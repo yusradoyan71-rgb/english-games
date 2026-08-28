@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keep or Pass — Team Vocabulary &amp; Strategy Game</title>
+  <meta name="description" content="Answer the English question correctly, then choose: KEEP the mystery box or PASS it to your opponents!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="game-header">
+    <div class="header-inner">
+      <a href="../../index.html" class="back-link" id="backToHub">
+        <span class="back-arrow" aria-hidden="true">←</span> Back to Games
+      </a>
+      <div class="game-brand">
+        <span class="brand-icon">🎁</span>
+        <span class="brand-title">Keep or Pass</span>
+      </div>
+      <div class="header-actions">
+        <button type="button" class="btn-icon" id="btnSoundToggle" title="Toggle Sound" aria-label="Toggle Sound">🔊</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- SCREEN 1: SETUP -->
+    <section id="setupScreen" class="game-panel active">
+      <div class="panel-header">
+        <span class="badge-pill">VOCABULARY &amp; STRATEGY</span>
+        <h1 class="panel-title">Keep or Pass</h1>
+        <p class="panel-desc">Answer the English question. Then decide: Keep the mystery points or pass the risk to your opponents?</p>
+      </div>
+
+      <div class="setup-grid">
+        <div class="setup-group">
+          <label class="control-label">👥 Number of Teams</label>
+          <div class="option-pills" id="teamOptions">
+            <button type="button" class="pill-btn active" data-teams="2">2 Teams</button>
+            <button type="button" class="pill-btn" data-teams="3">3 Teams</button>
+            <button type="button" class="pill-btn" data-teams="4">4 Teams</button>
+          </div>
+        </div>
+
+        <div class="setup-group">
+          <label class="control-label">🎯 Total Questions</label>
+          <div class="option-pills" id="roundOptions">
+            <button type="button" class="pill-btn" data-rounds="8">8 Questions</button>
+            <button type="button" class="pill-btn active" data-rounds="12">12 Questions</button>
+            <button type="button" class="pill-btn" data-rounds="16">16 Questions</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="start-action-row">
+        <button type="button" class="btn-primary-action" id="btnStartGame">
+          START MATCH ▶
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: QUESTION PHASE -->
+    <section id="questionScreen" class="game-panel hidden">
+      <!-- Live Scoreboard -->
+      <div class="scoreboard-bar" id="scoreboardBar"></div>
+
+      <div class="turn-status-banner">
+        <span class="turn-label" id="activeTeamTurn">Team 1's Turn</span>
+        <span class="question-progress" id="questionProgress">Question 1 / 12</span>
+      </div>
+
+      <!-- Question Card -->
+      <div class="question-card">
+        <div class="question-badge" id="questionCategory">Vocabulary &amp; Grammar</div>
+        <h2 class="question-text" id="questionText">What do you wear on your feet?</h2>
+        <div class="hint-box" id="hintBox">💡 Hint: Classroom &amp; Daily Objects</div>
+      </div>
+
+      <div class="judge-actions">
+        <button type="button" class="btn-judge btn-wrong" id="btnAnswerWrong">
+          <span>❌ Incorrect</span>
+        </button>
+        <button type="button" class="btn-judge btn-correct" id="btnAnswerCorrect">
+          <span>✅ Correct Answer!</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: KEEP OR PASS DECISION PHASE -->
+    <section id="decisionScreen" class="game-panel hidden">
+      <div class="scoreboard-bar" id="decisionScoreboard"></div>
+
+      <div class="decision-header">
+        <span class="badge-pill">CORRECT! NOW CHOOSE:</span>
+        <h2 class="decision-title" id="decisionTeamTitle">Team 1, what will you do?</h2>
+      </div>
+
+      <div class="mystery-box-stage">
+        <div class="mystery-box" id="mysteryBoxGraphic">
+          <span class="box-icon">🎁</span>
+          <span class="box-label">MYSTERY BOX</span>
+        </div>
+      </div>
+
+      <div class="choice-buttons">
+        <button type="button" class="btn-choice btn-keep" id="btnChoiceKeep">
+          <span class="choice-icon">🤲</span>
+          <span class="choice-title">KEEP IT</span>
+          <span class="choice-desc">Take whatever is inside</span>
+        </button>
+        <button type="button" class="btn-choice btn-pass" id="btnChoicePass">
+          <span class="choice-icon">👉</span>
+          <span class="choice-title">PASS IT</span>
+          <span class="choice-desc">Give it to the other team!</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 4: REVEAL PHASE -->
+    <section id="revealScreen" class="game-panel hidden">
+      <div class="panel-header">
+        <span class="badge-pill" id="revealActionTag">BOX OPENED!</span>
+        <h2 class="panel-title" id="revealTargetTeam">Team 1 receives:</h2>
+      </div>
+
+      <div class="reveal-result-card" id="revealCard">
+        <div class="reveal-icon" id="revealIcon">⭐</div>
+        <div class="reveal-points" id="revealPointsText">+100 POINTS</div>
+        <p class="reveal-desc" id="revealDescText">Great decision! Points added to team total.</p>
+      </div>
+
+      <div class="start-action-row">
+        <button type="button" class="btn-primary-action" id="btnNextQuestion">
+          Next Question ➔
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 5: FINAL PODIUM -->
+    <section id="podiumScreen" class="game-panel hidden">
+      <div class="panel-header">
+        <span class="badge-pill">GAME OVER</span>
+        <h1 class="panel-title">🏆 Champion Ceremony</h1>
+        <p class="panel-desc">Amazing game! Congratulations to all teams!</p>
+      </div>
+
+      <div class="results-podium" id="finalPodium"></div>
+
+      <div class="start-action-row">
+        <button type="button" class="btn-primary-action" id="btnPlayAgain">Play Again 🔄</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

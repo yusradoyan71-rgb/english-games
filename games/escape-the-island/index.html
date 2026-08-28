@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escape the Island — English Questions &amp; Speaking Game</title>
+  <meta name="description" content="Work as a team, answer English survival questions, gather resources, and find a way to escape the island!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="game-header">
+    <div class="header-inner">
+      <a href="../../index.html" class="back-link" id="backToHub">
+        <span class="back-arrow" aria-hidden="true">←</span> Back to Games
+      </a>
+      <div class="game-brand">
+        <span class="brand-icon">🏝️</span>
+        <span class="brand-title">Escape the Island</span>
+      </div>
+      <div class="header-actions">
+        <button type="button" class="btn-icon" id="btnSoundToggle" title="Toggle Sound" aria-label="Toggle Sound">🔊</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- SCREEN 1: SETUP -->
+    <section id="setupScreen" class="game-panel active">
+      <div class="panel-header">
+        <span class="badge-pill">COOPERATIVE SPEAKING QUEST</span>
+        <h1 class="panel-title">Escape the Island</h1>
+        <p class="panel-desc">You are stranded on a mysterious island! Answer English questions as a team to gather materials and build your escape boat.</p>
+      </div>
+
+      <div class="setup-grid">
+        <div class="setup-group">
+          <label class="control-label">👥 Classroom / Team Mode</label>
+          <div class="option-pills" id="teamOptions">
+            <button type="button" class="pill-btn active" data-mode="coop">Whole Class Coop</button>
+            <button type="button" class="pill-btn" data-mode="teams">2 Teams Race</button>
+          </div>
+        </div>
+
+        <div class="setup-group">
+          <label class="control-label">🧭 Island Quest Steps Needed to Escape</label>
+          <div class="option-pills" id="stepOptions">
+            <button type="button" class="pill-btn" data-steps="4">4 Steps (Fast)</button>
+            <button type="button" class="pill-btn active" data-steps="6">6 Steps (Standard)</button>
+            <button type="button" class="pill-btn" data-steps="8">8 Steps (Epic)</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="start-action-row">
+        <button type="button" class="btn-primary-action" id="btnStartGame">
+          START ISLAND EXPEDITION 🧭
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: GAMEPLAY -->
+    <section id="playScreen" class="game-panel hidden">
+      <!-- Island Progress Map -->
+      <div class="island-map-container">
+        <div class="island-track" id="islandTrack">
+          <!-- Step markers injected via JS -->
+        </div>
+      </div>
+
+      <!-- Question Box -->
+      <div class="survival-card">
+        <div class="card-meta-row">
+          <span class="category-tag" id="scenarioCategory">🏝️ Survival Scenario</span>
+          <span class="step-counter" id="stepCounter">Step 1 of 6</span>
+        </div>
+
+        <h2 class="scenario-prompt" id="scenarioPrompt">
+          Would you survive one night in a mysterious jungle?
+        </h2>
+
+        <div class="speaking-goal">
+          🎯 <strong>Speaking Goal:</strong> Answer with full reasons in English: <em>"I would survive because..."</em>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="judge-actions">
+        <button type="button" class="btn-judge btn-fail" id="btnFailedAnswer">
+          <span>❌ Struggled / Try Another</span>
+        </button>
+        <button type="button" class="btn-judge btn-pass-step" id="btnPassedAnswer">
+          <span>⛵ Great Answer! Advance Island ➔</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: RESCUE VICTORY -->
+    <section id="victoryScreen" class="game-panel hidden">
+      <div class="panel-header">
+        <span class="badge-pill">MISSION ACCOMPLISHED!</span>
+        <h1 class="panel-title">🏝️ Escaped the Island! ⛵</h1>
+        <p class="panel-desc">Through teamwork, fluent English communication, and sharp thinking, your crew successfully built the boat and returned home!</p>
+      </div>
+
+      <div class="victory-hero-box">
+        <span class="victory-icon">⛵🌊🎉</span>
+        <div class="victory-tag">MASTER OF ENGLISH CONVERSATION</div>
+      </div>
+
+      <div class="start-action-row">
+        <button type="button" class="btn-primary-action" id="btnPlayAgain">
+          Play Another Island Quest 🔄
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

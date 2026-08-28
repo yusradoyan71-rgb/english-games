@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOT POTATO 💣 TEAM EDITION — Classroom Speaking Game</title>
+  <meta name="description" content="A thrilling team-based English speaking classroom game for 7th and 8th grade students. Speak before the bomb goes BOOM!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Canvas for Confetti & Particles -->
+  <canvas id="fxCanvas"></canvas>
+
+  <!-- Flash / Screen Shake Container -->
+  <div id="app" class="app-container">
+
+    <!-- Back to Hub Link -->
+    <div style="position: absolute; top: 1rem; left: 1.5rem; z-index: 100;">
+      <a href="../../index.html" style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(15, 23, 42, 0.85); color: #94a3b8; text-decoration: none; font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 600; padding: 0.45rem 0.95rem; border-radius: 9999px; border: 1px solid rgba(255, 255, 255, 0.12); backdrop-filter: blur(8px); transition: all 0.2s ease;">
+        ← Back to Games
+      </a>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- SCREEN 1: START & TEAM SETUP SCREEN -->
+    <!-- ============================================================ -->
+    <section id="setupScreen" class="screen active">
+      <div class="setup-hero">
+        <div class="logo-badge">CLASSROOM SPEAKING GAME 🎓 7TH & 8TH GRADE</div>
+        <h1 class="game-title">
+          HOT POTATO <span class="bomb-emoji animate-wobble">💣</span>
+          <span class="edition-tag">TEAM EDITION</span>
+        </h1>
+        <p class="game-tagline">🔥 "Speak before the bomb goes BOOM!" 🔥</p>
+      </div>
+
+      <div class="setup-card glass-panel">
+        <!-- Step 1: Team Count -->
+        <div class="setup-step">
+          <label class="step-label"><span class="step-num">1</span> HOW MANY TEAMS?</label>
+          <div class="btn-group" id="teamCountGroup">
+            <button type="button" class="btn-select" data-teams="2" id="btnTeams2">2 TEAMS</button>
+            <button type="button" class="btn-select active" data-teams="3" id="btnTeams3">3 TEAMS</button>
+            <button type="button" class="btn-select" data-teams="4" id="btnTeams4">4 TEAMS</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Students Per Team -->
+        <div class="setup-step">
+          <label class="step-label"><span class="step-num">2</span> STUDENTS PER TEAM (2–6)</label>
+          <div class="btn-group" id="playerCountGroup">
+            <button type="button" class="btn-select" data-players="2" id="btnPlayers2">2</button>
+            <button type="button" class="btn-select active" data-players="3" id="btnPlayers3">3</button>
+            <button type="button" class="btn-select" data-players="4" id="btnPlayers4">4</button>
+            <button type="button" class="btn-select" data-players="5" id="btnPlayers5">5</button>
+            <button type="button" class="btn-select" data-players="6" id="btnPlayers6">6</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Game Length -->
+        <div class="setup-step">
+          <label class="step-label"><span class="step-num">3</span> GAME LENGTH (ROUNDS)</label>
+          <div class="btn-group" id="roundsGroup">
+            <button type="button" class="btn-select" data-rounds="10" id="btnRounds10">10 ROUNDS</button>
+            <button type="button" class="btn-select" data-rounds="15" id="btnRounds15">15 ROUNDS</button>
+            <button type="button" class="btn-select active" data-rounds="20" id="btnRounds20">20 ROUNDS (Default)</button>
+            <button type="button" class="btn-select" data-rounds="30" id="btnRounds30">30 ROUNDS</button>
+          </div>
+        </div>
+
+        <!-- Step 4: Team & Player Names Configuration -->
+        <div class="setup-step">
+          <div class="step-header-row">
+            <label class="step-label"><span class="step-num">4</span> TEAM & PLAYER ROSTER</label>
+            <button type="button" class="btn-link" id="btnAutofill" title="Quickly fill sample names for classroom testing">
+              ✨ Auto-Fill Fun Names
+            </button>
+          </div>
+          <div id="teamsConfigContainer" class="teams-config-grid">
+            <!-- Dynamically generated team roster cards -->
+          </div>
+        </div>
+
+        <!-- Validation message -->
+        <div id="setupErrorMsg" class="setup-error hidden"></div>
+
+        <!-- Start Game Button -->
+        <div class="setup-actions">
+          <button type="button" id="btnStartGame" class="btn-primary btn-huge btn-pulse">
+            <span class="btn-icon">🚀</span> START GAME — IGNITE THE BOMB!
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SCREEN 2: MAIN GAME ARENA -->
+    <!-- ============================================================ -->
+    <section id="gameScreen" class="screen hidden">
+      <!-- Top Navigation / Status Bar -->
+      <header class="game-header">
+        <div class="header-left">
+          <span class="header-logo">HOT POTATO 💣</span>
+          <div class="round-badge" id="roundBadge">
+            ROUND <span id="currentRoundNum">1</span> / <span id="totalRoundsNum">20</span>
+          </div>
+          <div id="specialModeBadge" class="special-badge hidden">
+            🔥🔥 CHAOS ROUND! 🔥🔥
+          </div>
+        </div>
+
+        <div class="header-right">
+          <button type="button" class="header-btn" id="btnSoundToggle" title="Toggle Sound (M)">
+            <span id="soundIcon">🔊</span> <span id="soundText">Sound ON</span>
+          </button>
+          <button type="button" class="header-btn" id="btnHelpModal" title="Rules & Shortcuts">
+            ❓ Rules
+          </button>
+          <button type="button" class="header-btn btn-danger-soft" id="btnResetGame" title="Restart Game">
+            🔄 Reset
+          </button>
+        </div>
+      </header>
+
+      <!-- Scoreboard Bar -->
+      <div class="scoreboard-wrapper">
+        <div class="scoreboard-title">🏆 SCOREBOARD</div>
+        <div id="scoreboardList" class="scoreboard-cards">
+          <!-- Dynamically populated team score cards -->
+        </div>
+      </div>
+
+      <!-- Main Central Arena -->
+      <main class="game-arena" id="gameArena">
+        
+        <!-- Active Team Banner -->
+        <div class="team-turn-banner" id="teamTurnBanner">
+          <span class="banner-flame">🔥</span>
+          <span id="activeTeamNameText" class="active-team-name">THE TIGERS</span>
+          <span class="banner-sub">HAVE THE BOMB!</span>
+          <span class="banner-flame">🔥</span>
+        </div>
+
+        <!-- Special Event Notification Pill -->
+        <div id="eventNotificationPill" class="event-pill hidden">
+          <span class="event-icon" id="eventIcon">⚡</span>
+          <span class="event-title" id="eventTitle">SPEED ROUND!</span>
+          <span class="event-desc" id="eventDesc">10-second fast timer!</span>
+        </div>
+
+        <!-- STAGE 1: SPEAKER SELECTION VIEW -->
+        <div id="speakerSelectionView" class="arena-stage active">
+          <div class="stage-prompt-box">
+            <h2 class="stage-title">👥 CHOOSE YOUR SPEAKER!</h2>
+            <p class="stage-subtitle">Which teammate will answer the challenge?</p>
+          </div>
+          <div id="speakerButtonsGrid" class="speaker-buttons-grid">
+            <!-- Dynamic player choice buttons -->
+          </div>
+          <div class="speaker-tip">
+            💡 <em>Tip: Rotate speakers so every team member gets speaking practice!</em>
+          </div>
+        </div>
+
+        <!-- STAGE 2: ACTIVE QUESTION & COUNTDOWN VIEW -->
+        <div id="activeQuestionView" class="arena-stage hidden">
+          <!-- Active Speaker Indicator -->
+          <div class="current-speaker-pill" id="currentSpeakerPill">
+            <span class="speaker-avatar">🗣️</span>
+            <span class="speaker-label"><strong id="currentSpeakerName">Alex</strong> is answering!</span>
+          </div>
+
+          <!-- Question Card -->
+          <div class="question-card glass-panel" id="questionCard">
+            <div class="question-card-header">
+              <span class="category-tag" id="questionCategory">🍕 FOOD & DRINKS</span>
+              <span class="points-tag" id="pointsAwardTag">+1 POINT</span>
+            </div>
+            <div class="question-text" id="questionText">
+              WHAT IS YOUR FAVORITE FOOD AND WHY?
+            </div>
+            <div class="question-subtext hidden" id="questionChaosInstruction">
+              🤖 Challenge: Speak like a robot!
+            </div>
+          </div>
+
+          <!-- Giant Animated Cartoon Bomb & Timer Area -->
+          <div class="bomb-timer-container">
+            <div class="bomb-wrapper" id="bombWrapper">
+              <!-- SVG Bomb with Fuse & Dynamic Spark -->
+              <div class="bomb-visual" id="bombVisual">
+                <svg viewBox="0 0 200 200" class="bomb-svg" id="bombSvg">
+                  <defs>
+                    <!-- Bomb Sphere Gradient -->
+                    <radialGradient id="bombGrad" cx="35%" cy="35%" r="65%">
+                      <stop offset="0%" stop-color="#4b5563"/>
+                      <stop offset="45%" stop-color="#1f2937"/>
+                      <stop offset="85%" stop-color="#111827"/>
+                      <stop offset="100%" stop-color="#030712"/>
+                    </radialGradient>
+                    <!-- Metal Cap Gradient -->
+                    <linearGradient id="capGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#9ca3af"/>
+                      <stop offset="50%" stop-color="#4b5563"/>
+                      <stop offset="100%" stop-color="#1f2937"/>
+                    </linearGradient>
+                    <!-- Fuse Burning Glow Filter -->
+                    <filter id="fuseGlow" x="-50%" y="-50%" width="200%" height="200%">
+                      <feGaussianBlur stdDeviation="3" result="blur"/>
+                      <feMerge>
+                        <feMergeNode in="blur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
+                    </filter>
+                  </defs>
+
+                  <!-- Fuse Path -->
+                  <path id="fusePath" d="M 100,52 C 100,28 135,28 135,12 C 135,4 125,0 120,0" 
+                        fill="none" stroke="#d97706" stroke-width="5" stroke-linecap="round" />
+                  
+                  <!-- Metal Cap Collar -->
+                  <rect x="86" y="44" width="28" height="12" rx="3" fill="url(#capGrad)" stroke="#374151" stroke-width="1.5" />
+
+                  <!-- Bomb Main Sphere -->
+                  <circle cx="100" cy="120" r="72" fill="url(#bombGrad)" stroke="#111827" stroke-width="2" />
+
+                  <!-- Reflection Shine Highlight -->
+                  <ellipse cx="78" cy="85" rx="20" ry="12" transform="rotate(-30, 78, 85)" fill="#ffffff" opacity="0.18" />
+                  <circle cx="68" cy="74" r="4" fill="#ffffff" opacity="0.3" />
+
+                  <!-- Burning Spark Elements -->
+                  <g id="fuseSparkGroup" filter="url(#fuseGlow)">
+                    <circle id="sparkCore" cx="120" cy="0" r="7" fill="#fef08a" />
+                    <circle id="sparkFlame" cx="120" cy="0" r="13" fill="#f97316" opacity="0.8" />
+                    <circle id="sparkOuter" cx="120" cy="0" r="18" fill="#ef4444" opacity="0.4" />
+                  </g>
+                </svg>
+
+                <!-- Digital Big Timer in Bomb Belly -->
+                <div class="bomb-timer-display" id="bombTimerDisplay">
+                  <div class="timer-number" id="timerNumber">15</div>
+                  <div class="timer-label" id="timerStatusLabel">SECONDS</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TEACHER ACTION CONTROLS -->
+          <div class="teacher-controls-panel">
+            <div class="controls-label">👩‍🏫 TEACHER CONTROLS</div>
+            <div class="controls-buttons-row">
+              <button type="button" id="btnAnswered" class="btn-action btn-success btn-grow" title="Confirm correct answer (Shortcut: A or Space)">
+                <span class="btn-action-icon">🟢</span>
+                <span class="btn-action-text">
+                  <strong class="main-action-text" id="btnAnsweredText">ANSWERED! +1 POINT</strong>
+                  <small class="key-hint">[Key: Space / A]</small>
+                </span>
+              </button>
+
+              <button type="button" id="btnBoom" class="btn-action btn-danger btn-grow" title="Explode bomb (Shortcut: B)">
+                <span class="btn-action-icon">🔴</span>
+                <span class="btn-action-text">
+                  <strong class="main-action-text">BOOM! PASS BOMB</strong>
+                  <small class="key-hint">[Key: B]</small>
+                </span>
+              </button>
+
+              <button type="button" id="btnSkipQuestion" class="btn-action btn-neutral" title="Get a different question for the same student (Shortcut: S)">
+                <span class="btn-action-icon">🔄</span>
+                <span class="btn-action-text">
+                  <strong>SKIP QUESTION</strong>
+                  <small class="key-hint">[Key: S]</small>
+                </span>
+              </button>
+
+              <button type="button" id="btnPauseGame" class="btn-action btn-warning" title="Pause or Resume Timer (Shortcut: P)">
+                <span class="btn-action-icon" id="pauseBtnIcon">⏸️</span>
+                <span class="btn-action-text">
+                  <strong id="pauseBtnText">PAUSE</strong>
+                  <small class="key-hint">[Key: P]</small>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SCREEN 3: GAME OVER / WINNER SCREEN -->
+    <!-- ============================================================ -->
+    <section id="winnerScreen" class="screen hidden">
+      <div class="winner-container glass-panel">
+        <div class="winner-trophies animate-bounce">🏆 👑 🏆</div>
+        <h1 class="winner-title">GAME OVER!</h1>
+        <div class="winner-team-announcement" id="winnerAnnouncement">
+          THE <span id="winningTeamName" class="winner-glow">TIGERS</span> WIN!
+        </div>
+        <p class="winner-quote">"YOU SURVIVED THE HOT POTATO!" 🎉</p>
+
+        <!-- Podium / Final Ranks -->
+        <div class="podium-section" id="finalPodium">
+          <!-- Dynamically populated ranks 1st, 2nd, 3rd, 4th -->
+        </div>
+
+        <!-- Player Awards (MVP & Best Team Player) -->
+        <div class="awards-grid">
+          <div class="award-card award-top-speaker">
+            <div class="award-icon">🔥</div>
+            <div class="award-content">
+              <div class="award-badge-title">TOP SPEAKER</div>
+              <div class="award-player-name" id="topSpeakerName">Alex</div>
+              <div class="award-desc" id="topSpeakerDesc">7 successful answers</div>
+            </div>
+          </div>
+
+          <div class="award-card award-team-player">
+            <div class="award-icon">⭐</div>
+            <div class="award-content">
+              <div class="award-badge-title">BEST TEAM PLAYER</div>
+              <div class="award-player-name" id="bestPlayerName">Emma</div>
+              <div class="award-desc" id="bestPlayerDesc">5 successful answers</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Full Stats Table Toggle -->
+        <div class="stats-table-wrapper">
+          <h3 class="stats-title">📊 FULL CLASSROOM STATS</h3>
+          <div id="fullStatsContainer" class="stats-table-container">
+            <!-- Dynamic stats table -->
+          </div>
+        </div>
+
+        <!-- Winner Actions -->
+        <div class="winner-actions">
+          <button type="button" id="btnPlayAgain" class="btn-primary btn-huge btn-pulse">
+            🔄 PLAY AGAIN (Same Teams)
+          </button>
+          <button type="button" id="btnNewGame" class="btn-secondary btn-huge">
+            🏠 NEW GAME (Setup)
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SUCCESS / BOOM POPUP OVERLAYS -->
+    <!-- ============================================================ -->
+    <div id="successOverlay" class="popup-overlay hidden">
+      <div class="popup-card success-card animate-pop">
+        <div class="popup-icon">🔥 NICE!</div>
+        <div class="popup-points" id="successPointsText">+1 POINT</div>
+        <div class="popup-team-update" id="successTeamScoreText">TIGERS: 6</div>
+      </div>
+    </div>
+
+    <div id="boomOverlay" class="popup-overlay hidden">
+      <div class="popup-card boom-card animate-shake-hard">
+        <div class="boom-flame-icon">💥</div>
+        <h1 class="boom-text">BOOOOOOM!</h1>
+        <div class="boom-sub" id="boomTeamMsg">TIGERS DIDN'T MAKE IT!</div>
+        <div class="boom-points">+0 POINTS</div>
+        <div class="boom-next-msg">PASS THE BOMB! 💣</div>
+      </div>
+    </div>
+
+    <!-- PAUSE MODAL -->
+    <div id="pauseModal" class="modal-backdrop hidden">
+      <div class="modal-card glass-panel">
+        <div class="modal-icon">⏸️</div>
+        <h2>GAME PAUSED</h2>
+        <p>Timer and animations are stopped. Ready when you are!</p>
+        <div class="modal-actions">
+          <button type="button" id="btnResumeModal" class="btn-primary btn-large">
+            ▶️ RESUME GAME
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RULES & SHORTCUTS MODAL -->
+    <div id="rulesModal" class="modal-backdrop hidden">
+      <div class="modal-card glass-panel rules-modal-card">
+        <div class="modal-header">
+          <h2>📖 HOW TO PLAY & SHORTCUTS</h2>
+          <button type="button" class="btn-close" id="btnCloseRules">✖</button>
+        </div>
+        <div class="rules-content">
+          <div class="rule-box">
+            <h3>🎮 Core Rules</h3>
+            <ul>
+              <li><strong>Pass the Bomb:</strong> Teams take turns receiving the bomb in fixed rotation.</li>
+              <li><strong>Pick Speaker:</strong> The team chooses which teammate will answer.</li>
+              <li><strong>15-Second Timer:</strong> Student speaks aloud to answer before time runs out!</li>
+              <li><strong>Teacher Judgement:</strong> Teacher presses <em>ANSWERED</em> (+1 pt) or <em>BOOM</em> (0 pts).</li>
+              <li><strong>No Elimination:</strong> Everyone stays in the game for maximum fun and practice!</li>
+              <li><strong>Chaos Rounds:</strong> Every 5 rounds brings funny voice/action challenges (+2 pts)!</li>
+            </ul>
+          </div>
+          <div class="rule-box">
+            <h3>⌨️ Teacher Keyboard Shortcuts</h3>
+            <div class="shortcut-list">
+              <div class="shortcut-item"><kbd>Space</kbd> or <kbd>A</kbd> <span>Mark Answered (+1/+2 pts)</span></div>
+              <div class="shortcut-item"><kbd>B</kbd> or <kbd>X</kbd> <span>Trigger BOOM (0 pts, pass bomb)</span></div>
+              <div class="shortcut-item"><kbd>S</kbd> <span>Skip Question (same student, timer resets)</span></div>
+              <div class="shortcut-item"><kbd>P</kbd> <span>Pause / Resume Game</span></div>
+              <div class="shortcut-item"><kbd>M</kbd> <span>Toggle Sound ON / OFF</span></div>
+              <div class="shortcut-item"><kbd>1</kbd>–<kbd>6</kbd> <span>Quick-select speaker 1 to 6</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- End App Container -->
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>

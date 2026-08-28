@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English Taboo — Vocabulary & Speaking Game</title>
+  <meta name="description" content="Describe the secret word in English without saying the forbidden taboo words! Engaging classroom vocabulary game.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header / Navigation Bar -->
+  <header class="game-header">
+    <div class="header-inner">
+      <a href="../../index.html" class="back-link" id="backToHub">
+        <span class="back-arrow" aria-hidden="true">←</span> Back to Games
+      </a>
+      <div class="game-brand">
+        <span class="brand-icon">🃏</span>
+        <span class="brand-title">English Taboo</span>
+      </div>
+      <div class="header-actions">
+        <button type="button" class="btn-icon" id="btnSoundToggle" title="Toggle Sound" aria-label="Toggle Sound">🔊</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- SCREEN 1: SETUP -->
+    <section id="setupScreen" class="game-panel active">
+      <div class="panel-header">
+        <span class="badge-pill">VOCABULARY &amp; SPEAKING</span>
+        <h1 class="panel-title">English Taboo</h1>
+        <p class="panel-desc">Describe the secret word without saying any of the forbidden taboo words!</p>
+      </div>
+
+      <div class="setup-grid">
+        <div class="setup-group">
+          <label class="control-label">👥 Game Mode</label>
+          <div class="option-pills" id="modeOptions">
+            <button type="button" class="pill-btn active" data-mode="teams">2 Teams</button>
+            <button type="button" class="pill-btn" data-mode="3teams">3 Teams</button>
+            <button type="button" class="pill-btn" data-mode="practice">Practice / Free Play</button>
+          </div>
+        </div>
+
+        <div class="setup-group">
+          <label class="control-label">⏱️ Round Timer</label>
+          <div class="option-pills" id="timerOptions">
+            <button type="button" class="pill-btn" data-time="30">30s</button>
+            <button type="button" class="pill-btn active" data-time="60">60s</button>
+            <button type="button" class="pill-btn" data-time="90">90s</button>
+          </div>
+        </div>
+
+        <div class="setup-group">
+          <label class="control-label">🎯 Pass Limit Per Round</label>
+          <div class="option-pills" id="passOptions">
+            <button type="button" class="pill-btn" data-passes="2">2 Passes</button>
+            <button type="button" class="pill-btn active" data-passes="3">3 Passes</button>
+            <button type="button" class="pill-btn" data-passes="unlimited">Unlimited</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="start-action-row">
+        <button type="button" class="btn-primary-action" id="btnStartGame">
+          START GAME ▶
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: GAMEPLAY -->
+    <section id="playScreen" class="game-panel hidden">
+      <!-- Top Scoreboard -->
+      <div class="scoreboard-bar" id="scoreboardBar">
+        <!-- Injected via JS based on mode -->
+      </div>
+
+      <!-- Turn & Timer Header -->
+      <div class="play-status-row">
+        <div class="turn-indicator" id="turnIndicator">Team 1's Turn</div>
+        <div class="timer-badge" id="timerDisplay">
+          <span class="timer-icon">⏱️</span>
+          <span class="timer-seconds" id="timerSeconds">60</span>s
+        </div>
+      </div>
+
+      <!-- Main Taboo Card -->
+      <div class="taboo-card-container">
+        <div class="taboo-card" id="activeCard">
+          <div class="target-word-banner">
+            <span class="card-type-label">SECRET WORD</span>
+            <h2 class="target-word" id="targetWord">TEACHER</h2>
+          </div>
+          
+          <div class="forbidden-section">
+            <div class="forbidden-header">
+              <span class="forbidden-icon">🚫</span>
+              <span>FORBIDDEN TABOO WORDS</span>
+            </div>
+            <ul class="forbidden-list" id="forbiddenList">
+              <li>school</li>
+              <li>student</li>
+              <li>lesson</li>
+              <li>class</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Control Buttons -->
+      <div class="game-controls">
+        <button type="button" class="btn-ctrl btn-taboo-buzz" id="btnTabooBuzzer">
+          <span class="ctrl-icon">🚫</span>
+          <span>TABOO! (-1)</span>
+        </button>
+        <button type="button" class="btn-ctrl btn-skip" id="btnPass">
+          <span class="ctrl-icon">⏭️</span>
+          <span id="passBtnText">PASS (3 left)</span>
+        </button>
+        <button type="button" class="btn-ctrl btn-correct" id="btnCorrect">
+          <span class="ctrl-icon">✅</span>
+          <span>CORRECT! (+1)</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: ROUND OVER / RESULTS -->
+    <section id="resultScreen" class="game-panel hidden">
+      <div class="panel-header">
+        <span class="badge-pill">ROUND FINISHED</span>
+        <h1 class="panel-title" id="resultTitle">Time's Up! ⏰</h1>
+        <p class="panel-desc" id="resultSubtitle">Great effort! Here is the current scoreboard:</p>
+      </div>
+
+      <div class="results-podium" id="resultsPodium"></div>
+
+      <div class="result-action-row">
+        <button type="button" class="btn-secondary-action" id="btnEndGame">Back to Setup</button>
+        <button type="button" class="btn-primary-action" id="btnNextRound">Next Round ➔</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

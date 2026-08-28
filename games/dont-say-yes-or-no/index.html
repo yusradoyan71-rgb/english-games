@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Don't Say Yes or No — Speaking Game</title>
+  <meta name="description" content="Engaging English conversation challenge! Answer rapid-fire questions without saying YES or NO.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="game-header">
+    <div class="header-inner">
+      <a href="../../index.html" class="back-link" id="backToHub">
+        <span class="back-arrow" aria-hidden="true">←</span> Back to Games
+      </a>
+      <div class="game-brand">
+        <span class="brand-icon">🤐</span>
+        <span class="brand-title">Don't Say Yes or No</span>
+      </div>
+      <div class="header-actions">
+        <button type="button" class="btn-icon" id="btnSoundToggle" title="Toggle Sound" aria-label="Toggle Sound">🔊</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- SCREEN 1: SETUP -->
+    <section id="setupScreen" class="game-panel active">
+      <div class="panel-header">
+        <span class="badge-pill">SPEAKING &amp; CONVERSATION REFLEX</span>
+        <h1 class="panel-title">Don't Say Yes or No</h1>
+        <p class="panel-desc">Keep answering questions in English without ever uttering "YES", "NO", "YEAH", or "NOPE"!</p>
+      </div>
+
+      <div class="setup-grid">
+        <div class="setup-group">
+          <label class="control-label">📚 Curriculum Grade Level</label>
+          <div class="option-pills" id="gradeOptions">
+            <button type="button" class="pill-btn active" data-grade="both">Grade 7 &amp; 8 (140+ Questions)</button>
+            <button type="button" class="pill-btn" data-grade="g7">Grade 7 Focus</button>
+            <button type="button" class="pill-btn" data-grade="g8">Grade 8 Focus</button>
+          </div>
+        </div>
+
+        <div class="setup-group">
+          <label class="control-label">⏱️ Hot-Seat Round Duration</label>
+          <div class="option-pills" id="durationOptions">
+            <button type="button" class="pill-btn" data-time="30">30 Seconds</button>
+            <button type="button" class="pill-btn active" data-time="45">45 Seconds</button>
+            <button type="button" class="pill-btn" data-time="60">60 Seconds</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="forbidden-preview">
+        <span class="preview-label">🚫 FORBIDDEN WORDS:</span>
+        <span class="forbidden-chip">YES</span>
+        <span class="forbidden-chip">NO</span>
+        <span class="forbidden-chip">YEAH</span>
+        <span class="forbidden-chip">NOPE</span>
+        <span class="forbidden-chip">EVET / HAYIR</span>
+      </div>
+
+      <div class="start-action-row">
+        <button type="button" class="btn-primary-action" id="btnStartGame">
+          START HOT-SEAT ▶
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: GAMEPLAY -->
+    <section id="playScreen" class="game-panel hidden">
+      <div class="play-top-bar">
+        <div class="streak-badge">
+          <span>🔥 Streak:</span>
+          <strong id="streakCount">0</strong>
+        </div>
+        <div class="timer-badge" id="timerBadge">
+          <span>⏱️</span>
+          <strong id="timerSeconds">45</strong>s
+        </div>
+      </div>
+
+      <div class="question-box">
+        <span class="category-tag" id="questionCategory">General Question</span>
+        <h2 class="question-title" id="activeQuestion">Do you like pizza?</h2>
+        <div class="pro-tip">💡 Answer in full English sentences without saying YES or NO!</div>
+      </div>
+
+      <!-- Live Judge Buttons -->
+      <div class="judge-controls">
+        <button type="button" class="btn-judge btn-caught" id="btnCaught">
+          <span class="j-icon">🚨</span>
+          <span class="j-text">SAID YES / NO!</span>
+          <span class="j-sub">Fails Round</span>
+        </button>
+        <button type="button" class="btn-judge btn-pass-q" id="btnPassQ">
+          <span class="j-icon">⏭️</span>
+          <span class="j-text">NEXT QUESTION</span>
+          <span class="j-sub">Skip to next</span>
+        </button>
+        <button type="button" class="btn-judge btn-survived-q" id="btnSurvivedQ">
+          <span class="j-icon">✅</span>
+          <span class="j-text">GREAT ANSWER!</span>
+          <span class="j-sub">+1 Streak Point</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: RESULTS -->
+    <section id="resultScreen" class="game-panel hidden">
+      <div class="panel-header">
+        <span class="badge-pill" id="resultStatusPill">HOT-SEAT FINISHED</span>
+        <h1 class="panel-title" id="resultHeadline">Awesome Speaking! 🎉</h1>
+        <p class="panel-desc" id="resultDetail">You survived and answered multiple tricky questions!</p>
+      </div>
+
+      <div class="score-summary-card">
+        <div class="summary-metric">
+          <span class="metric-label">Questions Survived</span>
+          <span class="metric-val" id="finalScoreVal">0</span>
+        </div>
+        <div class="summary-metric">
+          <span class="metric-label">Best Fluency Streak</span>
+          <span class="metric-val" id="finalStreakVal">0</span>
+        </div>
+      </div>
+
+      <div class="start-action-row">
+        <button type="button" class="btn-primary-action" id="btnNextStudent">
+          Next Student ➔
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
