@@ -588,6 +588,31 @@ body {
   box-shadow: 0 6px 20px rgba(14, 165, 233, 0.45);
 }
 
+/* 6. Monster Dance Theme */
+.card-monster .card-glow {
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.35) 0%, transparent 65%);
+}
+.card-monster:hover {
+  border-color: rgba(236, 72, 153, 0.45);
+  box-shadow: 0 16px 40px -10px rgba(236, 72, 153, 0.35);
+}
+.topic-monster {
+  background: rgba(236, 72, 153, 0.15);
+  color: #f472b6;
+  border: 1px solid rgba(236, 72, 153, 0.35);
+}
+.card-monster .card-icon-bubble {
+  background: linear-gradient(135deg, #db2777, #701a75);
+  border: 1px solid rgba(244, 114, 182, 0.45);
+}
+.btn-monster {
+  background: linear-gradient(135deg, #ec4899, #be185d);
+}
+.btn-monster:hover {
+  background: linear-gradient(135deg, #f472b6, #db2777);
+  box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5);
+}
+
 /* Features Highlights Bar */
 .features-bar {
   background: rgba(19, 29, 54, 0.6);

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>👾 MONSTER DANCE! — English Learning Game for Kids</title>
+  <meta name="description" content="Preschool English learning game for 4-year-olds. Create your cute monster, learn body parts, colors, and dance!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800;900&family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Particle Canvas -->
+  <canvas id="bgFxCanvas"></canvas>
+
+  <div id="app">
+
+    <!-- ======================================================
+         SCREEN 1: START SCREEN (Animated Playground)
+         ====================================================== -->
+    <section id="screen-start" class="screen active" aria-label="Start Screen">
+      <!-- Sky and Playground Decorations -->
+      <div class="sky-cloud c1"></div>
+      <div class="sky-cloud c2"></div>
+      <div class="sky-cloud c3"></div>
+      <div class="sky-rainbow"></div>
+
+      <!-- Butterflies -->
+      <div class="floating-butterfly" style="top:25%; left:12%;">🦋</div>
+      <div class="floating-butterfly" style="top:28%; right:14%; animation-delay: -1.5s;">🦋</div>
+
+      <!-- Grass and Flowers -->
+      <div class="grass-hill"></div>
+      <div class="ground-flower" style="left: 6%; animation-delay: 0s;">🌸</div>
+      <div class="ground-flower" style="left: 18%; animation-delay: -1.2s;">🌼</div>
+      <div class="ground-flower" style="right: 18%; animation-delay: -0.6s;">🌻</div>
+      <div class="ground-flower" style="right: 6%; animation-delay: -2s;">🌺</div>
+
+      <!-- Sound Toggle -->
+      <button id="btnSoundToggleStart" class="btn-sound-toggle" aria-label="Toggle Sound">🔊</button>
+
+      <!-- Start Hero Content -->
+      <div class="start-hero">
+        <h1 class="start-title-banner">👾 MONSTER DANCE!</h1>
+        <p class="start-subtitle">English Learning Game</p>
+
+        <!-- Preview Monster on Start Screen -->
+        <div class="start-monster-container">
+          <svg id="startMonsterSVG" viewBox="0 0 400 520" xmlns="http://www.w3.org/2000/svg"
+            style="--mc:#4ADE80; --mcd:#16A34A; --mcl:#BBF7D0;">
+            <!-- Ears -->
+            <ellipse cx="148" cy="78" rx="24" ry="68" fill="var(--mc)" stroke="var(--mcd)" stroke-width="3.5"/>
+            <ellipse cx="148" cy="80" rx="14" ry="52" fill="#FBCFE8" opacity="0.95"/>
+            <ellipse cx="252" cy="78" rx="24" ry="68" fill="var(--mc)" stroke="var(--mcd)" stroke-width="3.5"/>
+            <ellipse cx="252" cy="80" rx="14" ry="52" fill="#FBCFE8" opacity="0.95"/>
+            <!-- Legs -->
+            <rect x="152" y="416" width="38" height="70" rx="19" fill="var(--mc)" stroke="var(--mcd)" stroke-width="3.5"/>
+            <rect x="210" y="416" width="38" height="70" rx="19" fill="var(--mc)" stroke="var(--mcd)" stroke-width="3.5"/>
+            <!-- Arms -->
+            <ellipse cx="114" cy="316" rx="22" ry="44" fill="var(--mc)" stroke="var(--mcd)" stroke-width="3.5" transform="rotate(-20, 114, 316)"/>
+            <ellipse cx="286" cy="316" rx="22" ry="44" fill="var(--mc)" stroke="var(--mcd)" stroke-width="3.5" transform="rotate(20, 286, 316)"/>
+            <!-- Body -->
+            <ellipse cx="204" cy="364" rx="88" ry="78" fill="rgba(0,0,0,0.07)"/>
+            <ellipse cx="200" cy="356" rx="88" ry="78" fill="var(--mc)" stroke="var(--mcd)" stroke-width="3.5"/>
+            <ellipse cx="196" cy="348" rx="52" ry="46" fill="var(--mcl)" opacity="0.45"/>
+            <!-- Head -->
+            <circle cx="204" cy="198" r="88" fill="rgba(0,0,0,0.07)"/>
+            <circle cx="200" cy="194" r="88" fill="var(--mc)" stroke="var(--mcd)" stroke-width="3.5"/>
+            <ellipse cx="140" cy="224" rx="22" ry="14" fill="#FDA4AF" opacity="0.65"/>
+            <ellipse cx="260" cy="224" rx="22" ry="14" fill="#FDA4AF" opacity="0.65"/>
+            <!-- Spiky Hair -->
+            <path d="M112,170 L128,102 L148,152 L166,82 L184,148 L200,74 L216,148 L234,82 L252,152 L272,102 L288,170 Q200,140 112,170 Z"
+              fill="#854D0E" stroke="#533009" stroke-width="3.5" stroke-linejoin="round"/>
+            <!-- Big Round Eyes -->
+            <ellipse cx="158" cy="186" rx="25" ry="27" fill="#FFFFFF" stroke="#2D3748" stroke-width="3.5"/>
+            <circle cx="160" cy="187" r="15" fill="#1A202C"/>
+            <circle cx="167" cy="179" r="7" fill="#FFFFFF"/>
+            <ellipse cx="242" cy="186" rx="25" ry="27" fill="#FFFFFF" stroke="#2D3748" stroke-width="3.5"/>
+            <circle cx="244" cy="187" r="15" fill="#1A202C"/>
+            <circle cx="251" cy="179" r="7" fill="#FFFFFF"/>
+            <!-- Tiny Round Nose -->
+            <circle cx="200" cy="216" r="11" fill="#FB7185" stroke="#E11D48" stroke-width="2"/>
+            <circle cx="204" cy="213" r="4" fill="#FFFFFF" opacity="0.8"/>
+            <!-- Big Smile Mouth -->
+            <path d="M162,242 Q200,282 238,242" fill="none" stroke="#1F2937" stroke-width="6" stroke-linecap="round"/>
+            <!-- Hands -->
+            <circle cx="82" cy="370" r="22" fill="var(--mc)" stroke="var(--mcd)" stroke-width="3"/>
+            <circle cx="318" cy="370" r="22" fill="var(--mc)" stroke="var(--mcd)" stroke-width="3"/>
+            <!-- Feet -->
+            <ellipse cx="165" cy="498" rx="34" ry="20" fill="var(--mc)" stroke="var(--mcd)" stroke-width="3"/>
+            <ellipse cx="235" cy="498" rx="34" ry="20" fill="var(--mc)" stroke="var(--mcd)" stroke-width="3"/>
+          </svg>
+        </div>
+
+        <!-- Huge Play Button -->
+        <button id="btnPlayGame" class="btn-play-huge">
+          <span>▶ PLAY!</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SCREEN 2: MAIN GAME (HUD, Monster Stage, Panels)
+         ====================================================== -->
+    <section id="screen-game" class="screen" aria-label="Main Gameplay">
+
+      <!-- HUD Top Bar -->
+      <header class="game-hud">
+        <div id="starCounter" class="hud-star-badge" aria-label="Star Rewards">
+          <span class="star-icon">⭐</span> <span class="star-num">0</span>
+        </div>
+
+        <div class="hud-progress-trail" aria-label="Game Progress">
+          <span id="progress-disc" class="progress-node" title="Learn Body Parts">👾</span>
+          <span class="progress-arrow">➜</span>
+          <span id="progress-cust" class="progress-node" title="Customize Monster">🎨</span>
+          <span class="progress-arrow">➜</span>
+          <span id="progress-combo" class="progress-node" title="Colors & Parts">🌈</span>
+          <span class="progress-arrow">➜</span>
+          <span id="progress-chal" class="progress-node" title="Find the Part">🎯</span>
+          <span class="progress-arrow">➜</span>
+          <span id="progress-dance" class="progress-node" title="Monster Dance">🕺</span>
+        </div>
+
+        <button id="btnSoundToggleGame" class="btn-sound-toggle" style="position:static;" aria-label="Toggle Sound">🔊</button>
+      </header>
+
+      <!-- Center Monster Stage -->
+      <main class="monster-play-stage">
+        <!-- Spoken Speech Bubble -->
+        <div id="speechBubble" class="speech-bubble-wrapper hidden" aria-live="polite">
+          <span id="speechText">Hello!</span>
+        </div>
+
+        <!-- Layered Monster SVG -->
+        <div class="monster-svg-wrapper">
+          <svg id="monsterSVG" viewBox="0 0 400 520" xmlns="http://www.w3.org/2000/svg"
+            style="--mc:#4ADE80; --mcd:#16A34A; --mcl:#BBF7D0;">
+            <!-- Layers populated and controlled by monster.js -->
+            <g id="g-ears"  data-part="ears"></g>
+            <g id="g-legs"  data-part="legs"></g>
+            <g id="g-arms"  data-part="arms"></g>
+            <g id="g-body"  data-part="body"></g>
+            <g id="g-head"  data-part="head"></g>
+            <g id="g-hair"  data-part="hair"></g>
+            <g id="g-eyes"  data-part="eyes"></g>
+            <g id="g-nose"  data-part="nose"></g>
+            <g id="g-mouth" data-part="mouth"></g>
+            <g id="g-hands" data-part="hands"></g>
+            <g id="g-feet"  data-part="feet"></g>
+            <g id="g-accessories" data-part="accessories"></g>
+          </svg>
+        </div>
+      </main>
+
+      <!-- Control Panels -->
+      <footer id="controlPanelsContainer" style="width:100%; display:flex; justify-content:center;">
+
+        <!-- Panel A: Intro -->
+        <div id="panel-intro" class="game-bottom-panel hidden">
+          <h2 class="panel-word-title">👾 HELLO!</h2>
+          <p class="panel-instruction-sub">Listen to the monster!</p>
+        </div>
+
+        <!-- Panel B: Discovery -->
+        <div id="panel-discovery" class="game-bottom-panel hidden">
+          <h2 id="discoveryWordLabel" class="panel-word-title">HEAD!</h2>
+          <p id="discoveryTouchHint" class="panel-instruction-sub">Touch the head!</p>
+          <button id="btnSkipDiscovery" class="btn-action-secondary">Skip ➜</button>
+        </div>
+
+        <!-- Panel C: Customization -->
+        <div id="panel-customize" class="game-bottom-panel hidden">
+          <!-- Category Tabs -->
+          <div id="categoryTabBar" class="category-tab-bar"></div>
+
+          <!-- Options Grid (Cards or Colors) -->
+          <div id="optionsGrid" class="options-cards-grid"></div>
+
+          <button id="btnFinishCustomization" class="btn-action-primary">READY! ➡️</button>
+        </div>
+
+        <!-- Panel D: Color + Body Part Combo -->
+        <div id="panel-combo" class="game-bottom-panel hidden">
+          <h2 id="comboPromptText" class="panel-word-title">Choose BLUE eyes!</h2>
+          <div id="comboOptionsContainer" class="combo-options-grid"></div>
+          <button id="btnSkipCombo" class="btn-action-secondary">Next ➜</button>
+        </div>
+
+        <!-- Panel E: Mini Challenge -->
+        <div id="panel-challenge" class="game-bottom-panel hidden">
+          <h2 id="challengeQuestionText" class="panel-word-title">Can you find my NOSE?</h2>
+          <p class="panel-instruction-sub">Touch the correct body part on your monster!</p>
+          <button id="btnSkipChallenge" class="btn-action-secondary">Dance Now! 🕺</button>
+        </div>
+
+      </footer>
+    </section>
+
+    <!-- ======================================================
+         SCREEN 3: MONSTER DANCE (Party Scene)
+         ====================================================== -->
+    <section id="screen-dance" class="screen" aria-label="Monster Dance Screen">
+      <div class="dance-party-lights"></div>
+
+      <!-- Dance Prompt Banner -->
+      <h1 id="danceCommandBanner" class="dance-command-banner">LET'S DANCE! 🕺</h1>
+
+      <!-- Dancing Monster Stage -->
+      <div class="monster-play-stage">
+        <div class="monster-svg-wrapper">
+          <svg id="danceMonsterSVG" viewBox="0 0 400 520" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SCREEN 4: FINAL CELEBRATION
+         ====================================================== -->
+    <section id="screen-celeb" class="screen" aria-label="Celebration Screen">
+      <h1 class="celeb-title-banner">🎉 AMAZING! 🎉</h1>
+      <h2 class="celeb-subtitle-monster">✨ MY MONSTER! ✨</h2>
+      <div id="celebStarsBanner" class="celeb-stars-row">⭐⭐⭐⭐⭐</div>
+
+      <!-- Celebratory Monster -->
+      <div class="monster-play-stage" style="min-height:240px;">
+        <div class="monster-svg-wrapper">
+          <svg id="celebMonsterSVG" viewBox="0 0 400 520" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="celeb-buttons-group">
+        <button id="btnPlayAgain" class="btn-action-primary">🔄 PLAY AGAIN</button>
+        <button id="btnNewMonster" class="btn-action-primary" style="background: linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%);">🎨 NEW MONSTER</button>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Modular Scripts -->
+  <script src="monsterParts.js"></script>
+  <script src="data.js"></script>
+  <script src="animations.js"></script>
+  <script src="audio.js"></script>
+  <script src="monster.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

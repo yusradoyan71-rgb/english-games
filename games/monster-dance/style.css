@@ -1,0 +1,1276 @@
+/* ============================================================
+   style.css  -  Monster Dance! Vibrant Preschool Cartoon Theme
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800;900&family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800;900&display=swap');
+
+/* ── Reset & Fundamentals ─────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #120326;
+  font-family: 'Baloo 2', 'Fredoka', 'Nunito', sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.15s ease, box-shadow 0.15s ease;
+}
+
+button:active {
+  transform: scale(0.92) !important;
+}
+
+/* ── Background FX Canvas ─────────────────────────────────── */
+#bgFxCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── App Layout Container ─────────────────────────────────── */
+#app {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Screens ──────────────────────────────────────────────── */
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+  overflow: hidden;
+}
+
+.screen.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ══════════════════════════════════════════════════════════
+   SCREEN 1: START SCREEN (Playground Scene)
+   ══════════════════════════════════════════════════════════ */
+#screen-start {
+  background:
+    radial-gradient(circle at 50% 15%, rgba(124, 58, 237, 0.6) 0%, transparent 65%),
+    radial-gradient(circle at 10% 70%, rgba(37, 99, 235, 0.45) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(219, 39, 119, 0.45) 0%, transparent 50%),
+    linear-gradient(180deg, #1e0840 0%, #110526 50%, #06112d 100%);
+}
+
+/* Clouds */
+.sky-cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 80px;
+  filter: blur(1px);
+  animation: floatCloud 10s ease-in-out infinite;
+}
+.sky-cloud.c1 { width: 220px; height: 75px; top: 8%;  left: 4%;  animation-delay: 0s; }
+.sky-cloud.c2 { width: 170px; height: 60px; top: 14%; right: 6%; animation-delay: -4s; }
+.sky-cloud.c3 { width: 260px; height: 85px; top: 5%;  left: 32%; animation-delay: -7s; }
+
+@keyframes floatCloud {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50%      { transform: translateY(-14px) translateX(8px); }
+}
+
+/* Rainbow */
+.sky-rainbow {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(850px, 95vw);
+  height: 425px;
+  border-radius: 425px 425px 0 0;
+  background: conic-gradient(
+    from 180deg,
+    #FF5964 0deg 25deg,
+    #FFA940 25deg 50deg,
+    #FFD700 50deg 75deg,
+    #52C41A 75deg 100deg,
+    #1890FF 100deg 125deg,
+    #722ED1 125deg 150deg
+  );
+  opacity: 0.28;
+  mask-image: radial-gradient(circle at 50% 100%, transparent 68%, black 72%);
+  -webkit-mask-image: radial-gradient(circle at 50% 100%, transparent 68%, black 72%);
+}
+
+/* Ground & Grass */
+.grass-hill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 24%;
+  background: linear-gradient(180deg, #22C55E 0%, #15803D 80%, #0D5426 100%);
+  border-radius: 50% 50% 0 0 / 35px 35px 0 0;
+  box-shadow: 0 -8px 25px rgba(34, 197, 94, 0.35);
+}
+
+.ground-flower {
+  position: absolute;
+  bottom: 12%;
+  font-size: 2.2rem;
+  animation: flowerSway 3.5s ease-in-out infinite;
+}
+@keyframes flowerSway {
+  0%, 100% { transform: rotate(-7deg); }
+  50%      { transform: rotate(7deg) scale(1.05); }
+}
+
+.floating-butterfly {
+  position: absolute;
+  font-size: 2.2rem;
+  animation: butterflyFlutter 4s ease-in-out infinite;
+}
+@keyframes butterflyFlutter {
+  0%, 100% { transform: translateY(0) rotate(-10deg) scaleX(1); }
+  25%      { transform: translateY(-20px) rotate(12deg) scaleX(-1); }
+  50%      { transform: translateY(-8px) rotate(-8deg) scaleX(1); }
+  75%      { transform: translateY(-26px) rotate(15deg) scaleX(-1); }
+}
+
+/* Start Hero Container */
+.start-hero {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.start-title-banner {
+  font-size: clamp(2.4rem, 6vw, 4.8rem);
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #FFF;
+  text-shadow:
+    0 4px 0 #7C3AED,
+    0 8px 16px rgba(0, 0, 0, 0.4),
+    0 0 25px rgba(255, 215, 0, 0.6);
+  animation: titlePulse 2.4s ease-in-out infinite;
+  text-align: center;
+}
+
+@keyframes titlePulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.04) rotate(-1deg); }
+}
+
+.start-subtitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-weight: 800;
+  color: #FDE047;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  margin-top: -8px;
+  margin-bottom: 8px;
+}
+
+/* Start Monster View */
+.start-monster-container {
+  width: min(280px, 50vw);
+  height: min(340px, 46vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.start-monster-container svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 14px 18px rgba(0,0,0,0.35));
+}
+
+/* Huge Play Button */
+.btn-play-huge {
+  padding: 16px 48px;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  color: #FFF;
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 50%, #FFAA00 100%);
+  border-radius: 50px;
+  border: 4px solid #FFFFFF;
+  box-shadow:
+    0 8px 0 #C2410C,
+    0 16px 30px rgba(255, 107, 107, 0.55),
+    inset 0 2px 4px rgba(255,255,255,0.6);
+  animation: playButtonPulse 1.8s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+@keyframes playButtonPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 8px 0 #C2410C, 0 16px 30px rgba(255, 107, 107, 0.55); }
+  50%      { transform: scale(1.08); box-shadow: 0 8px 0 #C2410C, 0 24px 40px rgba(255, 107, 107, 0.8); }
+}
+
+/* Sound Toggle Button */
+.btn-sound-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  border: 3px solid rgba(255, 255, 255, 0.6);
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  color: #FFF;
+}
+.btn-sound-toggle:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* ══════════════════════════════════════════════════════════
+   SCREEN 2: MAIN GAME (HUD, Monster Stage, Control Panels)
+   ══════════════════════════════════════════════════════════ */
+#screen-game {
+  background:
+    radial-gradient(circle at 50% 20%, rgba(99, 102, 241, 0.4) 0%, transparent 60%),
+    radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.3) 0%, transparent 50%),
+    linear-gradient(180deg, #180933 0%, #0d041e 100%);
+  justify-content: space-between;
+  padding: 12px 16px 16px;
+}
+
+/* HUD */
+.game-hud {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  z-index: 20;
+}
+
+.hud-star-badge {
+  background: rgba(255, 255, 255, 0.18);
+  border: 2.5px solid #FFD700;
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #FFD700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+.star-bump {
+  animation: starBumpAnim 0.3s ease-out;
+}
+@keyframes starBumpAnim {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.35) rotate(10deg); }
+  100% { transform: scale(1); }
+}
+
+/* Progress Breadcrumb */
+.hud-progress-trail {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 6px 14px;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.progress-node {
+  font-size: 1.3rem;
+  opacity: 0.45;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.progress-node.progress-active {
+  opacity: 1;
+  transform: scale(1.35);
+  filter: drop-shadow(0 0 8px #FFD700);
+}
+.progress-node.progress-completed {
+  opacity: 0.9;
+  filter: drop-shadow(0 0 4px #4ADE80);
+}
+
+.progress-arrow {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.9rem;
+}
+
+/* Stage Area (Center Monster) */
+.monster-play-stage {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+}
+
+.monster-svg-wrapper {
+  width: min(340px, 46vw);
+  height: min(440px, 52vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+#monsterSVG, #danceMonsterSVG, #celebMonsterSVG {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.45));
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Speech Bubble */
+.speech-bubble-wrapper {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #FFFFFF;
+  border: 4px solid #3B82F6;
+  border-radius: 28px;
+  padding: 10px 24px;
+  font-size: clamp(1.3rem, 3vw, 2.2rem);
+  font-weight: 900;
+  color: #1E293B;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  z-index: 30;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.speech-bubble-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 16px 14px 0;
+  border-style: solid;
+  border-color: #3B82F6 transparent;
+  display: block;
+  width: 0;
+}
+.speech-bubble-wrapper.hidden {
+  display: none !important;
+}
+.bubble-fade-in {
+  animation: bubblePopIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.bubble-fade-out {
+  animation: bubblePopOut 0.25s ease-in forwards;
+}
+
+@keyframes bubblePopIn {
+  0%   { opacity: 0; transform: translateX(-50%) scale(0.6); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1); }
+}
+@keyframes bubblePopOut {
+  0%   { opacity: 1; transform: translateX(-50%) scale(1); }
+  100% { opacity: 0; transform: translateX(-50%) scale(0.6); }
+}
+
+/* ── Interactive Game Panels ──────────────────────────────── */
+.game-bottom-panel {
+  width: 100%;
+  max-width: 920px;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 3px solid rgba(255, 255, 255, 0.28);
+  border-radius: 28px;
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  z-index: 20;
+}
+
+.game-bottom-panel.hidden {
+  display: none;
+}
+
+.panel-slide-in {
+  animation: panelSlideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes panelSlideUp {
+  0%   { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Spoken Word Badges */
+.panel-word-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900;
+  color: #FFD700;
+  text-shadow: 0 3px 0 #B45309, 0 6px 14px rgba(0,0,0,0.5);
+  letter-spacing: 1px;
+}
+
+.panel-instruction-sub {
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  font-weight: 800;
+  color: #E2E8F0;
+  margin-top: -4px;
+}
+
+.word-pop-anim {
+  animation: wordPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes wordPop {
+  0%   { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Category Tab Bar */
+.category-tab-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  width: 100%;
+}
+
+.category-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 14px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  color: #FFF;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+.category-tab-btn .tab-icon {
+  font-size: 1.3rem;
+}
+.category-tab-btn.active {
+  background: linear-gradient(135deg, #FF6B6B 0%, #FFAA00 100%);
+  border-color: #FFFFFF;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.6);
+  transform: scale(1.08);
+}
+
+/* Customization Options Grid */
+.options-cards-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  max-height: 190px;
+  overflow-y: auto;
+  padding: 4px;
+}
+
+.part-choice-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 92px;
+  height: 92px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 3.5px solid #E2E8F0;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+  padding: 5px;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s;
+}
+.part-choice-card:hover {
+  transform: scale(1.08);
+}
+.part-choice-card.selected {
+  border-color: #22C55E;
+  background: #F0FDF4;
+  box-shadow: 0 0 0 4px #86EFAC, 0 8px 18px rgba(34, 197, 94, 0.4);
+  transform: scale(1.1);
+}
+.card-svg-preview {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-svg-preview svg {
+  width: 100%;
+  height: 100%;
+}
+.card-part-title {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #334155;
+  text-align: center;
+  line-height: 1.1;
+  margin-top: 2px;
+}
+
+/* Color Bubble Buttons */
+.color-bubble-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 4px solid #FFFFFF;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.color-bubble-btn:hover {
+  transform: scale(1.15);
+}
+.color-bubble-btn.selected {
+  border-color: #FFD700;
+  box-shadow: 0 0 0 4px #FFD700, 0 8px 20px rgba(0,0,0,0.4);
+  transform: scale(1.2);
+}
+.color-label-tag {
+  font-size: 0.7rem;
+  font-weight: 900;
+  color: #FFF;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+
+/* Combo Options Cards */
+.combo-options-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.combo-option-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 3.5px solid #CBD5E1;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+}
+.combo-option-card:hover {
+  transform: scale(1.08);
+}
+.combo-card-swatch {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #FFF;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+}
+.combo-swatch-emoji {
+  font-size: 1.6rem;
+}
+.combo-card-label {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #1E293B;
+}
+
+.correct-glow {
+  animation: correctGlowAnim 0.6s ease-out;
+}
+@keyframes correctGlowAnim {
+  0%   { transform: scale(1); box-shadow: 0 0 0 0 #22C55E; }
+  50%  { transform: scale(1.18); box-shadow: 0 0 25px 8px #22C55E; }
+  100% { transform: scale(1.05); }
+}
+
+.wrong-shake {
+  animation: wrongShakeAnim 0.45s ease-in-out;
+}
+@keyframes wrongShakeAnim {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-10px); }
+  40%, 80% { transform: translateX(10px); }
+}
+
+/* Action Control Buttons (Large & Rounded) */
+.btn-action-primary {
+  padding: 10px 32px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
+  color: #FFF;
+  font-size: 1.35rem;
+  font-weight: 900;
+  border: 3px solid #FFF;
+  box-shadow: 0 6px 0 #14532D, 0 10px 20px rgba(34, 197, 94, 0.45);
+}
+
+.btn-action-secondary {
+  padding: 8px 20px;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #E2E8F0;
+  font-size: 1.1rem;
+  font-weight: 800;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+/* ══════════════════════════════════════════════════════════
+   SCREEN 3: MONSTER DANCE PARTY SCREEN
+   ══════════════════════════════════════════════════════════ */
+#screen-dance {
+  background:
+    radial-gradient(circle at 50% 30%, rgba(236, 72, 153, 0.45) 0%, transparent 65%),
+    radial-gradient(circle at 20% 70%, rgba(99, 102, 241, 0.4) 0%, transparent 55%),
+    radial-gradient(circle at 80% 80%, rgba(245, 158, 11, 0.4) 0%, transparent 55%),
+    linear-gradient(180deg, #1f083d 0%, #0d021c 100%);
+}
+
+.dance-party-lights {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 0%, rgba(255, 215, 0, 0.3) 0%, transparent 65%);
+  animation: partyDiscoFlash 1.0s ease-in-out infinite alternate;
+}
+@keyframes partyDiscoFlash {
+  0%   { opacity: 0.3; filter: hue-rotate(0deg); }
+  100% { opacity: 0.95; filter: hue-rotate(180deg); }
+}
+
+.dance-command-banner {
+  font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+  font-weight: 900;
+  color: #FFF;
+  text-shadow:
+    0 4px 0 #EC4899,
+    0 8px 20px rgba(0, 0, 0, 0.5),
+    0 0 30px #F472B6;
+  text-align: center;
+  z-index: 25;
+  margin-top: 10px;
+}
+
+.banner-pop-anim {
+  animation: bannerPopIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes bannerPopIn {
+  0%   { transform: scale(0.6) rotate(-3deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* Floating Balloons & Music Notes */
+.floating-party-balloon {
+  position: absolute;
+  bottom: -60px;
+  z-index: 15;
+  pointer-events: none;
+  animation: balloonRise 5s linear forwards;
+}
+@keyframes balloonRise {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-110vh) rotate(20deg); opacity: 0.2; }
+}
+
+.floating-music-note {
+  position: absolute;
+  z-index: 15;
+  pointer-events: none;
+  color: #FFD700;
+  text-shadow: 0 0 10px #FF69B4;
+  animation: noteFloatUp 3s ease-out forwards;
+}
+@keyframes noteFloatUp {
+  0%   { transform: translateY(0) scale(0.8); opacity: 1; }
+  100% { transform: translateY(-160px) scale(1.4) rotate(35deg); opacity: 0; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   SCREEN 4: FINAL CELEBRATION SCREEN
+   ══════════════════════════════════════════════════════════ */
+#screen-celeb {
+  background:
+    radial-gradient(circle at 50% 25%, rgba(255, 215, 0, 0.4) 0%, transparent 60%),
+    radial-gradient(circle at 10% 80%, rgba(34, 197, 94, 0.4) 0%, transparent 50%),
+    linear-gradient(180deg, #1b0736 0%, #0a0117 100%);
+  gap: 12px;
+}
+
+.celeb-title-banner {
+  font-size: clamp(2.4rem, 6vw, 4.6rem);
+  font-weight: 900;
+  color: #FFD700;
+  text-shadow: 0 4px 0 #D97706, 0 8px 25px rgba(255, 215, 0, 0.7);
+  animation: celebTitleAnim 1.6s ease-in-out infinite;
+}
+@keyframes celebTitleAnim {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.08) rotate(1deg); }
+}
+
+.celeb-subtitle-monster {
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: #FFF;
+  margin-top: -6px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+.celeb-stars-row {
+  font-size: 2.6rem;
+  letter-spacing: 6px;
+  animation: starPulseRow 1.4s ease-in-out infinite;
+}
+@keyframes starPulseRow {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.1); filter: drop-shadow(0 0 14px #FFD700); }
+}
+
+.celeb-buttons-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  z-index: 30;
+  margin-top: 10px;
+}
+
+/* ══════════════════════════════════════════════════════════
+   MONSTER ANIMATION ENGINE (CSS Keyframes)
+   ══════════════════════════════════════════════════════════ */
+
+/* Idle Breathing */
+.monster-breathe {
+  animation: monsterBreatheAnim 3.2s ease-in-out infinite;
+  transform-origin: 200px 420px;
+}
+@keyframes monsterBreatheAnim {
+  0%, 100% { transform: scale(1, 1); }
+  50%      { transform: scale(1.025, 0.975) translateY(-3px); }
+}
+
+/* Part Fly-in & Pop */
+.part-pop-in {
+  animation: partPopInAnim 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: 200px 200px;
+}
+@keyframes partPopInAnim {
+  0%   { transform: scale(0.2) translateY(-40px); opacity: 0; }
+  70%  { transform: scale(1.25); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* Part Wiggle (Discovery & Wrong Feedback) */
+.part-wiggle {
+  animation: partWiggleAnim 0.65s ease-in-out;
+  transform-origin: 200px 200px;
+}
+@keyframes partWiggleAnim {
+  0%, 100% { transform: rotate(0deg); }
+  20%      { transform: rotate(-12deg) scale(1.1); }
+  40%      { transform: rotate(12deg) scale(1.1); }
+  60%      { transform: rotate(-8deg); }
+  80%      { transform: rotate(8deg); }
+}
+
+/* Head Shake for Hair Selection */
+.part-head-shake {
+  animation: headShakeAnim 0.65s ease-in-out;
+  transform-origin: 200px 200px;
+}
+@keyframes headShakeAnim {
+  0%, 100% { transform: rotate(0deg); }
+  25%      { transform: rotate(-15deg); }
+  75%      { transform: rotate(15deg); }
+}
+
+/* Discovery Target Glow & Sparkle Highlight */
+.part-target-glow {
+  filter: drop-shadow(0 0 20px #FFD700) drop-shadow(0 0 10px #FF69B4);
+  animation: targetGlowPulse 1.0s ease-in-out infinite alternate;
+}
+@keyframes targetGlowPulse {
+  0%   { opacity: 0.8; transform: scale(1); }
+  100% { opacity: 1.0; transform: scale(1.08); }
+}
+
+/* Monster Blink */
+.monster-blink-anim {
+  animation: blinkEyesAnim 0.35s ease-in-out;
+  transform-origin: 200px 186px;
+}
+@keyframes blinkEyesAnim {
+  0%, 100% { transform: scaleY(1); }
+  50%      { transform: scaleY(0.08); }
+}
+
+/* Mouth Talking */
+.mouth-talking {
+  animation: mouthTalkAnim 0.3s ease-in-out infinite alternate;
+  transform-origin: 200px 244px;
+}
+@keyframes mouthTalkAnim {
+  0%   { transform: scale(1, 1); }
+  100% { transform: scale(1.15, 1.4) translateY(4px); }
+}
+
+/* Hands Waving */
+.hands-waving {
+  animation: handsWaveAnim 0.75s ease-in-out infinite;
+  transform-origin: 200px 370px;
+}
+@keyframes handsWaveAnim {
+  0%, 100% { transform: rotate(0deg); }
+  25%      { transform: rotate(-14deg) translateY(-8px); }
+  75%      { transform: rotate(14deg) translateY(-8px); }
+}
+
+/* Jump Single (Squash and Stretch) */
+.monster-jump-single {
+  animation: jumpSingleAnim 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: 200px 480px;
+}
+@keyframes jumpSingleAnim {
+  0%, 100% { transform: scale(1, 1) translateY(0); }
+  25%      { transform: scale(1.15, 0.85) translateY(10px); }
+  60%      { transform: scale(0.9, 1.15) translateY(-50px); }
+  85%      { transform: scale(1.1, 0.9) translateY(0); }
+}
+
+/* Happy Pose for Accessories */
+.monster-happy-pose {
+  animation: happyPoseAnim 0.8s ease-in-out;
+  transform-origin: 200px 360px;
+}
+@keyframes happyPoseAnim {
+  0%, 100% { transform: scale(1); }
+  35%      { transform: scale(1.12, 0.95) rotate(-5deg) translateY(-15px); }
+  70%      { transform: scale(1.12, 0.95) rotate(5deg) translateY(-15px); }
+}
+
+/* Spin Happy for Body Color Selection */
+.monster-spin-happy {
+  animation: spinHappyAnim 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: 200px 280px;
+}
+@keyframes spinHappyAnim {
+  0%   { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(180deg) scale(1.15); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+/* ── Instructional Dance Animations (Clear, Paced) ── */
+.dance-head-bob {
+  animation: danceHeadBobAnim 0.75s ease-in-out infinite alternate;
+  transform-origin: 200px 200px;
+}
+@keyframes danceHeadBobAnim {
+  0%   { transform: rotate(-16deg) translateY(-8px); }
+  100% { transform: rotate(16deg) translateY(8px); }
+}
+
+.dance-hands-wave {
+  animation: danceHandsWaveAnim 0.6s ease-in-out infinite alternate;
+  transform-origin: 200px 370px;
+}
+@keyframes danceHandsWaveAnim {
+  0%   { transform: rotate(-24deg) scale(1.12); }
+  100% { transform: rotate(24deg) scale(1.12); }
+}
+
+.dance-feet-stomp {
+  animation: danceFeetStompAnim 0.5s ease-in-out infinite alternate;
+  transform-origin: 200px 500px;
+}
+@keyframes danceFeetStompAnim {
+  0%   { transform: rotate(-14deg) translateY(-16px); }
+  100% { transform: rotate(14deg) translateY(-16px); }
+}
+
+.dance-eyes-blink {
+  animation: danceEyesBlinkAnim 0.4s ease-in-out infinite alternate;
+  transform-origin: 200px 186px;
+}
+@keyframes danceEyesBlinkAnim {
+  0%   { transform: scaleY(1); }
+  100% { transform: scaleY(0.08); }
+}
+
+.dance-ears-wiggle {
+  animation: danceEarsWiggleAnim 0.45s ease-in-out infinite alternate;
+  transform-origin: 200px 140px;
+}
+@keyframes danceEarsWiggleAnim {
+  0%   { transform: rotate(-18deg) scale(1.12); }
+  100% { transform: rotate(18deg) scale(1.12); }
+}
+
+.dance-jump-high {
+  animation: danceJumpHighAnim 0.9s ease-in-out infinite;
+  transform-origin: 200px 480px;
+}
+@keyframes danceJumpHighAnim {
+  0%, 100% { transform: scale(1, 1) translateY(0); }
+  25%      { transform: scale(1.22, 0.78) translateY(14px); }
+  55%      { transform: scale(0.85, 1.2) translateY(-75px); }
+  80%      { transform: scale(1.12, 0.88) translateY(0); }
+}
+
+/* ── 20-30s Free Dance Varied Choreography Sequences ── */
+
+/* ── 1. GROOVE LEFT (Multi-Part Full Body Animation) ── */
+.dance-groove-left {
+  animation: grooveLeftBodyAnim 1.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  transform-origin: 200px 480px;
+}
+@keyframes grooveLeftBodyAnim {
+  0% {
+    transform: rotate(0deg) translateX(0) scale(1, 1);
+  }
+  25% {
+    /* 0-300ms: Body leans LEFT */
+    transform: rotate(-14deg) translateX(-42px) scale(0.96, 1.04);
+  }
+  45% {
+    /* 100-500ms: Arms & Feet shift LEFT + body wiggle */
+    transform: rotate(-18deg) translateX(-50px) scale(1.04, 0.96);
+  }
+  65% {
+    /* 300-700ms: Wiggle bounce */
+    transform: rotate(-8deg) translateX(-28px) scale(0.98, 1.02);
+  }
+  85% {
+    /* 700-1000ms: Returning to center */
+    transform: rotate(-2deg) translateX(-8px) scale(1.02, 0.98);
+  }
+  100% {
+    transform: rotate(0deg) translateX(0) scale(1, 1);
+  }
+}
+
+.dance-groove-left #g-head,
+.dance-groove-left #g-hair,
+.dance-groove-left #g-ears,
+.dance-groove-left #g-accessories {
+  animation: grooveLeftHeadAnim 1.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transform-origin: 200px 190px;
+}
+@keyframes grooveLeftHeadAnim {
+  0%, 100% { transform: rotate(0deg) translateX(0); }
+  35%      { transform: rotate(-14deg) translateX(-18px); }
+  70%      { transform: rotate(6deg) translateX(-6px); }
+}
+
+.dance-groove-left #g-arms,
+.dance-groove-left #g-hands {
+  animation: grooveLeftArmsAnim 1.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transform-origin: 200px 320px;
+}
+@keyframes grooveLeftArmsAnim {
+  0%, 100% { transform: rotate(0deg) translateX(0); }
+  35%      { transform: rotate(-28deg) translateX(-28px); }
+  65%      { transform: rotate(-10deg) translateX(-12px); }
+}
+
+.dance-groove-left #g-legs,
+.dance-groove-left #g-feet {
+  animation: grooveLeftFeetAnim 1.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transform-origin: 200px 480px;
+}
+@keyframes grooveLeftFeetAnim {
+  0%, 100% { transform: rotate(0deg) translateX(0); }
+  30%      { transform: rotate(-8deg) translateX(-22px); }
+  60%      { transform: rotate(-4deg) translateX(-10px); }
+}
+
+/* ── 2. GROOVE RIGHT (Multi-Part Full Body Animation) ── */
+.dance-groove-right {
+  animation: grooveRightBodyAnim 1.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  transform-origin: 200px 480px;
+}
+@keyframes grooveRightBodyAnim {
+  0% {
+    transform: rotate(0deg) translateX(0) scale(1, 1);
+  }
+  25% {
+    /* 0-300ms: Body leans RIGHT */
+    transform: rotate(14deg) translateX(42px) scale(0.96, 1.04);
+  }
+  45% {
+    /* 100-500ms: Arms & Feet shift RIGHT + body wiggle */
+    transform: rotate(18deg) translateX(50px) scale(1.04, 0.96);
+  }
+  65% {
+    /* 300-700ms: Wiggle bounce */
+    transform: rotate(8deg) translateX(28px) scale(0.98, 1.02);
+  }
+  85% {
+    /* 700-1000ms: Returning to center */
+    transform: rotate(2deg) translateX(8px) scale(1.02, 0.98);
+  }
+  100% {
+    transform: rotate(0deg) translateX(0) scale(1, 1);
+  }
+}
+
+.dance-groove-right #g-head,
+.dance-groove-right #g-hair,
+.dance-groove-right #g-ears,
+.dance-groove-right #g-accessories {
+  animation: grooveRightHeadAnim 1.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transform-origin: 200px 190px;
+}
+@keyframes grooveRightHeadAnim {
+  0%, 100% { transform: rotate(0deg) translateX(0); }
+  35%      { transform: rotate(14deg) translateX(18px); }
+  70%      { transform: rotate(-6deg) translateX(6px); }
+}
+
+.dance-groove-right #g-arms,
+.dance-groove-right #g-hands {
+  animation: grooveRightArmsAnim 1.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transform-origin: 200px 320px;
+}
+@keyframes grooveRightArmsAnim {
+  0%, 100% { transform: rotate(0deg) translateX(0); }
+  35%      { transform: rotate(28deg) translateX(28px); }
+  65%      { transform: rotate(10deg) translateX(12px); }
+}
+
+.dance-groove-right #g-legs,
+.dance-groove-right #g-feet {
+  animation: grooveRightFeetAnim 1.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transform-origin: 200px 480px;
+}
+@keyframes grooveRightFeetAnim {
+  0%, 100% { transform: rotate(0deg) translateX(0); }
+  30%      { transform: rotate(8deg) translateX(22px); }
+  60%      { transform: rotate(4deg) translateX(10px); }
+}
+
+/* ── 3. HANDS HIGH ── */
+.choreography-hands-high {
+  animation: handsHighAnim 0.75s ease-in-out infinite alternate;
+  transform-origin: 200px 320px;
+}
+@keyframes handsHighAnim {
+  0%   { transform: translateY(0) scale(1, 1); }
+  50%  { transform: translateY(-30px) scale(1.05, 1.05); }
+  100% { transform: translateY(-15px) scale(0.98, 1.02); }
+}
+.choreography-hands-high #g-arms,
+.choreography-hands-high #g-hands {
+  animation: handsHighArmsAnim 0.6s ease-in-out infinite alternate;
+  transform-origin: 200px 320px;
+}
+@keyframes handsHighArmsAnim {
+  0%   { transform: translateY(0) rotate(-10deg); }
+  100% { transform: translateY(-35px) rotate(10deg); }
+}
+
+/* ── 4. HEAD EAR MIX ── */
+.choreography-head-ear-mix {
+  animation: headEarMixAnim 0.7s ease-in-out infinite alternate;
+  transform-origin: 200px 240px;
+}
+@keyframes headEarMixAnim {
+  0%   { transform: rotate(-14deg) translateY(-8px); }
+  100% { transform: rotate(14deg) translateY(8px); }
+}
+
+/* ── 5. FAST STOMP ── */
+.choreography-fast-stomp {
+  animation: fastStompAnim 0.4s ease-in-out infinite alternate;
+  transform-origin: 200px 490px;
+}
+@keyframes fastStompAnim {
+  0%   { transform: rotate(-8deg) translateY(-14px) scale(1.04, 0.96); }
+  100% { transform: rotate(8deg) translateY(-14px) scale(1.04, 0.96); }
+}
+.choreography-fast-stomp #g-feet {
+  animation: fastStompFeetAnim 0.4s ease-in-out infinite alternate;
+  transform-origin: 200px 500px;
+}
+@keyframes fastStompFeetAnim {
+  0%   { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+
+/* ── 6. HIGH BOUNCE ── */
+.choreography-high-bounce {
+  animation: highBounceAnim 0.85s ease-in-out infinite;
+  transform-origin: 200px 480px;
+}
+@keyframes highBounceAnim {
+  0%, 100% { transform: scale(1, 1) translateY(0); }
+  25%      { transform: scale(1.2, 0.8) translateY(12px); }
+  55%      { transform: scale(0.85, 1.18) translateY(-80px); }
+  80%      { transform: scale(1.14, 0.86) translateY(0); }
+}
+
+/* ── 7. SPIN DISCO ── */
+.choreography-spin-disco {
+  animation: spinDiscoAnim 1.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: 200px 280px;
+}
+@keyframes spinDiscoAnim {
+  0%   { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(180deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+/* ── 8. BODY WIGGLE ── */
+.choreography-body-wiggle {
+  animation: bodyWiggleAnim 0.5s ease-in-out infinite alternate;
+  transform-origin: 200px 340px;
+}
+@keyframes bodyWiggleAnim {
+  0%   { transform: rotate(-12deg) scale(1.06, 0.94) translateY(-10px); }
+  100% { transform: rotate(12deg) scale(0.94, 1.06) translateY(-10px); }
+}
+
+/* ── 9. DOUBLE JUMP ── */
+.choreography-double-jump {
+  animation: doubleJumpAnim 1.1s ease-in-out infinite;
+  transform-origin: 200px 480px;
+}
+@keyframes doubleJumpAnim {
+  0%, 100% { transform: translateY(0) scale(1); }
+  20%      { transform: translateY(-45px) scale(0.9, 1.1); }
+  40%      { transform: translateY(0) scale(1.1, 0.9); }
+  65%      { transform: translateY(-65px) scale(0.88, 1.14); }
+  85%      { transform: translateY(0) scale(1.12, 0.88); }
+}
+
+/* ── 10. FINAL FREEZE ── */
+.choreography-final-freeze {
+  animation: finalFreezeAnim 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  transform-origin: 200px 320px;
+}
+@keyframes finalFreezeAnim {
+  0%   { transform: scale(1) translateY(0); }
+  50%  { transform: scale(1.22, 1.18) translateY(-40px) rotate(4deg); }
+  100% { transform: scale(1.18) translateY(-25px) rotate(-2deg); }
+}
+
+/* ── Sparkles & Confetti FX ── */
+.sparkle-particle {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1000;
+  box-shadow: 0 0 10px #FFF;
+  animation: sparkleBurstAnim 0.75s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+@keyframes sparkleBurstAnim {
+  0%   { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+}
+
+.flying-star-fx {
+  position: fixed;
+  font-size: 2.4rem;
+  pointer-events: none;
+  z-index: 1000;
+  filter: drop-shadow(0 0 12px #FFD700);
+  animation: flyStarAnim 0.85s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+@keyframes flyStarAnim {
+  0%   { transform: translate(0, 0) scale(1.4) rotate(0deg); opacity: 1; }
+  70%  { opacity: 1; }
+  100% { transform: translate(var(--tx), var(--ty)) scale(0.4) rotate(360deg); opacity: 0; }
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -20px;
+  pointer-events: none;
+  z-index: 100;
+  animation: confettiFall linear forwards;
+}
+@keyframes confettiFall {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(105vh) rotate(720deg); opacity: 0.9; }
+}
+
+/* ── Responsive Adjustments ── */
+@media (max-height: 640px) {
+  .monster-svg-wrapper {
+    width: min(240px, 40vw);
+    height: min(280px, 42vh);
+  }
+  .part-choice-card {
+    width: 78px;
+    height: 78px;
+  }
+  .card-svg-preview {
+    width: 44px;
+    height: 44px;
+  }
+  .category-tab-btn {
+    padding: 5px 10px;
+    font-size: 0.95rem;
+  }
+}
