@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HANGMAN — Classic Word Guessing Game | Grade 7 & 8</title>
+  <meta name="description" content="Modern, curriculum-aligned English Hangman game for 7th and 8th grade students. Boost vocabulary, spelling, and reading comprehension with progressive figure drawing!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Animated Background Mesh -->
+  <div class="bg-mesh-container" aria-hidden="true">
+    <div class="mesh-blob mesh-1"></div>
+    <div class="mesh-blob mesh-2"></div>
+    <div class="mesh-blob mesh-3"></div>
+  </div>
+
+  <!-- Particle FX Canvas -->
+  <canvas id="fxCanvas"></canvas>
+
+  <!-- Main Application Wrapper -->
+  <div id="app">
+    <!-- Top Site Header Navigation -->
+    <header class="site-header glass-panel">
+      <div class="brand-group" id="headerLogoBtn" title="Back to Main Menu">
+        <div class="brand-logo-icon" aria-hidden="true">🎯</div>
+        <span class="brand-text">HANGMAN</span>
+      </div>
+      <div class="header-actions">
+        <button type="button" class="btn-icon-header" id="btnSoundToggle" aria-label="Toggle Sound">
+          <span id="soundIcon">🔊</span>
+          <span id="soundText">Sound ON</span>
+        </button>
+        <button type="button" class="btn-icon-header" id="btnRulesModal" aria-label="How To Play">
+          <span>❓</span>
+          <span>Rules</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ================================================================== -->
+    <!-- SCREEN 1: MAIN MENU & GRADE SELECTION -->
+    <!-- ================================================================== -->
+    <section id="screenMenu" class="screen">
+      <div class="menu-container glass-panel">
+        <div class="menu-badge">
+          <span>🎓</span>
+          <span>MIDDLE SCHOOL ENGLISH • A2–B1</span>
+        </div>
+
+        <h1 class="menu-title-hero">HANGMAN</h1>
+        <p class="menu-tagline">"Can you guess the word before the figure is complete?"</p>
+
+        <div class="section-label">CHOOSE YOUR GRADE</div>
+
+        <!-- Grade Selector Cards -->
+        <div class="grades-grid">
+          <!-- Grade 7 Card -->
+          <article class="grade-card grade-card-7" id="cardGrade7" role="button" tabindex="0">
+            <div class="grade-card-header">
+              <span class="grade-card-badge badge-g7">CEFR A2 – A2+</span>
+              <span class="grade-card-icon" aria-hidden="true">🚀</span>
+            </div>
+            <div>
+              <h2 class="grade-card-title">GRADE 7</h2>
+              <p class="grade-card-desc">Master essential middle-school vocabulary, spelling, and sentence context.</p>
+              <ul class="grade-features-list">
+                <li><span class="dot"></span> 5 Progressive Levels</li>
+                <li><span class="dot"></span> School, Hobbies & Everyday Life</li>
+                <li><span class="dot"></span> Missing Words in Context</li>
+                <li><span class="dot"></span> Generous Hints & 60s Timer</li>
+              </ul>
+            </div>
+            <button type="button" class="btn-play-grade btn-grade7" id="btnPlayGrade7">
+              <span>PLAY GRADE 7</span>
+              <span aria-hidden="true">➜</span>
+            </button>
+          </article>
+
+          <!-- Grade 8 Card -->
+          <article class="grade-card grade-card-8" id="cardGrade8" role="button" tabindex="0">
+            <div class="grade-card-header">
+              <span class="grade-card-badge badge-g8">CEFR A2+ – B1</span>
+              <span class="grade-card-icon" aria-hidden="true">⚡</span>
+            </div>
+            <div>
+              <h2 class="grade-card-title">GRADE 8</h2>
+              <p class="grade-card-desc">Challenge yourself with advanced academic words, abstract concepts, and inference.</p>
+              <ul class="grade-features-list">
+                <li><span class="dot"></span> 6 Advanced Challenge Levels</li>
+                <li><span class="dot"></span> Dictionary Definitions & Inference</li>
+                <li><span class="dot"></span> Tricky Spelling & Prefixes/Suffixes</li>
+                <li><span class="dot"></span> Timed Speed Rounds (45s & 30s)</li>
+              </ul>
+            </div>
+            <button type="button" class="btn-play-grade btn-grade8" id="btnPlayGrade8">
+              <span>PLAY GRADE 8</span>
+              <span aria-hidden="true">➜</span>
+            </button>
+          </article>
+        </div>
+
+        <!-- Footer Info Chips -->
+        <div class="menu-footer-info">
+          <div class="info-chip"><span>✨</span> 100% Text-Based Clues</div>
+          <div class="info-chip"><span>🎨</span> Progressive Line-Art Drawing</div>
+          <div class="info-chip"><span>🔥</span> Streak Multipliers</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- SCREEN 2: LEVEL SELECTION MAP -->
+    <!-- ================================================================== -->
+    <section id="screenLevels" class="screen hidden">
+      <div class="level-select-container glass-panel">
+        <div class="level-header-bar">
+          <div>
+            <h2 class="level-header-title" id="levelGradeTitle">Grade 7 Levels</h2>
+            <p class="level-header-sub" id="levelGradeSub">Choose a level to test your vocabulary skills</p>
+          </div>
+          <button type="button" class="btn-icon-header" id="btnBackToMenu">
+            <span>←</span>
+            <span>Back to Menu</span>
+          </button>
+        </div>
+
+        <!-- Level Cards Grid -->
+        <div class="level-cards-grid" id="levelsGridContainer">
+          <!-- Dynamically populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- SCREEN 3: MAIN GAMEPLAY ARENA -->
+    <!-- ================================================================== -->
+    <section id="screenGame" class="screen hidden">
+      <div class="gameplay-container">
+        <!-- Top Status Bar -->
+        <div class="game-top-bar glass-panel">
+          <div class="top-bar-left">
+            <span class="grade-badge-active" id="hudGradeBadge">GRADE 7</span>
+            <div class="level-progress-tag" id="hudLevelProgress">
+              WORD <span id="hudWordCount">1</span> / <span id="hudWordsToPass">5</span>
+            </div>
+          </div>
+
+          <div class="top-bar-center">
+            <!-- Mistakes Counter (No lives/hearts) -->
+            <div class="stat-pill stat-mistakes" id="hudMistakesPill" title="Wrong Guesses">
+              <span>⚠️</span>
+              <span>MISTAKES: <b id="hudMistakesCount">0</b> / 6</span>
+            </div>
+            <div class="stat-pill stat-score" title="Total Score">
+              <span>⭐</span>
+              <span id="hudScore">0</span>
+            </div>
+            <div class="stat-pill stat-streak" id="hudStreakPill" title="Consecutive Correct Words">
+              <span>🔥</span>
+              <span id="hudStreak">0</span>
+            </div>
+          </div>
+
+          <div class="top-bar-right">
+            <!-- Timed round badge (hidden when no timer) -->
+            <div class="timer-container hidden" id="hudTimerContainer" title="Time Remaining">
+              <span>⏱️</span>
+              <span id="hudTimerText">60s</span>
+            </div>
+            <button type="button" class="btn-icon-header" id="btnExitToLevels" title="Change Level">
+              <span>🗺️</span>
+              <span>Levels</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Central Stage: Hangman Drawing & Clue / Word Layout -->
+        <div class="game-central-stage glass-panel">
+          <!-- Left Column: Hangman Figure Display Area -->
+          <div class="hangman-figure-box" aria-label="Hangman Drawing Display">
+            <svg class="hangman-svg" viewBox="0 0 180 180" id="hangmanSvg" aria-hidden="true">
+              <!-- Gallows Stand Structure (Always visible) -->
+              <g class="gallows-stand" stroke="#475569" stroke-width="4" stroke-linecap="round">
+                <!-- Base line -->
+                <line x1="20" y1="168" x2="80" y2="168" />
+                <!-- Upright pole -->
+                <line x1="45" y1="168" x2="45" y2="16" />
+                <!-- Top horizontal beam -->
+                <line x1="45" y1="16" x2="125" y2="16" />
+                <!-- Corner diagonal strut -->
+                <line x1="45" y1="45" x2="72" y2="16" stroke-width="3" />
+                <!-- Hanging rope -->
+                <line x1="125" y1="16" x2="125" y2="40" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="3 2" />
+              </g>
+
+              <!-- Progressive Body Parts (1 to 6) -->
+              <!-- Part 1: Head -->
+              <circle id="partHead" class="figure-part" cx="125" cy="56" r="16" stroke="#38bdf8" stroke-width="4" fill="rgba(56, 189, 248, 0.15)" />
+              
+              <!-- Part 2: Torso -->
+              <line id="partTorso" class="figure-part" x1="125" y1="72" x2="125" y2="114" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" />
+              
+              <!-- Part 3: Left Arm -->
+              <line id="partArmLeft" class="figure-part" x1="125" y1="84" x2="102" y2="104" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" />
+              
+              <!-- Part 4: Right Arm -->
+              <line id="partArmRight" class="figure-part" x1="125" y1="84" x2="148" y2="104" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" />
+              
+              <!-- Part 5: Left Leg -->
+              <line id="partLegLeft" class="figure-part" x1="125" y1="114" x2="104" y2="148" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" />
+              
+              <!-- Part 6: Right Leg -->
+              <line id="partLegRight" class="figure-part" x1="125" y1="114" x2="146" y2="148" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" />
+            </svg>
+          </div>
+
+          <!-- Right Column: Category, Clue & Word Slots -->
+          <div class="game-word-info-box">
+            <!-- Category Chip -->
+            <div class="category-pill" id="categoryPill">
+              <span>🏷️</span>
+              <span id="categoryText">CATEGORY: ANIMALS</span>
+            </div>
+
+            <!-- Clue / Definition Text (Strictly NO Images) -->
+            <p class="clue-text-main" id="clueMainText">
+              "A large, powerful bird that can fly high and has sharp eyesight."
+            </p>
+
+            <!-- Optional Context Sentence -->
+            <div class="clue-context-sentence hidden" id="clueContextSentence"></div>
+
+            <!-- Word Blanks Display -->
+            <div class="word-slots-wrapper">
+              <div class="letters-slots-container" id="wordSlotsContainer">
+                <!-- Letter blank slots inserted by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Feedback Message -->
+        <div class="feedback-msg-bar" id="feedbackMsgBar">
+          Select or type letters to guess the hidden English word!
+        </div>
+
+        <!-- On-Screen Alphabet Keyboard -->
+        <div class="keyboard-section glass-panel">
+          <div class="keyboard-row" id="kbRow1"></div>
+          <div class="keyboard-row" id="kbRow2"></div>
+          <div class="keyboard-row" id="kbRow3"></div>
+
+          <div class="game-bottom-actions">
+            <button type="button" class="btn-hint" id="btnOpenHint">
+              <span>💡</span>
+              <span id="hintBtnText">USE HINT (-50 PTS)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- MODAL 1: WORD COMPLETE MODAL -->
+    <!-- ================================================================== -->
+    <div class="modal-overlay hidden" id="modalWordComplete">
+      <div class="modal-box">
+        <div class="modal-icon-badge">🎉</div>
+        <h2 class="modal-title title-success">WORD COMPLETE!</h2>
+        
+        <div class="revealed-word-card">
+          <div class="word-was-label">THE WORD WAS:</div>
+          <div class="revealed-word-text" id="winWordText">APPLE</div>
+          <div class="revealed-definition-text" id="winDefinitionText">
+            A round fruit with red, yellow, or green skin and firm white flesh.
+          </div>
+          <div class="revealed-context-text" id="winContextText"></div>
+        </div>
+
+        <div class="score-breakdown-card">
+          <div class="score-row">
+            <span>Base Points:</span>
+            <span id="winBasePts">+100</span>
+          </div>
+          <div class="score-row">
+            <span>Fewer Mistakes Bonus:</span>
+            <span id="winMistakesBonusPts">+50</span>
+          </div>
+          <div class="score-row" id="winNoHintRow">
+            <span>No-Hint Clean Bonus:</span>
+            <span id="winNoHintPts">+50</span>
+          </div>
+          <div class="score-row" id="winStreakRow">
+            <span>Streak Multiplier Bonus:</span>
+            <span id="winStreakPts">+20</span>
+          </div>
+          <div class="score-row" id="winSpeedRow">
+            <span>Speed Time Bonus:</span>
+            <span id="winSpeedPts">+15</span>
+          </div>
+          <div class="score-row total-row">
+            <span>ROUND TOTAL:</span>
+            <span id="winRoundTotalPts">+225 PTS</span>
+          </div>
+        </div>
+
+        <div class="modal-actions-row">
+          <button type="button" class="btn-modal btn-primary-action" id="btnNextWordWin">
+            <span>NEXT WORD</span>
+            <span>➜</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- MODAL 2: ROUND OVER / WORD FAILED MODAL -->
+    <!-- ================================================================== -->
+    <div class="modal-overlay hidden" id="modalWordFailed">
+      <div class="modal-box">
+        <div class="modal-icon-badge">🏁</div>
+        <h2 class="modal-title title-retry">ROUND OVER</h2>
+        <p style="color: #94a3b8; font-size: 0.95rem;">The figure was completed. Let's learn this word:</p>
+
+        <div class="revealed-word-card">
+          <div class="word-was-label">THE WORD WAS:</div>
+          <div class="revealed-word-text" style="color: #f87171;" id="failWordText">ELEPHANT</div>
+          <div class="revealed-definition-text" id="failDefinitionText">
+            A very large plant-eating mammal with a long trunk and large ears.
+          </div>
+          <div class="revealed-context-text" id="failContextText"></div>
+        </div>
+
+        <div class="modal-actions-row">
+          <button type="button" class="btn-modal btn-secondary-action" id="btnRetryWord">
+            <span>🔄</span>
+            <span>TRY AGAIN</span>
+          </button>
+          <button type="button" class="btn-modal btn-primary-action" id="btnNextWordFail">
+            <span>NEXT WORD</span>
+            <span>➜</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- MODAL 3: LEVEL COMPLETE MODAL -->
+    <!-- ================================================================== -->
+    <div class="modal-overlay hidden" id="modalLevelComplete">
+      <div class="modal-box">
+        <div class="modal-icon-badge">🏆</div>
+        <h2 class="modal-title title-success">LEVEL COMPLETE!</h2>
+        <p style="color: #cbd5e1;" id="lvlCompleteSub">You successfully solved all words in this level!</p>
+
+        <div class="score-breakdown-card">
+          <div class="score-row">
+            <span>Total Score:</span>
+            <span id="lvlStatScore" style="color: #fbbf24; font-weight: bold;">0</span>
+          </div>
+          <div class="score-row">
+            <span>Guessing Accuracy:</span>
+            <span id="lvlStatAccuracy" style="color: #34d399; font-weight: bold;">92%</span>
+          </div>
+          <div class="score-row">
+            <span>Best Streak:</span>
+            <span id="lvlStatStreak" style="color: #c084fc; font-weight: bold;">5 in a row</span>
+          </div>
+          <div class="score-row">
+            <span>Hints Used:</span>
+            <span id="lvlStatHints">0</span>
+          </div>
+        </div>
+
+        <div class="modal-actions-row">
+          <button type="button" class="btn-modal btn-secondary-action" id="btnLvlReplay">
+            <span>🔄 REPLAY</span>
+          </button>
+          <button type="button" class="btn-modal btn-primary-action" id="btnNextLevel">
+            <span>NEXT LEVEL 🚀</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- MODAL 4: GRADE COMPLETION MODAL -->
+    <!-- ================================================================== -->
+    <div class="modal-overlay hidden" id="modalGradeComplete">
+      <div class="modal-box">
+        <div class="modal-icon-badge">🎓🌟</div>
+        <h2 class="modal-title title-success">GRADE MASTERED!</h2>
+        <p style="color: #cbd5e1;" id="gradeMasteryText">
+          Outstanding work! You have conquered all levels in this grade!
+        </p>
+
+        <div class="score-breakdown-card">
+          <div class="score-row total-row">
+            <span>FINAL SCORE:</span>
+            <span id="gradeFinalScore">0 PTS</span>
+          </div>
+          <div class="score-row">
+            <span>Overall Accuracy:</span>
+            <span id="gradeFinalAccuracy">95%</span>
+          </div>
+          <div class="score-row">
+            <span>Best Streak:</span>
+            <span id="gradeFinalStreak">12</span>
+          </div>
+          <div class="score-row">
+            <span>Total Hints Used:</span>
+            <span id="gradeFinalHints">2</span>
+          </div>
+        </div>
+
+        <div class="modal-actions-row">
+          <button type="button" class="btn-modal btn-secondary-action" id="btnReplayGrade">
+            <span>🔄 REPLAY GRADE</span>
+          </button>
+          <button type="button" class="btn-modal btn-primary-action" id="btnSwitchGrade">
+            <span>CHANGE GRADE ➜</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- MODAL 5: HINT PICKER DRAWER / MODAL -->
+    <!-- ================================================================== -->
+    <div class="modal-overlay hidden" id="modalHintPicker">
+      <div class="modal-box">
+        <div class="modal-icon-badge">💡</div>
+        <h2 class="modal-title" style="color: #fbbf24;">SELECT A HINT</h2>
+        <p style="color: #94a3b8; font-size: 0.9rem;">Using a hint will deduct points from your final round score.</p>
+
+        <div class="hint-options-grid" id="hintOptionsContainer">
+          <!-- Dynamic hint buttons based on Grade 7 or Grade 8 -->
+        </div>
+
+        <div class="modal-actions-row">
+          <button type="button" class="btn-modal btn-secondary-action" id="btnCloseHintModal">
+            CANCEL
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- MODAL 6: HOW TO PLAY / RULES -->
+    <!-- ================================================================== -->
+    <div class="modal-overlay hidden" id="modalRules">
+      <div class="modal-box" style="max-width: 600px;">
+        <div class="modal-icon-badge">📖</div>
+        <h2 class="modal-title" style="color: #38bdf8;">HOW TO PLAY</h2>
+        
+        <div class="rules-content-body">
+          <div class="rules-step-card">
+            <div class="rules-step-title">1. Read the Text Clue</div>
+            <p>Every word features an English category, definition, or missing sentence context. No picture clues!</p>
+          </div>
+
+          <div class="rules-step-card">
+            <div class="rules-step-title">2. Guess Letters</div>
+            <p>Click the on-screen letters or use your physical keyboard to reveal blanks. Correct letters appear in the word.</p>
+          </div>
+
+          <div class="rules-step-card">
+            <div class="rules-step-title">3. Watch the Hangman Figure</div>
+            <p>Each incorrect guess adds one body part to the figure (Head, Torso, Left Arm, Right Arm, Left Leg, Right Leg). You have 6 mistakes before the round is over!</p>
+          </div>
+
+          <div class="rules-step-card">
+            <div class="rules-step-title">4. Build Streaks & Beat the Clock</div>
+            <p>Solve consecutive words to trigger Streak Multipliers. In timed levels, solve quickly for extra bonus points!</p>
+          </div>
+        </div>
+
+        <div class="modal-actions-row">
+          <button type="button" class="btn-modal btn-primary-action" id="btnCloseRulesModal">
+            GOT IT! LET'S PLAY
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="audio.js"></script>
+  <script src="animations.js"></script>
+  <script src="game.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
