@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>🧠 SORT IT! — English Sorting Educational Game</title>
+  <meta name="description" content="Engaging drag-and-drop English educational game for 7th and 8th grade students. Practice vocabulary, grammar, and sentence context in a dynamic sorting station.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="fxCanvas" class="bg-canvas"></canvas>
+
+  <div class="ambient-glow glow-top-left" aria-hidden="true"></div>
+  <div class="ambient-glow glow-bottom-right" aria-hidden="true"></div>
+  <div class="cyber-grid" aria-hidden="true"></div>
+
+  <main id="app">
+
+    <section id="startScreen" class="screen active" aria-labelledby="gameMainTitle">
+      <div class="start-container">
+        
+        <div class="brand-badge">
+          <span>🎮</span> ENGLISH SORTING STATION <span>⚡</span>
+        </div>
+
+        <div>
+          <h1 id="gameMainTitle" class="game-logo">
+            🧠 SORT IT!
+          </h1>
+          <p class="game-subtitle">"Can you sort everything correctly?"</p>
+        </div>
+
+        <div class="grade-selection-grid">
+          
+          <button type="button" class="grade-btn grade-btn-7" id="btnSelectGrade7" aria-label="Select Grade 7 Mode">
+            <div class="grade-btn-content">
+              <div class="grade-header-row">
+                <span class="grade-pill pill-grade7">🟢 GRADE 7</span>
+                <span class="cefr-tag">CEFR A2 – A2+</span>
+              </div>
+              <h2 class="grade-btn-title">Vocabulary &amp; Context</h2>
+              <p class="grade-btn-desc">Master everyday life, specific categories, short sentence contexts, and speed sorting.</p>
+              <div class="grade-btn-meta">
+                <span>5 Level Stages</span>
+                <span class="grade-arrow">➜</span>
+              </div>
+            </div>
+          </button>
+
+          <button type="button" class="grade-btn grade-btn-8" id="btnSelectGrade8" aria-label="Select Grade 8 Mode">
+            <div class="grade-btn-content">
+              <div class="grade-header-row">
+                <span class="grade-pill pill-grade8">🔵 GRADE 8</span>
+                <span class="cefr-tag">CEFR A2+ – B1</span>
+              </div>
+              <h2 class="grade-btn-title">Grammar &amp; Functions</h2>
+              <p class="grade-btn-desc">Analyze academic vocabulary, semantic tone, verb tenses, modal functions, and discourse logic.</p>
+              <div class="grade-btn-meta">
+                <span>6 Level Stages</span>
+                <span class="grade-arrow">➜</span>
+              </div>
+            </div>
+          </button>
+
+        </div>
+
+        <div class="start-footer-controls">
+          <button type="button" class="btn-icon-text" id="btnToggleSound" aria-label="Toggle Sound">
+            <span id="soundIcon">🔊</span>
+            <span id="soundLabel">Sound ON</span>
+          </button>
+          
+          <button type="button" class="btn-icon-text" id="btnHowToPlay" aria-label="How to Play Tutorial">
+            <span>ℹ️</span>
+            <span>How to Play</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="mapScreen" class="screen" aria-labelledby="mapGradeTitle">
+      <div class="map-container">
+        
+        <header class="map-header">
+          <div class="map-header-left">
+            <button type="button" class="btn-back" id="btnBackToGrades" aria-label="Back to Grade Selection">
+              ❮
+            </button>
+            <div>
+              <h2 id="mapGradeTitle" class="map-title">Grade 7 Levels</h2>
+              <p id="mapGradeSubtitle" style="font-size: 0.85rem; color: var(--text-muted);">Select your level stage</p>
+            </div>
+          </div>
+          <div class="map-stats-badge" id="mapStarsBadge">
+            <span>⭐</span>
+            <span id="mapStarsCount">0 / 15 Stars</span>
+          </div>
+        </header>
+
+        <div class="levels-grid" id="levelsGridContainer">
+        </div>
+
+      </div>
+    </section>
+
+    <section id="gameScreen" class="screen" aria-label="Active Game Arena">
+      <div class="game-station-container">
+        
+        <header class="game-hud">
+          <div class="hud-left">
+            <button type="button" class="btn-back" id="btnPauseGame" aria-label="Return to Map" style="width: 36px; height: 36px; font-size: 1rem;">
+              ❮
+            </button>
+            <div class="hud-pill" id="hudGradePill">
+              🟢 G7
+            </div>
+            <div class="hud-level-info" id="hudLevelTitle">
+              Level 1: Basic Categories
+            </div>
+          </div>
+
+          <div class="hud-score-box">
+            <span class="hud-score-label">SCORE</span>
+            <span class="hud-score-val" id="hudScore">0</span>
+          </div>
+
+          <div class="hud-right">
+            <div class="combo-badge" id="hudComboBadge">
+              🔥 <span id="hudComboText">COMBO x3</span>
+            </div>
+
+            <div class="hud-timer-badge" id="hudTimerBadge" style="display: none;">
+              ⏱️ <span id="hudTimerVal">60s</span>
+            </div>
+
+            <button type="button" class="btn-back" id="btnInGameSound" aria-label="Toggle Sound" style="width: 36px; height: 36px; font-size: 1rem;">
+              🔊
+            </button>
+          </div>
+        </header>
+
+        <div class="sorting-arena" id="sortingArena">
+          
+          <div class="deck-counter-badge" id="deckCounterBadge">
+            <span>📦 Card</span>
+            <span id="deckProgressText" style="color: #fff; font-weight: 800;">1 / 10</span>
+          </div>
+
+          <div class="card-deck-stack" id="cardDeckStack">
+          </div>
+
+        </div>
+
+        <div class="categories-dock" id="categoriesDock">
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <div id="tutorialModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="tutTitle">
+    <div class="modal-box">
+      <h3 id="tutTitle" class="modal-title">How to Play 🧠</h3>
+      <p class="modal-subtitle">Drag and sort cards into their matching category containers!</p>
+
+      <div class="tutorial-stage">
+        <div class="tut-card">
+          <span>🍌</span> BANANA
+        </div>
+        <div class="tut-feedback">✨ CORRECT!</div>
+        <div class="tut-categories">
+          <div class="tut-cat target">
+            <span>🍎</span> FOOD
+          </div>
+          <div class="tut-cat">
+            <span>🐾</span> ANIMALS
+          </div>
+          <div class="tut-cat">
+            <span>🏛️</span> PLACES
+          </div>
+        </div>
+      </div>
+
+      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.4;">
+        Drag with your <strong>mouse or touch</strong>, or tap the card and tap a category. Faster correct sorts earn extra combo bonuses!
+      </p>
+
+      <button type="button" class="modal-close-btn" id="btnCloseTutorial">
+        GOT IT, LET'S PLAY! 🚀
+      </button>
+    </div>
+  </div>
+
+  <div id="levelResultModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="resTitle">
+    <div class="modal-box">
+      <div style="font-size: 3rem; margin-bottom: 0.5rem;" id="resIcon">🎉</div>
+      <h3 id="resTitle" class="modal-title">LEVEL COMPLETE!</h3>
+      <p id="resSubtitle" class="modal-subtitle">Great sorting work!</p>
+
+      <div style="font-size: 2.2rem; margin: 0.5rem 0;" id="resStarsRow">
+        ⭐⭐⭐
+      </div>
+
+      <div class="results-stats-grid">
+        <div class="stat-box">
+          <span class="stat-label">LEVEL SCORE</span>
+          <span class="stat-value" id="resScore" style="color: #ffd93d;">2,450</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">BEST COMBO</span>
+          <span class="stat-value" id="resCombo" style="color: #ff7675;">x5</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">ACCURACY</span>
+          <span class="stat-value" id="resAccuracy" style="color: #55efc4;">92%</span>
+        </div>
+      </div>
+
+      <div class="results-actions-row">
+        <button type="button" class="btn-result-action btn-secondary-action" id="btnRetryLevel">
+          🔄 Retry
+        </button>
+        <button type="button" class="btn-result-action btn-secondary-action" id="btnMapFromModal">
+          🗺️ Levels
+        </button>
+        <button type="button" class="btn-result-action btn-primary-action" id="btnNextLevel">
+          Next Level ➜
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="gradeCompleteModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="gradeResTitle">
+    <div class="modal-box">
+      <div style="font-size: 3.5rem; margin-bottom: 0.5rem;">🏆</div>
+      <h3 id="gradeResTitle" class="modal-title">GRADE MASTERED!</h3>
+      <p id="gradeResSubtitle" class="modal-subtitle">You have completed all levels in this grade!</p>
+
+      <div class="results-stats-grid">
+        <div class="stat-box">
+          <span class="stat-label">TOTAL SCORE</span>
+          <span class="stat-value" id="gradeTotalScore" style="color: #ffd93d;">12,850</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">STARS EARNED</span>
+          <span class="stat-value" id="gradeStarsEarned" style="color: #ff7675;">15 / 15</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">AVG ACCURACY</span>
+          <span class="stat-value" id="gradeAvgAccuracy" style="color: #55efc4;">95%</span>
+        </div>
+      </div>
+
+      <div class="results-actions-row">
+        <button type="button" class="btn-result-action btn-secondary-action" id="btnReplayGrade">
+          🔄 Play Again
+        </button>
+        <button type="button" class="btn-result-action btn-primary-action" id="btnSwitchGrade">
+          Change Grade 🎓
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
