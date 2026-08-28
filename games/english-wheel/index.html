@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENGLISH WHEEL 🎡 - Classroom English Game Show</title>
+  <meta name="description" content="Engaging classroom English game show for 7th and 8th graders. Spin the wheel, guess consonants, buy vowels, and solve English idioms and expressions!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Confetti Canvas for Grand Celebrations -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Top Application Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="brand-logo">
+        <span>🎡</span>
+        <span>ENGLISH WHEEL</span>
+      </div>
+      <div class="header-badges">
+        <span id="grade-badge" class="header-badge badge-grade">GRADE 7</span>
+        <span id="round-badge" class="header-badge badge-round">ROUND 1 OF 3</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <button id="btn-sound-toggle" class="btn-header-action" aria-label="Toggle Sound">
+        <span class="sound-icon-text">🔊 SOUND: ON</span>
+      </button>
+      <button id="btn-howto" class="btn-header-action" aria-label="How to play">
+        <span>❓ HOW TO PLAY</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       SCREEN 1: WELCOME & GRADE SELECTION
+       ========================================================================= -->
+  <main id="screen-welcome" class="screen-container">
+    <div class="welcome-box">
+      <div class="welcome-logo-hero">🎡</div>
+      <h1 class="welcome-title">ENGLISH WHEEL</h1>
+      <p class="welcome-subtitle">Spin. Guess. Solve.</p>
+      <p class="welcome-desc">
+        A prime-time TV game show designed for middle-school English classrooms. Guess hidden idioms, daily expressions, phrasal verbs, and proverbs!
+      </p>
+
+      <div class="grade-btn-grid">
+        <button id="btn-grade-7" class="grade-card-btn grade-card-7">
+          <div class="grade-card-title">GRADE 7</div>
+          <div class="grade-card-level">CEFR A2–A2+</div>
+          <p class="grade-card-desc">Accessible expressions, common idioms, daily routines &amp; friendly phrasal verbs.</p>
+        </button>
+
+        <button id="btn-grade-8" class="grade-card-btn grade-card-8">
+          <div class="grade-card-title">GRADE 8</div>
+          <div class="grade-card-level">CEFR A2+–B1</div>
+          <p class="grade-card-desc">Challenging idioms, abstract phrasal verbs, proverbs, collocations &amp; discourse markers.</p>
+        </button>
+      </div>
+
+      <div class="welcome-footer-row">
+        <span style="font-size: 0.85rem; color: var(--text-muted);">Designed for 3 Classroom Teams &bull; Smartboard &amp; Projector Ready</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       SCREEN 2: TEAM SETUP
+       ========================================================================= -->
+  <section id="screen-setup" class="screen-container hidden">
+    <div class="setup-box">
+      <h2 id="setup-grade-title" class="setup-title">GRADE 7 SETUP</h2>
+      <p class="setup-subtitle">Customize team names for your classroom competition:</p>
+
+      <div class="team-inputs-group">
+        <div class="team-input-row">
+          <span class="team-indicator-dot dot-team1"></span>
+          <label for="team1-name" class="team-label">TEAM 1</label>
+          <input type="text" id="team1-name" class="team-text-input" value="TEAM 1" maxlength="20" placeholder="Enter Team 1 Name">
+        </div>
+        <div class="team-input-row">
+          <span class="team-indicator-dot dot-team2"></span>
+          <label for="team2-name" class="team-label">TEAM 2</label>
+          <input type="text" id="team2-name" class="team-text-input" value="TEAM 2" maxlength="20" placeholder="Enter Team 2 Name">
+        </div>
+        <div class="team-input-row">
+          <span class="team-indicator-dot dot-team3"></span>
+          <label for="team3-name" class="team-label">TEAM 3</label>
+          <input type="text" id="team3-name" class="team-text-input" value="TEAM 3" maxlength="20" placeholder="Enter Team 3 Name">
+        </div>
+      </div>
+
+      <div class="setup-actions">
+        <button id="btn-back-setup" class="btn-secondary">BACK</button>
+        <button id="btn-start-game" class="btn-primary">START GAME 🚀</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SCREEN 3: MAIN GAMEPLAY SCREEN
+       ========================================================================= -->
+  <section id="screen-game" class="game-layout hidden">
+    <!-- Top Teams Scoreboard -->
+    <div id="teams-container" class="teams-bar">
+      <!-- Injected dynamically via game.js -->
+    </div>
+
+    <!-- Puzzle Board & Category -->
+    <div class="board-section">
+      <div class="category-banner">
+        <span class="category-tag">CATEGORY:</span>
+        <span id="category-text" class="category-text">IDIOM</span>
+      </div>
+
+      <div id="puzzle-container" class="puzzle-container">
+        <!-- Puzzle letter tiles injected dynamically -->
+      </div>
+    </div>
+
+    <!-- Status / Turn Banner -->
+    <div class="status-bar">
+      <div id="turn-banner" class="turn-banner banner-info">
+        Team 1's Turn — Spin the wheel or Solve!
+      </div>
+      <div class="active-multiplier-tags">
+        <span id="multiplier-badge" class="tag-multiplier hidden">⚡ 2X MULTIPLIER</span>
+        <span id="bonus-badge" class="tag-bonus hidden">🎁 +500 BONUS</span>
+      </div>
+    </div>
+
+    <!-- Bottom Interactive Row (Wheel + Controls + Keyboard) -->
+    <div class="game-bottom-grid">
+      <!-- Wheel Column -->
+      <div class="wheel-column">
+        <div class="wheel-wrapper">
+          <canvas id="wheel-canvas" width="340" height="340"></canvas>
+        </div>
+        <div class="wheel-controls">
+          <button id="btn-spin" class="btn-spin-action">🎡 SPIN</button>
+          <button id="btn-buy-vowel" class="btn-buy-vowel" disabled>💰 BUY VOWEL (-500)</button>
+          <button id="btn-solve" class="btn-solve-action">🧩 SOLVE</button>
+        </div>
+      </div>
+
+      <!-- Keyboard & Used Letters Column -->
+      <div class="keyboard-column">
+        <div>
+          <div class="keyboard-section-label">Consonants (Select after spinning):</div>
+          <div id="consonants-grid" class="keys-grid">
+            <!-- Consonant keys injected dynamically -->
+          </div>
+        </div>
+
+        <div>
+          <div class="keyboard-section-label">Vowels (Available when purchasing):</div>
+          <div id="vowels-grid" class="keys-grid">
+            <!-- Vowel keys injected dynamically -->
+          </div>
+        </div>
+
+        <div class="used-letters-bar">
+          <span class="used-label">USED:</span>
+          <div id="used-letters-list" class="used-letters-list">
+            <span class="empty-used">None yet</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SCREEN 4: FINAL ROUND SCREEN
+       ========================================================================= -->
+  <section id="screen-final" class="screen-container hidden">
+    <div class="final-container">
+      <h2 class="final-hero-title">🏆 THE FINAL ROUND</h2>
+      <div id="final-team-banner" class="final-team-badge">FINALIST: TEAM 1</div>
+
+      <div class="category-banner">
+        <span class="category-tag">CATEGORY:</span>
+        <span id="final-category-text" class="category-text">PROVERB</span>
+      </div>
+
+      <div id="final-puzzle-container" class="puzzle-container">
+        <!-- Final puzzle tiles -->
+      </div>
+
+      <div id="final-status-text" class="final-step-status">
+        Step 1: Choose 3 additional consonants to reveal!
+      </div>
+
+      <!-- Pick 3 Consonants Grid -->
+      <div id="final-picks-grid" class="keys-grid" style="justify-content: center;">
+        <!-- Consonants for final round -->
+      </div>
+
+      <!-- Solve & 10s Timer Section -->
+      <div id="final-solve-section" class="final-solve-container hidden">
+        <button id="btn-final-start-solve" class="btn-primary">START 10s TIMER ⏱️</button>
+        <div id="final-timer-display" class="timer-display">⏱️ 10s</div>
+        <div class="solve-input-row">
+          <input type="text" id="input-final-solve" class="solve-text-input" placeholder="Type final expression..." disabled autocomplete="off">
+          <button id="btn-final-confirm-solve" class="btn-primary" disabled>SUBMIT</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SCREEN 5: WINNER / SCOREBOARD SCREEN
+       ========================================================================= -->
+  <section id="screen-winner" class="screen-container hidden">
+    <div class="winner-container">
+      <div class="winner-trophy">🏆</div>
+      <h2 class="winner-title">GAME COMPLETED!</h2>
+
+      <div class="winner-champion-card">
+        <div class="champion-label">CHAMPIONS</div>
+        <div id="winner-champion-name" class="champion-name">TEAM 1</div>
+        <div id="winner-champion-score" class="champion-score">8,500 PTS</div>
+      </div>
+
+      <div id="winner-scoreboard" class="winner-scoreboard">
+        <!-- Final ranked rows -->
+      </div>
+
+      <div class="setup-actions" style="width: 100%; max-width: 450px;">
+        <button id="btn-change-grade" class="btn-secondary">MAIN MENU</button>
+        <button id="btn-play-again" class="btn-primary">PLAY AGAIN 🔁</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       MODAL 1: SOLVE PUZZLE
+       ========================================================================= -->
+  <div id="modal-solve" class="modal-overlay hidden">
+    <div class="modal-card">
+      <h3 style="font-family: var(--font-display); font-size: 1.5rem; color: #fbbf24; text-align: center;">🧩 SOLVE THE PUZZLE</h3>
+      <p style="font-size: 0.9rem; color: var(--text-secondary); text-align: center;">
+        Enter your guess for the full English expression:
+      </p>
+      <input type="text" id="input-solve" class="solve-text-input" placeholder="TYPE FULL EXPRESSION HERE..." autocomplete="off">
+      <div class="setup-actions">
+        <button id="btn-cancel-solve" class="btn-secondary">CANCEL</button>
+        <button id="btn-confirm-solve" class="btn-primary">CONFIRM SOLVE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 2: EDUCATIONAL LEARNING CARD
+       ========================================================================= -->
+  <div id="modal-edu" class="modal-overlay hidden">
+    <div class="modal-card edu-card">
+      <div class="edu-header">
+        <span id="edu-card-category" class="edu-badge">IDIOM</span>
+        <h3 id="edu-card-title" class="edu-title">PIECE OF CAKE</h3>
+      </div>
+      <div class="edu-content">
+        <div class="edu-section-box">
+          <div class="edu-section-label">ENGLISH MEANING:</div>
+          <p id="edu-card-meaning" class="edu-section-text">"Something that is very easy to do."</p>
+        </div>
+        <div class="edu-section-box">
+          <div class="edu-section-label">EXAMPLE SENTENCE:</div>
+          <p id="edu-card-sentence" class="edu-section-text edu-example">"Don't worry about the English quiz, it's a piece of cake!"</p>
+        </div>
+      </div>
+      <button id="btn-next-round" class="btn-primary" style="width: 100%;">CONTINUE TO NEXT ROUND ➜</button>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 3: HOW TO PLAY
+       ========================================================================= -->
+  <div id="modal-howto" class="modal-overlay hidden">
+    <div class="modal-card howto-card">
+      <h3 class="howto-title">🎡 HOW TO PLAY ENGLISH WHEEL</h3>
+      <div class="howto-rules-list">
+        <div class="howto-rule-item">
+          <span class="rule-num">1</span>
+          <div><strong>Spin the Wheel:</strong> Land on point values (100–1000) or special wedges like <em>DOUBLE</em>, <em>BONUS</em>, <em>PASS</em>, or <em>BANKRUPT</em>.</div>
+        </div>
+        <div class="howto-rule-item">
+          <span class="rule-num">2</span>
+          <div><strong>Guess Consonants:</strong> Choose a consonant. If correct, you earn points for every occurrence and keep your turn!</div>
+        </div>
+        <div class="howto-rule-item">
+          <span class="rule-num">3</span>
+          <div><strong>Buy Vowels:</strong> If your team has at least 500 round points, you can buy a vowel (A, E, I, O, U) to reveal vowels in the puzzle.</div>
+        </div>
+        <div class="howto-rule-item">
+          <span class="rule-num">4</span>
+          <div><strong>Solve the Puzzle:</strong> When you know the expression, press <em>SOLVE</em> to type it in and win the round bonus!</div>
+        </div>
+        <div class="howto-rule-item">
+          <span class="rule-num">5</span>
+          <div><strong>Final Round:</strong> The highest-scoring team advances to the Final Round for a chance at <strong>+3,000 BONUS POINTS</strong>!</div>
+        </div>
+      </div>
+      <button id="btn-close-howto" class="btn-primary" style="margin-top: 1rem; width: 100%;">GOT IT!</button>
+    </div>
+  </div>
+
+  <!-- Game Scripts -->
+  <script src="expressions.js"></script>
+  <script src="audio.js"></script>
+  <script src="wheel.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
