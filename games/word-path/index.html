@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WORD PATH — English Educational Game (Grade 7 & 8)</title>
+  <meta name="description" content="A modern classroom path game for practicing Word Formation, Suffixes, Prefixes, Parts of Speech, and Word Families.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Atmosphere Elements -->
+  <div class="bg-ambient" aria-hidden="true">
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+    <div class="bg-grid"></div>
+  </div>
+
+  <div class="app-viewport">
+    
+    <!-- =======================================================================
+         SCREEN 1: MAIN MENU & GRADE SELECTION
+         ======================================================================= -->
+    <main id="menuScreen" class="screen active">
+      <div class="menu-container">
+        <!-- Hero Header -->
+        <header class="menu-hero">
+          <div class="tag-badge">
+            <span aria-hidden="true">🌟</span> FINAL GAME • WORD FORMATION
+          </div>
+          <h1 class="game-title">
+            <span class="title-icon" aria-hidden="true">⚡</span> WORD PATH
+          </h1>
+          <p class="game-subtitle">"Choose the right word. Build your path."</p>
+        </header>
+
+        <!-- Grade Selection Cards -->
+        <section class="grade-selection-grid" aria-label="Select Grade Level">
+          <!-- Grade 7 Card -->
+          <article class="grade-card card-g7" id="btnStartG7" tabindex="0" role="button" aria-label="Start Grade 7 Path">
+            <div class="grade-badge-row">
+              <span class="grade-pill">GRADE 7</span>
+              <span class="grade-level">Level A2–A2+</span>
+            </div>
+            <h2 class="grade-card-title">Fundamental Word Formation</h2>
+            <p class="grade-card-desc">
+              Master adjectives vs adverbs, basic word families, common suffixes (-ly, -ful, -less, -ness, -er, -ment), and context clues.
+            </p>
+            <div class="grade-topics">
+              <span class="topic-chip">⚡ Adj vs Adv</span>
+              <span class="topic-chip">🌳 Word Families</span>
+              <span class="topic-chip">🧩 Common Suffixes</span>
+              <span class="topic-chip">5 Stages</span>
+            </div>
+            <button type="button" class="btn-start-grade" tabindex="-1">
+              PLAY GRADE 7 <span aria-hidden="true">➜</span>
+            </button>
+          </article>
+
+          <!-- Grade 8 Card -->
+          <article class="grade-card card-g8" id="btnStartG8" tabindex="0" role="button" aria-label="Start Grade 8 Path">
+            <div class="grade-badge-row">
+              <span class="grade-pill">GRADE 8</span>
+              <span class="grade-level">Level A2+–B1</span>
+            </div>
+            <h2 class="grade-card-title">Advanced Word Mastery</h2>
+            <p class="grade-card-desc">
+              Explore negative prefixes (un-, im-, dis-), complex suffixes (-tion, -ity, -ive, -ous, -able), and nuanced syntactic context.
+            </p>
+            <div class="grade-topics">
+              <span class="topic-chip">🏛️ Parts of Speech</span>
+              <span class="topic-chip">🧲 Prefixes & Suffixes</span>
+              <span class="topic-chip">👑 Master Path</span>
+              <span class="topic-chip">6 Stages</span>
+            </div>
+            <button type="button" class="btn-start-grade" tabindex="-1">
+              PLAY GRADE 8 <span aria-hidden="true">➜</span>
+            </button>
+          </article>
+        </section>
+
+        <!-- Secondary Controls -->
+        <footer class="menu-controls">
+          <button type="button" id="btnHowToPlay" class="btn-secondary">
+            <span aria-hidden="true">📖</span> HOW TO PLAY
+          </button>
+          <button type="button" id="btnMenuSound" class="btn-secondary">
+            <span class="btn-icon" aria-hidden="true">🔊</span> SOUND ON
+          </button>
+        </footer>
+      </div>
+    </main>
+
+    <!-- =======================================================================
+         SCREEN 2: GAME ARENA & PATH JOURNEY
+         ======================================================================= -->
+    <main id="gameScreen" class="screen">
+      <div class="game-arena">
+        
+        <!-- Top HUD Navigation Bar -->
+        <header class="game-hud">
+          <div class="hud-left">
+            <button type="button" id="btnQuitToMenu" class="btn-hud-icon" title="Return to Menu">
+              <span aria-hidden="true">🏠</span> Menu
+            </button>
+            <div id="hudStageBadge" class="stage-badge">
+              <span>⚡</span> Stage 1: Adjective or Adverb
+            </div>
+          </div>
+
+          <div class="hud-center">
+            <div class="hud-stat">
+              <span class="stat-label">Score</span>
+              <span id="hudScore" class="stat-value score">0</span>
+            </div>
+            <div id="hudStreakContainer" class="streak-pill">
+              <span aria-hidden="true">🔥</span>
+              <span id="hudStreak">x0</span>
+            </div>
+            <div id="hudTimerContainer" class="timer-container" style="display: none;">
+              <span aria-hidden="true">⏱️</span>
+              <span id="hudTimer">20s</span>
+            </div>
+          </div>
+
+          <div class="hud-right">
+            <button type="button" id="btnSoundToggle" class="btn-hud-icon">
+              <span class="btn-icon" aria-hidden="true">🔊</span> Sound ON
+            </button>
+          </div>
+        </header>
+
+        <!-- Main Arena Grid (Board Path + Challenge Card) -->
+        <div class="arena-grid">
+          
+          <!-- Left Column: Interactive Path Journey Board -->
+          <section class="path-board-card" aria-label="Journey Path Board">
+            <div class="board-header">
+              <div class="board-title">
+                <span aria-hidden="true">🗺️</span> WORD JOURNEY
+              </div>
+              <span id="stageStepIndicator" class="stage-step-indicator">Tile 1 of 6</span>
+            </div>
+
+            <div class="path-canvas-wrap">
+              <svg id="pathSvg" class="path-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+            </div>
+
+            <div class="keyboard-hints">
+              <span class="kbd-badge">1–4</span> or <span class="kbd-badge">A–D</span> to choose • <span class="kbd-badge">Enter/Space</span> to continue
+            </div>
+          </section>
+
+          <!-- Right Column: Question & Challenge Area -->
+          <section class="challenge-card" aria-label="Question Challenge">
+            
+            <div class="challenge-header">
+              <div id="rootWordBadge" class="root-word-badge" style="display: none;">
+                ROOT: <span id="rootWordValue" class="root-word-value">SUCCESS</span>
+              </div>
+              <span id="questionStageTag" class="question-stage-tag">Grade 7 • Adverb vs Adjective</span>
+            </div>
+
+            <!-- Sentence Context Box -->
+            <div id="sentenceContainer" class="sentence-box">
+              <p class="sentence-text">She speaks English <span class="blank-highlight">______</span>.</p>
+            </div>
+
+            <!-- Answer Options (4 buttons) -->
+            <div id="optionsGrid" class="options-grid" role="group" aria-label="Answer Options">
+              <!-- Dynamically rendered options -->
+            </div>
+
+            <!-- Educational Feedback Container & Word Family Diagram -->
+            <div id="feedbackContainer" class="feedback-container">
+              <div class="feedback-header-row">
+                <div id="feedbackStatus" class="feedback-status correct">
+                  <span>✨</span> Correct!
+                </div>
+                <span id="feedbackPos" class="pos-tag">Adverb</span>
+              </div>
+
+              <p id="feedbackExplanation" class="feedback-explanation">
+                Fluently is an adverb because it describes how she speaks.
+              </p>
+
+              <div id="feedbackRule" class="feedback-rule">
+                ADVERB → describes a verb (how an action is done).
+              </div>
+
+              <!-- Word Family Mini Tree -->
+              <div id="wordFamilyDrawer" class="word-family-drawer">
+                <div class="wf-title">WORD FAMILY TREE:</div>
+                <div id="wfNodesList" class="wf-nodes-list"></div>
+              </div>
+
+              <button type="button" id="btnFeedbackNext" class="btn-feedback-next">
+                CONTINUE <span aria-hidden="true">➜</span>
+              </button>
+            </div>
+
+          </section>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- =======================================================================
+       MODAL 1: STAGE CLEAR
+       ======================================================================= -->
+  <div id="modalStageClear" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="stageClearTitle">
+    <div class="modal-card">
+      <div class="modal-icon-badge" aria-hidden="true">🎉</div>
+      <h2 id="stageClearTitle" class="modal-title">Stage Complete!</h2>
+      <p id="stageClearDesc" class="modal-subtitle">You have conquered this path challenge!</p>
+
+      <div class="modal-stats-grid">
+        <div class="modal-stat-box">
+          <span class="modal-stat-label">Score</span>
+          <span id="stageClearScore" class="modal-stat-val">1,200</span>
+        </div>
+        <div class="modal-stat-box">
+          <span class="modal-stat-label">Accuracy</span>
+          <span id="stageClearAccuracy" class="modal-stat-val">100%</span>
+        </div>
+        <div class="modal-stat-box">
+          <span class="modal-stat-label">Streak</span>
+          <span id="stageClearStreak" class="modal-stat-val">x5</span>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" id="btnNextStage" class="btn-modal-primary">
+          NEXT STAGE <span aria-hidden="true">➜</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       MODAL 2: GAME CLEAR / VICTORY
+       ======================================================================= -->
+  <div id="modalGameClear" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="gameClearGradeBadge">
+    <div class="modal-card">
+      <div class="modal-icon-badge" style="background: linear-gradient(135deg, #f59e0b, #ec4899);" aria-hidden="true">👑</div>
+      <h2 class="modal-title">WORD PATH COMPLETE!</h2>
+      <span id="gameClearGradeBadge" class="tag-badge">Grade 7 Champion 🏆</span>
+      <p class="modal-subtitle">Outstanding mastery of English word formation and parts of speech!</p>
+
+      <div class="modal-stats-grid">
+        <div class="modal-stat-box">
+          <span class="modal-stat-label">Total Score</span>
+          <span id="gameClearScore" class="modal-stat-val">6,400</span>
+        </div>
+        <div class="modal-stat-box">
+          <span class="modal-stat-label">Accuracy</span>
+          <span id="gameClearAccuracy" class="modal-stat-val">95%</span>
+        </div>
+        <div class="modal-stat-box">
+          <span class="modal-stat-label">Best Streak</span>
+          <span id="gameClearStreak" class="modal-stat-val">x8</span>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" id="btnPlayAgain" class="btn-modal-primary">
+          PLAY AGAIN
+        </button>
+        <button type="button" id="btnSwitchGrade" class="btn-secondary" style="border-radius: var(--radius-md);">
+          CHANGE GRADE
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       MODAL 3: HOW TO PLAY INSTRUCTIONS
+       ======================================================================= -->
+  <div id="modalHowToPlay" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="howToPlayTitle">
+    <div class="modal-card" style="max-width: 600px;">
+      <div class="modal-icon-badge" aria-hidden="true">📖</div>
+      <h2 id="howToPlayTitle" class="modal-title">How to Play Word Path</h2>
+      
+      <div class="instructions-list">
+        <div class="instruction-item">
+          <span class="instruction-num">1</span>
+          <div>
+            <strong>Read the Sentence Context:</strong> Look at the missing word in the blank and identify what grammatical role is required (Adjective, Adverb, Noun, or Verb).
+          </div>
+        </div>
+        <div class="instruction-item">
+          <span class="instruction-num">2</span>
+          <div>
+            <strong>Choose the Correct Word Form:</strong> Select the right derived form using suffixes (-ly, -ful, -ness, -tion) or prefixes (un-, im-, dis-).
+          </div>
+        </div>
+        <div class="instruction-item">
+          <span class="instruction-num">3</span>
+          <div>
+            <strong>Advance on the Path:</strong> Correct answers slide your token to the next tile, grant score bonuses, and build streak multipliers!
+          </div>
+        </div>
+        <div class="instruction-item">
+          <span class="instruction-num">4</span>
+          <div>
+            <strong>Explore Word Families:</strong> After each answer, check the Word Family drawer to discover all related forms of the root word.
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" id="btnCloseHowToPlay" class="btn-modal-primary">
+          GOT IT! LET'S PLAY
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="audio.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
