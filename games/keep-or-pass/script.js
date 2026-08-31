@@ -23,14 +23,25 @@ const KEEP_OR_PASS_QUESTIONS = [
 ];
 
 const MYSTERY_REWARDS = [
-  { points: 50, type: "gain", icon: "⭐", text: "+50 Points!" },
-  { points: 100, type: "gain", icon: "🌟", text: "+100 Points!" },
-  { points: 200, type: "gain", icon: "💎", text: "JACKPOT! +200 Points!" },
-  { points: -50, type: "loss", icon: "💣", text: "BOOM! -50 Points!" },
-  { points: -100, type: "loss", icon: "💥", text: "TRAP! -100 Points!" },
-  { points: 75, type: "gain", icon: "🎁", text: "+75 Points Bonus!" },
-  { points: 150, type: "gain", icon: "🏆", text: "+150 Points!" },
-  { points: 0, type: "neutral", icon: "💨", text: "Empty Box! (0 pts)" }
+  // Positive Outcomes (~63%)
+  { points: 100, type: "gain", icon: "⭐", badge: "GAIN", text: "+100 POINTS" },
+  { points: 200, type: "gain", icon: "🌟", badge: "GAIN", text: "+200 POINTS" },
+  { points: 300, type: "gain", icon: "💎", badge: "REWARD", text: "+300 POINTS" },
+  { points: 500, type: "gain", icon: "🎁", badge: "BIG GAIN", text: "+500 POINTS" },
+  { points: 750, type: "gain", icon: "🏆", badge: "MEGA REWARD", text: "+750 POINTS" },
+  { points: 1000, type: "gain", icon: "👑", badge: "JACKPOT", text: "+1000 POINTS" },
+  { points: 200, type: "gain", icon: "💰", badge: "GAIN", text: "+200 POINTS" },
+  { points: 500, type: "gain", icon: "🔥", badge: "BIG GAIN", text: "+500 POINTS" },
+  { points: 100, type: "gain", icon: "✨", badge: "GAIN", text: "+100 POINTS" },
+  { points: 300, type: "gain", icon: "🍀", badge: "REWARD", text: "+300 POINTS" },
+
+  // Negative Outcomes (~37%)
+  { points: -100, type: "loss", icon: "⚠️", badge: "RISK", text: "-100 POINTS" },
+  { points: -200, type: "loss", icon: "💣", badge: "RISK", text: "-200 POINTS" },
+  { points: -300, type: "loss", icon: "⚡", badge: "LOSS", text: "-300 POINTS" },
+  { points: -500, type: "loss", icon: "💥", badge: "BIG LOSS", text: "-500 POINTS" },
+  { points: -750, type: "loss", icon: "☠️", badge: "HEAVY LOSS", text: "-750 POINTS" },
+  { points: -1000, type: "loss", icon: "🚨", badge: "CRITICAL RISK", text: "-1000 POINTS" }
 ];
 
 // Procedural Sound Effects
@@ -122,11 +133,30 @@ const questionTextEl = document.getElementById("questionText");
 const hintBoxEl = document.getElementById("hintBox");
 
 const decisionTeamTitle = document.getElementById("decisionTeamTitle");
+const revealCard = document.getElementById("revealCard");
+const revealBadge = document.getElementById("revealBadge");
 const revealActionTag = document.getElementById("revealActionTag");
 const revealTargetTeam = document.getElementById("revealTargetTeam");
 const revealIcon = document.getElementById("revealIcon");
 const revealPointsText = document.getElementById("revealPointsText");
 const revealDescText = document.getElementById("revealDescText");
+
+let consecutiveLossCount = 0;
+
+function getRandomReward() {
+  let pool = MYSTERY_REWARDS;
+  // If we already had 2 negative outcomes in a row, guarantee a positive reward to avoid long negative streaks
+  if (consecutiveLossCount >= 2) {
+    pool = MYSTERY_REWARDS.filter(r => r.type === "gain");
+  }
+  const reward = pool[Math.floor(Math.random() * pool.length)];
+  if (reward.type === "loss") {
+    consecutiveLossCount++;
+  } else {
+    consecutiveLossCount = 0;
+  }
+  return reward;
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   setupPills();
@@ -177,6 +207,7 @@ function startMatch() {
   gameState.totalRounds = roundCount;
   gameState.currentQuestionIdx = 0;
   gameState.activeTeamIdx = 0;
+  consecutiveLossCount = 0;
 
   gameState.teams = [];
   for (let i = 1; i <= teamCount; i++) {
@@ -220,8 +251,8 @@ function showQuestionScreen() {
 
 function onAnswerCorrect() {
   sfx.playChime();
-  // Pick random reward
-  gameState.pendingReward = MYSTERY_REWARDS[Math.floor(Math.random() * MYSTERY_REWARDS.length)];
+  // Pick random reward from valid point pool (positive & negative balanced, no empty boxes)
+  gameState.pendingReward = getRandomReward();
 
   questionScreen.classList.add("hidden");
   decisionScreen.classList.remove("hidden");
@@ -258,20 +289,29 @@ function handleDecision(choice) {
   }
 
   const rew = gameState.pendingReward;
+
+  // Restart card animations smoothly
+  revealCard.classList.remove("is-gain", "is-loss");
+  void revealCard.offsetWidth; // trigger reflow
+
   revealIcon.textContent = rew.icon;
   revealPointsText.textContent = rew.text;
 
-  if (rew.points > 0) {
+  if (rew.type === "gain") {
+    revealCard.classList.add("is-gain");
+    revealBadge.className = "reveal-badge gain-badge";
+    revealBadge.textContent = rew.badge || "GAIN";
     sfx.playFanfare();
-    revealDescText.textContent = `Awesome! ${rew.points} points awarded to ${gameState.teams[targetTeamIdx].name}.`;
-  } else if (rew.points < 0) {
+    revealDescText.textContent = `Awesome! +${rew.points} points awarded to ${gameState.teams[targetTeamIdx].name}.`;
+  } else {
+    revealCard.classList.add("is-loss");
+    revealBadge.className = "reveal-badge loss-badge";
+    revealBadge.textContent = rew.badge || "RISK";
     sfx.playBoom();
     revealDescText.textContent = `Uh oh! ${gameState.teams[targetTeamIdx].name} loses ${Math.abs(rew.points)} points!`;
-  } else {
-    sfx.playChime();
-    revealDescText.textContent = `Nothing happened! The box was empty.`;
   }
 
+  // Update target team score (floor at 0)
   gameState.teams[targetTeamIdx].score = Math.max(0, gameState.teams[targetTeamIdx].score + rew.points);
 }
 

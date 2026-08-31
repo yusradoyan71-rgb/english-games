@@ -418,18 +418,79 @@ body {
   padding: 2.5rem 1.5rem;
   margin: 1.5rem 0 2rem 0;
   box-shadow: 0 0 35px rgba(16, 185, 129, 0.3);
+  transition: all 0.3s ease;
+}
+
+.reveal-result-card.is-gain {
+  border-color: #34d399;
+  background: radial-gradient(circle at center, rgba(16, 185, 129, 0.2) 0%, rgba(6, 35, 24, 0.95) 100%);
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.45), inset 0 0 20px rgba(52, 211, 153, 0.15);
+  animation: popGain 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.reveal-result-card.is-loss {
+  border-color: #f43f5e;
+  background: radial-gradient(circle at center, rgba(244, 63, 94, 0.22) 0%, rgba(35, 8, 15, 0.95) 100%);
+  box-shadow: 0 0 40px rgba(244, 63, 94, 0.45), inset 0 0 20px rgba(244, 63, 94, 0.15);
+  animation: shakeLoss 0.45s ease-in-out;
+}
+
+.reveal-badge {
+  display: inline-block;
+  padding: 0.35rem 0.95rem;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+}
+
+.reveal-badge.gain-badge {
+  background: rgba(16, 185, 129, 0.25);
+  border: 1px solid #34d399;
+  color: #6ee7b7;
+}
+
+.reveal-badge.loss-badge {
+  background: rgba(244, 63, 94, 0.25);
+  border: 1px solid #f43f5e;
+  color: #fda4af;
 }
 
 .reveal-icon { font-size: 4rem; margin-bottom: 0.5rem; }
+
 .reveal-points {
   font-family: var(--font-heading);
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(2.1rem, 5.5vw, 3.2rem);
   font-weight: 700;
-  color: #fbbf24;
-  text-shadow: 0 2px 15px rgba(251, 191, 36, 0.4);
   margin-bottom: 0.5rem;
+  letter-spacing: 0.02em;
 }
+
+.reveal-result-card.is-gain .reveal-points {
+  color: #fbbf24;
+  text-shadow: 0 2px 18px rgba(251, 191, 36, 0.5);
+}
+
+.reveal-result-card.is-loss .reveal-points {
+  color: #fb7185;
+  text-shadow: 0 2px 18px rgba(244, 63, 94, 0.5);
+}
+
 .reveal-desc { color: #d1fae5; font-size: 1.05rem; }
+
+@keyframes popGain {
+  0% { transform: scale(0.85); opacity: 0; }
+  70% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shakeLoss {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
 
 /* Results Podium */
 .results-podium {
