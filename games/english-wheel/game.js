@@ -7,11 +7,10 @@ class EnglishWheelGame {
   constructor() {
     this.expressionManager = new ExpressionManager(grade7Expressions, grade8Expressions);
     this.grade = 7; // 7 or 8
-    this.teams = [
-      { name: "TEAM 1", roundScore: 0, totalScore: 0, color: "#3b82f6" },
-      { name: "TEAM 2", roundScore: 0, totalScore: 0, color: "#ec4899" },
-      { name: "TEAM 3", roundScore: 0, totalScore: 0, color: "#10b981" }
-    ];
+    this.teamCount = 3; // 2, 3, 4, or 5
+    this.teamColors = ["#3b82f6", "#ec4899", "#10b981", "#f59e0b", "#8b5cf6"];
+    this.teamNames = ["TEAM 1", "TEAM 2", "TEAM 3", "TEAM 4", "TEAM 5"];
+    this.teams = [];
     this.activeTeamIndex = 0;
     this.currentRound = 1;
     this.maxRounds = 3; // Rounds 1, 2, 3 + Final Round
@@ -51,6 +50,8 @@ class EnglishWheelGame {
     this.categoryText = document.getElementById("category-text");
     this.puzzleContainer = document.getElementById("puzzle-container");
     this.teamsContainer = document.getElementById("teams-container");
+    this.teamCountSelector = document.getElementById("team-count-selector");
+    this.teamInputsGroup = document.getElementById("team-inputs-group");
     this.usedLettersList = document.getElementById("used-letters-list");
 
     // Controls
@@ -110,7 +111,15 @@ class EnglishWheelGame {
     document.getElementById("btn-close-howto")?.addEventListener("click", () => this.closeHowTo());
     document.getElementById("btn-sound-toggle")?.addEventListener("click", () => this.toggleSound());
 
-    // Setup screen
+    // Setup screen team count buttons
+    document.querySelectorAll(".btn-team-count").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const count = parseInt(e.currentTarget.dataset.count, 10);
+        this.setTeamCount(count);
+      });
+    });
+
+    // Setup screen actions
     document.getElementById("btn-start-game")?.addEventListener("click", () => this.startGame());
     document.getElementById("btn-back-setup")?.addEventListener("click", () => this.showScreen("screen-welcome"));
 
@@ -153,11 +162,70 @@ class EnglishWheelGame {
     }
   }
 
+  setTeamCount(count) {
+    if (count < 2 || count > 5) return;
+    if (window.soundEngine) window.soundEngine.playBtnClick();
+
+    this.saveCurrentSetupNames();
+    this.teamCount = count;
+
+    document.querySelectorAll(".btn-team-count").forEach(btn => {
+      const btnCount = parseInt(btn.dataset.count, 10);
+      if (btnCount === count) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
+    });
+
+    this.renderTeamSetup();
+  }
+
+  saveCurrentSetupNames() {
+    for (let i = 1; i <= 5; i++) {
+      const input = document.getElementById(`team${i}-name`);
+      if (input && input.value.trim()) {
+        this.teamNames[i - 1] = input.value.trim().toUpperCase();
+      }
+    }
+  }
+
+  renderTeamSetup() {
+    if (!this.teamInputsGroup) return;
+    this.teamInputsGroup.innerHTML = "";
+    this.teamInputsGroup.className = `team-inputs-group ${this.teamCount >= 4 ? `grid-${this.teamCount}` : ''}`;
+
+    for (let i = 0; i < this.teamCount; i++) {
+      const teamNum = i + 1;
+      const defaultName = `TEAM ${teamNum}`;
+      const currentName = this.teamNames[i] || defaultName;
+
+      const row = document.createElement("div");
+      row.className = "team-input-row";
+      row.innerHTML = `
+        <span class="team-indicator-dot dot-team${teamNum}"></span>
+        <label for="team${teamNum}-name" class="team-label">TEAM ${teamNum}</label>
+        <input type="text" id="team${teamNum}-name" class="team-text-input" value="${currentName}" maxlength="20" placeholder="Enter Team ${teamNum} Name">
+      `;
+
+      const input = row.querySelector("input");
+      input?.addEventListener("input", (e) => {
+        const val = e.target.value.trim();
+        if (val) {
+          this.teamNames[i] = val.toUpperCase();
+        }
+      });
+
+      this.teamInputsGroup.appendChild(row);
+    }
+  }
+
   selectGrade(grade) {
     this.grade = grade;
     if (window.soundEngine) window.soundEngine.playBtnClick();
     const gradeTitle = document.getElementById("setup-grade-title");
     if (gradeTitle) gradeTitle.innerText = `GRADE ${grade} SETUP`;
+    this.renderTeamSetup();
     this.showScreen("screen-setup");
   }
 
@@ -181,17 +249,23 @@ class EnglishWheelGame {
 
   startGame() {
     if (window.soundEngine) window.soundEngine.playBtnClick();
+    this.saveCurrentSetupNames();
 
-    // Read custom team names
-    const t1 = document.getElementById("team1-name")?.value.trim() || "TEAM 1";
-    const t2 = document.getElementById("team2-name")?.value.trim() || "TEAM 2";
-    const t3 = document.getElementById("team3-name")?.value.trim() || "TEAM 3";
+    this.teams = [];
+    for (let i = 0; i < this.teamCount; i++) {
+      const teamNum = i + 1;
+      const name = this.teamNames[i] || `TEAM ${teamNum}`;
+      this.teams.push({
+        name: name.toUpperCase(),
+        roundScore: 0,
+        totalScore: 0,
+        color: this.teamColors[i % this.teamColors.length]
+      });
+    }
 
-    this.teams = [
-      { name: t1.toUpperCase(), roundScore: 0, totalScore: 0, color: "#3b82f6" },
-      { name: t2.toUpperCase(), roundScore: 0, totalScore: 0, color: "#ec4899" },
-      { name: t3.toUpperCase(), roundScore: 0, totalScore: 0, color: "#10b981" }
-    ];
+    if (this.teamsContainer) {
+      this.teamsContainer.style.setProperty("--team-cols", this.teams.length);
+    }
 
     this.currentRound = 1;
     this.activeTeamIndex = 0;
@@ -574,14 +648,16 @@ class EnglishWheelGame {
     }
     this.renderPuzzle();
 
-    // Add round scores to total scores
-    this.teams.forEach(t => {
-      t.totalScore += t.roundScore;
-    });
+    // Only active solving team's current round score is added to their total score
+    const solver = this.getActiveTeam();
+    solver.totalScore += solver.roundScore;
+
+    // Reset round scores for all teams for the next round
+    this.teams.forEach(t => t.roundScore = 0);
     this.renderTeams();
 
     this.setTurnState("ROUND_OVER");
-    this.setBanner(`🎉 PUZZLE SOLVED BY ${this.getActiveTeam().name}!`, "success");
+    this.setBanner(`🎉 PUZZLE SOLVED BY ${solver.name}!`, "success");
 
     // Show Educational Learning Card Modal after a short delay
     setTimeout(() => {
@@ -619,17 +695,19 @@ class EnglishWheelGame {
     this.turnState = "FINAL_ROUND";
     this.showScreen("screen-final");
 
-    // Determine highest scoring team
-    let highestScore = -1;
-    let winnerIndex = 0;
-    this.teams.forEach((t, i) => {
-      if (t.totalScore > highestScore) {
-        highestScore = t.totalScore;
-        winnerIndex = i;
-      }
+    // Determine highest scoring team across all active teams (handling ties gracefully)
+    let maxScore = -Infinity;
+    this.teams.forEach(t => {
+      if (t.totalScore > maxScore) maxScore = t.totalScore;
     });
 
-    this.finalTeamIndex = winnerIndex;
+    const topTeams = this.teams
+      .map((team, index) => ({ team, index }))
+      .filter(item => item.team.totalScore === maxScore);
+
+    // If there is a tie, pick fairly from the top teams
+    const chosenWinner = topTeams[Math.floor(Math.random() * topTeams.length)];
+    this.finalTeamIndex = chosenWinner.index;
     const finalTeam = this.teams[this.finalTeamIndex];
 
     // Pick a challenging expression
@@ -830,8 +908,9 @@ class EnglishWheelGame {
     const scoreboard = document.getElementById("winner-scoreboard");
     if (scoreboard) {
       scoreboard.innerHTML = "";
+      const medals = ["🥇", "🥈", "🥉", "🎖️", "🎖️"];
       sorted.forEach((team, idx) => {
-        const medal = idx === 0 ? "🥇" : idx === 1 ? "🥈" : "🥉";
+        const medal = medals[idx] || "🎖️";
         const row = document.createElement("div");
         row.className = `winner-row rank-${idx + 1}`;
         row.innerHTML = `

@@ -22,6 +22,8 @@
   --team1-color: #3b82f6;
   --team2-color: #ec4899;
   --team3-color: #10b981;
+  --team4-color: #f59e0b;
+  --team5-color: #8b5cf6;
 
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
@@ -299,12 +301,12 @@ body {
    ========================================================================== */
 
 .setup-box {
-  max-width: 600px;
+  max-width: 620px;
   width: 100%;
   background: var(--bg-glass);
   border: 1px solid var(--border-glass);
   border-radius: 24px;
-  padding: 2.5rem;
+  padding: 2.2rem 2.5rem;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
@@ -316,50 +318,112 @@ body {
   font-size: 2rem;
   font-weight: 800;
   text-align: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
   background: linear-gradient(135deg, #ffffff, #fbbf24);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.setup-subtitle {
-  text-align: center;
-  font-size: 0.95rem;
+.setup-section-block {
+  margin-bottom: 1.3rem;
+}
+
+.setup-section-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 800;
   color: var(--text-secondary);
-  margin-bottom: 2rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+  text-align: center;
+}
+
+.team-count-selector {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 0.35rem;
+  border-radius: 14px;
+  border: 1px solid var(--border-glass);
+}
+
+.btn-team-count {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 800;
+  padding: 0.65rem 0.4rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: center;
+}
+
+.btn-team-count:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.btn-team-count.active {
+  background: linear-gradient(135deg, #f59e0b, #ec4899);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
 }
 
 .team-inputs-group {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.65rem;
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.team-inputs-group.grid-4,
+.team-inputs-group.grid-5 {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.65rem;
 }
 
 .team-input-row {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-glass);
   border-radius: 12px;
-  padding: 0.8rem 1rem;
+  padding: 0.65rem 0.9rem;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.team-input-row:focus-within {
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.08);
 }
 
 .team-indicator-dot {
   width: 14px;
   height: 14px;
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .dot-team1 { background-color: var(--team1-color); box-shadow: 0 0 8px var(--team1-color); }
 .dot-team2 { background-color: var(--team2-color); box-shadow: 0 0 8px var(--team2-color); }
 .dot-team3 { background-color: var(--team3-color); box-shadow: 0 0 8px var(--team3-color); }
+.dot-team4 { background-color: var(--team4-color); box-shadow: 0 0 8px var(--team4-color); }
+.dot-team5 { background-color: var(--team5-color); box-shadow: 0 0 8px var(--team5-color); }
 
 .team-label {
   font-weight: 700;
-  font-size: 0.9rem;
-  min-width: 70px;
+  font-size: 0.85rem;
+  min-width: 65px;
   color: var(--text-secondary);
 }
 
@@ -369,7 +433,7 @@ body {
   border: none;
   color: var(--text-primary);
   font-family: var(--font-main);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   outline: none;
 }
@@ -439,8 +503,8 @@ body {
 /* TEAMS BAR (TOP) */
 .teams-bar {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(var(--team-cols, 3), 1fr);
+  gap: 0.75rem;
 }
 
 .team-card {

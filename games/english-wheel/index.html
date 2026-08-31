@@ -64,7 +64,7 @@
       </div>
 
       <div class="welcome-footer-row">
-        <span style="font-size: 0.85rem; color: var(--text-muted);">Designed for 3 Classroom Teams &bull; Smartboard &amp; Projector Ready</span>
+        <span style="font-size: 0.85rem; color: var(--text-muted);">Designed for 2–5 Classroom Teams &bull; Smartboard &amp; Projector Ready</span>
       </div>
     </div>
   </main>
@@ -75,23 +75,23 @@
   <section id="screen-setup" class="screen-container hidden">
     <div class="setup-box">
       <h2 id="setup-grade-title" class="setup-title">GRADE 7 SETUP</h2>
-      <p class="setup-subtitle">Customize team names for your classroom competition:</p>
+      
+      <!-- Team Count Selector -->
+      <div class="setup-section-block">
+        <label class="setup-section-label">NUMBER OF TEAMS</label>
+        <div class="team-count-selector" id="team-count-selector">
+          <button type="button" class="btn-team-count" data-count="2">2 TEAMS</button>
+          <button type="button" class="btn-team-count active" data-count="3">3 TEAMS</button>
+          <button type="button" class="btn-team-count" data-count="4">4 TEAMS</button>
+          <button type="button" class="btn-team-count" data-count="5">5 TEAMS</button>
+        </div>
+      </div>
 
-      <div class="team-inputs-group">
-        <div class="team-input-row">
-          <span class="team-indicator-dot dot-team1"></span>
-          <label for="team1-name" class="team-label">TEAM 1</label>
-          <input type="text" id="team1-name" class="team-text-input" value="TEAM 1" maxlength="20" placeholder="Enter Team 1 Name">
-        </div>
-        <div class="team-input-row">
-          <span class="team-indicator-dot dot-team2"></span>
-          <label for="team2-name" class="team-label">TEAM 2</label>
-          <input type="text" id="team2-name" class="team-text-input" value="TEAM 2" maxlength="20" placeholder="Enter Team 2 Name">
-        </div>
-        <div class="team-input-row">
-          <span class="team-indicator-dot dot-team3"></span>
-          <label for="team3-name" class="team-label">TEAM 3</label>
-          <input type="text" id="team3-name" class="team-text-input" value="TEAM 3" maxlength="20" placeholder="Enter Team 3 Name">
+      <!-- Dynamic Team Inputs Container -->
+      <div class="setup-section-block">
+        <label class="setup-section-label">CUSTOMIZE TEAM NAMES</label>
+        <div id="team-inputs-group" class="team-inputs-group">
+          <!-- Dynamically generated team inputs -->
         </div>
       </div>
 
