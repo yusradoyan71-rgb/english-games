@@ -613,6 +613,34 @@ body {
   box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5);
 }
 
+/* 7. English Wheel Theme */
+.card-wheel {
+  border-top: 4px solid #f59e0b;
+}
+.card-wheel .card-glow {
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.35) 0%, transparent 65%);
+}
+.card-wheel:hover {
+  border-color: rgba(245, 158, 11, 0.45);
+  box-shadow: 0 16px 40px -10px rgba(245, 158, 11, 0.35);
+}
+.topic-wheel {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+.card-wheel .card-icon-bubble {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(236, 72, 153, 0.25));
+  border: 1px solid rgba(251, 191, 36, 0.45);
+}
+.btn-wheel {
+  background: linear-gradient(135deg, #f59e0b, #ec4899);
+}
+.btn-wheel:hover {
+  background: linear-gradient(135deg, #fbbf24, #f43f5e);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+}
+
 /* Features Highlights Bar */
 .features-bar {
   background: rgba(19, 29, 54, 0.6);
