@@ -503,7 +503,11 @@ const grade8Questions = [
   { letter: "Z", question: "A sliding mechanical device used to close jackets, bags, or trousers.", answer: "ZIPPER", grade: 8, category: "clothes" }
 ];
 
-// Export for usage in ES / script modules
-if (typeof module !== 'undefined' && module.exports) {
+// Ensure accessibility in both browser window and Node.js environments
+if (typeof window !== "undefined") {
+  window.grade7Questions = grade7Questions;
+  window.grade8Questions = grade8Questions;
+}
+if (typeof module !== "undefined" && module.exports) {
   module.exports = { grade7Questions, grade8Questions };
 }

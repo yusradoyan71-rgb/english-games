@@ -125,13 +125,13 @@ body {
 }
 
 .screen {
-  display: none;
+  display: none !important;
   width: 100%;
   animation: fadeIn 0.35s ease forwards;
 }
 
 .screen.active {
-  display: flex;
+  display: flex !important;
   flex-direction: column;
 }
 
@@ -888,18 +888,22 @@ body {
 }
 
 /* ==========================================================================
-   SCREEN 3: VICTORY & SUMMARY SCREEN
+   SCREEN 3: VICTORY & SUMMARY SCREEN MODAL
    ========================================================================== */
 .modal-screen {
   position: fixed;
   inset: 0;
-  background: rgba(8, 13, 26, 0.85);
+  background: rgba(8, 13, 26, 0.88);
   backdrop-filter: blur(20px);
   z-index: 100;
-  display: flex;
+  display: none !important;
   align-items: center;
   justify-content: center;
   padding: 24px;
+}
+
+.modal-screen.active {
+  display: flex !important;
 }
 
 .victory-card {

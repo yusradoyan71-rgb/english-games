@@ -17,15 +17,58 @@ class PasaparolaGame {
     this.activeLetterIndex = 0; // Index in this.board (0..25)
     this.isSecondPass = false; // When looping through passed letters
 
-    // Question Deck Pools: { 7: { 'A': { pool: [], index: 0 } }, 8: { ... } }
+    // Question Deck Pools: { 7: { 'A': { pool: [], pointer: 0 } }, 8: { ... } }
     this.decks = { 7: {}, 8: {} };
+    this.validateAndReportQuestionBanks();
     this.initDecks();
+  }
+
+  // Development-time validation & count reporting
+  validateAndReportQuestionBanks() {
+    [7, 8].forEach(grade => {
+      const sourceList = this.getSourceList(grade);
+      if (!Array.isArray(sourceList) || sourceList.length === 0) {
+        console.error(`[Pasaparola Error] Question bank for Grade ${grade} is missing or not an array!`);
+        return;
+      }
+
+      const questionsSeen = new Set();
+      const lettersCount = {};
+      ALPHABET.forEach(l => (lettersCount[l] = 0));
+
+      sourceList.forEach((q, idx) => {
+        if (!q.letter || !q.question || !q.answer) {
+          console.warn(`[Pasaparola] Grade ${grade} item #${idx} missing fields:`, q);
+          return;
+        }
+        const cleanAnswer = q.answer.trim().toUpperCase();
+        if (!cleanAnswer.startsWith(q.letter.toUpperCase())) {
+          console.warn(`[Pasaparola] Grade ${grade} #${idx} Letter '${q.letter}' does not match answer '${q.answer}'`);
+        }
+        questionsSeen.add(q.question.toLowerCase());
+        lettersCount[q.letter.toUpperCase()] = (lettersCount[q.letter.toUpperCase()] || 0) + 1;
+      });
+
+      console.log(`%c[PASAPAROLA] Grade ${grade} Loaded: ${sourceList.length} total (${questionsSeen.size} unique questions)`, "color: #38bdf8; font-weight: bold;");
+      console.log(`Grade ${grade} Distribution:`, lettersCount);
+    });
+  }
+
+  getSourceList(grade) {
+    if (grade === 7) {
+      if (typeof window !== "undefined" && window.grade7Questions) return window.grade7Questions;
+      if (typeof grade7Questions !== "undefined") return grade7Questions;
+    } else {
+      if (typeof window !== "undefined" && window.grade8Questions) return window.grade8Questions;
+      if (typeof grade8Questions !== "undefined") return grade8Questions;
+    }
+    return [];
   }
 
   // Initialize and shuffle question pools per letter
   initDecks() {
     [7, 8].forEach(grade => {
-      const sourceList = grade === 7 ? grade7Questions : grade8Questions;
+      const sourceList = this.getSourceList(grade);
       this.decks[grade] = {};
 
       ALPHABET.forEach(letter => {
@@ -49,14 +92,19 @@ class PasaparolaGame {
 
   // Draw the next unused question for a letter (reshuffles only when pool exhausted)
   drawQuestion(grade, letter) {
-    const deck = this.decks[grade][letter];
-    if (!deck || deck.pool.length === 0) {
-      // Fallback
-      return { letter, question: `Find a word starting with ${letter}.`, answer: letter, grade };
+    const deck = this.decks[grade] && this.decks[grade][letter];
+    if (!deck || !deck.pool || deck.pool.length === 0) {
+      // Safe fallback ensuring game never crashes or finishes early
+      return {
+        letter: letter,
+        question: `Can you name an English word starting with ${letter}?`,
+        answer: letter,
+        grade: grade,
+        category: "general"
+      };
     }
 
     if (deck.pointer >= deck.pool.length) {
-      // Reshuffle pool
       deck.pool = this.shuffleArray(deck.pool);
       deck.pointer = 0;
     }
@@ -208,7 +256,7 @@ class PasaparolaGame {
       }
     }
 
-    // 2. If no subsequent unplayed letters, check if any unplayed letters remain from the start (rare)
+    // 2. If no subsequent unplayed letters, check from beginning for any unplayed
     if (nextIdx === -1) {
       for (let i = 0; i <= this.activeLetterIndex; i++) {
         if (this.board[i].status === "unplayed") {
