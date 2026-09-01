@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PASAPAROLA — English Vocabulary Game</title>
+  <meta name="description" content="Classic TV format English Pasaparola vocabulary game for Grade 7 and Grade 8 classroom smartboards and tablets.">
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient background glow effects -->
+  <div class="ambient-background" aria-hidden="true">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+    <div class="bg-grid-overlay"></div>
+  </div>
+
+  <div class="game-wrapper">
+    <!-- =========================================================================
+         SCREEN 1: SETUP & MENU SCREEN
+         ========================================================================= -->
+    <section id="setupScreen" class="screen active">
+      <div class="setup-container">
+        <header class="game-hero-header">
+          <div class="hero-chip">
+            <span class="chip-sparkle">✨</span> CLASSROOM VOCABULARY ARENA
+          </div>
+          <h1 class="brand-title">
+            <span class="title-letter-ring">P</span>ASAPAROLA
+          </h1>
+          <p class="hero-tagline">Find the English word for every letter from A to Z!</p>
+        </header>
+
+        <!-- Grade Selection -->
+        <div class="setup-block">
+          <h2 class="section-label">1. SELECT YOUR GRADE</h2>
+          <div class="grade-cards-grid">
+            <div class="grade-card selected" id="btnGrade7" role="button" tabindex="0" data-grade="7">
+              <div class="grade-card-badge">LEVEL A1+ / A2</div>
+              <div class="grade-icon">🎒</div>
+              <h3 class="grade-title">7th GRADE</h3>
+              <p class="grade-desc">School, daily routines, animals, food, sports, family, and home vocabulary.</p>
+              <span class="select-indicator">✓ SELECTED</span>
+            </div>
+
+            <div class="grade-card" id="btnGrade8" role="button" tabindex="0" data-grade="8">
+              <div class="grade-card-badge">LEVEL A2 / A2+</div>
+              <div class="grade-icon">🚀</div>
+              <h3 class="grade-title">8th GRADE</h3>
+              <p class="grade-desc">Friendship, tourism, communication, cooking, technology, and health vocabulary.</p>
+              <span class="select-indicator">SELECT</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Team Mode Selection -->
+        <div class="setup-block">
+          <h2 class="section-label">2. SELECT TEAM MODE</h2>
+          <div class="team-selector-row" role="group" aria-label="Team Mode">
+            <button type="button" class="team-opt-btn" data-teams="1">
+              <span class="team-icon">🏫</span>
+              <span class="team-label">1 TEAM</span>
+              <span class="team-sub">Class Team</span>
+            </button>
+            <button type="button" class="team-opt-btn active" data-teams="2">
+              <span class="team-icon">👥</span>
+              <span class="team-label">2 TEAMS</span>
+              <span class="team-sub">Head to Head</span>
+            </button>
+            <button type="button" class="team-opt-btn" data-teams="3">
+              <span class="team-icon">🏆</span>
+              <span class="team-label">3 TEAMS</span>
+              <span class="team-sub">Triple Battle</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Action Button -->
+        <div class="setup-actions">
+          <button type="button" id="btnStartGame" class="btn-play-primary">
+            <span>START PASAPAROLA</span>
+            <span class="btn-arrow" aria-hidden="true">➜</span>
+          </button>
+          <a href="../../index.html" class="btn-back-home">
+            <span>← Back to All Games</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SCREEN 2: MAIN GAMEPLAY SCREEN
+         ========================================================================= -->
+    <section id="gameScreen" class="screen">
+      <!-- Top Navigation & Score Bar -->
+      <header class="game-top-bar">
+        <div class="bar-left">
+          <button type="button" id="btnExitToMenu" class="icon-nav-btn" title="Exit to Menu">
+            <span>← Menu</span>
+          </button>
+          <div class="game-badge-group">
+            <span id="currentGradeBadge" class="info-pill">Grade 7</span>
+            <span id="roundBadge" class="info-pill pill-round">Round 1</span>
+          </div>
+        </div>
+
+        <!-- Team Score Cards -->
+        <div id="teamScoresContainer" class="team-scores-container">
+          <!-- Dynamically populated -->
+        </div>
+
+        <div class="bar-right">
+          <button type="button" id="btnSoundToggle" class="icon-nav-btn" title="Toggle Sound" aria-label="Toggle Sound">
+            <span id="soundIcon">🔊</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Playfield Arena -->
+      <main class="playfield-arena">
+        <!-- Alphabet Board Board Matrix (A to Z) -->
+        <div class="alphabet-board-section">
+          <div id="alphabetBoard" class="alphabet-wheel-grid" aria-label="Alphabet Board A to Z">
+            <!-- 26 Circular Letter Nodes injected by JS -->
+          </div>
+        </div>
+
+        <!-- Central Question & Answer Stage -->
+        <div class="stage-container">
+          <!-- Turn Indicator -->
+          <div class="turn-banner" id="turnBanner">
+            <span class="turn-dot"></span>
+            <span id="turnLabel" class="turn-text">TEAM 1'S TURN</span>
+          </div>
+
+          <!-- Active Question Card -->
+          <div class="question-card" id="questionCard">
+            <div class="active-letter-badge-wrap">
+              <div class="letter-circle-glow" aria-hidden="true"></div>
+              <div class="letter-circle-hero" id="activeLetterHero">A</div>
+            </div>
+
+            <div class="question-content">
+              <div class="letter-title-row">
+                <span class="letter-label">LETTER <strong id="letterName">A</strong></span>
+                <span class="pass-warning-tag" id="passNotice" style="display:none;">⏭ SECOND CHANCE</span>
+              </div>
+              <p class="question-text" id="questionText">
+                "Loading question..."
+              </p>
+            </div>
+
+            <!-- Input & Actions Form -->
+            <form id="answerForm" class="answer-action-form" onsubmit="return false;">
+              <div class="input-wrapper">
+                <input
+                  type="text"
+                  id="answerInput"
+                  class="answer-input-field"
+                  placeholder="Type word..."
+                  autocomplete="off"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  spellcheck="false"
+                  aria-label="Your Answer"
+                />
+              </div>
+
+              <div class="action-buttons-group">
+                <button type="submit" id="btnSubmitAnswer" class="btn-action btn-submit">
+                  <span class="btn-icon">✓</span>
+                  <span>ANSWER</span>
+                </button>
+                <button type="button" id="btnPassLetter" class="btn-action btn-pass">
+                  <span class="btn-icon">⏭</span>
+                  <span>PASAPAROLA</span>
+                </button>
+              </div>
+            </form>
+
+            <!-- Feedback Overlay / Toast -->
+            <div id="feedbackBanner" class="feedback-banner" aria-live="polite">
+              <span id="feedbackIcon" class="fb-icon">✓</span>
+              <span id="feedbackText" class="fb-text">CORRECT! +10 POINTS</span>
+            </div>
+          </div>
+        </div>
+      </main>
+    </section>
+
+    <!-- =========================================================================
+         SCREEN 3: ROUND VICTORY / SUMMARY MODAL
+         ========================================================================= -->
+    <section id="victoryScreen" class="screen modal-screen">
+      <div class="victory-card">
+        <div class="victory-icon-header">🎉</div>
+        <h2 class="victory-title">PASAPAROLA COMPLETE!</h2>
+        <p class="victory-subtitle">All 26 letters have been completed!</p>
+
+        <!-- Podium & Score Summary -->
+        <div id="victoryScoreboard" class="victory-scoreboard">
+          <!-- Dynamically populated -->
+        </div>
+
+        <!-- Board Completion Stats -->
+        <div class="victory-stats-row">
+          <div class="stat-box">
+            <span class="stat-val correct-val" id="statCorrect">26</span>
+            <span class="stat-lbl">Correct (+10 pts)</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-val wrong-val" id="statWrong">0</span>
+            <span class="stat-lbl">Wrong / Skipped</span>
+          </div>
+        </div>
+
+        <div class="victory-actions">
+          <button type="button" id="btnPlayAnotherRound" class="btn-play-primary">
+            <span>PLAY ANOTHER ROUND</span>
+            <span class="btn-arrow" aria-hidden="true">➜</span>
+          </button>
+          <button type="button" id="btnVictoryToMenu" class="btn-secondary-outline">
+            <span>MAIN MENU</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="audio.js"></script>
+  <script src="animations.js"></script>
+  <script src="game.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
