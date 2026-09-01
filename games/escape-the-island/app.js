@@ -157,6 +157,22 @@ class IslandGame {
     if (!container) return;
     container.innerHTML = "";
 
+    if (this.teamCount === 1) {
+      const card = document.createElement("div");
+      card.className = "team-setup-card single-team-card";
+      card.id = "setup-card-0";
+      card.innerHTML = `
+        <div class="team-avatar-selector" id="avatar-btn-0" title="Class Emblem">🧭</div>
+        <div class="team-inputs">
+          <div class="team-order-tag">👑 WHOLE CLASS EXPEDITION (COOPERATIVE MODE)</div>
+          <input type="text" class="team-name-input" id="team-name-input-0" value="CLASS EXPEDITION" maxlength="24" placeholder="Enter Class Name (e.g. GRADE 7-A)" aria-label="Class Team Name">
+          <small style="color: var(--text-secondary); font-size: 0.8rem; display: block; margin-top: 4px;">Entire classroom shares score, inventory, and moves across the island together!</small>
+        </div>
+      `;
+      container.appendChild(card);
+      return;
+    }
+
     for (let i = 0; i < this.teamCount; i++) {
       const def = DEFAULT_TEAMS[i] || {
         id: `team-${i+1}`,
@@ -189,26 +205,47 @@ class IslandGame {
 
   initializeExpedition() {
     this.teams = [];
-    for (let i = 0; i < this.teamCount; i++) {
-      const nameInput = document.getElementById(`team-name-input-${i}`);
-      const def = DEFAULT_TEAMS[i] || { emoji: "🧭", color: "#10b981" };
-      const teamName = nameInput && nameInput.value.trim() ? nameInput.value.trim().toUpperCase() : (def.name || `TEAM ${i+1}`);
-      const emoji = def.emoji;
-
+    if (this.teamCount === 1) {
+      const nameInput = document.getElementById("team-name-input-0");
+      const teamName = nameInput && nameInput.value.trim() ? nameInput.value.trim().toUpperCase() : "CLASS EXPEDITION";
       this.teams.push({
-        id: `team-${i+1}`,
+        id: "class_team",
         name: teamName,
-        emoji: emoji,
-        color: def.color,
+        emoji: "🧭",
+        color: "#10b981",
         energy: 3,
         inventory: [],
         exploredLocations: ["beach"],
+        currentLocation: "beach",
         correctAnswers: 0,
         escaped: false,
         escapeMethod: null,
         escapeRound: null,
         turnCount: 0
       });
+    } else {
+      for (let i = 0; i < this.teamCount; i++) {
+        const nameInput = document.getElementById(`team-name-input-${i}`);
+        const def = DEFAULT_TEAMS[i] || { emoji: "🧭", color: "#10b981" };
+        const teamName = nameInput && nameInput.value.trim() ? nameInput.value.trim().toUpperCase() : (def.name || `TEAM ${i+1}`);
+        const emoji = def.emoji;
+
+        this.teams.push({
+          id: `team-${i+1}`,
+          name: teamName,
+          emoji: emoji,
+          color: def.color,
+          energy: 3,
+          inventory: [],
+          exploredLocations: ["beach"],
+          currentLocation: "beach",
+          correctAnswers: 0,
+          escaped: false,
+          escapeMethod: null,
+          escapeRound: null,
+          turnCount: 0
+        });
+      }
     }
 
     this.round = 1;
@@ -358,12 +395,15 @@ class IslandGame {
     this.selectedOptionIndex = null;
     this.verdictGiven = false;
 
+    this.currentLocation = team.currentLocation || "beach";
+
     // Update active team banner
     this.updateActiveTeamBanner();
     this.updateAllTeamsPanel();
     this.updateInventoryPanel();
     this.updateBlueprintsPanel();
     this.updateMapVisuals();
+    this.updateLocationScenery(this.currentLocation);
     this.updateIslandProgress();
 
     // Check if team is already escaped
@@ -528,7 +568,7 @@ class IslandGame {
       // 🎉 CORRECT VERDICT
       if (this.soundEngine) this.soundEngine.playCorrect();
       team.correctAnswers++;
-      if (expBadge) expBadge.textContent = "🎉 CORRECT!";
+      if (expBadge) expBadge.textContent = "🎉 EXCELLENT ANSWER!";
 
       // Reward an important item
       const rewardItemKey = this.determineRewardItem(team);
@@ -536,29 +576,37 @@ class IslandGame {
         this.grantItemToTeam(team, rewardItemKey, false);
         const itemInfo = GAME_ITEMS[rewardItemKey] || { name: rewardItemKey, icon: "🎒" };
         if (expItem) expItem.textContent = `🎒 ITEM FOUND: ${itemInfo.icon} ${itemInfo.name}!`;
+        this.showItemToast(rewardItemKey, team, false);
         this.addChronicleEntry(`🎉 ${team.emoji} ${team.name} answered correctly and found ${itemInfo.icon} ${itemInfo.name}!`);
       } else {
-        if (expItem) expItem.textContent = "✨ Area successfully mapped!";
+        if (expItem) expItem.textContent = "✨ Island pathway mapped successfully!";
         this.addChronicleEntry(`🎉 ${team.emoji} ${team.name} answered correctly!`);
       }
 
-      // Unlock new location based on exploration
+      // Unlock and physically advance team to the next map location!
       this.unlockNextLocation(team);
 
-      if (nextBtnLabel) nextBtnLabel.textContent = "COLLECT REWARD & CONTINUE";
+      if (nextBtnLabel) nextBtnLabel.textContent = "COLLECT REWARD & ADVANCE ➔";
     } else {
       // ❌ INCORRECT VERDICT
       if (this.soundEngine) this.soundEngine.playWrong();
       if (expBadge) expBadge.textContent = "❌ INCORRECT";
-      if (expItem) expItem.textContent = "⚠️ No supplies found this turn.";
+      if (expItem) expItem.textContent = "🌿 Thick vines slowed down your forward trek.";
 
-      // Mild Consequence: 40% chance of losing 1 energy if energy > 1, else time lost
-      if (team.energy > 1 && Math.random() < 0.4) {
+      const qCard = document.getElementById("question-card");
+      if (qCard) {
+        qCard.classList.remove("animate-wrong-shake");
+        void qCard.offsetWidth;
+        qCard.classList.add("animate-wrong-shake");
+      }
+
+      // Mild Consequence: 30% chance of losing 1 energy if energy > 1
+      if (team.energy > 1 && Math.random() < 0.3) {
         team.energy--;
         if (this.soundEngine) this.soundEngine.playHeartChange(false);
-        this.addChronicleEntry(`❌ ${team.emoji} ${team.name} was incorrect. Searching in the rough terrain cost 1 ❤️!`);
+        this.addChronicleEntry(`❌ ${team.emoji} ${team.name} was incorrect. Navigating rough terrain cost 1 ❤️!`);
       } else {
-        this.addChronicleEntry(`❌ ${team.emoji} ${team.name} was incorrect. Time was lost as dusk approached.`);
+        this.addChronicleEntry(`❌ ${team.emoji} ${team.name} was incorrect. Regrouping for the next challenge!`);
       }
 
       if (nextBtnLabel) nextBtnLabel.textContent = "CONTINUE ADVENTURE";
@@ -616,6 +664,34 @@ class IslandGame {
     }
   }
 
+  showItemToast(itemKey, team, isRoadblock = false) {
+    const container = document.getElementById("item-toast-layer");
+    if (!container) return;
+
+    const item = GAME_ITEMS[itemKey] || { name: itemKey, icon: "🎒", description: "" };
+    const toast = document.createElement("div");
+    toast.className = `item-toast-card ${isRoadblock ? 'roadblock-toast' : ''}`;
+    toast.innerHTML = `
+      <span class="toast-icon">${item.icon}</span>
+      <div class="toast-content">
+        <span class="toast-title">${isRoadblock ? 'TOOL USED TO UNLOCK' : '🎒 NEW ITEM DISCOVERED!'}</span>
+        <span class="toast-desc">${isRoadblock ? `Used ${item.name} to clear the way!` : `${item.name} added to ${this.teamCount === 1 ? 'Class' : team.name}'s backpack!`}</span>
+      </div>
+    `;
+
+    container.appendChild(toast);
+
+    if (this.soundEngine) {
+      if (isRoadblock) this.soundEngine.playChoice();
+      else this.soundEngine.playItemFound();
+    }
+
+    setTimeout(() => {
+      toast.classList.add("toast-fadeout");
+      setTimeout(() => toast.remove(), 450);
+    }, 3500);
+  }
+
   showRewardModal(itemKey, team) {
     const item = GAME_ITEMS[itemKey];
     if (!item) return;
@@ -629,7 +705,7 @@ class IslandGame {
     document.getElementById("reward-icon-huge").textContent = item.icon;
     document.getElementById("reward-item-name").textContent = item.name.toUpperCase();
     document.getElementById("reward-item-utility").textContent = `"${item.description}"`;
-    document.getElementById("reward-target-team").innerHTML = `Added to ${team.emoji} <strong>${team.name}'S INVENTORY</strong>`;
+    document.getElementById("reward-target-team").innerHTML = `Added to ${team.emoji} <strong>${this.teamCount === 1 ? 'CLASS EXPEDITION' : team.name}'S INVENTORY</strong>`;
 
     card.classList.remove("hidden");
   }
@@ -689,13 +765,23 @@ class IslandGame {
     // Apply consequences
     if (opt.rewardItem) {
       this.grantItemToTeam(team, opt.rewardItem, false);
+      this.showItemToast(opt.rewardItem, team, false);
     }
     if (opt.energyDelta) {
       team.energy = Math.max(0, Math.min(3, team.energy + opt.energyDelta));
       if (this.soundEngine) this.soundEngine.playHeartChange(opt.energyDelta > 0);
     }
-    if (opt.unlockLocation && !team.exploredLocations.includes(opt.unlockLocation)) {
-      team.exploredLocations.push(opt.unlockLocation);
+    if (opt.unlockLocation) {
+      const oldLoc = team.currentLocation || "beach";
+      const newLoc = opt.unlockLocation;
+      team.currentLocation = newLoc;
+      this.currentLocation = newLoc;
+      if (!team.exploredLocations.includes(newLoc)) {
+        team.exploredLocations.push(newLoc);
+      }
+      this.animateTeamTokenMove(team, oldLoc, newLoc);
+      this.updateLocationScenery(newLoc);
+      this.updateMapVisuals();
     }
 
     const optionsRow = document.getElementById("choice-options-row");
@@ -810,8 +896,23 @@ class IslandGame {
 
     if (this.soundEngine) this.soundEngine.playEventAlert();
 
+    const craftModel = document.getElementById("craft-model");
+    const craftBanner = document.getElementById("craft-launch-banner");
+
+    let craftEmoji = "🛶";
+    let craftName = "OCEAN ESCAPE BOAT";
+    if (blueprint) {
+      if (blueprint.id === "radio_rescue") { craftEmoji = "📡"; craftName = "RADIO SOS BEACON"; }
+      else if (blueprint.id === "helicopter") { craftEmoji = "🚁"; craftName = "RESCUE HELICOPTER"; }
+    }
+    if (craftModel) {
+      craftModel.textContent = craftEmoji;
+      craftModel.className = "craft-model";
+    }
+    if (craftBanner) craftBanner.textContent = `ASSEMBLED CRAFT: ${craftName}`;
+
     document.getElementById("escape-challenge-title").textContent = blueprint ? `ESCAPE VIA ${blueprint.name.toUpperCase()}!` : "EMERGENCY EXTRACTION!";
-    document.getElementById("escape-challenge-desc").textContent = `You have assembled the gear! Answer the final English grammar challenge to complete your escape!`;
+    document.getElementById("escape-challenge-desc").textContent = `You have assembled the required survival items! Solve this final English grammar challenge to complete your escape!`;
     document.getElementById("final-prompt-text").textContent = challenge.prompt;
 
     const grid = document.getElementById("final-options-grid");
@@ -847,6 +948,16 @@ class IslandGame {
         this.escapeRankings.push(team.id);
       }
 
+      // Trigger Craft Launch Visual Animation
+      const craftModel = document.getElementById("craft-model");
+      if (craftModel) {
+        if (team.escapeMethod.includes("Boat")) {
+          craftModel.classList.add("launching-boat");
+        } else {
+          craftModel.classList.add("launching-heli");
+        }
+      }
+
       if (this.soundEngine) this.soundEngine.playVictory();
       this.triggerConfetti();
 
@@ -854,14 +965,14 @@ class IslandGame {
 
       // Check if all teams escaped
       const allEscaped = this.teams.every(t => t.escaped);
-      if (allEscaped) {
-        setTimeout(() => this.showVictoryScreen(), 2000);
+      if (allEscaped || this.teamCount === 1) {
+        setTimeout(() => this.showVictoryScreen(), 2200);
       } else {
         setTimeout(() => this.advanceToNextTeam(), 1800);
       }
     } else {
       if (this.soundEngine) this.soundEngine.playWrong();
-      this.addChronicleEntry(`❌ ${team.emoji} ${team.name}'s launch failed this round. Regrouping for next turn!`);
+      this.addChronicleEntry(`❌ ${team.emoji} ${team.name}'s launch was held up by island squalls. Regrouping!`);
       this.advanceToNextTeam();
     }
   }
@@ -882,6 +993,21 @@ class IslandGame {
     const container = document.getElementById("podium-container");
     if (!container) return;
     container.innerHTML = "";
+
+    if (this.teamCount === 1) {
+      const team = this.teams[0];
+      const step = document.createElement("div");
+      step.className = "podium-step rank-1 single-team-podium";
+      step.style.gridColumn = "span 3";
+      step.innerHTML = `
+        <div class="podium-medal">🏆</div>
+        <div class="podium-team-name" style="font-size: 2rem; color: #fbbf24;">${team.name}</div>
+        <div class="podium-stats" style="font-size: 1.15rem; font-weight: 800; color: #fff; margin: 8px 0;">🎉 MISSION ACCOMPLISHED — WHOLE CLASS ESCAPED!</div>
+        <div class="podium-stats" style="color: var(--text-secondary);">${team.correctAnswers} Questions Solved • ${team.inventory.length} Survival Items Collected</div>
+      `;
+      container.appendChild(step);
+      return;
+    }
 
     // Sort teams by: 1) Escaped, 2) Escape order ranking, 3) Correct answers, 4) Items, 5) Energy
     const sorted = [...this.teams].sort((a, b) => {
@@ -940,21 +1066,59 @@ class IslandGame {
   }
 
   // ============================================================
-  // MAP VISUALIZATION & PATH UNLOCKS
+  // MAP VISUALIZATION, TOKENS & PATH PROGRESSION
   // ============================================================
   unlockNextLocation(team) {
-    const locData = ISLAND_LOCATIONS[this.currentLocation];
-    if (locData && locData.unlocks) {
-      locData.unlocks.forEach(nextLoc => {
-        if (!team.exploredLocations.includes(nextLoc)) {
-          team.exploredLocations.push(nextLoc);
-          const nextData = ISLAND_LOCATIONS[nextLoc];
-          if (nextData) {
-            this.addChronicleEntry(`🟢 Unlocked new destination: ${nextData.icon} ${nextData.name}!`);
-          }
-        }
-      });
+    const currentLoc = team.currentLocation || "beach";
+    const locData = ISLAND_LOCATIONS[currentLoc] || ISLAND_LOCATIONS.beach;
+    
+    // Choose next candidate along route
+    let nextCandidates = locData.unlocks || ["escape_dock"];
+    let nextLoc = null;
+
+    for (const cand of nextCandidates) {
+      if (!team.exploredLocations.includes(cand)) {
+        nextLoc = cand;
+        break;
+      }
     }
+    if (!nextLoc && nextCandidates.length > 0) {
+      nextLoc = nextCandidates[0];
+    }
+    if (!nextLoc) {
+      nextLoc = "escape_dock";
+    }
+
+    const nextData = ISLAND_LOCATIONS[nextLoc];
+    const oldLoc = currentLoc;
+    team.currentLocation = nextLoc;
+    this.currentLocation = nextLoc;
+
+    if (!team.exploredLocations.includes(nextLoc)) {
+      team.exploredLocations.push(nextLoc);
+      if (nextData) {
+        this.addChronicleEntry(`🟢 Advanced to ${nextData.icon} ${nextData.name}!`);
+      }
+    }
+
+    // Check Roadblock item requirements
+    if (nextData && nextData.requiredItems && nextData.requiredItems.length > 0) {
+      const hasReq = nextData.requiredItems.some(i => team.inventory.includes(i));
+      const hasAlt = nextData.altRequiredItems ? nextData.altRequiredItems.some(i => team.inventory.includes(i)) : false;
+      if (hasReq || hasAlt) {
+        const usedKey = nextData.requiredItems.find(i => team.inventory.includes(i)) || nextData.altRequiredItems[0];
+        this.showItemToast(usedKey, team, true);
+        if (nextData.roadblockSolvedText) {
+          this.addChronicleEntry(nextData.roadblockSolvedText);
+        }
+      }
+    }
+
+    // Trigger physical animated movement on the map
+    this.animateTeamTokenMove(team, oldLoc, nextLoc);
+    this.updateMapVisuals();
+    this.updateLocationScenery(nextLoc);
+    this.updateStoryNarrative();
   }
 
   updateMapVisuals() {
@@ -967,9 +1131,8 @@ class IslandGame {
 
       const locData = ISLAND_LOCATIONS[locKey];
       const isExplored = team.exploredLocations.includes(locKey);
-      const isCurrent = this.currentLocation === locKey;
+      const isCurrent = (team.currentLocation || this.currentLocation) === locKey;
 
-      // Check item locks
       let isUnlocked = isExplored || locKey === "beach";
       if (locData.requiredItems && locData.requiredItems.length > 0) {
         const hasReq = locData.requiredItems.some(i => team.inventory.includes(i));
@@ -986,6 +1149,102 @@ class IslandGame {
         pinEl.classList.add("locked");
       }
     });
+
+    this.renderMapTokens();
+  }
+
+  renderMapTokens() {
+    const layer = document.getElementById("map-tokens-layer");
+    if (!layer) return;
+    layer.innerHTML = "";
+
+    const createSvgEl = (tag) => (document.createElementNS ? document.createElementNS("http://www.w3.org/2000/svg", tag) : document.createElement(tag));
+
+    this.teams.forEach((team) => {
+      const locKey = team.currentLocation || "beach";
+      const loc = ISLAND_LOCATIONS[locKey] || ISLAND_LOCATIONS.beach;
+
+      // Coordinate offset if multiple teams at same location
+      const sameLocTeams = this.teams.filter(t => (t.currentLocation || "beach") === locKey);
+      const idxInLoc = sameLocTeams.indexOf(team);
+      const offsetX = sameLocTeams.length > 1 ? (idxInLoc - (sameLocTeams.length - 1) / 2) * 26 : 0;
+      const offsetY = sameLocTeams.length > 1 ? (idxInLoc % 2 === 0 ? -4 : 4) : 0;
+
+      const posX = loc.x + offsetX;
+      const posY = loc.y + offsetY;
+      const isActive = team === this.getActiveTeam();
+
+      const g = createSvgEl("g");
+      if (g.setAttribute) {
+        g.setAttribute("class", `map-team-token ${isActive ? 'active-turn' : ''}`);
+        g.setAttribute("id", `token-${team.id}`);
+        g.setAttribute("transform", `translate(${posX}, ${posY})`);
+      } else {
+        g.className = `map-team-token ${isActive ? 'active-turn' : ''}`;
+        g.id = `token-${team.id}`;
+      }
+
+      g.innerHTML = `
+        <circle class="token-halo" r="24" fill="${team.color || '#10b981'}" opacity="0.35" />
+        <circle class="token-body" r="16" fill="${team.color || '#10b981'}" />
+        <text class="token-avatar" text-anchor="middle" dy="5.5">${team.emoji || '🧭'}</text>
+        <rect class="token-label-box" x="-36" y="20" width="72" height="15" rx="4" />
+        <text class="token-name-text" text-anchor="middle" dy="31">${this.teamCount === 1 ? 'CLASS TEAM' : team.name}</text>
+      `;
+
+      layer.appendChild(g);
+    });
+  }
+
+  animateTeamTokenMove(team, startLocKey, destLocKey) {
+    const tokenEl = document.getElementById(`token-${team.id}`);
+    const destLoc = ISLAND_LOCATIONS[destLocKey] || ISLAND_LOCATIONS.beach;
+    const startLoc = ISLAND_LOCATIONS[startLocKey] || ISLAND_LOCATIONS.beach;
+    const svgCanvas = document.getElementById("island-svg-canvas");
+    const createSvgEl = (tag) => (document.createElementNS ? document.createElementNS("http://www.w3.org/2000/svg", tag) : document.createElement(tag));
+
+    if (svgCanvas && startLoc && destLoc && startLocKey !== destLocKey) {
+      const trail = createSvgEl("line");
+      if (trail.setAttribute) {
+        trail.setAttribute("class", "map-glow-trail");
+        trail.setAttribute("x1", startLoc.x);
+        trail.setAttribute("y1", startLoc.y);
+        trail.setAttribute("x2", destLoc.x);
+        trail.setAttribute("y2", destLoc.y);
+      }
+      svgCanvas.appendChild(trail);
+
+      setTimeout(() => {
+        if (trail.parentNode) trail.parentNode.removeChild(trail);
+      }, 1200);
+    }
+
+    if (tokenEl) {
+      if (tokenEl.classList && tokenEl.classList.add) {
+        tokenEl.classList.add("token-walking");
+      }
+
+      const sameLocTeams = this.teams.filter(t => (t.currentLocation || "beach") === destLocKey);
+      const idxInLoc = sameLocTeams.indexOf(team);
+      const offsetX = sameLocTeams.length > 1 ? (idxInLoc - (sameLocTeams.length - 1) / 2) * 26 : 0;
+      const offsetY = sameLocTeams.length > 1 ? (idxInLoc % 2 === 0 ? -4 : 4) : 0;
+
+      const posX = destLoc.x + offsetX;
+      const posY = destLoc.y + offsetY;
+
+      if (tokenEl.setAttribute) {
+        tokenEl.setAttribute("transform", `translate(${posX}, ${posY})`);
+      }
+
+      setTimeout(() => {
+        if (tokenEl.classList && tokenEl.classList.remove) {
+          tokenEl.classList.remove("token-walking");
+        }
+        this.renderMapTokens();
+      }, 900);
+    } else {
+      this.renderMapTokens();
+    }
   }
 
   selectLocation(locKey) {
@@ -995,7 +1254,6 @@ class IslandGame {
     const locData = ISLAND_LOCATIONS[locKey];
     if (!locData) return;
 
-    // Verify item requirements
     if (locData.requiredItems && locData.requiredItems.length > 0) {
       const hasReq = locData.requiredItems.some(i => team.inventory.includes(i));
       const hasAlt = locData.altRequiredItems ? locData.altRequiredItems.some(i => team.inventory.includes(i)) : false;
@@ -1006,15 +1264,54 @@ class IslandGame {
       }
     }
 
+    const oldLoc = team.currentLocation || "beach";
+    team.currentLocation = locKey;
     this.currentLocation = locKey;
     if (!team.exploredLocations.includes(locKey)) {
       team.exploredLocations.push(locKey);
     }
 
     if (this.soundEngine) this.soundEngine.playChoice();
+    this.animateTeamTokenMove(team, oldLoc, locKey);
     this.updateMapVisuals();
+    this.updateLocationScenery(locKey);
     this.updateStoryNarrative();
     this.addChronicleEntry(`📍 ${team.emoji} ${team.name} navigated to ${locData.icon} ${locData.name}.`);
+  }
+
+  updateLocationScenery(locKey) {
+    const locData = ISLAND_LOCATIONS[locKey] || ISLAND_LOCATIONS.beach;
+    const iconEl = document.getElementById("scenery-icon");
+    const nameEl = document.getElementById("scenery-name");
+    const bgEl = document.getElementById("scenery-layer-bg");
+    const roadblockPill = document.getElementById("roadblock-alert-pill");
+    const roadblockText = document.getElementById("roadblock-text");
+    const team = this.getActiveTeam();
+
+    if (iconEl) iconEl.textContent = locData.icon;
+    if (nameEl) nameEl.textContent = locData.name.toUpperCase();
+
+    if (bgEl) {
+      bgEl.className = `scenery-layer-bg theme-${locData.scene || locKey}`;
+    }
+
+    if (roadblockPill && team) {
+      if (locData.requiredItems && locData.requiredItems.length > 0) {
+        const hasReq = locData.requiredItems.some(i => team.inventory.includes(i));
+        const hasAlt = locData.altRequiredItems ? locData.altRequiredItems.some(i => team.inventory.includes(i)) : false;
+        roadblockPill.classList.remove("hidden");
+        if (hasReq || hasAlt) {
+          roadblockPill.className = "roadblock-alert-pill solved";
+          if (roadblockText) roadblockText.textContent = "✨ Obstacle Cleared with Tool!";
+        } else {
+          roadblockPill.className = "roadblock-alert-pill";
+          const reqNames = locData.requiredItems.map(i => GAME_ITEMS[i] ? GAME_ITEMS[i].name : i).join(" or ");
+          if (roadblockText) roadblockText.textContent = `Needs: ${reqNames}`;
+        }
+      } else {
+        roadblockPill.classList.add("hidden");
+      }
+    }
   }
 
   updateStoryNarrative() {

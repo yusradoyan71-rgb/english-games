@@ -31,12 +31,12 @@ function runExpeditionSimulation(teamCount = 4) {
   console.log(`\n▶ Simulating ${teamCount}-Team 35-Minute Classroom Game...`);
 
   // Target questions based on team count per specification:
-  // 15–25 questions TOTAL across all teams (up to ~28 for 6 teams)
-  const targetMin = 15;
+  // 12–25 questions TOTAL across all teams (up to ~28 for 6 teams)
+  const targetMin = teamCount === 1 ? 12 : 15;
   const targetMax = 28;
 
   // Minimum exploration rounds before escape opens (ensures balanced lesson pacing)
-  const minRoundsBeforeEscape = teamCount === 2 ? 8 : (teamCount <= 4 ? 4 : 3);
+  const minRoundsBeforeEscape = teamCount === 1 ? 12 : (teamCount === 2 ? 8 : (teamCount <= 4 ? 4 : 3));
 
   // Initialize simulated teams
   const teamNames = ["TIGERS", "LIONS", "EAGLES", "SHARKS", "DRAGONS", "WOLVES"];
@@ -148,8 +148,9 @@ function runExpeditionSimulation(teamCount = 4) {
   simAssert(podium.length === teamCount, "All teams accounted for on podium scoreboard");
 }
 
-console.log("\n🎮 RUNNING MULTI-TEAM CLASSROOM GAME SIMULATIONS (2, 4, 6 TEAMS)...\n");
+console.log("\n🎮 RUNNING CLASSROOM GAME SIMULATIONS (1, 2, 4, 6 TEAMS)...\n");
 
+runExpeditionSimulation(1);
 runExpeditionSimulation(2);
 runExpeditionSimulation(4);
 runExpeditionSimulation(6);

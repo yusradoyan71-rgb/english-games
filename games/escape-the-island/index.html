@@ -150,9 +150,10 @@
             <span>CHOOSE NUMBER OF EXPEDITION TEAMS (2–6 TEAMS):</span>
           </label>
           <div class="team-count-buttons" id="team-count-buttons" role="radiogroup" aria-label="Number of Teams">
-            <button type="button" class="btn-count" data-teams="2">2 Teams</button>
-            <button type="button" class="btn-count" data-teams="3">3 Teams</button>
-            <button type="button" class="btn-count active" data-teams="4">4 Teams</button>
+            <button type="button" class="btn-count" data-teams="1">👤 1 Team (Class Coop)</button>
+            <button type="button" class="btn-count active" data-teams="2">👥 2 Teams</button>
+            <button type="button" class="btn-count" data-teams="3">👥 3 Teams</button>
+            <button type="button" class="btn-count" data-teams="4">4 Teams</button>
             <button type="button" class="btn-count" data-teams="5">5 Teams</button>
             <button type="button" class="btn-count" data-teams="6">6 Teams</button>
           </div>
@@ -405,7 +406,32 @@
                     <text class="pin-label" text-anchor="middle" dy="32">Escape Cove</text>
                   </g>
                 </g>
+
+                <!-- Dynamic Map Tokens Layer (Animated Player/Team Markers) -->
+                <g class="map-tokens-layer" id="map-tokens-layer"></g>
               </svg>
+            </div>
+          </div>
+
+          <!-- LOCATION SCENERY & VISUAL ENVIRONMENT SPOTLIGHT -->
+          <div class="location-scenery-stage" id="location-scenery-stage">
+            <div class="scenery-backdrop" id="scenery-backdrop">
+              <div class="scenery-layer-bg" id="scenery-layer-bg"></div>
+              <div class="scenery-particles" id="scenery-particles"></div>
+              <div class="scenery-overlay-glow"></div>
+            </div>
+            <div class="scenery-hud">
+              <div class="scenery-badge">
+                <span class="scenery-icon" id="scenery-icon">🏖️</span>
+                <div class="scenery-info">
+                  <span class="scenery-label">CURRENT ISLAND LOCATION</span>
+                  <h3 class="scenery-name" id="scenery-name">SANDY BEACH</h3>
+                </div>
+              </div>
+              <div class="roadblock-alert-pill hidden" id="roadblock-alert-pill">
+                <span class="roadblock-icon" id="roadblock-icon">🔒</span>
+                <span class="roadblock-text" id="roadblock-text">Locked Passage</span>
+              </div>
             </div>
           </div>
 
@@ -416,9 +442,12 @@
               <span class="story-loc-name" id="story-loc-name">SANDY BEACH</span>
             </div>
             <p class="story-text" id="story-text">
-              Waves crash violently against the shoreline wreckage. You spot an old smuggler's crate half-buried in the wet sand. Answer the English challenge to crack it open!
+              Waves crash violently against the shoreline wreckage. You scan the shore for supplies.
             </p>
           </div>
+
+          <!-- Floating Toast Notifications for Item Discoveries & Path Movement -->
+          <div class="item-toast-layer" id="item-toast-layer" aria-live="polite"></div>
 
           <!-- DYNAMIC INTERACTION ARENA -->
           <div class="interaction-arena" id="interaction-arena">
@@ -598,6 +627,13 @@
               <p class="escape-challenge-desc" id="escape-challenge-desc">
                 You have collected the required survival items! Solve this final English grammar challenge to complete your escape!
               </p>
+
+              <!-- Craft Launch Visual Stage -->
+              <div class="craft-launch-stage" id="craft-launch-stage">
+                <div class="craft-model" id="craft-model">🛶</div>
+                <div class="craft-water-wake" id="craft-water-wake"></div>
+                <div class="craft-launch-banner" id="craft-launch-banner">READY FOR LAUNCH AT ESCAPE COVE</div>
+              </div>
 
               <div class="final-question-box">
                 <div class="final-prompt-text" id="final-prompt-text">

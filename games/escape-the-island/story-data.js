@@ -15,113 +15,163 @@ const ISLAND_LOCATIONS = {
     id: "beach",
     name: "Sandy Beach",
     icon: "🏖️",
+    x: 180,
+    y: 330,
+    scene: "beach",
+    themeColor: "#38bdf8",
     description: "The crash site. Crystal waters, scattered plane wreckage, and the sound of waves.",
-    initialStatus: "available", // available, locked, explored
+    initialStatus: "available",
     requiredItems: [],
     unlocks: ["jungle", "shipwreck"],
     rewardsPool: ["wood", "rope", "map", "compass"],
-    storySnippet: "Waves wash over the wreckage. You scan the shore for supplies."
+    storySnippet: "Waves wash over the wreckage. You scan the sunny shore for initial supplies and shelter."
   },
   jungle: {
     id: "jungle",
     name: "Emerald Jungle",
     icon: "🌴",
+    x: 320,
+    y: 260,
+    scene: "jungle",
+    themeColor: "#22c55e",
     description: "A dense, humid forest filled with exotic birds, thick vines, and ancient trails.",
     initialStatus: "locked",
     requiredItems: [],
     unlocks: ["hut", "waterfall", "cave"],
     rewardsPool: ["rope", "food", "wood", "fire"],
-    storySnippet: "Tall palm trees and thick vines block the sunlight. Mysterious sounds echo ahead."
+    storySnippet: "Tall palm trees and thick canopy block the sunlight. Multiple paths branch out ahead."
   },
   shipwreck: {
     id: "shipwreck",
     name: "Sunken Galleon",
     icon: "🚢",
+    x: 140,
+    y: 180,
+    scene: "shipwreck",
+    themeColor: "#0284c7",
     description: "An old wooden cargo ship lodged between sharp coral reefs.",
     initialStatus: "locked",
-    requiredItems: [], // Can enter, but deeper exploration benefits from hook or rope
+    requiredItems: [],
     unlocks: ["escape_dock"],
     rewardsPool: ["fuel", "tool", "wood", "hook"],
-    storySnippet: "The creaking wooden hull is filled with rusted nautical machinery and barrels."
+    storySnippet: "The creaking wooden hull is filled with rusted nautical machinery, fuel drums, and timber."
   },
   hut: {
     id: "hut",
     name: "Abandoned Hut",
     icon: "🏚️",
-    description: "A mysterious smuggler's cabin covered in moss. The heavy front door is locked.",
+    x: 350,
+    y: 380,
+    scene: "hut",
+    themeColor: "#eab308",
+    description: "A mysterious smuggler's cabin covered in moss. The heavy door is locked.",
     initialStatus: "locked",
-    requiredItems: ["key"], // requires key to unlock
+    requiredItems: ["key"],
+    roadblockText: "🔒 The heavy wooden cabin door is locked! You need the 🔑 Key to enter.",
+    roadblockSolvedText: "✨ You used the 🔑 Key to unlock the smuggler's cabin!",
     unlocks: ["radio_tower"],
     rewardsPool: ["radio", "battery", "map", "toolbox"],
-    storySnippet: "Inside the dusty cabin, old radio schematics and gear lie on a wooden table."
+    storySnippet: "Inside the dusty cabin, old radio schematics, spare parts, and tools lie on a wooden workbench."
   },
   cave: {
     id: "cave",
     name: "Dark Crystal Cave",
     icon: "🪨",
-    description: "A deep underground cavern. Without light, you cannot venture past the entrance.",
+    x: 520,
+    y: 290,
+    scene: "cave",
+    themeColor: "#a855f7",
+    description: "A deep underground cavern. Pitch black without light.",
     initialStatus: "locked",
-    requiredItems: ["flashlight"], // or fire
+    requiredItems: ["flashlight"],
     altRequiredItems: ["fire"],
+    roadblockText: "🌑 Pitch black inside the cavern! You need a 🔦 Flashlight or 🔥 Torch to explore.",
+    roadblockSolvedText: "✨ Your light illuminates ancient crystal stalactites and hidden supplies!",
     unlocks: ["volcano", "mountain"],
     rewardsPool: ["battery", "rope", "water", "key"],
-    storySnippet: "Echoing water drops and glittering crystals reveal ancient carvings on the walls."
+    storySnippet: "Glittering amethyst crystals reveal hidden passages leading deep into the island interior."
   },
   mountain: {
     id: "mountain",
     name: "Mist Peak",
     icon: "⛰️",
+    x: 600,
+    y: 140,
+    scene: "mountain",
+    themeColor: "#94a3b8",
     description: "A towering rocky mountain overlooking the entire island.",
     initialStatus: "locked",
     requiredItems: ["rope"],
+    roadblockText: "🧗 A steep vertical rock face blocks the ascent! You need 🪢 Climbing Rope to scale it.",
+    roadblockSolvedText: "✨ You secured the 🪢 Rope and climbed safely up to the misty summit!",
     unlocks: ["radio_tower", "escape_dock"],
     rewardsPool: ["map", "battery", "tool"],
-    storySnippet: "From the windy peak, you can see rescue aircraft corridors and the whole archipelago!"
+    storySnippet: "From the breezy summit, you can see rescue aircraft routes and the whole archipelago!"
   },
   waterfall: {
     id: "waterfall",
     name: "Hidden Falls",
     icon: "🌊",
+    x: 420,
+    y: 160,
+    scene: "waterfall",
+    themeColor: "#06b6d4",
     description: "A roaring freshwater waterfall cascading into a crystal clear swimming pool.",
     initialStatus: "locked",
     requiredItems: [],
     unlocks: ["cave", "hut"],
     rewardsPool: ["water", "food", "key", "wood"],
-    storySnippet: "Pure, refreshing drinking water pours endlessly. Behind the falls lies a secret path."
+    storySnippet: "Pure drinking water pours endlessly. Behind the misty curtain lies a secret passage."
   },
   volcano: {
     id: "volcano",
     name: "Obsidian Crater",
     icon: "🌋",
-    description: "A smoldering volcanic ridge. Dangerous, but filled with rare minerals and shortcuts.",
+    x: 680,
+    y: 270,
+    scene: "volcano",
+    themeColor: "#f97316",
+    description: "A smoldering volcanic ridge. Dangerous, but offers shortcuts and rare fuel.",
     initialStatus: "locked",
     requiredItems: ["compass"],
     altRequiredItems: ["map"],
+    roadblockText: "🧭 Disorienting smoke and sulphur haze! You need a 🧭 Compass or 🗺️ Map to navigate.",
+    roadblockSolvedText: "✨ Guided by your navigation tools, you traversed the volcanic ridge safely!",
     unlocks: ["radio_tower", "escape_dock"],
     rewardsPool: ["fire", "fuel", "tool"],
-    storySnippet: "Steam hisses from deep fissures. Red-hot pumice lines the narrow trail."
+    storySnippet: "Steam hisses from deep fissures. Red-hot pumice lines the shortcut to the coast."
   },
   radio_tower: {
     id: "radio_tower",
     name: "Ancient Radio Tower",
     icon: "📡",
-    description: "A tall rusted steel mast perched high on the island's central ridge.",
+    x: 720,
+    y: 150,
+    scene: "radio_tower",
+    themeColor: "#ec4899",
+    description: "A tall rusted steel mast perched high on the central ridge.",
     initialStatus: "locked",
     requiredItems: ["tool"],
+    roadblockText: "⚙️ Corroded junction box! You need a 🔧 Toolkit to rewire the antenna circuit.",
+    roadblockSolvedText: "✨ You repaired the electrical relays with your 🔧 Toolkit!",
     unlocks: ["escape_dock"],
     rewardsPool: ["radio", "battery"],
-    storySnippet: "The antenna is still standing, waiting for a power source and tuning to send an SOS."
+    storySnippet: "The antenna hums to life, ready to transmit high-frequency emergency SOS signals!"
   },
   escape_dock: {
     id: "escape_dock",
     name: "Escape Cove",
     icon: "🚁",
-    description: "A sheltered lagoon dock with a launch pad and calm waters for final departure.",
+    x: 760,
+    y: 360,
+    scene: "escape_dock",
+    themeColor: "#f59e0b",
+    description: "A sheltered lagoon dock with calm water and a launch pad for final departure.",
     initialStatus: "locked",
     requiredItems: [],
     unlocks: [],
-    rewardsPool: ["fuel", "boat_frame"],
-    storySnippet: "The ultimate departure point! Build your boat, call the chopper, or send the beacon."
+    rewardsPool: ["fuel", "wood"],
+    storySnippet: "The ultimate departure point! Build your boat, call the chopper, or broadcast the SOS."
   }
 };
 
