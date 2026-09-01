@@ -1,5 +1,6 @@
 /**
  * PASAPAROLA - Core Game Logic Engine
+ * Explicit state model with clear completion conditions and deck shuffling.
  */
 
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
@@ -10,57 +11,41 @@ class PasaparolaGame {
     this.teamCount = 2; // 1, 2, or 3
     this.teams = [];
     this.currentTeamIndex = 0;
-    this.currentRound = 1;
+    this.round = 1;
 
-    // Letter states: { letter: 'A', status: 'unplayed' | 'current' | 'correct' | 'passed' | 'wrong', questionObj: null }
-    this.board = [];
-    this.activeLetterIndex = 0; // Index in this.board (0..25)
-    this.isSecondPass = false; // When looping through passed letters
+    // Explicit Alphabet States
+    this.board = []; // Array of 26 letter nodes
+    this.currentLetter = "A";
+    this.activeLetterIndex = 0;
+    this.completedLetters = []; // Letters answered (correct or wrong)
+    this.passedLetters = []; // Letters currently in passed state
+    this.remainingLetters = 26;
+    this.gameCompleted = false;
+    this.isSecondPass = false;
 
     // Question Deck Pools: { 7: { 'A': { pool: [], pointer: 0 } }, 8: { ... } }
     this.decks = { 7: {}, 8: {} };
-    this.validateAndReportQuestionBanks();
     this.initDecks();
-  }
 
-  // Development-time validation & count reporting
-  validateAndReportQuestionBanks() {
-    [7, 8].forEach(grade => {
-      const sourceList = this.getSourceList(grade);
-      if (!Array.isArray(sourceList) || sourceList.length === 0) {
-        console.error(`[Pasaparola Error] Question bank for Grade ${grade} is missing or not an array!`);
-        return;
-      }
-
-      const questionsSeen = new Set();
-      const lettersCount = {};
-      ALPHABET.forEach(l => (lettersCount[l] = 0));
-
-      sourceList.forEach((q, idx) => {
-        if (!q.letter || !q.question || !q.answer) {
-          console.warn(`[Pasaparola] Grade ${grade} item #${idx} missing fields:`, q);
-          return;
-        }
-        const cleanAnswer = q.answer.trim().toUpperCase();
-        if (!cleanAnswer.startsWith(q.letter.toUpperCase())) {
-          console.warn(`[Pasaparola] Grade ${grade} #${idx} Letter '${q.letter}' does not match answer '${q.answer}'`);
-        }
-        questionsSeen.add(q.question.toLowerCase());
-        lettersCount[q.letter.toUpperCase()] = (lettersCount[q.letter.toUpperCase()] || 0) + 1;
-      });
-
-      console.log(`%c[PASAPAROLA] Grade ${grade} Loaded: ${sourceList.length} total (${questionsSeen.size} unique questions)`, "color: #38bdf8; font-weight: bold;");
-      console.log(`Grade ${grade} Distribution:`, lettersCount);
-    });
+    // Start with a valid initial game state immediately
+    this.startNewGame(this.grade, this.teamCount);
   }
 
   getSourceList(grade) {
     if (grade === 7) {
-      if (typeof window !== "undefined" && window.grade7Questions) return window.grade7Questions;
-      if (typeof grade7Questions !== "undefined") return grade7Questions;
+      if (typeof window !== "undefined" && window.grade7Questions && window.grade7Questions.length > 0) {
+        return window.grade7Questions;
+      }
+      if (typeof grade7Questions !== "undefined" && grade7Questions.length > 0) {
+        return grade7Questions;
+      }
     } else {
-      if (typeof window !== "undefined" && window.grade8Questions) return window.grade8Questions;
-      if (typeof grade8Questions !== "undefined") return grade8Questions;
+      if (typeof window !== "undefined" && window.grade8Questions && window.grade8Questions.length > 0) {
+        return window.grade8Questions;
+      }
+      if (typeof grade8Questions !== "undefined" && grade8Questions.length > 0) {
+        return grade8Questions;
+      }
     }
     return [];
   }
@@ -72,7 +57,7 @@ class PasaparolaGame {
       this.decks[grade] = {};
 
       ALPHABET.forEach(letter => {
-        const questionsForLetter = sourceList.filter(q => q.letter.toUpperCase() === letter);
+        const questionsForLetter = sourceList.filter(q => q.letter && q.letter.toUpperCase() === letter);
         this.decks[grade][letter] = {
           pool: this.shuffleArray([...questionsForLetter]),
           pointer: 0
@@ -94,13 +79,13 @@ class PasaparolaGame {
   drawQuestion(grade, letter) {
     const deck = this.decks[grade] && this.decks[grade][letter];
     if (!deck || !deck.pool || deck.pool.length === 0) {
-      // Safe fallback ensuring game never crashes or finishes early
+      // Safe fallback question matching the letter
       return {
         letter: letter,
-        question: `Can you name an English word starting with ${letter}?`,
+        question: `Name an English word starting with the letter ${letter}.`,
         answer: letter,
         grade: grade,
-        category: "general"
+        category: "vocabulary"
       };
     }
 
@@ -114,12 +99,13 @@ class PasaparolaGame {
     return q;
   }
 
-  // Setup game with selected grade & team mode
+  // Setup / Reset new game
   startNewGame(grade = 7, teamCount = 2) {
     this.grade = grade;
     this.teamCount = teamCount;
-    this.currentRound = 1;
+    this.round = 1;
     this.currentTeamIndex = 0;
+    this.gameCompleted = false;
     this.initTeams();
     this.initRoundBoard();
   }
@@ -149,9 +135,14 @@ class PasaparolaGame {
     }
   }
 
-  // Prepare a round's alphabet board
+  // Initialize board for a round
   initRoundBoard() {
+    this.completedLetters = [];
+    this.passedLetters = [];
+    this.remainingLetters = 26;
     this.isSecondPass = false;
+    this.gameCompleted = false;
+
     this.board = ALPHABET.map((letter, idx) => {
       return {
         index: idx,
@@ -163,6 +154,7 @@ class PasaparolaGame {
     });
 
     this.activeLetterIndex = 0;
+    this.currentLetter = "A";
     this.board[0].status = "current";
   }
 
@@ -206,7 +198,7 @@ class PasaparolaGame {
   // Submit Answer
   submitAnswer(input) {
     const current = this.getCurrentLetter();
-    if (!current) return null;
+    if (!current || this.gameCompleted) return null;
 
     const result = this.checkAnswer(input);
 
@@ -219,6 +211,14 @@ class PasaparolaGame {
       current.solvedByTeam = null;
     }
 
+    // Update state tracking
+    if (!this.completedLetters.includes(current.letter)) {
+      this.completedLetters.push(current.letter);
+    }
+    // Remove from passed letters if it was passed before
+    this.passedLetters = this.passedLetters.filter(l => l !== current.letter);
+    this.remainingLetters = 26 - this.completedLetters.length;
+
     const nextState = this.moveToNextLetter();
     return {
       ...result,
@@ -229,9 +229,13 @@ class PasaparolaGame {
   // Pasaparola (Pass) Action
   passCurrentLetter() {
     const current = this.getCurrentLetter();
-    if (!current) return null;
+    if (!current || this.gameCompleted) return null;
 
     current.status = "passed";
+
+    if (!this.passedLetters.includes(current.letter)) {
+      this.passedLetters.push(current.letter);
+    }
 
     const nextState = this.moveToNextLetter();
     return {
@@ -242,12 +246,18 @@ class PasaparolaGame {
     };
   }
 
-  // Advance to next eligible letter (or loop to passed letters)
+  // Advance to next letter (or loop back to passed letters)
   moveToNextLetter() {
-    // Rotate team turn
+    // 1. Check completion: ONLY when all 26 letters are in completedLetters
+    if (this.completedLetters.length >= 26) {
+      this.gameCompleted = true;
+      return { isComplete: true, scoreboard: this.getScoreboard() };
+    }
+
+    // 2. Rotate team turn
     this.rotateTeam();
 
-    // 1. Search for next 'unplayed' letter after current index
+    // 3. Look for next unplayed letter forward
     let nextIdx = -1;
     for (let i = this.activeLetterIndex + 1; i < this.board.length; i++) {
       if (this.board[i].status === "unplayed") {
@@ -256,7 +266,7 @@ class PasaparolaGame {
       }
     }
 
-    // 2. If no subsequent unplayed letters, check from beginning for any unplayed
+    // 4. Look for unplayed letter from start
     if (nextIdx === -1) {
       for (let i = 0; i <= this.activeLetterIndex; i++) {
         if (this.board[i].status === "unplayed") {
@@ -266,17 +276,17 @@ class PasaparolaGame {
       }
     }
 
-    // 3. If no unplayed letters exist at all, loop through PASSED letters!
-    if (nextIdx === -1) {
+    // 5. If no unplayed letters remain, loop through PASSED letters!
+    if (nextIdx === -1 && this.passedLetters.length > 0) {
       this.isSecondPass = true;
-      // Search for next 'passed' letter after active index
+      // Search passed forward
       for (let i = this.activeLetterIndex + 1; i < this.board.length; i++) {
         if (this.board[i].status === "passed") {
           nextIdx = i;
           break;
         }
       }
-      // If none ahead, wrap around from beginning
+      // Wrap around from beginning for passed letters
       if (nextIdx === -1) {
         for (let i = 0; i <= this.activeLetterIndex; i++) {
           if (this.board[i].status === "passed") {
@@ -287,19 +297,23 @@ class PasaparolaGame {
       }
     }
 
-    // 4. If still no eligible letter, then the whole board is COMPLETED!
+    // 6. Safety check for completion
     if (nextIdx === -1) {
+      this.gameCompleted = true;
       return { isComplete: true, scoreboard: this.getScoreboard() };
     }
 
     this.activeLetterIndex = nextIdx;
+    this.currentLetter = this.board[nextIdx].letter;
     this.board[nextIdx].status = "current";
 
     return {
       isComplete: false,
       activeLetter: this.getCurrentLetter(),
       currentTeam: this.getCurrentTeam(),
-      isSecondPass: this.isSecondPass
+      isSecondPass: this.isSecondPass,
+      completedCount: this.completedLetters.length,
+      passedCount: this.passedLetters.length
     };
   }
 
@@ -312,11 +326,12 @@ class PasaparolaGame {
   getScoreboard() {
     const sorted = [...this.teams].sort((a, b) => b.score - a.score);
     return {
-      round: this.currentRound,
+      round: this.round,
       teams: sorted,
       stats: {
         correct: this.board.filter(l => l.status === "correct").length,
         wrong: this.board.filter(l => l.status === "wrong").length,
+        completed: this.completedLetters.length,
         total: 26
       }
     };
@@ -324,7 +339,7 @@ class PasaparolaGame {
 
   // Start next round with fresh board and unused questions
   startNextRound() {
-    this.currentRound++;
+    this.round++;
     this.initRoundBoard();
   }
 }
