@@ -1,0 +1,23 @@
+{
+  "name": "escape-the-island",
+  "version": "1.0.0",
+  "description": "🏝️ Interactive English learning adventure game for 7th and 8th grade students (35-minute classroom session)",
+  "private": true,
+  "scripts": {
+    "test": "node test-runner.js && node verify-dom.js && node verify-game-logic.js && node test-start-button-fix.js && node e2e-simulation.js",
+    "build": "node test-runner.js && node verify-dom.js && node test-start-button-fix.js",
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "english-game",
+    "classroom-game",
+    "esl",
+    "efl",
+    "a2-b1",
+    "middle-school",
+    "escape-the-island",
+    "interactive-adventure"
+  ],
+  "author": "English Classroom Adventure",
+  "license": "MIT"
+}
