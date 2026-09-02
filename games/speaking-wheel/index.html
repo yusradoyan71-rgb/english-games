@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPEAKING WHEEL 🎡 — 7th &amp; 8th Grade English Speaking Game</title>
+  <meta name="description" content="A classroom spinning wheel speaking game for 7th and 8th grade English students. 120 progressive questions across 3 challenge rounds.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Particle / Confetti Canvas -->
+  <canvas id="fxCanvas"></canvas>
+
+  <!-- ============================================================ -->
+  <!-- SCREEN 1: WELCOME / GRADE & ROUND SELECTION -->
+  <!-- ============================================================ -->
+  <main id="screenWelcome" class="welcome-screen">
+    <div class="welcome-header">
+      <div class="game-badge">
+        <span>🎓 CLASSROOM SPEAKING GAME</span>
+      </div>
+      <h1 class="main-title">SPEAKING WHEEL 🎡</h1>
+      <p class="tagline">Spin the wheel, practice conversational fluency, and boost English speaking confidence!</p>
+    </div>
+
+    <div class="setup-card">
+      <!-- Step 1: Grade Selection -->
+      <section class="step-section" aria-labelledby="step1Title">
+        <h2 id="step1Title" class="step-heading">
+          <span class="step-number">1</span> Choose your grade:
+        </h2>
+        <div class="grade-btn-grid">
+          <button type="button" id="btnGrade7" class="grade-card-btn" aria-label="Select 7th Grade">
+            <div class="grade-title">
+              <span>7th GRADE</span>
+              <span class="grade-level-pill">Level A2</span>
+            </div>
+            <p class="grade-desc">Daily routines, hobbies, food, animals, weather, holidays &amp; likes/dislikes.</p>
+          </button>
+
+          <button type="button" id="btnGrade8" class="grade-card-btn" aria-label="Select 8th Grade">
+            <div class="grade-title">
+              <span>8th GRADE</span>
+              <span class="grade-level-pill">Level A2–B1</span>
+            </div>
+            <p class="grade-desc">Teen life, technology, environment, future careers, opinions &amp; comparisons.</p>
+          </button>
+        </div>
+      </section>
+
+      <!-- Step 2: Round Selection (Appears after choosing grade) -->
+      <section id="stepRoundSelection" class="step-section hidden" aria-labelledby="step2Title">
+        <h2 id="step2Title" class="step-heading">
+          <span class="step-number">2</span> Choose your challenge for <span id="selectedGradeLabel" style="color: #818cf8;">7th Grade</span>:
+        </h2>
+        <div class="round-btn-grid">
+          <!-- Round 1 -->
+          <button type="button" id="btnRound1" class="round-card-btn round-easy" aria-label="Select Round 1 Easy">
+            <div class="round-name">
+              <span>🌱 ROUND 1</span>
+              <span style="font-size: 0.85rem; opacity: 0.8;">(EASY)</span>
+            </div>
+            <span class="round-target">🎯 Target: 1–2 Sentences</span>
+            <p class="round-info">Short &amp; simple answers on familiar topics with basic speaking structures.</p>
+          </button>
+
+          <!-- Round 2 -->
+          <button type="button" id="btnRound2" class="round-card-btn round-medium" aria-label="Select Round 2 Medium">
+            <div class="round-name">
+              <span>⚡ ROUND 2</span>
+              <span style="font-size: 0.85rem; opacity: 0.8;">(MEDIUM)</span>
+            </div>
+            <span class="round-target">🎯 Target: 3–4 Sentences</span>
+            <p class="round-info">Detailed responses with reasons, personal examples, and linking words.</p>
+          </button>
+
+          <!-- Round 3 -->
+          <button type="button" id="btnRound3" class="round-card-btn round-challenge" aria-label="Select Round 3 Challenge">
+            <div class="round-name">
+              <span>🔥 ROUND 3</span>
+              <span style="font-size: 0.85rem; opacity: 0.8;">(CHALLENGE)</span>
+            </div>
+            <span class="round-target">🎯 Target: 5–7 Sentences</span>
+            <p class="round-info">Extended speaking with opinions, hypotheses, predictions, and depth.</p>
+          </button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ============================================================ -->
+  <!-- SCREEN 2: MAIN GAME ARENA -->
+  <!-- ============================================================ -->
+  <div id="screenGame" class="game-screen hidden">
+    
+    <!-- Top Navigation Bar -->
+    <header class="game-navbar">
+      <div class="nav-left">
+        <a href="../../index.html" class="hub-brand" title="Return to English Games Hub">
+          <span>🎡 SPEAKING WHEEL</span>
+        </a>
+        <span id="badgeGrade" class="grade-badge-chip">Grade 7</span>
+        <span id="badgeRound" class="round-badge round-1">ROUND 1 — EASY</span>
+      </div>
+
+      <div class="nav-center">
+        <div class="progress-track" title="Current Round Questions Progress">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+        <span id="progressCounter" class="progress-text">0 / 20</span>
+      </div>
+
+      <div class="nav-right">
+        <button type="button" id="btnOpenTimer" class="nav-btn" title="Toggle Countdown Timer (Hotkey: T)">
+          <span>⏱ Timer</span>
+        </button>
+        <button type="button" id="btnResetRound" class="nav-btn" title="Reset all 20 questions in this round">
+          <span>🔄 Reset</span>
+        </button>
+        <button type="button" id="btnChangeRound" class="nav-btn" title="Switch to another Round">
+          <span>⚡ Round</span>
+        </button>
+        <button type="button" id="btnChangeGrade" class="nav-btn" title="Switch Grade">
+          <span>🎓 Grade</span>
+        </button>
+        <button type="button" id="btnTeacherSettings" class="nav-btn" title="Teacher Settings">
+          <span>⚙ Settings</span>
+        </button>
+        <button type="button" id="btnToggleSound" class="nav-btn" title="Toggle Sound Effects">
+          <span>🔊 Sound: ON</span>
+        </button>
+        <button type="button" id="btnFullscreen" class="nav-btn" title="Toggle Fullscreen Mode">
+          <span>⤢ Fullscreen</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Arena Stage -->
+    <main class="arena-container">
+      <div class="wheel-stage">
+        <!-- Top Pointer Needle -->
+        <div class="wheel-pointer" aria-hidden="true">
+          <svg class="wheel-pointer-svg" viewBox="0 0 24 28">
+            <polygon points="12,28 0,0 24,0" fill="#F59E0B" stroke="#B45309" stroke-width="2" />
+          </svg>
+        </div>
+
+        <!-- Wheel Canvas -->
+        <canvas id="wheelCanvas"></canvas>
+      </div>
+
+      <!-- Action Controls Bar -->
+      <div class="action-controls">
+        <button type="button" id="btnSpin" class="btn-spin-huge" aria-label="Spin the wheel">
+          <span class="spin-icon">🎡</span>
+          <span>SPIN WHEEL</span>
+        </button>
+      </div>
+    </main>
+
+    <!-- Floating Timer Widget -->
+    <aside id="timerPanel" class="timer-panel-floating hidden" aria-label="Classroom Countdown Timer">
+      <div class="timer-header">
+        <div class="timer-title">
+          <span>⏱</span> Classroom Timer
+        </div>
+        <button type="button" id="btnTimerClose" class="timer-btn-close" aria-label="Close Timer">&times;</button>
+      </div>
+
+      <div class="timer-visual-container">
+        <svg class="timer-svg" viewBox="0 0 120 120">
+          <circle class="track" cx="60" cy="60" r="54" />
+          <circle id="timerProgressCircle" class="progress" cx="60" cy="60" r="54" />
+        </svg>
+        <div id="timerDisplay" class="timer-digits">00:45</div>
+      </div>
+
+      <div id="timerAlertBanner" class="timer-alert-banner hidden">
+        ⏰ TIME'S UP!
+      </div>
+
+      <div class="timer-preset-row">
+        <button type="button" class="timer-preset-btn" data-seconds="30">30s</button>
+        <button type="button" class="timer-preset-btn active" data-seconds="45">45s</button>
+        <button type="button" class="timer-preset-btn" data-seconds="60">60s</button>
+        <button type="button" class="timer-preset-btn" data-seconds="90">90s</button>
+      </div>
+
+      <div class="timer-controls-row">
+        <button type="button" id="btnTimerStart" class="btn-timer-primary">
+          <span>▶ START</span>
+        </button>
+        <button type="button" id="btnTimerReset" class="btn-timer-secondary">
+          <span>↺ Reset</span>
+        </button>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MODAL: PROMINENT QUESTION CARD -->
+  <!-- ============================================================ -->
+  <div id="modalQuestion" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="cardQuestionText">
+    <div class="question-card-modal">
+      <div class="card-top-row">
+        <span id="cardTopicBadge" class="topic-badge-pill">Daily Routines • Grade 7</span>
+        <button type="button" id="btnCardClose" class="card-btn-close" aria-label="Close question card">&times;</button>
+      </div>
+
+      <div class="question-content-box">
+        <h2 id="cardQuestionText" class="question-text-prominent">
+          What time do you usually wake up on weekdays and what is the first thing you do?
+        </h2>
+
+        <div id="cardTargetBadge" class="target-badge-box">
+          🎯 Target: Speak for 1–2 sentences.
+        </div>
+      </div>
+
+      <!-- Useful Language Prompts -->
+      <div class="useful-language-box">
+        <div class="useful-lang-title">
+          <span>💬</span> Useful Language &amp; Connectors:
+        </div>
+        <ul id="cardUsefulLanguageList" class="lang-chip-list">
+          <li class="lang-chip">I usually...</li>
+          <li class="lang-chip">Because...</li>
+          <li class="lang-chip">For example...</li>
+        </ul>
+      </div>
+
+      <!-- Card Footer Actions -->
+      <div class="card-actions-row">
+        <div class="card-actions-left">
+          <button type="button" id="btnCardTts" class="btn-card-action" title="Listen to question pronunciation">
+            <span>🔊 Read Aloud</span>
+          </button>
+          <button type="button" id="btnCardTimerStart" class="btn-card-action" title="Start Timer for this question">
+            <span>⏱ Start Timer</span>
+          </button>
+        </div>
+
+        <button type="button" id="btnCardNextSpin" class="btn-card-primary">
+          <span>🎡 Next Question / Spin</span>
+          <span>➜</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MODAL: ROUND COMPLETE CELEBRATION -->
+  <!-- ============================================================ -->
+  <div id="modalComplete" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+    <div class="complete-card-modal">
+      <div class="trophy-badge" aria-hidden="true">🏆</div>
+      <h2 class="complete-title">ROUND COMPLETE!</h2>
+      <p id="completeSummaryText" class="complete-summary">
+        Outstanding effort! All 20 speaking questions have been answered. Ready for the next round?
+      </p>
+
+      <div class="complete-actions-row">
+        <button type="button" id="btnReplayRound" class="nav-btn" style="padding: 0.85rem 1.5rem; font-size: 1rem;">
+          <span>🔄 Replay Round</span>
+        </button>
+        <button type="button" id="btnNextRound" class="btn-card-primary" style="padding: 0.85rem 2rem; font-size: 1.15rem;">
+          <span>🚀 Start Next Round</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MODAL: TEACHER SETTINGS -->
+  <!-- ============================================================ -->
+  <div id="modalSettings" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+    <div class="settings-card-modal">
+      <div class="settings-header">
+        <h2 class="settings-title">
+          <span>⚙</span> Teacher Controls
+        </h2>
+        <button type="button" id="btnSettingsClose" class="card-btn-close">&times;</button>
+      </div>
+
+      <div class="setting-row">
+        <label for="selectSettingGrade" class="setting-label">Grade Level:</label>
+        <select id="selectSettingGrade" class="setting-select">
+          <option value="7">7th Grade (Level A2)</option>
+          <option value="8">8th Grade (Level A2–B1)</option>
+        </select>
+      </div>
+
+      <div class="setting-row">
+        <label for="selectSettingRound" class="setting-label">Round / Difficulty:</label>
+        <select id="selectSettingRound" class="setting-select">
+          <option value="1">Round 1 — Easy (1–2 Sentences)</option>
+          <option value="2">Round 2 — Medium (3–4 Sentences)</option>
+          <option value="3">Round 3 — Challenge (5–7 Sentences)</option>
+        </select>
+      </div>
+
+      <div class="setting-row">
+        <label for="selectSettingTimer" class="setting-label">Default Timer Duration:</label>
+        <select id="selectSettingTimer" class="setting-select">
+          <option value="30">30 Seconds</option>
+          <option value="45" selected>45 Seconds</option>
+          <option value="60">60 Seconds</option>
+          <option value="90">90 Seconds</option>
+        </select>
+      </div>
+
+      <div class="settings-actions">
+        <button type="button" id="btnSettingsApply" class="btn-card-primary" style="font-size: 1rem; padding: 0.65rem 1.5rem;">
+          <span>Save &amp; Apply</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logic Script -->
+  <script src="script.js"></script>
+</body>
+</html>
