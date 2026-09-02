@@ -1,729 +1,234 @@
 /**
- * ESCAPE THE ISLAND - Story & Adventure Engine Data
- * Includes:
- *  - 10 Island Locations with requirements & unlock paths
- *  - 16 Mechanical Items & Recipes
- *  - 3 Streamlined Escape Blueprints (Boat, Radio, Helicopter)
- *  - 30+ Snappy Branching Choices (A/B)
- *  - 15 Island Hazard Event Cards
- *  - Final Escape Challenges
- *  - 35-Minute Classroom Pacing Controls
+ * ESCAPE THE ISLAND - Adventure & Story Engine Data
+ * Designed for 7th & 8th Grade ESL/EFL Classroom Engagement
  */
 
-const ISLAND_LOCATIONS = {
-  beach: {
-    id: "beach",
-    name: "Sandy Beach",
-    icon: "🏖️",
-    x: 180,
-    y: 330,
-    scene: "beach",
-    themeColor: "#38bdf8",
-    description: "The crash site. Crystal waters, scattered plane wreckage, and the sound of waves.",
-    initialStatus: "available",
-    requiredItems: [],
-    unlocks: ["jungle", "shipwreck"],
-    rewardsPool: ["wood", "rope", "map", "compass"],
-    storySnippet: "Waves wash over the wreckage. You scan the sunny shore for initial supplies and shelter."
-  },
-  jungle: {
-    id: "jungle",
-    name: "Emerald Jungle",
+// ============================================================
+// 6 STORY MISSIONS PROGRESSION
+// ============================================================
+const ESCAPE_MISSIONS = [
+  {
+    id: 1,
+    title: "FIND THE JUNGLE PATH",
     icon: "🌴",
-    x: 320,
-    y: 260,
-    scene: "jungle",
-    themeColor: "#22c55e",
-    description: "A dense, humid forest filled with exotic birds, thick vines, and ancient trails.",
-    initialStatus: "locked",
-    requiredItems: [],
-    unlocks: ["hut", "waterfall", "cave"],
-    rewardsPool: ["rope", "food", "wood", "fire"],
-    storySnippet: "Tall palm trees and thick canopy block the sunlight. Multiple paths branch out ahead."
+    zone: "jungle",
+    zoneName: "Emerald Jungle",
+    tagline: "Navigate through the dense tropical forest",
+    briefing: "You wake up on the stormy beach. Your boat is destroyed, and the coastline is surrounded by steep cliffs. The only way forward is through the thick jungle.",
+    objective: "Answer the English challenges to hack through the thick vines and find your way.",
+    questionsNeeded: 3,
+    rewardItem: {
+      id: "compass",
+      name: "Brass Compass",
+      icon: "🧭",
+      description: "Points north and guides your expedition through the mysterious island."
+    },
+    bonusItem: {
+      id: "map",
+      name: "Island Map",
+      icon: "🗺️",
+      description: "An old nautical chart showing temple ruins and coastal docks."
+    },
+    successMessage: "You cleared the overgrown trail and found a brass compass and ancient map!"
   },
-  shipwreck: {
-    id: "shipwreck",
-    name: "Sunken Galleon",
-    icon: "🚢",
-    x: 140,
-    y: 180,
-    scene: "shipwreck",
-    themeColor: "#0284c7",
-    description: "An old wooden cargo ship lodged between sharp coral reefs.",
-    initialStatus: "locked",
-    requiredItems: [],
-    unlocks: ["escape_dock"],
-    rewardsPool: ["fuel", "tool", "wood", "hook"],
-    storySnippet: "The creaking wooden hull is filled with rusted nautical machinery, fuel drums, and timber."
+  {
+    id: 2,
+    title: "UNLOCK THE ANCIENT TEMPLE",
+    icon: "🗿",
+    zone: "temple",
+    zoneName: "Ancient Stone Temple",
+    tagline: "Decipher ancient stone runes to find the boat key",
+    briefing: "Deep in the jungle stands a moss-covered temple. Inside, an ancient stone pedestal holds the key to the abandoned smuggler boat at the coast!",
+    objective: "Solve the English grammar & vocabulary puzzles to unlock the temple gates.",
+    questionsNeeded: 3,
+    rewardItem: {
+      id: "key",
+      name: "Boat Ignition Key",
+      icon: "🔑",
+      description: "The brass key needed to start the rescue boat engine."
+    },
+    successMessage: "The temple stone gates slide open! You recovered the Boat Ignition Key!"
   },
-  hut: {
-    id: "hut",
-    name: "Abandoned Hut",
-    icon: "🏚️",
-    x: 350,
-    y: 380,
-    scene: "hut",
-    themeColor: "#eab308",
-    description: "A mysterious smuggler's cabin covered in moss. The heavy door is locked.",
-    initialStatus: "locked",
-    requiredItems: ["key"],
-    roadblockText: "🔒 The heavy wooden cabin door is locked! You need the 🔑 Key to enter.",
-    roadblockSolvedText: "✨ You used the 🔑 Key to unlock the smuggler's cabin!",
-    unlocks: ["radio_tower"],
-    rewardsPool: ["radio", "battery", "map", "toolbox"],
-    storySnippet: "Inside the dusty cabin, old radio schematics, spare parts, and tools lie on a wooden workbench."
+  {
+    id: 3,
+    title: "SEARCH THE ABANDONED CAMP",
+    icon: "🛖",
+    zone: "camp",
+    zoneName: "Abandoned Smuggler Camp",
+    tagline: "Scavenge survival supplies and transmitter power",
+    briefing: "You discover a hidden base camp left by previous explorers. Under a rusted workbench, you spot a heavy generator battery pack!",
+    objective: "Complete English sentence challenges to scavenge the camp before the storm arrives.",
+    questionsNeeded: 3,
+    rewardItem: {
+      id: "battery",
+      name: "Heavy Duty Battery",
+      icon: "🔋",
+      description: "Provides electrical power to the mountain radio tower."
+    },
+    successMessage: "Camp searched successfully! You secured the High-Capacity Battery Pack!"
   },
-  cave: {
-    id: "cave",
-    name: "Dark Crystal Cave",
-    icon: "🪨",
-    x: 520,
-    y: 290,
-    scene: "cave",
-    themeColor: "#a855f7",
-    description: "A deep underground cavern. Pitch black without light.",
-    initialStatus: "locked",
-    requiredItems: ["flashlight"],
-    altRequiredItems: ["fire"],
-    roadblockText: "🌑 Pitch black inside the cavern! You need a 🔦 Flashlight or 🔥 Torch to explore.",
-    roadblockSolvedText: "✨ Your light illuminates ancient crystal stalactites and hidden supplies!",
-    unlocks: ["volcano", "mountain"],
-    rewardsPool: ["battery", "rope", "water", "key"],
-    storySnippet: "Glittering amethyst crystals reveal hidden passages leading deep into the island interior."
-  },
-  mountain: {
-    id: "mountain",
-    name: "Mist Peak",
-    icon: "⛰️",
-    x: 600,
-    y: 140,
-    scene: "mountain",
-    themeColor: "#94a3b8",
-    description: "A towering rocky mountain overlooking the entire island.",
-    initialStatus: "locked",
-    requiredItems: ["rope"],
-    roadblockText: "🧗 A steep vertical rock face blocks the ascent! You need 🪢 Climbing Rope to scale it.",
-    roadblockSolvedText: "✨ You secured the 🪢 Rope and climbed safely up to the misty summit!",
-    unlocks: ["radio_tower", "escape_dock"],
-    rewardsPool: ["map", "battery", "tool"],
-    storySnippet: "From the breezy summit, you can see rescue aircraft routes and the whole archipelago!"
-  },
-  waterfall: {
-    id: "waterfall",
-    name: "Hidden Falls",
-    icon: "🌊",
-    x: 420,
-    y: 160,
-    scene: "waterfall",
-    themeColor: "#06b6d4",
-    description: "A roaring freshwater waterfall cascading into a crystal clear swimming pool.",
-    initialStatus: "locked",
-    requiredItems: [],
-    unlocks: ["cave", "hut"],
-    rewardsPool: ["water", "food", "key", "wood"],
-    storySnippet: "Pure drinking water pours endlessly. Behind the misty curtain lies a secret passage."
-  },
-  volcano: {
-    id: "volcano",
-    name: "Obsidian Crater",
-    icon: "🌋",
-    x: 680,
-    y: 270,
-    scene: "volcano",
-    themeColor: "#f97316",
-    description: "A smoldering volcanic ridge. Dangerous, but offers shortcuts and rare fuel.",
-    initialStatus: "locked",
-    requiredItems: ["compass"],
-    altRequiredItems: ["map"],
-    roadblockText: "🧭 Disorienting smoke and sulphur haze! You need a 🧭 Compass or 🗺️ Map to navigate.",
-    roadblockSolvedText: "✨ Guided by your navigation tools, you traversed the volcanic ridge safely!",
-    unlocks: ["radio_tower", "escape_dock"],
-    rewardsPool: ["fire", "fuel", "tool"],
-    storySnippet: "Steam hisses from deep fissures. Red-hot pumice lines the shortcut to the coast."
-  },
-  radio_tower: {
-    id: "radio_tower",
-    name: "Ancient Radio Tower",
-    icon: "📡",
-    x: 720,
-    y: 150,
-    scene: "radio_tower",
-    themeColor: "#ec4899",
-    description: "A tall rusted steel mast perched high on the central ridge.",
-    initialStatus: "locked",
-    requiredItems: ["tool"],
-    roadblockText: "⚙️ Corroded junction box! You need a 🔧 Toolkit to rewire the antenna circuit.",
-    roadblockSolvedText: "✨ You repaired the electrical relays with your 🔧 Toolkit!",
-    unlocks: ["escape_dock"],
-    rewardsPool: ["radio", "battery"],
-    storySnippet: "The antenna hums to life, ready to transmit high-frequency emergency SOS signals!"
-  },
-  escape_dock: {
-    id: "escape_dock",
-    name: "Escape Cove",
-    icon: "🚁",
-    x: 760,
-    y: 360,
-    scene: "escape_dock",
-    themeColor: "#f59e0b",
-    description: "A sheltered lagoon dock with calm water and a launch pad for final departure.",
-    initialStatus: "locked",
-    requiredItems: [],
-    unlocks: [],
-    rewardsPool: ["fuel", "wood"],
-    storySnippet: "The ultimate departure point! Build your boat, call the chopper, or broadcast the SOS."
-  }
-};
-
-const GAME_ITEMS = {
-  wood: {
-    id: "wood",
-    name: "Sturdy Timber",
-    icon: "🪵",
-    category: "construction",
-    description: "Dense cedar logs essential for repairing the escape boat.",
-    usedIn: "boat"
-  },
-  rope: {
-    id: "rope",
-    name: "Climbing Rope",
-    icon: "🪢",
-    category: "equipment",
-    description: "Strong braided cord. Allows scaling Mist Peak and binding the raft.",
-    usedIn: ["mountain", "boat"]
-  },
-  fuel: {
-    id: "fuel",
-    name: "Aviation Fuel",
-    icon: "⛽",
-    category: "energy",
-    description: "A sealed red canister of high-octane fuel to power the boat engine.",
-    usedIn: "boat"
-  },
-  tool: {
-    id: "tool",
-    name: "Wrench & Toolkit",
-    icon: "🔧",
-    category: "tools",
-    description: "Mechanical wrench to fix boat motors and radio antennas.",
-    usedIn: ["boat", "radio_rescue"]
-  },
-  radio: {
-    id: "radio",
-    name: "SOS Radio Transceiver",
+  {
+    id: 4,
+    title: "REPAIR THE RADIO TOWER",
     icon: "📻",
-    category: "communications",
-    description: "Emergency broadcast radio capable of transmitting on 121.5 MHz.",
-    usedIn: "radio_rescue"
+    zone: "radio_tower",
+    zoneName: "High Ridge Radio Tower",
+    tagline: "Connect power and align the emergency antenna",
+    briefing: "Perched atop the highest cliff is a rusty communications mast. With your new battery and radio relays, you can broadcast an emergency SOS signal across the Pacific!",
+    objective: "Answer English questions accurately to wire the frequencies and transmitter.",
+    questionsNeeded: 3,
+    rewardItem: {
+      id: "radio",
+      name: "Long-Range Radio",
+      icon: "📻",
+      description: "Armed with emergency broadcast frequencies to call for rescue."
+    },
+    successMessage: "The tower hums to life with blue electric sparks! Emergency frequency tuned!"
   },
-  battery: {
-    id: "battery",
-    name: "Lithium Battery",
-    icon: "🔋",
-    category: "energy",
-    description: "Charged power cell to energize the radio tower and flashlight.",
-    usedIn: ["radio_rescue", "helicopter"]
+  {
+    id: 5,
+    title: "REACH THE ESCAPE BOAT",
+    icon: "🚤",
+    zone: "boat_dock",
+    zoneName: "Secret Coastal Dock",
+    tagline: "Prepare the boat and fuel up for the ocean crossing",
+    briefing: "You rush down to the hidden rocky cove where a rugged motorboat is tethered. But the fuel tank is empty! You must scavenge the emergency fuel drum.",
+    objective: "Answer challenges to fuel up the boat and start the engine.",
+    questionsNeeded: 3,
+    rewardItem: {
+      id: "fuel",
+      name: "Emergency Fuel Canister",
+      icon: "⛽",
+      description: "Full tank of high-octane nautical fuel."
+    },
+    successMessage: "Boat fueled and ready! Engine roars to life with a deep rumble!"
   },
-  map: {
-    id: "map",
-    name: "Island Topo Chart",
-    icon: "🗺️",
-    category: "navigation",
-    description: "Detailed aerial chart of air corridors, reefs, and landing zones.",
-    usedIn: ["helicopter", "navigation"]
-  },
-  fire: {
-    id: "fire",
-    name: "Signal Flare & Flint",
-    icon: "🔥",
-    category: "signals",
-    description: "Ignition kit to light cave paths and emergency rescue signal fires.",
-    usedIn: ["helicopter", "cave"]
-  },
-  key: {
-    id: "key",
-    name: "Brass Smuggler Key",
-    icon: "🔑",
-    category: "keys",
-    description: "Heavy antique key that unlocks the Abandoned Hut.",
-    usedIn: "hut"
-  },
-  flashlight: {
-    id: "flashlight",
-    name: "LED Flashlight",
-    icon: "🔦",
-    category: "equipment",
-    description: "High-beam torch that illuminates the Dark Crystal Cave.",
-    usedIn: "cave"
-  },
-  compass: {
-    id: "compass",
-    name: "Brass Compass",
-    icon: "🧭",
-    category: "navigation",
-    description: "Magnetic guide that helps avoid getting lost in swamps and jungles.",
-    usedIn: "navigation"
-  },
-  water: {
-    id: "water",
-    name: "Fresh Spring Water",
-    icon: "💧",
-    category: "consumable",
-    description: "Pure hydration! Instantly restores +1 Team Energy (❤️).",
-    usedIn: "energy_restore"
-  },
-  food: {
-    id: "food",
-    name: "Tropical Rations",
-    icon: "🍎",
-    category: "consumable",
-    description: "Nutritious wild fruits. Instantly restores +1 Team Energy (❤️).",
-    usedIn: "energy_restore"
-  },
-  hook: {
-    id: "hook",
-    name: "Grappling Hook",
-    icon: "🪝",
-    category: "equipment",
-    description: "Forged hook on a line for pulling shipwreck items from deep water.",
-    usedIn: "salvage"
-  },
-  toolbox: {
-    id: "toolbox",
-    name: "Master Toolbox",
-    icon: "🧰",
-    category: "tools",
-    description: "Full mechanic set. Works as an all-in-one repair booster.",
-    usedIn: ["boat", "radio_rescue"]
-  },
-  boat_frame: {
-    id: "boat_frame",
-    name: "Raft Keel",
-    icon: "🛶",
-    category: "construction",
-    description: "The sturdy base hull of the escape boat.",
-    usedIn: "boat"
-  }
-};
-
-/**
- * STREAMLINED ESCAPE BLUEPRINTS
- * Each requires 3-4 meaningful items.
- */
-const ESCAPE_BLUEPRINTS = {
-  boat: {
-    id: "boat",
-    name: "Ocean Escape Boat",
-    icon: "🛶",
-    requiredItems: ["wood", "rope", "fuel", "tool"],
-    locationRequired: "beach", // or shipwreck or escape_dock
-    escapeStory: "You assemble the sturdy timbers, lash them with heavy rope, fill the fuel tank, and tune the engine. The craft roars to life and glides safely out toward the open sea!"
-  },
-  radio_rescue: {
-    id: "radio_rescue",
-    name: "Radio SOS Beacon",
-    icon: "📡",
-    requiredItems: ["radio", "battery", "tool"],
-    locationRequired: "radio_tower", // or mountain
-    escapeStory: "You wire the battery to the high mast and calibrate the frequency. A crackle of static breaks: 'MAYDAY RECEIVED! Coast Guard cutter en route!' A patrol vessel arrives at the cove!"
-  },
-  helicopter: {
-    id: "helicopter",
-    name: "Helicopter Signal Extraction",
+  {
+    id: 6,
+    title: "CALL FOR RESCUE & ESCAPE!",
     icon: "🚁",
-    requiredItems: ["map", "battery", "fire"],
-    locationRequired: "mountain", // or escape_dock
-    escapeStory: "You align the landing coordinates from your map, flash the battery beacon, and light the triangle of signal fires. The rescue helicopter touches down right on Mist Peak!"
-  }
-};
-
-/**
- * 30+ SNAPPY BRANCHING CHOICES
- * Fast 5-10 second read time.
- * Real, concrete consequences (items, energy, location unlocks, or shortcuts).
- */
-const BRANCHING_CHOICES = [
-  {
-    id: "choice-01",
-    title: "Fork in the Jungle Trail",
-    text: "The path splits into two distinct routes. Where do you lead your team?",
-    optionA: {
-      label: "🌴 Overgrown Jungle Route",
-      resultText: "You hack through thick vines and find an old brass compass!",
-      rewardItem: "compass",
-      energyDelta: 0,
-      unlockLocation: "jungle"
+    zone: "rescue_zone",
+    zoneName: "Open Ocean & Rescue Point",
+    tagline: "Transmit Mayday SOS and rendezvous with the rescue chopper",
+    briefing: "You launch the boat into open waters. Giant waves crash around you! Transmit your final SOS coordinates so the search helicopter can pinpoint your location!",
+    objective: "Master the final English questions to guide the rescue helicopter!",
+    questionsNeeded: 3,
+    rewardItem: {
+      id: "flare",
+      name: "Signal Flare",
+      icon: "🎆",
+      description: "Bright red flare illuminating the ocean for the rescue team."
     },
-    optionB: {
-      label: "🏖️ Coastline Reef Trail",
-      resultText: "You walk along the shore and spot the Sunken Galleon on the reef!",
-      rewardItem: null,
-      energyDelta: 0,
-      unlockLocation: "shipwreck"
-    }
-  },
-  {
-    id: "choice-02",
-    title: "Steep Waterfall Cliff",
-    text: "A 20-meter cliff blocks your path near the waterfall.",
-    optionA: {
-      label: "🧗 Climb the Slippery Rock Face",
-      resultText: "You scramble to the top and find a coil of climbing rope! (-1 ❤️ from exhaustion)",
-      rewardItem: "rope",
-      energyDelta: -1,
-      unlockLocation: "mountain"
-    },
-    optionB: {
-      label: "🌊 Walk Behind the Water Curtain",
-      resultText: "Behind the roaring water is a hidden cave! You drink pure water (+1 ❤️).",
-      rewardItem: "water",
-      energyDelta: 1,
-      unlockLocation: "cave"
-    }
-  },
-  {
-    id: "choice-03",
-    title: "Sunken Galleon Cargo Hold",
-    text: "Water is rising in the lower deck of the shipwreck.",
-    optionA: {
-      label: "🤿 Dive into the Flooded Engine Room",
-      resultText: "You retrieve a sealed canister of aviation fuel! Perfect for the boat.",
-      rewardItem: "fuel",
-      energyDelta: 0,
-      unlockLocation: null
-    },
-    optionB: {
-      label: "🧰 Search the Captain's Quarters",
-      resultText: "You pry open a metal locker and find a heavy-duty wrench & toolkit!",
-      rewardItem: "tool",
-      energyDelta: 0,
-      unlockLocation: null
-    }
-  },
-  {
-    id: "choice-04",
-    title: "Nightfall is Approaching",
-    text: "The sun is sinking below the ocean horizon. Shadows grow long.",
-    optionA: {
-      label: "⛺ Set Up Camp & Build a Fire",
-      resultText: "You rest safely by the warm fire. The team recovers energy (+1 ❤️)!",
-      rewardItem: "fire",
-      energyDelta: 1,
-      unlockLocation: null
-    },
-    optionB: {
-      label: "🔦 Push Ahead in the Dark",
-      resultText: "Your flashlight spots an old smuggler's key near the roots!",
-      rewardItem: "key",
-      energyDelta: 0,
-      unlockLocation: "hut"
-    }
-  },
-  {
-    id: "choice-05",
-    title: "The Smuggler's Locked Chest",
-    text: "In the abandoned hut, you discover an iron-bound footlocker.",
-    optionA: {
-      label: "🔑 Use the Key to Unlock It",
-      resultText: "Click! Inside sits an emergency SOS radio transceiver!",
-      rewardItem: "radio",
-      energyDelta: 0,
-      unlockLocation: "radio_tower"
-    },
-    optionB: {
-      label: "🗺️ Examine the Desk Documents",
-      resultText: "You uncover a detailed topographical map of island landing pads!",
-      rewardItem: "map",
-      energyDelta: 0,
-      unlockLocation: "escape_dock"
-    }
-  },
-  {
-    id: "choice-06",
-    title: "Deep Cave Chasm",
-    text: "A dark pit divides the cave. A narrow natural bridge crosses it.",
-    optionA: {
-      label: "🚶 Cross the Narrow Stone Bridge",
-      resultText: "Careful footing! On the other side, you find an intact lithium battery!",
-      rewardItem: "battery",
-      energyDelta: 0,
-      unlockLocation: "volcano"
-    },
-    optionB: {
-      label: "🔍 Search the Entrance Walls",
-      resultText: "You gather flint and dry kindling for starting emergency fires.",
-      rewardItem: "fire",
-      energyDelta: 0,
-      unlockLocation: null
-    }
-  },
-  {
-    id: "choice-07",
-    title: "Volcanic Fissure Shortcut",
-    text: "Hot sulfur steam rises from a narrow gorge that leads directly to the mast.",
-    optionA: {
-      label: "⚠️ Sprint Through the Volcanic Pass",
-      resultText: "Fast sprint! You reach the radio tower in record time, but the heat burns (-1 ❤️).",
-      rewardItem: "fuel",
-      energyDelta: -1,
-      unlockLocation: "radio_tower"
-    },
-    optionB: {
-      label: "🛣️ Take the Safer Forest Detour",
-      resultText: "Safe and sound. You forage sweet mangoes and papayas along the trail (+1 ❤️).",
-      rewardItem: "food",
-      energyDelta: 1,
-      unlockLocation: null
-    }
-  },
-  {
-    id: "choice-08",
-    title: "Floating Debris in the Cove",
-    text: "A bundle of wooden planks is drifting 30 meters off the beach.",
-    optionA: {
-      label: "🏊 Swim Out to Retrieve It",
-      resultText: "You pull in sturdy cedar timber for building the boat hull!",
-      rewardItem: "wood",
-      energyDelta: 0,
-      unlockLocation: "escape_dock"
-    },
-    optionB: {
-      label: "🪝 Throw a Grappling Line",
-      resultText: "Hooked! You reel in a waterproof bag containing a heavy mechanic's toolbox!",
-      rewardItem: "toolbox",
-      energyDelta: 0,
-      unlockLocation: null
-    }
-  },
-  {
-    id: "choice-09",
-    title: "Radio Mast Static",
-    text: "The transmitter at the radio tower is humming, but the signal is faint.",
-    optionA: {
-      label: "🔧 Realign the High Antenna",
-      resultText: "You tighten the antenna clamps. The broadcast range extends across the ocean!",
-      rewardItem: "tool",
-      energyDelta: 0,
-      unlockLocation: "escape_dock"
-    },
-    optionB: {
-      label: "🔋 Double the Battery Voltage",
-      resultText: "High power mode activated! A clear transmission channel opens.",
-      rewardItem: "battery",
-      energyDelta: 0,
-      unlockLocation: null
-    }
-  },
-  {
-    id: "choice-10",
-    title: "Strange Footprints in the Sand",
-    text: "Fresh tracks lead toward the abandoned hut.",
-    optionA: {
-      label: "👣 Follow the Footprints",
-      resultText: "The tracks lead to a hidden stash box containing an LED flashlight!",
-      rewardItem: "flashlight",
-      energyDelta: 0,
-      unlockLocation: "cave"
-    },
-    optionB: {
-      label: "🏖️ Return to Fortify the Beach Camp",
-      resultText: "You gather driftwood and build a solid shelter for the night (+1 ❤️).",
-      rewardItem: "wood",
-      energyDelta: 1,
-      unlockLocation: null
-    }
+    successMessage: "Mayday received! The rescue helicopter is descending with emergency winches!"
   }
 ];
 
-/**
- * 15 ISLAND HAZARD & SURPRISE EVENT CARDS
- * Max 3-4 per 35-minute game to maintain quick pacing.
- */
-const ISLAND_EVENTS = [
+// ============================================================
+// ISLAND MAP NODES (Locations with coordinates on map canvas)
+// ============================================================
+const MAP_LOCATIONS = [
   {
-    id: "event-01",
-    title: "🌧️ TROPICAL SQUALL!",
-    icon: "🌧️",
-    text: "Sudden torrential rain and gale winds hammer the island! Water threatens your supplies.",
-    optionA: {
-      label: "🛡️ Cover supplies with tarps",
-      outcome: "Success! All gear is kept dry, but your team is soaked and tired (-1 ❤️).",
-      energyDelta: -1,
-      rewardItem: null
-    },
-    optionB: {
-      label: "🪣 Collect rainwater in barrels",
-      outcome: "Great thinking! You collect 10 liters of clean drinking water (+1 ❤️)!",
-      energyDelta: 1,
-      rewardItem: "water"
-    }
+    id: "beach",
+    missionId: 0,
+    name: "Sandy Beach (Crash Site)",
+    shortName: "Beach",
+    icon: "🏝️",
+    x: 14, // percentage
+    y: 72,
+    color: "#38bdf8",
+    bgGradient: "linear-gradient(135deg, #0284c7, #38bdf8)",
+    description: "The stormy beach where you woke up next to the plane wreckage."
   },
   {
-    id: "event-02",
-    title: "🐍 VENOMOUS VIPER!",
-    icon: "🐍",
-    text: "A bright emerald tree viper is coiled across the only climbing branch.",
-    optionA: {
-      label: "🥢 Use a long stick to gently move it",
-      outcome: "Smart and calm! The snake slithers harmlessly away into the canopy.",
-      energyDelta: 0,
-      rewardItem: null
-    },
-    optionB: {
-      label: "🏃 Throw a stone and sprint past",
-      outcome: "The snake strikes and grazes your boot! You escape in a panic (-1 ❤️).",
-      energyDelta: -1,
-      rewardItem: null
-    }
+    id: "jungle",
+    missionId: 1,
+    name: "Emerald Jungle",
+    shortName: "Jungle",
+    icon: "🌴",
+    x: 28,
+    y: 48,
+    color: "#22c55e",
+    bgGradient: "linear-gradient(135deg, #15803d, #22c55e)",
+    description: "Dense, misty jungle with towering ferns and ancient trails."
   },
   {
-    id: "event-03",
-    title: "🦈 SHARK AT THE REEF!",
-    icon: "🦈",
-    text: "A large blacktip reef shark circles the supply crate floating near the sandbar.",
-    optionA: {
-      label: "⏳ Wait patiently for it to swim away",
-      outcome: "Patience pays off! The shark departs and you safely grab the crate containing fuel!",
-      energyDelta: 0,
-      rewardItem: "fuel"
-    },
-    optionB: {
-      label: "🌊 Splash water to scare it off",
-      outcome: "The splashing makes it agitated! You scramble back to shore without the item.",
-      energyDelta: 0,
-      rewardItem: null
-    }
+    id: "temple",
+    missionId: 2,
+    name: "Ancient Stone Temple",
+    shortName: "Temple",
+    icon: "🗿",
+    x: 48,
+    y: 30,
+    color: "#eab308",
+    bgGradient: "linear-gradient(135deg, #b45309, #eab308)",
+    description: "Mysterious stone ruins holding the boat ignition key."
   },
   {
-    id: "event-04",
-    title: "🌋 VOLCANIC TREMOR!",
-    icon: "🌋",
-    text: "The ground shakes violently! Loose rocks tumble down the slope of Mist Peak.",
-    optionA: {
-      label: "🛡️ Take cover under a rocky ledge",
-      outcome: "You safely dodge the rockslide and discover a dislodged lithium battery!",
-      energyDelta: 0,
-      rewardItem: "battery"
-    },
-    optionB: {
-      label: "🏃 Run downhill toward the beach",
-      outcome: "You trip over exposed tree roots while sprinting (-1 ❤️).",
-      energyDelta: -1,
-      rewardItem: null
-    }
+    id: "camp",
+    missionId: 3,
+    name: "Abandoned Smuggler Camp",
+    shortName: "Camp",
+    icon: "🛖",
+    x: 64,
+    y: 54,
+    color: "#f97316",
+    bgGradient: "linear-gradient(135deg, #c2410c, #f97316)",
+    description: "Old wooden cabins hidden under hanging moss and vines."
   },
   {
-    id: "event-05",
-    title: "🐒 MISCHIEVOUS MONKEYS!",
-    icon: "🐒",
-    text: "A troop of curious macaque monkeys swarms your pack and tries to steal shiny tools!",
-    optionA: {
-      label: "🍌 Distract them with sweet bananas",
-      outcome: "They happily trade a shiny brass key for the fruit!",
-      energyDelta: 0,
-      rewardItem: "key"
-    },
-    optionB: {
-      label: "🗣️ Shout and wave your arms",
-      outcome: "The monkeys scatter into the trees, leaving all your equipment safe.",
-      energyDelta: 0,
-      rewardItem: null
-    }
+    id: "radio_tower",
+    missionId: 4,
+    name: "High Ridge Radio Tower",
+    shortName: "Radio Tower",
+    icon: "📻",
+    x: 76,
+    y: 22,
+    color: "#a855f7",
+    bgGradient: "linear-gradient(135deg, #7e22ce, #a855f7)",
+    description: "Rusted communications mast atop the windy mountain ridge."
   },
   {
-    id: "event-06",
-    title: "📦 WASHED ASHORE CRATE!",
-    icon: "📦",
-    text: "An emergency airdrop crate marked with international rescue symbols is found in the tide!",
-    optionA: {
-      label: "🔨 Pry it open immediately",
-      outcome: "Jackpot! Inside is an intact emergency SOS radio and dry rations (+1 ❤️)!",
-      energyDelta: 1,
-      rewardItem: "radio"
-    },
-    optionB: {
-      label: "🧭 Carry it to base camp first",
-      outcome: "You secure the crate and find a heavy-duty climbing rope inside!",
-      energyDelta: 0,
-      rewardItem: "rope"
-    }
+    id: "boat_dock",
+    missionId: 5,
+    name: "Secret Escape Boat Dock",
+    shortName: "Boat Dock",
+    icon: "🚤",
+    x: 86,
+    y: 74,
+    color: "#06b6d4",
+    bgGradient: "linear-gradient(135deg, #0e7490, #06b6d4)",
+    description: "A hidden rocky cove where the sturdy escape boat awaits."
   },
   {
-    id: "event-07",
-    title: "🌫️ COASTAL SEA FOG!",
-    icon: "🌫️",
-    text: "A thick blanket of fog rolls in, reducing visibility to less than 3 meters.",
-    optionA: {
-      label: "🧭 Use your compass to navigate slowly",
-      outcome: "Perfect orientation! You stay on track and find the trail to the radio tower.",
-      energyDelta: 0,
-      rewardItem: "map"
-    },
-    optionB: {
-      label: "🔥 Light a bright bonfire and wait",
-      outcome: "The warm fire provides comfort and safety (+1 ❤️).",
-      energyDelta: 1,
-      rewardItem: "fire"
-    }
+    id: "rescue_zone",
+    missionId: 6,
+    name: "Helicopter Rescue Point",
+    shortName: "Rescue Zone",
+    icon: "🚁",
+    x: 92,
+    y: 16,
+    color: "#ec4899",
+    bgGradient: "linear-gradient(135deg, #be185d, #ec4899)",
+    description: "Open sky where the emergency coast guard helicopter approaches!"
   }
 ];
 
-/**
- * HIGH-STAKES FINAL ESCAPE CHALLENGES
- */
-const FINAL_ESCAPE_CHALLENGES = [
-  {
-    id: "final-01",
-    title: "FINAL ESCAPE: LAUNCH THE RESCUE CRAFT",
-    prompt: "Choose the sentence that is 100% grammatically CORRECT to signal the final launch:",
-    options: [
-      "We have successfully repaired the boat and we are ready to leave.",
-      "We has successfully repair the boat and ready leaving.",
-      "We have repair successfully the boat and was leaving.",
-      "We successfully are repaired the boat and leaves."
-    ],
-    correctIndex: 0,
-    explanation: "Present perfect 'have successfully repaired' + 'are ready to leave' is correct.",
-    rescueMessage: "The engine roars! Your boat cuts through the ocean surf toward the sunrise! ESCAPE ACHIEVED!"
-  },
-  {
-    id: "final-02",
-    title: "FINAL ESCAPE: BROADCAST THE SOS COORDINATES",
-    prompt: "Which transmission properly uses modal verbs and conditional structure?",
-    options: [
-      "If you receive our signal, you must dispatch a rescue team to the north cove immediately.",
-      "If you received our signal, you dispatch must a rescue team now.",
-      "If you will receive signal, you should dispatching rescue team.",
-      "If you receives signal, you can to dispatch team."
-    ],
-    correctIndex: 0,
-    explanation: "First conditional: 'If you receive... you must dispatch...' is grammatically flawless.",
-    rescueMessage: "Radio confirms: 'Coordinates locked! Navy cutter arriving in 3 minutes!' ESCAPE ACHIEVED!"
-  },
-  {
-    id: "final-03",
-    title: "FINAL ESCAPE: HELICOPTER BEACON SIGNAL",
-    prompt: "Choose the correct past and present perfect combination:",
-    options: [
-      "Although we struggled on the island for days, we have finally found our way home.",
-      "Although we struggle on the island yesterday, we has find our way.",
-      "Although we were struggle for days, we have finded our way home.",
-      "Although we struggled, we have finally find our way home."
-    ],
-    correctIndex: 0,
-    explanation: "Past simple 'struggled' + Present perfect 'have finally found' correctly links the adventure.",
-    rescueMessage: "The helicopter lowers the rescue winch and hoists your team to safety! ESCAPE ACHIEVED!"
-  }
+// ============================================================
+// ESCAPE ITEMS INVENTORY DEFINITION
+// ============================================================
+const ALL_ESCAPE_ITEMS = [
+  { id: "map", name: "Island Map", icon: "🗺️", locked: true },
+  { id: "compass", name: "Brass Compass", icon: "🧭", locked: true },
+  { id: "key", name: "Boat Key", icon: "🔑", locked: true },
+  { id: "battery", name: "Battery Pack", icon: "🔋", locked: true },
+  { id: "radio", name: "Emergency Radio", icon: "📻", locked: true },
+  { id: "fuel", name: "Boat Fuel", icon: "⛽", locked: true }
 ];
 
-// Export for Node/Tests and browser global
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = {
-    ISLAND_LOCATIONS,
-    GAME_ITEMS,
-    ESCAPE_BLUEPRINTS,
-    BRANCHING_CHOICES,
-    ISLAND_EVENTS,
-    FINAL_ESCAPE_CHALLENGES
-  };
-}
+// Intro Story Scenes
+const STORY_INTRO_STEPS = [
+  { text: "DAY 1 — 06:00 AM", subtext: "Somewhere in the South Pacific Ocean..." },
+  { text: "You wake up stranded on a mysterious uncharted island.", subtext: "Waves crash violently against sharp volcanic rocks." },
+  { text: "Your ship is destroyed. The radio battery is almost dead.", subtext: "Dark storm clouds are gathering on the horizon." },
+  { text: "To escape, you must complete 6 survival missions across the island.", subtext: "Find the key, power the radio, launch the boat, and call for rescue!" }
+];
