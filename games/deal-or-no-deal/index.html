@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEAL OR NO DEAL — Speaking Showdown 💼 Classroom English Game</title>
+  <meta name="description" content="A thrilling classroom TV game show speaking game for 7th &amp; 8th grade English learners inspired by Deal or No Deal / Var Mısın Yok Musun.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Particle / Confetti Canvas -->
+  <canvas id="fxCanvas"></canvas>
+
+  <!-- Flash / Lighting FX Layer -->
+  <div id="stageFlash" class="stage-flash"></div>
+
+  <!-- Main Game Wrapper -->
+  <div id="app" class="game-wrapper">
+
+    <!-- ============================================================ -->
+    <!-- TOP NAVIGATION BAR -->
+    <!-- ============================================================ -->
+    <header class="game-navbar">
+      <div class="nav-left">
+        <a href="../../index.html" class="nav-brand" title="Return to English Games Hub">
+          <span class="brand-icon">💼</span>
+          <span class="brand-text">DEAL OR NO DEAL</span>
+          <span class="brand-badge">SPEAKING SHOWDOWN</span>
+        </a>
+      </div>
+
+      <div class="nav-center">
+        <div id="navStatusBanner" class="nav-status-banner">
+          <span id="navRoundPill" class="status-pill">STAGE 1</span>
+          <span id="navBoxesLeftPill" class="status-pill status-accent">20 BOXES REMAINING</span>
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <button type="button" id="btnToggleSound" class="control-btn" title="Toggle Sound On/Off">
+          <span id="soundIcon">🔊</span>
+        </button>
+        <button type="button" id="btnToggleFullscreen" class="control-btn" title="Toggle Fullscreen">
+          <span>⛶</span>
+        </button>
+        <button type="button" id="btnRestartGame" class="control-btn btn-danger" title="Restart Game">
+          <span>🔄 Restart</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ============================================================ -->
+    <!-- SCREEN 1: SETUP & TEAM SELECTION -->
+    <!-- ============================================================ -->
+    <main id="screenSetup" class="screen screen-setup active">
+      <div class="setup-container">
+        
+        <div class="setup-hero">
+          <div class="hero-badge">🎓 CLASSROOM SPEAKING GAME • 7TH &amp; 8TH GRADE</div>
+          <h1 class="hero-title">
+            DEAL OR NO DEAL
+            <span class="hero-subtitle">SPEAKING SHOWDOWN 💼</span>
+          </h1>
+          <p class="hero-tagline">Answer English speaking challenges, eliminate boxes, beat the Banker, and win the jackpot!</p>
+        </div>
+
+        <div class="setup-card glass-panel">
+          
+          <!-- Step 1: Grade Selection -->
+          <div class="setup-row">
+            <label class="setup-label"><span class="step-num">1</span> SELECT GRADE LEVEL</label>
+            <div class="btn-group" id="gradeSelector">
+              <button type="button" class="btn-choice active" data-grade="grade7">
+                <span class="choice-title">7th GRADE</span>
+                <span class="choice-sub">Level A2 • Routines, Hobbies &amp; Nature</span>
+              </button>
+              <button type="button" class="btn-choice" data-grade="grade8">
+                <span class="choice-title">8th GRADE</span>
+                <span class="choice-sub">Level A2–B1 • Teen Life, Science &amp; Future</span>
+              </button>
+              <button type="button" class="btn-choice" data-grade="mixed">
+                <span class="choice-title">MIXED (7 &amp; 8)</span>
+                <span class="choice-sub">Comprehensive Question Bank</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Number of Teams -->
+          <div class="setup-row">
+            <label class="setup-label"><span class="step-num">2</span> HOW MANY TEAMS?</label>
+            <div class="btn-group" id="teamCountSelector">
+              <button type="button" class="btn-choice" data-teams="2">2 TEAMS</button>
+              <button type="button" class="btn-choice active" data-teams="3">3 TEAMS</button>
+              <button type="button" class="btn-choice" data-teams="4">4 TEAMS</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Team Names -->
+          <div class="setup-row">
+            <label class="setup-label"><span class="step-num">3</span> EDIT TEAM NAMES</label>
+            <div id="teamInputsGrid" class="team-inputs-grid">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Start Button -->
+          <div class="setup-actions">
+            <button type="button" id="btnStartGame" class="btn-gold-glow btn-huge">
+              <span>🚀 START GAME — CHOOSE SECRET BOXES</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+
+    <!-- ============================================================ -->
+    <!-- SCREEN 2: PRE-ROUND SECRET BOX PICKING -->
+    <!-- ============================================================ -->
+    <section id="screenSecretPick" class="screen screen-secret-pick hidden">
+      <div class="secret-pick-banner">
+        <div class="phase-badge">PHASE 1: SECRET BOX SELECTION</div>
+        <h2 class="pick-title">
+          <span id="currentPickingTeamName" class="highlight-team">TEAM 1</span>: CHOOSE YOUR SECRET BOX!
+        </h2>
+        <p class="pick-instruction">
+          Every team must choose <strong>ONE</strong> box to keep until the grand finale. Its value will stay hidden!
+        </p>
+      </div>
+
+      <!-- 20 Boxes for Secret Picking -->
+      <div class="boxes-container">
+        <div id="secretBoxesGrid" class="boxes-grid">
+          <!-- 20 Boxes rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- Teams Secret Box Status Bar -->
+      <div class="secret-status-bar" id="secretStatusBar">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SCREEN 3: MAIN GAME ARENA (TV SHOW ARENA) -->
+    <!-- ============================================================ -->
+    <section id="screenGameArena" class="screen screen-arena hidden">
+      
+      <!-- TV SHOW ARENA GRID: Left Board | Center Stage | Right Board -->
+      <div class="arena-layout">
+
+        <!-- Left Prize Board: Low Values (100 to 2,500) -->
+        <aside class="prize-column prize-column-left">
+          <div class="column-header">LOW VALUES</div>
+          <div class="prize-list" id="prizeListLeft">
+            <!-- 10 values -->
+          </div>
+        </aside>
+
+        <!-- Center Stage: Speaking Challenge + 20 Boxes + Team HUD -->
+        <div class="center-stage">
+          
+          <!-- Top Turn & Speaking Header -->
+          <div class="turn-header" id="turnHeaderCard">
+            <div class="turn-top-row">
+              <div class="active-team-pill" id="activeTeamPill">
+                <span class="turn-indicator-dot"></span>
+                <span id="activeTeamLabel">TEAM 1'S TURN</span>
+              </div>
+              <div class="challenge-category-pill" id="challengeCategoryPill">
+                Daily Life &amp; Routines
+              </div>
+              <div class="challenge-difficulty-pill" id="challengeDifficultyPill">
+                Level 1 • 1–2 Sentences
+              </div>
+            </div>
+
+            <!-- Speaking Challenge Card -->
+            <div class="speaking-challenge-box" id="speakingChallengeBox">
+              <div class="challenge-icon-label">🗣️ SPEAKING CHALLENGE:</div>
+              <p class="challenge-prompt-text" id="challengePromptText">
+                "What time do you usually wake up on school days, and what is the very first thing you do?"
+              </p>
+              
+              <div class="challenge-footer">
+                <div class="challenge-target" id="challengeTargetText">
+                  🎯 Target: 1–2 complete sentences
+                </div>
+                <button type="button" id="btnToggleHint" class="btn-hint-toggle">
+                  💡 Hint / Sentence Starter
+                </button>
+              </div>
+
+              <div id="hintContainer" class="hint-dropdown hidden">
+                <span id="hintContentText">Start with: 'I usually wake up at... and I...'</span>
+              </div>
+
+              <!-- Teacher Judgement Controls -->
+              <div class="teacher-controls-area">
+                <span class="judge-label">👨‍🏫 TEACHER JUDGEMENT:</span>
+                <div class="judge-buttons">
+                  <button type="button" id="btnAnswerCorrect" class="btn-judge btn-judge-correct">
+                    <span>✓ CORRECT (OPEN BOX)</span>
+                  </button>
+                  <button type="button" id="btnAnswerTryAgain" class="btn-judge btn-judge-try">
+                    <span>✗ TRY AGAIN</span>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Box Selection Prompt (Shown after teacher marks correct) -->
+            <div id="boxPromptBanner" class="box-prompt-banner hidden">
+              <span class="sparkle-icon">✨</span>
+              <span class="prompt-msg">Speaking Challenge Passed! <strong>CHOOSE AN UNOPENED BOX TO REVEAL</strong></span>
+            </div>
+          </div>
+
+          <!-- The 20 Metallic Boxes Grid -->
+          <div class="main-boxes-wrapper">
+            <div id="mainBoxesGrid" class="boxes-grid arena-boxes-grid">
+              <!-- 20 Interactive TV Boxes -->
+            </div>
+          </div>
+
+          <!-- Bottom Team HUD & Banker Tracker -->
+          <div class="team-hud-bar" id="teamHudBar">
+            <!-- Teams status cards rendered dynamically -->
+          </div>
+
+        </div>
+
+        <!-- Right Prize Board: High Values (3,000 to 20,000) -->
+        <aside class="prize-column prize-column-right">
+          <div class="column-header">HIGH VALUES</div>
+          <div class="prize-list" id="prizeListRight">
+            <!-- 10 values -->
+          </div>
+        </aside>
+
+      </div>
+
+    </section>
+
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MODAL 1: DRAMATIC BOX REVEAL OVERLAY -->
+  <!-- ============================================================ -->
+  <div id="modalBoxReveal" class="game-modal modal-reveal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content reveal-content">
+      <div class="reveal-team-badge" id="revealTeamBadge">TEAM 1 OPENING</div>
+      <div class="reveal-box-number" id="revealBoxNumber">BOX 8</div>
+
+      <!-- 3D Shaking Animated Briefcase / Box -->
+      <div class="dramatic-box-wrapper">
+        <div id="dramaticBoxElement" class="dramatic-box">
+          <div class="box-lid"></div>
+          <div class="box-face">
+            <span class="box-badge-num" id="dramaticBoxNum">8</span>
+          </div>
+          <div class="box-glow-rays"></div>
+        </div>
+      </div>
+
+      <!-- Countdown Text -->
+      <div id="revealCountdown" class="reveal-countdown">3...</div>
+
+      <!-- Revealed Prize Amount (Fades in dramatically) -->
+      <div id="revealPrizeArea" class="reveal-prize-area hidden">
+        <div class="prize-amount-label">CONTAINED:</div>
+        <div class="prize-amount-value" id="revealPrizeValue">5,000</div>
+        <div class="prize-points-tag">POINTS</div>
+        <div class="prize-verdict" id="revealPrizeVerdict">GREAT RESULT! LOW VALUE ELIMINATED</div>
+        <button type="button" id="btnContinueAfterReveal" class="btn-gold-glow btn-large">
+          <span>CONTINUE ➜</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MODAL 2: BANKER INCOMING TELEPHONE CALL -->
+  <!-- ============================================================ -->
+  <div id="modalBankerPhone" class="game-modal modal-banker-call hidden">
+    <div class="modal-backdrop backdrop-dark-red"></div>
+    <div class="modal-content banker-call-content">
+      
+      <div class="phone-call-card">
+        <div class="call-top-pill">🚨 HIGH STAKES ALERT</div>
+        
+        <!-- Animated Ringing Telephone Graphic -->
+        <div class="telephone-container">
+          <div class="phone-waves wave-1"></div>
+          <div class="phone-waves wave-2"></div>
+          <div class="phone-icon-art">☎</div>
+        </div>
+
+        <h2 class="call-title">INCOMING CALL...</h2>
+        <p class="call-subtitle">THE BANKER IS ON THE LINE!</p>
+
+        <div class="call-actions">
+          <button type="button" id="btnAnswerPhone" class="btn-answer-call btn-pulse">
+            <span class="phone-btn-icon">📞</span> ANSWER CALL
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MODAL 3: BANKER NEGOTIATION ROOM (DEAL OR NO DEAL) -->
+  <!-- ============================================================ -->
+  <div id="modalBankerOffer" class="game-modal modal-banker-offer hidden">
+    <div class="modal-backdrop backdrop-vault"></div>
+    <div class="modal-content banker-offer-content">
+      
+      <div class="banker-header">
+        <div class="banker-silhouette">🎩</div>
+        <div class="banker-title-group">
+          <div class="banker-subtitle">THE BANKER'S PROPOSAL FOR <span id="bankerTargetTeamName" class="highlight-team">TEAM 1</span></div>
+          <h2 class="banker-offer-headline">OFFICIAL BANK OFFER</h2>
+        </div>
+      </div>
+
+      <!-- Big Glowing Offer Box -->
+      <div class="banker-offer-display">
+        <div class="offer-sub">THE BANKER OFFERS YOUR TEAM:</div>
+        <div class="offer-amount" id="bankerOfferAmount">8,750</div>
+        <div class="offer-unit">GUARANTEED POINTS</div>
+      </div>
+
+      <!-- Speaking for Deal / No Deal Discussion -->
+      <div class="deal-speaking-prompt-card">
+        <div class="prompt-header-chip">🗣️ TEAM DISCUSSION &amp; JUSTIFICATION:</div>
+        <p class="deal-prompt-text" id="dealSpeakingPromptText">
+          "Tell the class why you want to ACCEPT or REJECT this Banker's offer."
+        </p>
+        <div class="deal-judge-row">
+          <button type="button" id="btnDecisionSpeakingDone" class="btn-decision-judge">
+            <span>✓ SPEAKING ACCEPTED / DECISION READY</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Massive Action Buttons -->
+      <div class="deal-buttons-row" id="dealButtonsRow">
+        <button type="button" id="btnChooseDeal" class="btn-huge-action btn-deal" disabled>
+          <span class="action-icon">💰</span>
+          <span class="action-title">DEAL</span>
+          <span class="action-desc">Take the guaranteed points &amp; lock score</span>
+        </button>
+
+        <button type="button" id="btnChooseNoDeal" class="btn-huge-action btn-no-deal" disabled>
+          <span class="action-icon">🔥</span>
+          <span class="action-title">NO DEAL</span>
+          <span class="action-desc">Reject offer &amp; keep opening boxes</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MODAL 4: DEAL OUTCOME BANNER OVERLAY -->
+  <!-- ============================================================ -->
+  <div id="modalDealOutcome" class="game-modal modal-deal-outcome hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content outcome-content">
+      <div class="outcome-icon" id="outcomeIcon">💰</div>
+      <h2 class="outcome-headline" id="outcomeHeadline">DEAL!</h2>
+      <p class="outcome-details" id="outcomeDetails">
+        TEAM 1 accepted the Banker's offer of 8,750 points!
+      </p>
+      <button type="button" id="btnContinueOutcome" class="btn-gold-glow btn-large">
+        <span>CONTINUE GAME ➜</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MODAL 5: FINAL REVEAL (SECRET BOX OPENING) -->
+  <!-- ============================================================ -->
+  <div id="modalFinalReveal" class="game-modal modal-final-reveal hidden">
+    <div class="modal-backdrop backdrop-climax"></div>
+    <div class="modal-content final-reveal-content">
+      
+      <div class="final-badge">🏆 THE GRAND FINALE</div>
+      <h2 class="final-title">SECRET BOX REVEAL</h2>
+      <p class="final-subtitle">It's time to find out what was inside each team's secret box!</p>
+
+      <div id="finalSecretCardsContainer" class="final-secret-cards-grid">
+        <!-- Dynamic final secret box cards -->
+      </div>
+
+      <div class="final-actions">
+        <button type="button" id="btnShowFinalScores" class="btn-gold-glow btn-huge hidden">
+          <span>👑 VIEW FINAL CHAMPIONSHIP PODIUM</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SCREEN 4: GRAND FINALE & WINNER PODIUM -->
+  <!-- ============================================================ -->
+  <section id="screenWinner" class="screen screen-winner hidden">
+    <div class="winner-container">
+      
+      <div class="winner-header">
+        <div class="winner-trophy-art">🏆</div>
+        <div class="winner-super-tag">DEAL OR NO DEAL CHAMPIONS</div>
+        <h1 class="winner-team-name" id="winnerTeamName">TEAM 1</h1>
+        <div class="winner-score-pill" id="winnerScorePill">20,000 POINTS</div>
+      </div>
+
+      <!-- Podiums / Roster Rankings -->
+      <div class="podium-grid" id="podiumGrid">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Actions -->
+      <div class="winner-actions">
+        <button type="button" id="btnPlayAgain" class="btn-gold-glow btn-huge">
+          <span>🔄 PLAY AGAIN</span>
+        </button>
+        <a href="../../index.html" class="btn-back-hub">
+          <span>🏠 Return to English Games Hub</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- External & Game Scripts -->
+  <script src="questions.js"></script>
+  <script src="audio.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
