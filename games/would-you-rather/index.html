@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WOULD YOU RATHER? 🎯 — Classroom Speaking Game</title>
+  <meta name="description" content="A fast, colorful, projector-ready English speaking ice-breaker game for 7th &amp; 8th grade students. Choose between two choices and explain why!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Particle / Confetti Canvas Layer -->
+  <canvas id="fxCanvas"></canvas>
+
+  <!-- Atmospheric Background Mesh -->
+  <div class="bg-mesh" aria-hidden="true">
+    <div class="mesh-orb mesh-orb-1"></div>
+    <div class="mesh-orb mesh-orb-2"></div>
+    <div class="mesh-orb mesh-orb-3"></div>
+  </div>
+
+  <!-- Main Game Container -->
+  <div id="app" class="game-wrapper">
+
+    <!-- ============================================================ -->
+    <!-- TOP NAVIGATION BAR -->
+    <!-- ============================================================ -->
+    <header class="game-navbar">
+      <div class="nav-left">
+        <a href="../../english-games/index.html" class="nav-brand" title="Return to English Games Hub">
+          <span class="brand-icon">🎯</span>
+          <span class="brand-text">WOULD YOU RATHER?</span>
+          <span class="brand-badge">SPEAKING ICE-BREAKER</span>
+        </a>
+      </div>
+
+      <div class="nav-center">
+        <div id="navStatusBanner" class="nav-status-banner" style="display: none;">
+          <span id="navStagePill" class="status-pill status-stage">STAGE 1</span>
+          <span id="navTeamPill" class="status-pill status-team">TURN: TEAM ALPHA</span>
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <button type="button" id="btnToggleSound" class="control-btn" title="Toggle Sound On/Off">
+          <span id="soundIcon">🔊</span>
+        </button>
+        <button type="button" id="btnToggleFullscreen" class="control-btn" title="Toggle Fullscreen">
+          <span>⛶</span>
+        </button>
+        <button type="button" id="btnRestartGame" class="control-btn btn-danger" title="Restart Game">
+          <span>🔄 Restart</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ============================================================ -->
+    <!-- SCREEN 1: SETUP & CONFIGURATION -->
+    <!-- ============================================================ -->
+    <main id="screenSetup" class="screen screen-setup active">
+      <div class="setup-container">
+        
+        <div class="setup-hero">
+          <div class="hero-badge">🎯 CLASSROOM SPEAKING ICE-BREAKER • 7TH &amp; 8TH GRADE</div>
+          <h1 class="hero-title">WOULD YOU RATHER?</h1>
+          <p class="hero-tagline">Choose • Speak • Explain your decisions in English!</p>
+        </div>
+
+        <div class="setup-card">
+          <!-- Step 1: Grade Level -->
+          <div class="setup-step">
+            <label class="step-label"><span class="step-num">1</span> SELECT GRADE LEVEL</label>
+            <div class="btn-grid-2">
+              <button type="button" class="btn-select active" data-grade="7" id="btnGrade7">
+                <span>7TH GRADE</span>
+                <span class="sub-text">Everyday life, hobbies, pets &amp; fun scenarios</span>
+              </button>
+              <button type="button" class="btn-select" data-grade="8" id="btnGrade8">
+                <span>8TH GRADE</span>
+                <span class="sub-text">Future choices, digital life, dilemmas &amp; society</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Game Mode -->
+          <div class="setup-step">
+            <label class="step-label"><span class="step-num">2</span> SELECT GAME MODE</label>
+            <div class="btn-grid-2">
+              <button type="button" class="btn-select" data-mode="individual" id="btnModeInd">
+                <span>👤 INDIVIDUAL MODE</span>
+                <span class="sub-text">Casual open class speaking</span>
+              </button>
+              <button type="button" class="btn-select active" data-mode="team" id="btnModeTeam">
+                <span>👥 TEAM MODE</span>
+                <span class="sub-text">Team turns &amp; point tracking</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Number of Teams -->
+          <div class="setup-step" id="teamCountGroup">
+            <label class="step-label"><span class="step-num">3</span> HOW MANY TEAMS?</label>
+            <div class="btn-grid-3">
+              <button type="button" class="btn-select" data-teams="2" id="btnTeams2">2 TEAMS</button>
+              <button type="button" class="btn-select active" data-teams="3" id="btnTeams3">3 TEAMS</button>
+              <button type="button" class="btn-select" data-teams="4" id="btnTeams4">4 TEAMS</button>
+            </div>
+
+            <!-- Customizable Team Names -->
+            <div class="team-names-box" id="teamNamesBox">
+              <div class="team-inputs-grid" id="teamInputsGrid">
+                <!-- Injected via JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4: Game Length -->
+          <div class="setup-step">
+            <label class="step-label"><span class="step-num">4</span> GAME LENGTH</label>
+            <div class="btn-grid-4">
+              <button type="button" class="btn-select" data-length="10">10 QUESTIONS</button>
+              <button type="button" class="btn-select active" data-length="20">20 QUESTIONS</button>
+              <button type="button" class="btn-select" data-length="30">30 QUESTIONS</button>
+              <button type="button" class="btn-select" data-length="endless">ENDLESS MODE ♾️</button>
+            </div>
+          </div>
+
+          <!-- Start Button -->
+          <button type="button" id="btnStartGame" class="btn-start-game">
+            <span>START GAME</span>
+            <span>🎯</span>
+          </button>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- ============================================================ -->
+    <!-- SCREEN 2: GAME ARENA -->
+    <!-- ============================================================ -->
+    <main id="screenArena" class="screen screen-arena">
+      <div class="arena-header">
+        
+        <!-- Top Tracker Bar -->
+        <div class="arena-top-bar">
+          <div class="stage-badge-container">
+            <span id="stageTitle" class="stage-title">STAGE 1: ICE BREAKER</span>
+            <div class="stage-dots">
+              <span class="stage-dot filled"></span>
+              <span class="stage-dot"></span>
+              <span class="stage-dot"></span>
+              <span class="stage-dot"></span>
+            </div>
+          </div>
+
+          <div id="questionCounterPill" class="question-counter-pill">QUESTION 1 / 20</div>
+        </div>
+
+        <!-- Teams Score Trackers -->
+        <div id="arenaTeamsBar" class="arena-teams-bar">
+          <!-- Injected dynamically -->
+        </div>
+
+        <!-- Question Prompt Banner -->
+        <div class="question-prompt-banner">
+          <span id="categoryTag" class="category-tag">TOPIC</span>
+          <h2 class="main-question-text">WOULD YOU RATHER...</h2>
+        </div>
+
+      </div>
+
+      <!-- Two Big Option Cards -->
+      <div class="options-arena">
+        
+        <!-- Option Card A -->
+        <article class="option-card option-card-a" id="optionCardA" tabindex="0" role="button" aria-label="Option A">
+          <span class="option-badge">OPTION A</span>
+          <span class="key-hint">Press [ 1 ] or [ A ]</span>
+          <div class="option-emoji" id="emojiA">🏝️</div>
+          <p class="option-text" id="textA">Live on a tropical island</p>
+        </article>
+
+        <!-- VS Divider -->
+        <div class="vs-divider">
+          <div class="vs-circle">VS</div>
+        </div>
+
+        <!-- Option Card B -->
+        <article class="option-card option-card-b" id="optionCardB" tabindex="0" role="button" aria-label="Option B">
+          <span class="option-badge">OPTION B</span>
+          <span class="key-hint">Press [ 2 ] or [ B ]</span>
+          <div class="option-emoji" id="emojiB">🏙️</div>
+          <p class="option-text" id="textB">Live in a huge modern city</p>
+        </article>
+
+      </div>
+
+      <!-- Speaking & Teacher Judge Phase (Revealed after student selects) -->
+      <section class="speaking-panel" id="speakingPanel">
+        <div class="speaking-header">
+          <div class="choice-summary">
+            <span class="choice-label">YOU CHOSE:</span>
+            <span id="choiceBadgeSelected" class="choice-badge-selected">🏝️ Live on a tropical island</span>
+          </div>
+          <div id="reactionPill" class="reaction-pill">GOOD CHOICE! 😎</div>
+        </div>
+
+        <div class="prompt-box">
+          <div class="prompt-icon">🗣️</div>
+          <h3 class="prompt-question" id="promptQuestion">Tell us why you chose it.</h3>
+          
+          <div class="scaffold-box">
+            <span class="scaffold-label">Sentence Starter:</span>
+            <span id="scaffoldText" class="scaffold-text">"I would rather live on an island because..."</span>
+          </div>
+        </div>
+
+        <div class="teacher-judge-bar">
+          <button type="button" id="btnGoodAnswer" class="btn-judge btn-good-answer" title="Teacher awards 1 point for speaking answer">
+            <span>✓ GOOD ANSWER</span>
+            <span>(+1 pt)</span>
+          </button>
+          <button type="button" id="btnTryAgain" class="btn-judge btn-try-again" title="Prompt student to explain more or refine sentence">
+            <span>↻ TRY AGAIN</span>
+          </button>
+          <button type="button" id="btnNextQuestion" class="btn-judge btn-next-question" title="Move to the next question">
+            <span>NEXT QUESTION ➜</span>
+          </button>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ============================================================ -->
+    <!-- SCREEN 3: END GAME SCREEN -->
+    <!-- ============================================================ -->
+    <main id="screenEnd" class="screen screen-end">
+      <div class="end-container">
+        
+        <div class="end-card">
+          <div class="end-trophy">🏆</div>
+          <h1 class="end-title">GAME COMPLETE! 🎉</h1>
+          <p id="endWinnerText" class="end-subtitle">Outstanding speaking from all teams!</p>
+
+          <!-- Final Scoreboard -->
+          <div class="scoreboard-box" id="endScoreboard">
+            <!-- Injected via JavaScript -->
+          </div>
+
+          <div class="end-actions">
+            <button type="button" id="btnPlayAgain" class="btn-end-play">
+              <span>PLAY AGAIN 🔄</span>
+            </button>
+            <a href="../../english-games/index.html" class="btn-end-home">
+              <span>🏠 RETURN TO HUB</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Game Scripts -->
+  <script src="audio.js"></script>
+  <script src="questions.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
