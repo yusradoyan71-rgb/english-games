@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WHO WANTS TO BE A MILLIONAIRE? — English Grammar TV Quiz Show</title>
+  <meta name="description" content="A classroom English grammar TV game show for 7th & 8th Grade students. Climb the 25,000 point ladder, use your 3 jokers, and compete with teams!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Canvas for Confetti & TV Sparkle FX -->
+  <canvas id="fxCanvas"></canvas>
+
+  <!-- Main App Shell -->
+  <div id="app" class="app-container">
+
+    <!-- ============================================================ -->
+    <!-- SCREEN 1: GAME SETUP SCREEN -->
+    <!-- ============================================================ -->
+    <section id="setupScreen" class="screen active">
+      <div class="setup-wrapper">
+        <div class="setup-hero">
+          <div class="studio-badge">
+            <span class="pulse-spark">✨</span> TV QUIZ SHOW • ENGLISH GRAMMAR EDITION
+          </div>
+          <h1 class="main-game-title">
+            <span class="gold-gradient-text">WHO WANTS TO BE A</span>
+            <span class="millionaire-text">MILLIONAIRE?</span>
+          </h1>
+          <p class="tagline">Climb the 25,000-Point Money Ladder • Answer Grammar Questions • Use Your Jokers</p>
+        </div>
+
+        <div class="setup-card glass-studio-card">
+          <!-- Step 1: Grade Selection -->
+          <div class="setup-section">
+            <label class="section-label"><span class="step-badge">1</span> SELECT GRADE LEVEL</label>
+            <div class="btn-toggle-grid" id="gradeToggleGroup">
+              <button type="button" class="btn-toggle active" data-grade="7" id="btnGrade7">
+                <span class="btn-toggle-icon">📘</span>
+                <span class="btn-toggle-title">7TH GRADE</span>
+                <span class="btn-toggle-sub">Present/Past/Future • Modals • Comparatives</span>
+              </button>
+              <button type="button" class="btn-toggle" data-grade="8" id="btnGrade8">
+                <span class="btn-toggle-icon">📙</span>
+                <span class="btn-toggle-title">8TH GRADE</span>
+                <span class="btn-toggle-sub">Present Perfect • Conditionals • Passive • Relatives</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Team Count -->
+          <div class="setup-section">
+            <label class="section-label"><span class="step-badge">2</span> HOW MANY TEAMS?</label>
+            <div class="btn-group" id="teamCountGroup">
+              <button type="button" class="btn-choice" data-teams="2" id="btnTeams2">2 TEAMS</button>
+              <button type="button" class="btn-choice active" data-teams="3" id="btnTeams3">3 TEAMS</button>
+              <button type="button" class="btn-choice" data-teams="4" id="btnTeams4">4 TEAMS</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Team Names & Colors -->
+          <div class="setup-section">
+            <div class="section-header-row">
+              <label class="section-label"><span class="step-badge">3</span> CUSTOMIZE TEAM NAMES</label>
+              <button type="button" class="btn-subtle" id="btnAutoTeamNames">✨ Fun Team Names</button>
+            </div>
+            <div id="teamsConfigGrid" class="teams-grid-config">
+              <!-- Dynamically rendered team name cards -->
+            </div>
+          </div>
+
+          <!-- Step 4: Game Length -->
+          <div class="setup-section">
+            <label class="section-label"><span class="step-badge">4</span> GAME LENGTH (TOTAL QUESTIONS)</label>
+            <div class="btn-group" id="gameLengthGroup">
+              <button type="button" class="btn-choice" data-rounds="10" id="btnLen10">10 Questions</button>
+              <button type="button" class="btn-choice active" data-rounds="20" id="btnLen20">20 Questions</button>
+              <button type="button" class="btn-choice" data-rounds="30" id="btnLen30">30 Questions</button>
+              <button type="button" class="btn-choice" data-rounds="999" id="btnLenEndless">♾️ Endless</button>
+            </div>
+          </div>
+
+          <!-- Start Action -->
+          <div class="setup-footer">
+            <button type="button" id="btnStartGame" class="btn-gold-huge">
+              <span class="btn-sparkle">🌟</span> ENTER THE STUDIO &amp; START!
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SCREEN 2: MAIN GAME ARENA SCREEN -->
+    <!-- ============================================================ -->
+    <section id="gameScreen" class="screen hidden">
+      <!-- Top Stage Bar -->
+      <header class="studio-header">
+        <div class="header-brand">
+          <span class="show-logo-mini">💰 MILLIONAIRE</span>
+          <span class="grade-pill-tag" id="currentGradeTag">7TH GRADE</span>
+          <span class="question-tracker" id="qTrackerBadge">QUESTION <b id="qCurrentNum">1</b> / <span id="qTotalNum">20</span></span>
+        </div>
+
+        <!-- Active Team Banner in Header -->
+        <div class="active-team-marquee" id="activeTeamMarquee">
+          <span class="turn-label">CURRENT TURN:</span>
+          <span class="turn-team-name" id="marqueeTeamName">TEAM A</span>
+          <span class="turn-badge" id="marqueeTeamBadge">Level 1</span>
+        </div>
+
+        <div class="header-controls">
+          <button type="button" class="control-btn" id="btnSoundToggle" title="Sound On/Off (M)">
+            <span id="soundIcon">🔊</span> <span id="soundLabel">Sound ON</span>
+          </button>
+          <button type="button" class="control-btn" id="btnRulesModal" title="Game Rules">
+            ❓ Rules
+          </button>
+          <button type="button" class="control-btn btn-exit" id="btnQuitGame" title="End Game / Results">
+            🏁 End Game
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Studio Stage (Center Arena + Right Money Ladder) -->
+      <main class="studio-main-stage">
+        
+        <!-- Left / Center: Question & Answer Studio -->
+        <div class="stage-center-podium">
+
+          <!-- Turn & Joker Notifications -->
+          <div class="turn-announcement-card" id="turnCard">
+            <div class="active-team-indicator">
+              <span class="indicator-icon">🎯</span>
+              <span class="indicator-text" id="turnIndicatorText">TEAM A's TURN</span>
+              <span class="indicator-target" id="turnTargetPoints">Playing for <b>100 POINTS</b></span>
+            </div>
+            <div id="doubleAnswerAlert" class="double-answer-banner hidden">
+              🔁 DOUBLE ANSWER JOKER ACTIVE — YOU HAVE 2 ATTEMPTS!
+            </div>
+          </div>
+
+          <!-- Question Podium Card -->
+          <div class="question-container">
+            <div class="question-top-meta">
+              <span class="topic-tag" id="questionTopicTag">PRESENT SIMPLE</span>
+              <span class="prize-tag" id="questionPrizeTag">💰 100 POINTS</span>
+              <span class="tier-tag tier-easy" id="questionTierTag">EASY</span>
+            </div>
+
+            <!-- The Question Text (High contrast for projector) -->
+            <div class="question-frame" id="questionFrame">
+              <div class="question-text" id="questionText">
+                Loading English grammar challenge...
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 Answer Option Podiums (A, B, C, D) -->
+          <div class="answers-grid" id="answersGrid">
+            <!-- Option A -->
+            <button type="button" class="answer-btn" data-index="0" id="optBtn0">
+              <span class="diamond-badge">A</span>
+              <span class="option-label" id="optLabel0">Option A</span>
+            </button>
+
+            <!-- Option B -->
+            <button type="button" class="answer-btn" data-index="1" id="optBtn1">
+              <span class="diamond-badge">B</span>
+              <span class="option-label" id="optLabel1">Option B</span>
+            </button>
+
+            <!-- Option C -->
+            <button type="button" class="answer-btn" data-index="2" id="optBtn2">
+              <span class="diamond-badge">C</span>
+              <span class="option-label" id="optLabel2">Option C</span>
+            </button>
+
+            <!-- Option D -->
+            <button type="button" class="answer-btn" data-index="3" id="optBtn3">
+              <span class="diamond-badge">D</span>
+              <span class="option-label" id="optLabel3">Option D</span>
+            </button>
+          </div>
+
+          <!-- Suspense Action Bar & Explanation Feedback -->
+          <div class="stage-action-bar">
+            <!-- Lock in status banner -->
+            <div id="suspenseBanner" class="suspense-status hidden">
+              <span class="suspense-spinner"></span>
+              <span id="suspenseStatusText">LOCKING IN ANSWER...</span>
+            </div>
+
+            <!-- Grammar Explanation Bar (Revealed after answer) -->
+            <div id="explanationBox" class="explanation-box hidden">
+              <div class="explanation-header" id="explanationHeader">✓ CORRECT!</div>
+              <p class="explanation-content" id="explanationContent"></p>
+              <button type="button" id="btnNextQuestion" class="btn-next-action">
+                NEXT TEAM ➔
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Side: Vertical Money Ladder (100 to 25,000) -->
+        <aside class="stage-right-ladder">
+          <div class="ladder-panel glass-ladder-panel">
+            <div class="ladder-header">
+              <span class="ladder-title">MONEY LADDER</span>
+              <span class="ladder-top-goal">🏆 25,000</span>
+            </div>
+            <div class="ladder-steps-list" id="ladderList">
+              <!-- 15 rungs generated dynamically -->
+            </div>
+            <div class="ladder-rule-reminder">
+              <span>⚠️ WRONG ANSWER = RESETS TO 0</span>
+            </div>
+          </div>
+        </aside>
+
+      </main>
+
+      <!-- Bottom: Team Podiums & Joker Controls -->
+      <footer class="studio-bottom-podiums">
+        <div class="teams-podiums-container" id="teamsPodiumsContainer">
+          <!-- Dynamically rendered team scoreboards and jokers -->
+        </div>
+      </footer>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SCREEN 3: GAME OVER / VICTORY RESULTS SCREEN -->
+    <!-- ============================================================ -->
+    <section id="resultsScreen" class="screen hidden">
+      <div class="results-wrapper">
+        <div class="results-hero">
+          <div class="trophy-display animate-float">🏆</div>
+          <h1 class="results-headline">QUIZ SHOW FINALE</h1>
+          <p class="results-sub" id="resultsSubTitle">Outstanding Grammar Performance!</p>
+        </div>
+
+        <!-- Grand Champion Banner -->
+        <div class="champion-podium-card glass-gold-card" id="championCard">
+          <div class="champ-crown">👑 GRAND CHAMPION</div>
+          <h2 class="champ-name" id="winnerTeamName">TEAM A</h2>
+          <div class="champ-score-box">
+            <span class="champ-pts-label">FINAL SCORE</span>
+            <span class="champ-pts-val" id="winnerPoints">25,000 PTS</span>
+          </div>
+        </div>
+
+        <!-- All Teams Final Leaderboard -->
+        <div class="leaderboard-card glass-studio-card">
+          <h3 class="leaderboard-title">📊 FINAL TEAM RANKINGS</h3>
+          <div class="leaderboard-list" id="leaderboardList">
+            <!-- Dynamically populated team rows -->
+          </div>
+        </div>
+
+        <div class="results-actions">
+          <button type="button" id="btnPlayAgain" class="btn-gold-huge">
+            🔄 PLAY AGAIN (NEW GAME)
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- MODAL 1: 👨‍🏫 ASK THE TEACHER JOKER MODAL -->
+    <!-- ============================================================ -->
+    <div id="askTeacherModal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+      <div class="modal-dialog glass-modal-card">
+        <div class="modal-header">
+          <span class="modal-icon">👨‍🏫</span>
+          <h3 class="modal-title">ASK THE TEACHER</h3>
+        </div>
+        <div class="modal-body">
+          <p class="teacher-prompt-text">
+            <b><span id="askTeacherTeamName">TEAM A</span></b> has activated their <b>Ask the Teacher</b> Joker!
+          </p>
+          <div class="teacher-dialog-box">
+            <p>🗣️ <i>"Students, discuss with your teacher! Teacher, you may give a hint, grammar clue, or explanation for this question."</i></p>
+          </div>
+          <div class="teacher-timer-box">
+            <span class="timer-label">CONSULTATION TIMER:</span>
+            <span class="timer-val" id="teacherTimerNum">45s</span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-gold-medium" id="btnCloseTeacherModal">
+            ✓ Got the Hint! Return to Question
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- MODAL 2: ❌ PROGRESS RESET NOTIFICATION MODAL -->
+    <!-- ============================================================ -->
+    <div id="resetModal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+      <div class="modal-dialog glass-modal-card reset-dialog">
+        <div class="reset-badge-icon">❌</div>
+        <h3 class="reset-headline">WRONG ANSWER!</h3>
+        <p class="reset-team-name" id="resetModalTeamName">TEAM B</p>
+        
+        <div class="reset-animation-box">
+          <div class="reset-calc">
+            <span class="prev-score-val" id="resetPrevScore">5,000 PTS</span>
+            <span class="reset-arrow">➔</span>
+            <span class="zero-score-val animate-pop">0 PTS</span>
+          </div>
+          <p class="reset-desc">Your ladder progress has been reset to zero!</p>
+        </div>
+
+        <div class="correct-answer-reveal-box">
+          <span class="reveal-label">CORRECT ANSWER WAS:</span>
+          <div class="reveal-answer-text" id="resetCorrectAnswerText">B) has lived</div>
+        </div>
+
+        <button type="button" class="btn-gold-medium" id="btnDismissResetModal">
+          CONTINUE TO NEXT TEAM ➔
+        </button>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- MODAL 3: ❓ RULES & INSTRUCTIONS MODAL -->
+    <!-- ============================================================ -->
+    <div id="rulesModal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+      <div class="modal-dialog glass-modal-card rules-dialog">
+        <div class="modal-header">
+          <span class="modal-icon">📜</span>
+          <h3 class="modal-title">GAME RULES &amp; HOW TO PLAY</h3>
+          <button type="button" class="modal-close-btn" id="btnCloseRulesX">&times;</button>
+        </div>
+        <div class="modal-body rules-content">
+          <div class="rule-block">
+            <h4>💰 THE 15-STEP MONEY LADDER</h4>
+            <p>Answer multiple-choice English grammar questions to climb from <b>100 points</b> up to <b>25,000 points</b>. Difficulty increases at every stage (Easy ➔ Medium ➔ Hard ➔ Very Hard)!</p>
+          </div>
+          <div class="rule-block">
+            <h4>⚠️ THE RESET RULE (NO ELIMINATIONS)</h4>
+            <p>If your team answers incorrectly, <b>you are NOT eliminated</b>. Instead, your team's current ladder progress resets to <b>0 points</b> and the turn passes to the next team. You can climb back up on your next turn!</p>
+          </div>
+          <div class="rule-block">
+            <h4>🃏 3 TEAM JOKERS (ONE USE EACH)</h4>
+            <ul>
+              <li><b>👨‍🏫 Ask the Teacher:</b> Ask your teacher for a grammar hint or explanation.</li>
+              <li><b>✂️ 50:50:</b> Removes two incorrect options, leaving only the correct answer and 1 wrong answer.</li>
+              <li><b>🔁 Double Answer:</b> Gives your team 2 chances on this question. If your first pick is wrong, you get to choose a second option!</li>
+            </ul>
+          </div>
+          <div class="rule-block">
+            <h4>⌨️ KEYBOARD SHORTCUTS</h4>
+            <p><b>1, 2, 3, 4</b> or <b>A, B, C, D</b>: Select answer options • <b>Space / Enter</b>: Confirm / Next question • <b>M</b>: Toggle Sound</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-gold-medium" id="btnCloseRulesBtn">
+            Got it! Let's Play
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="questions.js"></script>
+  <script src="audio.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
