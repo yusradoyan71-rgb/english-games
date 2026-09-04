@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Spin &amp; Choose 🎡 — Kindergarten English Speaking Game</title>
+  <meta name="description" content="A colorful 3D cartoon English speaking game for preschool &amp; kindergarten children. Spin the wheel, pick your favorite, and explore English visually!">
+  
+  <!-- Preconnect & Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Confetti & Celebration FX Canvas -->
+  <canvas id="fxCanvas" class="bg-canvas"></canvas>
+
+  <!-- Playroom / Classroom Atmosphere Scene -->
+  <div class="playroom-scene" aria-hidden="true">
+    <!-- Festive Bunting Flags at top right -->
+    <div class="bunting-ribbon">
+      <span class="flag f-red"></span>
+      <span class="flag f-yellow"></span>
+      <span class="flag f-green"></span>
+      <span class="flag f-blue"></span>
+      <span class="flag f-purple"></span>
+      <span class="flag f-orange"></span>
+      <span class="flag f-pink"></span>
+    </div>
+    <!-- Soft background shapes -->
+    <div class="bg-shelf shelf-left"></div>
+    <div class="bg-shelf shelf-right"></div>
+    <div class="purple-rug"></div>
+  </div>
+
+  <!-- Main Game Container -->
+  <div class="game-container">
+
+    <!-- Top Left Home Navigation Button -->
+    <a href="../../english-games/index.html" class="btn-3d-round btn-home" title="Back to Games Hub" aria-label="Home">
+      🏠
+    </a>
+
+    <!-- Bottom Left Audio Toggle Button -->
+    <button type="button" id="btnAudioToggle" class="btn-3d-round btn-sound" title="Sound Effects ON / OFF" aria-label="Toggle Sound">
+      🔊
+    </button>
+
+    <!-- Main Game Arena: 2-Column Playroom Layout -->
+    <main class="game-arena">
+
+      <!-- ============================================================ -->
+      <!-- LEFT COLUMN: 3D CARNIVAL WHEEL & SPIN BASE -->
+      <!-- ============================================================ -->
+      <section class="wheel-section" aria-label="Prize Wheel">
+        <div class="wheel-stage-wrapper">
+          
+          <!-- Golden Lightbulb Ring Surround -->
+          <div class="wheel-frame-outer">
+            <!-- 12 Golden Glowing Bulbs -->
+            <div class="bulb b-1"></div>
+            <div class="bulb b-2"></div>
+            <div class="bulb b-3"></div>
+            <div class="bulb b-4"></div>
+            <div class="bulb b-5"></div>
+            <div class="bulb b-6"></div>
+            <div class="bulb b-7"></div>
+            <div class="bulb b-8"></div>
+            <div class="bulb b-9"></div>
+            <div class="bulb b-10"></div>
+            <div class="bulb b-11"></div>
+            <div class="bulb b-12"></div>
+
+            <!-- Top Pointer Needle (Fixed at 12 o'clock) -->
+            <div id="wheelPointer" class="wheel-pointer" aria-hidden="true">
+              <svg viewBox="0 0 60 70" fill="none" xmlns="http://www.w3.org/2000/svg" class="pointer-3d-svg">
+                <!-- Golden Pointer Body -->
+                <path d="M30 68 L8 18 C5 12 9 4 16 4 L44 4 C51 4 55 12 52 18 Z" fill="url(#g-pointer-gold)" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round"/>
+                <!-- Red Jewel in Center -->
+                <circle cx="30" cy="20" r="12" fill="url(#g-pointer-jewel)" stroke="#FFE082" stroke-width="2"/>
+                <circle cx="27" cy="16" r="3.5" fill="#FFFFFF" fill-opacity="0.8"/>
+                <defs>
+                  <linearGradient id="g-pointer-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FFF9C4"/>
+                    <stop offset="40%" stop-color="#FFD54F"/>
+                    <stop offset="100%" stop-color="#FF8F00"/>
+                  </linearGradient>
+                  <radialGradient id="g-pointer-jewel" cx="35%" cy="35%" r="65%">
+                    <stop offset="0%" stop-color="#FF5252"/>
+                    <stop offset="100%" stop-color="#B71C1C"/>
+                  </radialGradient>
+                </defs>
+              </svg>
+            </div>
+
+            <!-- Rotating Canvas Wheel -->
+            <div class="canvas-mount">
+              <canvas id="wheelCanvas" width="520" height="520" class="wheel-canvas"></canvas>
+              
+              <!-- Center Golden Star Hub -->
+              <div class="wheel-center-star" aria-hidden="true">
+                ⭐
+              </div>
+            </div>
+          </div>
+
+          <!-- Red Sturdy Wooden Base Mount -->
+          <div class="wheel-wooden-base">
+            <!-- Giant Glossy 3D SPIN Button -->
+            <button type="button" id="btnSpin" class="btn-3d-spin" aria-label="Spin the Wheel">
+              <span class="star-accent">★</span>
+              <span class="btn-spin-text">SPIN</span>
+              <span class="star-accent">★</span>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- RIGHT COLUMN: CATEGORY BOARD & 6 CHOICE CARDS -->
+      <!-- ============================================================ -->
+      <section class="card-board-section" aria-label="Category Choices">
+        <div class="board-container">
+          
+          <!-- Hanging Wooden Signboard with Ropes & Leaves -->
+          <div class="wooden-sign-hang">
+            <div class="rope rope-left"></div>
+            <div class="rope rope-right"></div>
+            <div class="wooden-sign-board">
+              <span class="sign-leaf leaf-left">🍃</span>
+              <h2 id="categorySignTitle" class="sign-text">SPIN &amp; CHOOSE</h2>
+              <span class="sign-leaf leaf-right">🍃</span>
+            </div>
+          </div>
+
+          <!-- Main White Rounded Card Box -->
+          <div class="white-choice-card-box">
+            
+            <!-- Category Question Subtitle -->
+            <div id="categoryQuestionText" class="category-question-sub">
+              What's your favorite animal?
+            </div>
+
+            <!-- 6 Visual Choice Cards in a 2x3 Grid -->
+            <div id="choiceCardsGrid" class="choice-cards-grid">
+              <!-- Dynamically populated 6 cards -->
+            </div>
+
+            <!-- Bottom Selection Showcase & Mascot Strip -->
+            <div class="selection-footer-strip">
+              
+              <!-- Selected Result Circle & Word -->
+              <div class="selected-showcase-box" id="selectedShowcaseBox">
+                <div id="showcaseAvatar" class="showcase-avatar">
+                  <!-- Injected SVG -->
+                </div>
+                <div id="showcaseWord" class="showcase-word">TAP A CARD</div>
+              </div>
+
+              <!-- Green 3D "SPIN AGAIN" Button -->
+              <button type="button" id="btnSpinAgain" class="btn-3d-green-spin" aria-label="Spin Again">
+                <span class="spin-again-icon">🔄</span>
+                <span>SPIN AGAIN</span>
+              </button>
+
+              <!-- 3D Cheerful Star Mascot (Right Side) -->
+              <div id="mascotContainer" class="mascot-box" role="button" tabindex="0" aria-label="Star Mascot">
+                <!-- Injected SVG from assets.js -->
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ============================================================ -->
+    <!-- BOTTOM PROGRESS TRACKER: 6 CATEGORY TOKENS -->
+    <!-- ============================================================ -->
+    <nav class="bottom-progress-tracker" aria-label="Category Round Progress">
+      <div class="tracker-line" aria-hidden="true"></div>
+      <div id="trackerTokensContainer" class="tracker-tokens-row">
+        <!-- 6 Connected Category Token Pills -->
+      </div>
+    </nav>
+
+    <!-- ============================================================ -->
+    <!-- GRAND END OF ROUND VICTORY MODAL -->
+    <!-- ============================================================ -->
+    <div id="roundVictoryModal" class="victory-modal-overlay" aria-modal="true" role="dialog" aria-hidden="true">
+      <div class="victory-modal-card">
+        <div class="trophy-bounce-hero">
+          <span class="trophy-emoji">🏆</span>
+          <span class="star-fx s1">⭐</span>
+          <span class="star-fx s2">✨</span>
+          <span class="star-fx s3">🌟</span>
+        </div>
+
+        <h2 class="victory-headline">HOORAY! 🎉</h2>
+        <p class="victory-tagline">ALL 6 CATEGORIES COMPLETED!</p>
+
+        <div class="victory-tokens-ribbon">
+          <span>🎨</span>
+          <span>🐶</span>
+          <span>🍎</span>
+          <span>🥕</span>
+          <span>⚽</span>
+          <span>🧸</span>
+        </div>
+
+        <button type="button" id="btnPlayAgain" class="btn-3d-spin btn-play-again-huge" aria-label="Play Again">
+          <span>🔄</span>
+          <span>PLAY AGAIN!</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Game Scripts -->
+  <script src="assets.js"></script>
+  <script src="audio.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
