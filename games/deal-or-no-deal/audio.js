@@ -175,11 +175,11 @@ class SoundEngine {
     const master = this.getMasterGain();
     if (!master) return;
 
-    if (value >= 15000) {
+    if (value === 250000000) {
       this.playJackpotReveal(value);
-    } else if (value >= 5000) {
+    } else if (value >= 25000000) {
       this.playHighReveal(value);
-    } else if (value <= 1000) {
+    } else if (value <= 100000) {
       this.playLowReveal(value);
     } else {
       this.playMidReveal(value);

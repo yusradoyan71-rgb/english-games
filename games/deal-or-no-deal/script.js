@@ -1,18 +1,23 @@
 /**
  * DEAL OR NO DEAL – SPEAKING SHOWDOWN
- * Complete TV Game Show State Machine, Banker Engine & Audio-Visual Coordinator
+ * Complete TV Game Show State Machine, Banker Engine & Multi-Team Coordinator
  */
 
 // =========================================================================
-// 1. CONSTANTS & PRIZE BOARD DEFINITIONS
+// 1. CONSTANTS & PRIZE BOARD DEFINITIONS (MILLIONAIRE TL VALUES)
 // =========================================================================
 const ALL_PRIZES = [
-  100, 200, 300, 500, 750, 1000, 1250, 1500, 2000, 2500,
-  3000, 4000, 5000, 6000, 7500, 10000, 12500, 15000, 17500, 20000
+  1000, 5000, 10000, 25000, 50000, 100000, 250000, 500000, 750000, 1000000,
+  1500000, 2000000, 3000000, 5000000, 10000000, 25000000, 50000000, 75000000, 100000000, 250000000
 ];
 
-const LOW_PRIZES = [100, 200, 300, 500, 750, 1000, 1250, 1500, 2000, 2500];
-const HIGH_PRIZES = [3000, 4000, 5000, 6000, 7500, 10000, 12500, 15000, 17500, 20000];
+const LOW_PRIZES = [
+  1000, 5000, 10000, 25000, 50000, 100000, 250000, 500000, 750000, 1000000
+];
+
+const HIGH_PRIZES = [
+  1500000, 2000000, 3000000, 5000000, 10000000, 25000000, 50000000, 75000000, 100000000, 250000000
+];
 
 const TEAM_COLORS = [
   { name: "Blue", bg: "linear-gradient(135deg, #3b82f6, #1d4ed8)", hex: "#3b82f6" },
@@ -21,13 +26,19 @@ const TEAM_COLORS = [
   { name: "Purple", bg: "linear-gradient(135deg, #8b5cf6, #6d28d9)", hex: "#8b5cf6" }
 ];
 
+// Helper to format values as Turkish Lira
+function formatTL(val) {
+  if (val === null || val === undefined) return "0 TL";
+  return val.toLocaleString("tr-TR") + " TL";
+}
+
 // =========================================================================
 // 2. GAME STATE
 // =========================================================================
 const state = {
   grade: "grade7", // "grade7" | "grade8" | "mixed"
   teamCount: 3,
-  teams: [],
+  teams: [], // Array of teamState objects: { id, name, color, colorBg, secretBoxNum, secretValue, hasDeal, dealAmount, finalScore, secretBoxRevealed }
   currentPickingTeamIdx: 0,
   
   // Boxes: Array of 20 items: { id: 1..20, value: number, isSecretOf: teamId | null, isOpened: boolean }
@@ -37,9 +48,10 @@ const state = {
   // Game Play Turns
   activeTeamIdx: 0,
   stage: 1,
-  boxesOpenedInCurrentRound: 0,
   totalNormalBoxesOpened: 0,
-  boxesNeededForNextBanker: 4, // Next banker trigger
+  boxesOpenedInCurrentRound: 0,
+  roundBoxMilestones: [3, 3, 3, 3, 2, 2, 1, 1], // Boxes per round progression
+  currentRoundMilestoneIdx: 0,
   
   speakingPassedForTurn: false,
   currentQuestion: null,
@@ -128,6 +140,7 @@ const el = {
   btnAnswerPhone: document.getElementById("btnAnswerPhone"),
   bankerTargetTeamName: document.getElementById("bankerTargetTeamName"),
   bankerOfferAmount: document.getElementById("bankerOfferAmount"),
+  bankerRiskComment: document.getElementById("bankerRiskComment"),
   dealSpeakingPromptText: document.getElementById("dealSpeakingPromptText"),
   btnDecisionSpeakingDone: document.getElementById("btnDecisionSpeakingDone"),
   btnChooseDeal: document.getElementById("btnChooseDeal"),
@@ -183,7 +196,7 @@ function setupEventListeners() {
 
   // Grade Selector
   el.gradeSelector.querySelectorAll(".btn-choice").forEach(btn => {
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener("click", () => {
       gameAudio.playClick();
       el.gradeSelector.querySelectorAll(".btn-choice").forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
@@ -193,7 +206,7 @@ function setupEventListeners() {
 
   // Team Count Selector
   el.teamCountSelector.querySelectorAll(".btn-choice").forEach(btn => {
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener("click", () => {
       gameAudio.playClick();
       el.teamCountSelector.querySelectorAll(".btn-choice").forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
@@ -252,7 +265,7 @@ function renderTeamInputs() {
 }
 
 function startGameSetup() {
-  // Read team names
+  // Read team names and initialize per-team state
   state.teams = [];
   for (let i = 0; i < state.teamCount; i++) {
     const inputEl = document.getElementById(`teamInput_${i}`);
@@ -267,7 +280,8 @@ function startGameSetup() {
       secretValue: null,
       hasDeal: false,
       dealAmount: null,
-      finalScore: null
+      finalScore: null,
+      secretBoxRevealed: false
     });
   }
 
@@ -349,7 +363,7 @@ function renderSecretStatusBar() {
         <span class="secret-team-name">${team.name}</span>
       </div>
       <span class="secret-box-badge ${isAssigned ? 'assigned' : ''}">
-        ${isAssigned ? `BOX ${team.secretBoxNum}` : (isCurrent ? 'SELECTING NOW...' : 'WAITING')}
+        ${isAssigned ? `BOX #${team.secretBoxNum}` : (isCurrent ? 'SELECTING NOW...' : 'WAITING')}
       </span>
     `;
     el.secretStatusBar.appendChild(card);
@@ -390,9 +404,16 @@ function startMainGameArena() {
   state.stage = 1;
   state.totalNormalBoxesOpened = 0;
   state.boxesOpenedInCurrentRound = 0;
-  
-  // Set banker trigger: First call after 4 boxes opened, then every 3 boxes
-  state.boxesNeededForNextBanker = Math.max(3, Math.floor((20 - state.teamCount) / 4));
+  state.currentRoundMilestoneIdx = 0;
+
+  // Set balanced banker round milestones per team count
+  if (state.teamCount === 2) {
+    state.roundBoxMilestones = [3, 3, 3, 3, 2, 2, 1, 1];
+  } else if (state.teamCount === 3) {
+    state.roundBoxMilestones = [4, 4, 4, 2, 2, 1];
+  } else {
+    state.roundBoxMilestones = [3, 3, 3, 3, 2, 1, 1];
+  }
 
   renderPrizeBoards();
   renderMainArenaBoxes();
@@ -401,26 +422,26 @@ function startMainGameArena() {
 }
 
 function renderPrizeBoards() {
-  // Low values left (100 to 2,500)
+  // Low values left (1.000 TL to 1.000.000 TL)
   el.prizeListLeft.innerHTML = "";
   LOW_PRIZES.forEach(val => {
     const isOpened = state.openedValues.has(val);
     const pill = document.createElement("div");
     pill.className = `prize-pill ${isOpened ? 'opened' : ''}`;
     pill.id = `prizePill_${val}`;
-    pill.textContent = val.toLocaleString();
+    pill.textContent = formatTL(val);
     el.prizeListLeft.appendChild(pill);
   });
 
-  // High values right (3,000 to 20,000)
+  // High values right (1.500.000 TL to 250.000.000 TL)
   el.prizeListRight.innerHTML = "";
   HIGH_PRIZES.forEach(val => {
     const isOpened = state.openedValues.has(val);
-    const isJackpot = val >= 15000;
+    const isJackpot = val === 250000000;
     const pill = document.createElement("div");
     pill.className = `prize-pill ${isJackpot ? 'jackpot' : ''} ${isOpened ? 'opened' : ''}`;
     pill.id = `prizePill_${val}`;
-    pill.textContent = val.toLocaleString();
+    pill.textContent = formatTL(val);
     el.prizeListRight.appendChild(pill);
   });
 
@@ -442,7 +463,7 @@ function renderMainArenaBoxes() {
       boxEl.innerHTML = `
         <div class="tv-box-handle"></div>
         <div class="tv-box-num">${box.id}</div>
-        <div class="opened-val-stamp">${box.value.toLocaleString()}</div>
+        <div class="opened-val-stamp">${formatTL(box.value)}</div>
       `;
     } else if (box.isSecretOf !== null) {
       boxEl.classList.add("locked");
@@ -482,9 +503,9 @@ function renderTeamHud() {
         <span class="hud-team-name">${team.name}</span>
       </div>
       <div style="display: flex; gap: 0.4rem; align-items: center;">
-        <span class="hud-status-badge">SECRET: #${team.secretBoxNum}</span>
+        <span class="hud-status-badge">SECRET: BOX #${team.secretBoxNum}</span>
         <span class="hud-status-badge ${team.hasDeal ? 'deal-locked' : ''}">
-          ${team.hasDeal ? `DEAL: ${team.dealAmount.toLocaleString()} pts` : 'IN PLAY'}
+          ${team.hasDeal ? `DEAL: ${formatTL(team.dealAmount)}` : 'IN PLAY'}
         </span>
       </div>
     `;
@@ -504,11 +525,11 @@ function startNextTurn() {
   el.activeTeamLabel.textContent = `${currentTeam.name.toUpperCase()}'S TURN`;
   el.activeTeamPill.style.background = currentTeam.colorBg;
 
-  // Pick question based on difficulty stage
+  // Pick question based on progressive difficulty stages
   let level = "level1";
-  if (state.totalNormalBoxesOpened >= 10) {
+  if (state.totalNormalBoxesOpened >= 9) {
     level = "level3";
-  } else if (state.totalNormalBoxesOpened >= 5) {
+  } else if (state.totalNormalBoxesOpened >= 4) {
     level = "level2";
   }
 
@@ -561,7 +582,6 @@ function handleTeacherCorrect() {
 
 function handleTeacherTryAgain() {
   gameAudio.playTryAgain();
-  // Brief shake on speaking box
   const box = document.getElementById("speakingChallengeBox");
   box.classList.add("shaking");
   setTimeout(() => box.classList.remove("shaking"), 500);
@@ -584,7 +604,7 @@ function handleArenaBoxClick(boxId) {
 
   // Setup Reveal Modal
   el.revealTeamBadge.textContent = `${currentTeam.name.toUpperCase()} IS OPENING`;
-  el.revealBoxNumber.textContent = `BOX ${box.id}`;
+  el.revealBoxNumber.textContent = `BOX #${box.id}`;
   el.dramaticBoxNum.textContent = box.id;
 
   el.revealCountdown.classList.remove("hidden");
@@ -611,22 +631,28 @@ function handleArenaBoxClick(boxId) {
     // OPEN BOX DRAMATICALLY!
     el.revealCountdown.classList.add("hidden");
     el.dramaticBoxElement.className = "dramatic-box opening";
-    el.revealPrizeValue.textContent = box.value.toLocaleString();
+    el.revealPrizeValue.textContent = formatTL(box.value);
 
-    // Set verdict text
-    if (box.value <= 1000) {
+    // Set verdict text based on million-scale values
+    if (box.value <= 100000) {
       el.revealPrizeVerdict.textContent = "🌟 FANTASTIC! LOW VALUE ELIMINATED FROM THE BOARD!";
       el.revealPrizeVerdict.style.color = "#38bdf8";
-    } else if (box.value <= 5000) {
+    } else if (box.value <= 1000000) {
       el.revealPrizeVerdict.textContent = "👍 GOOD RESULT! SAFE MIDDLE PRIZE REMOVED.";
       el.revealPrizeVerdict.style.color = "#4ade80";
-    } else if (box.value <= 12500) {
-      el.revealPrizeVerdict.textContent = "⚠️ OUCH! A BIG HIGH VALUE IS GONE!";
-      el.revealPrizeVerdict.style.color = "#f87171";
-    } else {
-      el.revealPrizeVerdict.textContent = "💥 BOOM! HUGE JACKPOT WAS IN THIS BOX!";
+    } else if (box.value <= 10000000) {
+      el.revealPrizeVerdict.textContent = "⚠️ CAUTION! A MULTI-MILLION PRIZE WAS IN THIS BOX!";
+      el.revealPrizeVerdict.style.color = "#f59e0b";
+    } else if (box.value <= 100000000) {
+      el.revealPrizeVerdict.textContent = "💥 OUCH! HUGE VALUE REMOVED FROM PLAY!";
       el.revealPrizeVerdict.style.color = "#ef4444";
       spawnConfetti(window.innerWidth / 2, window.innerHeight / 2, 60);
+    } else {
+      // 250.000.000 TL JACKPOT!
+      el.revealPrizeVerdict.textContent = "💰 250.000.000 TL 💰 JACKPOT ELIMINATED FROM THE BOARD!";
+      el.revealPrizeVerdict.style.color = "#ffd700";
+      triggerJackpotShake();
+      spawnConfetti(window.innerWidth / 2, window.innerHeight / 2, 100);
     }
 
     el.revealPrizeArea.classList.remove("hidden");
@@ -639,6 +665,11 @@ function handleArenaBoxClick(boxId) {
     state.boxesOpenedInCurrentRound++;
 
   }, 3000);
+}
+
+function triggerJackpotShake() {
+  document.body.classList.add("jackpot-shake");
+  setTimeout(() => document.body.classList.remove("jackpot-shake"), 1200);
 }
 
 function handleContinueAfterReveal() {
@@ -656,9 +687,13 @@ function handleContinueAfterReveal() {
     return;
   }
 
-  // Check if it is time for Banker Call
-  if (state.boxesOpenedInCurrentRound >= state.boxesNeededForNextBanker) {
+  // Determine current round target
+  const currentTarget = state.roundBoxMilestones[Math.min(state.currentRoundMilestoneIdx, state.roundBoxMilestones.length - 1)];
+
+  // Check if Banker Call is triggered
+  if (state.boxesOpenedInCurrentRound >= currentTarget || normalBoxesRemaining <= 1) {
     state.boxesOpenedInCurrentRound = 0;
+    state.currentRoundMilestoneIdx++;
     state.stage++;
     triggerBankerSequence();
   } else {
@@ -669,11 +704,24 @@ function handleContinueAfterReveal() {
 }
 
 // =========================================================================
-// 9. THE BANKER TELEPHONE & NEGOTIATION ENGINE
+// 9. THE BANKER TELEPHONE & NEGOTIATION ENGINE (ZİRAAT BANKASI BANKER)
 // =========================================================================
 function triggerBankerSequence() {
-  // Banker makes an offer to the current team or active team in rotation
-  state.bankerPendingTeamIdx = state.activeTeamIdx;
+  // Determine which team receives the offer:
+  // Starts with the active team whose turn just finished.
+  // If the active team already accepted a deal, look for the next team in rotation that has not yet accepted a deal.
+  let targetIdx = state.activeTeamIdx;
+  if (state.teams[targetIdx].hasDeal) {
+    for (let i = 0; i < state.teams.length; i++) {
+      const idx = (state.activeTeamIdx + i) % state.teams.length;
+      if (!state.teams[idx].hasDeal) {
+        targetIdx = idx;
+        break;
+      }
+    }
+  }
+
+  state.bankerPendingTeamIdx = targetIdx;
   const targetTeam = state.teams[state.bankerPendingTeamIdx];
 
   // Calculate Mathematical Banker Offer
@@ -687,42 +735,49 @@ function triggerBankerSequence() {
 function calculateBankerOffer() {
   // Get all remaining unopened values
   const remainingValues = ALL_PRIZES.filter(v => !state.openedValues.has(v));
-  if (remainingValues.length === 0) return 1000;
+  if (remainingValues.length === 0) return 10000;
 
   // Expected Value (EV)
   const sum = remainingValues.reduce((a, b) => a + b, 0);
   const ev = sum / remainingValues.length;
-
-  // Stage factor based on boxes remaining:
-  // Starts around 0.65 in early game and rises to 0.95 - 1.05 in late game
   const remainingCount = remainingValues.length;
-  let stageFactor = 0.65;
-  if (remainingCount <= 3) {
-    stageFactor = 0.98;
-  } else if (remainingCount <= 6) {
+  const maxVal = Math.max(...remainingValues);
+
+  // Stage factor rises from early (~40%) to late (~85%)
+  let stageFactor = 0.40;
+  if (remainingCount <= 2) {
     stageFactor = 0.88;
-  } else if (remainingCount <= 10) {
-    stageFactor = 0.78;
-  } else if (remainingCount <= 14) {
-    stageFactor = 0.70;
+  } else if (remainingCount <= 4) {
+    stageFactor = 0.82;
+  } else if (remainingCount <= 7) {
+    stageFactor = 0.72;
+  } else if (remainingCount <= 11) {
+    stageFactor = 0.58;
+  } else if (remainingCount <= 15) {
+    stageFactor = 0.48;
   }
 
-  // Risk adjustment: If 20,000 or 17,500 is still alive, banker offers a sweet deal
-  const hasMegaPrize = remainingValues.includes(20000) || remainingValues.includes(17500);
-  if (hasMegaPrize && remainingCount <= 8) {
+  // Risk adjustments based on jackpot presence
+  if (remainingValues.includes(250000000)) {
     stageFactor += 0.05;
+  } else if (maxVal <= 5000000) {
+    stageFactor -= 0.05;
   }
 
   let offer = ev * stageFactor;
 
-  // Clean rounding (to nearest 250 or 500)
-  if (offer > 5000) {
-    offer = Math.round(offer / 500) * 500;
+  // Clean rounding for million-scale TL values
+  if (offer >= 10000000) {
+    offer = Math.round(offer / 1000000) * 1000000;
+  } else if (offer >= 1000000) {
+    offer = Math.round(offer / 250000) * 250000;
+  } else if (offer >= 100000) {
+    offer = Math.round(offer / 25000) * 25000;
   } else {
-    offer = Math.round(offer / 250) * 250;
+    offer = Math.round(offer / 5000) * 5000;
   }
 
-  return Math.max(250, offer);
+  return Math.max(5000, offer);
 }
 
 function handleAnswerBankerPhone() {
@@ -732,7 +787,22 @@ function handleAnswerBankerPhone() {
   const targetTeam = state.teams[state.bankerPendingTeamIdx];
   el.bankerTargetTeamName.textContent = targetTeam.name;
   el.bankerTargetTeamName.style.color = targetTeam.color;
-  el.bankerOfferAmount.textContent = state.currentBankerOffer.toLocaleString();
+  el.bankerOfferAmount.textContent = formatTL(state.currentBankerOffer);
+
+  // Banker reaction comment based on high values remaining
+  const remainingValues = ALL_PRIZES.filter(v => !state.openedValues.has(v));
+  if (el.bankerRiskComment) {
+    if (remainingValues.includes(250000000)) {
+      el.bankerRiskComment.textContent = "⚡ 250.000.000 TL JACKPOT IS STILL ON THE BOARD! THE BANKER IS NERVOUS!";
+      el.bankerRiskComment.style.color = "#fbbf24";
+    } else if (remainingValues.some(v => v >= 50000000)) {
+      el.bankerRiskComment.textContent = "🔥 MULTI-MILLION VALUES ARE STILL ALIVE! THIS IS A BIG DECISION!";
+      el.bankerRiskComment.style.color = "#f87171";
+    } else {
+      el.bankerRiskComment.textContent = "📉 BIG JACKPOTS ARE GONE. THE BANKER OFFERS A CAUTIOUS DEAL.";
+      el.bankerRiskComment.style.color = "#94a3b8";
+    }
+  }
 
   // Random decision speaking prompt
   const randPrompt = DEAL_DECISION_PROMPTS[Math.floor(Math.random() * DEAL_DECISION_PROMPTS.length)];
@@ -759,7 +829,7 @@ function handleChooseDeal() {
   el.outcomeIcon.textContent = "💰";
   el.outcomeHeadline.textContent = "DEAL!";
   el.outcomeHeadline.style.color = "#10b981";
-  el.outcomeDetails.innerHTML = `<strong>${targetTeam.name}</strong> accepted the Banker's offer of <strong>${state.currentBankerOffer.toLocaleString()} POINTS</strong>! Their score is permanently locked!`;
+  el.outcomeDetails.innerHTML = `<strong>${targetTeam.name}</strong> accepted the Ziraat Bankası Banker's offer of <strong>${formatTL(state.currentBankerOffer)}</strong>! Their score is permanently secured!`;
   showModal("dealOutcome");
 }
 
@@ -773,7 +843,7 @@ function handleChooseNoDeal() {
   el.outcomeIcon.textContent = "🔥";
   el.outcomeHeadline.textContent = "NO DEAL!";
   el.outcomeHeadline.style.color = "#ef4444";
-  el.outcomeDetails.innerHTML = `<strong>${targetTeam.name}</strong> rejected the Banker's offer of <strong>${state.currentBankerOffer.toLocaleString()} points</strong> and chose to keep playing!`;
+  el.outcomeDetails.innerHTML = `<strong>${targetTeam.name}</strong> rejected the Ziraat Bankası Banker's offer of <strong>${formatTL(state.currentBankerOffer)}</strong> and chose to keep playing!`;
   showModal("dealOutcome");
 }
 
@@ -804,24 +874,24 @@ function renderFinalSecretCards() {
     card.className = "final-team-secret-card";
     card.style.borderLeftColor = team.color;
 
-    const isRevealed = team.finalScore !== null && (!team.hasDeal || team.secretBoxRevealed);
+    const isRevealed = team.secretBoxRevealed;
     if (!isRevealed) allRevealed = false;
 
     card.innerHTML = `
       <div class="card-team-header" style="color: ${team.color}">${team.name}</div>
       <div class="card-box-holder">
         <span style="font-size: 2.5rem;">💼</span>
-        <div style="font-family: var(--font-display); font-weight: 800; font-size: 1.2rem;">BOX ${team.secretBoxNum}</div>
+        <div style="font-family: var(--font-display); font-weight: 800; font-size: 1.2rem;">SECRET BOX #${team.secretBoxNum}</div>
       </div>
       <div class="card-final-value">
-        ${team.secretBoxRevealed ? `${team.secretValue.toLocaleString()} pts` : '???'}
+        ${team.secretBoxRevealed ? formatTL(team.secretValue) : '???'}
       </div>
       <div class="card-deal-status">
-        ${team.hasDeal ? `🔒 Accepted Deal: ${team.dealAmount.toLocaleString()} pts` : 'Playing for Secret Box'}
+        ${team.hasDeal ? `🔒 Accepted Banker Deal: ${formatTL(team.dealAmount)}` : 'Playing for Secret Box'}
       </div>
       ${!team.secretBoxRevealed ? `
         <button type="button" class="btn-open-secret" onclick="revealTeamSecretBox(${team.id})">
-          ✨ REVEAL BOX ${team.secretBoxNum}
+          ✨ REVEAL BOX #${team.secretBoxNum}
         </button>
       ` : ''}
     `;
@@ -849,7 +919,14 @@ window.revealTeamSecretBox = function(teamId) {
   }
 
   gameAudio.playReveal(team.secretValue);
-  spawnConfetti(window.innerWidth / 2, window.innerHeight / 2, 50);
+  
+  if (team.secretValue === 250000000) {
+    triggerJackpotShake();
+    spawnConfetti(window.innerWidth / 2, window.innerHeight / 2, 100);
+  } else {
+    spawnConfetti(window.innerWidth / 2, window.innerHeight / 2, 50);
+  }
+  
   renderFinalSecretCards();
 };
 
@@ -863,7 +940,7 @@ function showWinnerScreen() {
 
   el.winnerTeamName.textContent = winner.name;
   el.winnerTeamName.style.color = winner.color;
-  el.winnerScorePill.textContent = `${(winner.finalScore || 0).toLocaleString()} POINTS`;
+  el.winnerScorePill.textContent = `${formatTL(winner.finalScore || 0)} WON!`;
 
   // Render Podium cards
   el.podiumGrid.innerHTML = "";
@@ -876,9 +953,9 @@ function showWinnerScreen() {
     card.innerHTML = `
       <div class="podium-rank">${rankMedals[idx] || "🎖️"}</div>
       <div class="podium-team-name" style="color: ${team.color}">${team.name}</div>
-      <div class="podium-score">${(team.finalScore || 0).toLocaleString()} pts</div>
-      <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 4px;">
-        ${team.hasDeal ? `Accepted Banker Deal (${team.dealAmount.toLocaleString()})` : `Box #${team.secretBoxNum} (${team.secretValue.toLocaleString()})`}
+      <div class="podium-score">${formatTL(team.finalScore || 0)}</div>
+      <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 4px;">
+        ${team.hasDeal ? `Secured Banker Deal (${formatTL(team.dealAmount)})` : `Box #${team.secretBoxNum} (${formatTL(team.secretValue)})`}
       </div>
     `;
     el.podiumGrid.appendChild(card);

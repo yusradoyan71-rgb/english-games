@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DEAL OR NO DEAL — Speaking Showdown 💼 Classroom English Game</title>
-  <meta name="description" content="A thrilling classroom TV game show speaking game for 7th &amp; 8th grade English learners inspired by Deal or No Deal / Var Mısın Yok Musun.">
+  <meta name="description" content="A thrilling classroom TV game show speaking game for 7th & 8th grade English learners inspired by Deal or No Deal / Var Mısın Yok Musun.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -36,7 +36,7 @@
       <div class="nav-center">
         <div id="navStatusBanner" class="nav-status-banner">
           <span id="navRoundPill" class="status-pill">STAGE 1</span>
-          <span id="navBoxesLeftPill" class="status-pill status-accent">20 BOXES REMAINING</span>
+          <span id="navBoxesLeftPill" class="status-pill status-accent">20 PRIZES IN PLAY</span>
         </div>
       </div>
 
@@ -65,7 +65,7 @@
             DEAL OR NO DEAL
             <span class="hero-subtitle">SPEAKING SHOWDOWN 💼</span>
           </h1>
-          <p class="hero-tagline">Answer English speaking challenges, eliminate boxes, beat the Banker, and win the jackpot!</p>
+          <p class="hero-tagline">Answer English speaking challenges, eliminate boxes, beat Ziraat Bankası Banker, and win up to 250.000.000 TL!</p>
         </div>
 
         <div class="setup-card glass-panel">
@@ -76,11 +76,11 @@
             <div class="btn-group" id="gradeSelector">
               <button type="button" class="btn-choice active" data-grade="grade7">
                 <span class="choice-title">7th GRADE</span>
-                <span class="choice-sub">Level A2 • Routines, Hobbies &amp; Nature</span>
+                <span class="choice-sub">Level A2 • Routines, Preferences, Daily Life &amp; Hobbies</span>
               </button>
               <button type="button" class="btn-choice" data-grade="grade8">
                 <span class="choice-title">8th GRADE</span>
-                <span class="choice-sub">Level A2–B1 • Teen Life, Science &amp; Future</span>
+                <span class="choice-sub">Level A2–B1 • Teen Life, Cooking, Friends &amp; Goals</span>
               </button>
               <button type="button" class="btn-choice" data-grade="mixed">
                 <span class="choice-title">MIXED (7 &amp; 8)</span>
@@ -129,7 +129,7 @@
           <span id="currentPickingTeamName" class="highlight-team">TEAM 1</span>: CHOOSE YOUR SECRET BOX!
         </h2>
         <p class="pick-instruction">
-          Every team must choose <strong>ONE</strong> box to keep until the grand finale. Its value will stay hidden!
+          Every team chooses <strong>ONE</strong> secret box to protect until the grand finale. Its value stays hidden!
         </p>
       </div>
 
@@ -154,7 +154,7 @@
       <!-- TV SHOW ARENA GRID: Left Board | Center Stage | Right Board -->
       <div class="arena-layout">
 
-        <!-- Left Prize Board: Low Values (100 to 2,500) -->
+        <!-- Left Prize Board: Low Values (1.000 TL to 1.000.000 TL) -->
         <aside class="prize-column prize-column-left">
           <div class="column-header">LOW VALUES</div>
           <div class="prize-list" id="prizeListLeft">
@@ -176,7 +176,7 @@
                 Daily Life &amp; Routines
               </div>
               <div class="challenge-difficulty-pill" id="challengeDifficultyPill">
-                Level 1 • 1–2 Sentences
+                LEVEL 1 • 1–2 Sentences
               </div>
             </div>
 
@@ -184,7 +184,7 @@
             <div class="speaking-challenge-box" id="speakingChallengeBox">
               <div class="challenge-icon-label">🗣️ SPEAKING CHALLENGE:</div>
               <p class="challenge-prompt-text" id="challengePromptText">
-                "What time do you usually wake up on school days, and what is the very first thing you do?"
+                "What is your favorite food, and why do you like it?"
               </p>
               
               <div class="challenge-footer">
@@ -197,7 +197,7 @@
               </div>
 
               <div id="hintContainer" class="hint-dropdown hidden">
-                <span id="hintContentText">Start with: 'I usually wake up at... and I...'</span>
+                <span id="hintContentText">Start with: 'My favorite food is... because...'</span>
               </div>
 
               <!-- Teacher Judgement Controls -->
@@ -236,7 +236,7 @@
 
         </div>
 
-        <!-- Right Prize Board: High Values (3,000 to 20,000) -->
+        <!-- Right Prize Board: High Values (1.500.000 TL to 250.000.000 TL) -->
         <aside class="prize-column prize-column-right">
           <div class="column-header">HIGH VALUES</div>
           <div class="prize-list" id="prizeListRight">
@@ -257,7 +257,7 @@
     <div class="modal-backdrop"></div>
     <div class="modal-content reveal-content">
       <div class="reveal-team-badge" id="revealTeamBadge">TEAM 1 OPENING</div>
-      <div class="reveal-box-number" id="revealBoxNumber">BOX 8</div>
+      <div class="reveal-box-number" id="revealBoxNumber">BOX #8</div>
 
       <!-- 3D Shaking Animated Briefcase / Box -->
       <div class="dramatic-box-wrapper">
@@ -275,9 +275,8 @@
 
       <!-- Revealed Prize Amount (Fades in dramatically) -->
       <div id="revealPrizeArea" class="reveal-prize-area hidden">
-        <div class="prize-amount-label">CONTAINED:</div>
-        <div class="prize-amount-value" id="revealPrizeValue">5,000</div>
-        <div class="prize-points-tag">POINTS</div>
+        <div class="prize-amount-label">THIS BOX CONTAINED:</div>
+        <div class="prize-amount-value" id="revealPrizeValue">500.000 TL</div>
         <div class="prize-verdict" id="revealPrizeVerdict">GREAT RESULT! LOW VALUE ELIMINATED</div>
         <button type="button" id="btnContinueAfterReveal" class="btn-gold-glow btn-large">
           <span>CONTINUE ➜</span>
@@ -304,8 +303,8 @@
           <div class="phone-icon-art">☎</div>
         </div>
 
-        <h2 class="call-title">INCOMING CALL...</h2>
-        <p class="call-subtitle">THE BANKER IS ON THE LINE!</p>
+        <h2 class="call-title">☎ INCOMING CALL...</h2>
+        <p class="call-subtitle">🏦 ZİRAAT BANKASI BANKER IS CALLING!</p>
 
         <div class="call-actions">
           <button type="button" id="btnAnswerPhone" class="btn-answer-call btn-pulse">
@@ -326,9 +325,9 @@
     <div class="modal-content banker-offer-content">
       
       <div class="banker-header">
-        <div class="banker-silhouette">🎩</div>
+        <div class="banker-silhouette">🏦</div>
         <div class="banker-title-group">
-          <div class="banker-subtitle">THE BANKER'S PROPOSAL FOR <span id="bankerTargetTeamName" class="highlight-team">TEAM 1</span></div>
+          <div class="banker-subtitle">ZİRAAT BANKASI BANKER'S PROPOSAL FOR <span id="bankerTargetTeamName" class="highlight-team">TEAM 1</span></div>
           <h2 class="banker-offer-headline">OFFICIAL BANK OFFER</h2>
         </div>
       </div>
@@ -336,15 +335,16 @@
       <!-- Big Glowing Offer Box -->
       <div class="banker-offer-display">
         <div class="offer-sub">THE BANKER OFFERS YOUR TEAM:</div>
-        <div class="offer-amount" id="bankerOfferAmount">8,750</div>
-        <div class="offer-unit">GUARANTEED POINTS</div>
+        <div class="offer-amount" id="bankerOfferAmount">15.000.000 TL</div>
+        <div class="offer-unit">GUARANTEED TURKISH LIRA</div>
+        <div id="bankerRiskComment" class="banker-risk-comment">⚡ 250.000.000 TL JACKPOT IS STILL IN PLAY!</div>
       </div>
 
       <!-- Speaking for Deal / No Deal Discussion -->
       <div class="deal-speaking-prompt-card">
         <div class="prompt-header-chip">🗣️ TEAM DISCUSSION &amp; JUSTIFICATION:</div>
         <p class="deal-prompt-text" id="dealSpeakingPromptText">
-          "Tell the class why you want to ACCEPT or REJECT this Banker's offer."
+          "Explain to your classmates why your team wants to ACCEPT or REJECT this Ziraat Bankası Banker offer!"
         </p>
         <div class="deal-judge-row">
           <button type="button" id="btnDecisionSpeakingDone" class="btn-decision-judge">
@@ -358,7 +358,7 @@
         <button type="button" id="btnChooseDeal" class="btn-huge-action btn-deal" disabled>
           <span class="action-icon">💰</span>
           <span class="action-title">DEAL</span>
-          <span class="action-desc">Take the guaranteed points &amp; lock score</span>
+          <span class="action-desc">Accept the guaranteed TL &amp; lock score</span>
         </button>
 
         <button type="button" id="btnChooseNoDeal" class="btn-huge-action btn-no-deal" disabled>
@@ -380,7 +380,7 @@
       <div class="outcome-icon" id="outcomeIcon">💰</div>
       <h2 class="outcome-headline" id="outcomeHeadline">DEAL!</h2>
       <p class="outcome-details" id="outcomeDetails">
-        TEAM 1 accepted the Banker's offer of 8,750 points!
+        TEAM 1 accepted the Banker's offer of 15.000.000 TL!
       </p>
       <button type="button" id="btnContinueOutcome" class="btn-gold-glow btn-large">
         <span>CONTINUE GAME ➜</span>
@@ -397,7 +397,7 @@
       
       <div class="final-badge">🏆 THE GRAND FINALE</div>
       <h2 class="final-title">SECRET BOX REVEAL</h2>
-      <p class="final-subtitle">It's time to find out what was inside each team's secret box!</p>
+      <p class="final-subtitle">It's time to open each team's Secret Box and discover the champions!</p>
 
       <div id="finalSecretCardsContainer" class="final-secret-cards-grid">
         <!-- Dynamic final secret box cards -->
@@ -422,7 +422,7 @@
         <div class="winner-trophy-art">🏆</div>
         <div class="winner-super-tag">DEAL OR NO DEAL CHAMPIONS</div>
         <h1 class="winner-team-name" id="winnerTeamName">TEAM 1</h1>
-        <div class="winner-score-pill" id="winnerScorePill">20,000 POINTS</div>
+        <div class="winner-score-pill" id="winnerScorePill">250.000.000 TL WON!</div>
       </div>
 
       <!-- Podiums / Roster Rankings -->

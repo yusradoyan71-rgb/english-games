@@ -1,610 +1,540 @@
 /**
  * DEAL OR NO DEAL – SPEAKING SHOWDOWN
- * 160+ Curriculum-Aligned Speaking Challenges for 7th & 8th Grade English
+ * Accessible, Classroom-Friendly Speaking Challenges for 7th & 8th Grade English
  * Categorized into Early Game (Level 1), Middle Game (Level 2), and Late Game (Level 3)
  */
 
 const DEAL_SPEAKING_BANK = {
   // =========================================================================
-  // GRADE 7 QUESTIONS
+  // GRADE 7 QUESTIONS (Everyday topics, familiar vocabulary, simple grammar)
   // =========================================================================
   grade7: {
-    // LEVEL 1: EARLY GAME (Short personal questions, routines, 1-2 sentence answers)
+    // LEVEL 1: EARLY GAME (Very easy questions, 1–2 sentences)
     level1: [
       {
         id: "g7_l1_01",
-        category: "Daily Life & Routines",
-        prompt: "What time do you usually wake up on school days, and what is the very first thing you do?",
+        category: "Food & Drinks",
+        prompt: "What is your favorite food, and why do you like it?",
         target: "1–2 sentences",
-        hint: "Start with: 'I usually wake up at... and I...'"
+        hint: "Start with: 'My favorite food is... because it is delicious/tasty.'"
       },
       {
         id: "g7_l1_02",
-        category: "Food & Drinks",
-        prompt: "What is your absolute favorite meal, and who usually cooks it for you?",
+        category: "Daily Routine",
+        prompt: "What do you usually do right after school finishes?",
         target: "1–2 sentences",
-        hint: "Start with: 'My favorite meal is... because...'"
+        hint: "Start with: 'After school, I usually go home and...'"
       },
       {
         id: "g7_l1_03",
-        category: "Free Time & Hobbies",
-        prompt: "What do you enjoy doing most after you finish your homework in the evening?",
+        category: "Friends",
+        prompt: "Describe your best friend using two positive personality words.",
         target: "1–2 sentences",
-        hint: "Mention your favorite hobby or entertainment."
+        hint: "Words like: friendly, funny, kind, helpful, smart."
       },
       {
         id: "g7_l1_04",
-        category: "School Life",
-        prompt: "Which school subject do you find most interesting this year, and why?",
+        category: "Past Activities",
+        prompt: "What did you do yesterday evening?",
         target: "1–2 sentences",
-        hint: "Name the subject and give one simple reason."
+        hint: "Start with: 'Yesterday evening, I watched/studied/played...'"
       },
       {
         id: "g7_l1_05",
-        category: "Sports & Activities",
-        prompt: "Do you prefer playing sports or watching sports on television? Explain why.",
+        category: "Abilities & Talents",
+        prompt: "What is one thing you can do very well?",
         target: "1–2 sentences",
-        hint: "State your preference and one reason."
+        hint: "Start with: 'I can play football / draw pictures / speak English well.'"
       },
       {
         id: "g7_l1_06",
-        category: "Animals & Nature",
-        prompt: "What is your favorite animal, and where does it live in the world?",
+        category: "School Subjects",
+        prompt: "What is your favorite school subject and why?",
         target: "1–2 sentences",
-        hint: "Name the animal and its habitat (e.g., forest, ocean, home)."
+        hint: "Start with: 'My favorite subject is English/Maths/Art because...'"
       },
       {
         id: "g7_l1_07",
-        category: "Weather & Seasons",
-        prompt: "Which season of the year is your favorite, and what weather do you like best?",
+        category: "Animals & Pets",
+        prompt: "What is your favorite animal, and do you have a pet at home?",
         target: "1–2 sentences",
-        hint: "Say the season (summer/winter/spring/autumn) and why you enjoy it."
+        hint: "Start with: 'My favorite animal is a dog/cat because...'"
       },
       {
         id: "g7_l1_08",
-        category: "Friends & Family",
-        prompt: "Describe your best friend using two positive personality adjectives.",
+        category: "Weather & Seasons",
+        prompt: "Which season do you like best: summer, winter, spring, or autumn?",
         target: "1–2 sentences",
-        hint: "E.g., friendly, helpful, funny, honest, kind, energetic."
+        hint: "Start with: 'I like summer because the weather is sunny and warm.'"
       },
       {
         id: "g7_l1_09",
-        category: "Shopping & Clothes",
-        prompt: "What type of clothes do you feel most comfortable wearing on weekends?",
+        category: "Sports & Games",
+        prompt: "What sport or game do you enjoy playing with your friends?",
         target: "1–2 sentences",
-        hint: "Describe casual clothes (e.g., hoodie, sneakers, jeans, t-shirt)."
+        hint: "Start with: 'I enjoy playing basketball / video games with my friends.'"
       },
       {
         id: "g7_l1_10",
-        category: "Music & Movies",
-        prompt: "What kind of music or movies do you like listening to or watching when you relax?",
+        category: "Morning Habits",
+        prompt: "What time do you wake up on weekdays, and what do you eat for breakfast?",
         target: "1–2 sentences",
-        hint: "Name the genre (pop, rock, comedy, animation) and your favorite artist/film."
+        hint: "Start with: 'I wake up at 7:00 and eat eggs, cheese, and bread.'"
       },
       {
         id: "g7_l1_11",
-        category: "Holidays & Travel",
-        prompt: "What is the most beautiful city or place you have ever visited?",
+        category: "Music & Entertainment",
+        prompt: "Who is your favorite singer or band, and when do you listen to them?",
         target: "1–2 sentences",
-        hint: "Tell the place and one thing you saw there."
+        hint: "Start with: 'My favorite singer is... I listen to them when I relax.'"
       },
       {
         id: "g7_l1_12",
-        category: "Technology",
-        prompt: "Which electronic device or app do you use the most every day?",
+        category: "Clothes & Style",
+        prompt: "What do you like wearing on weekends when you go out?",
         target: "1–2 sentences",
-        hint: "Smartphone, tablet, computer, or a specific learning/game app."
+        hint: "Start with: 'On weekends, I like wearing jeans, a hoodie, and sneakers.'"
       },
       {
         id: "g7_l1_13",
-        category: "Personal Feelings",
-        prompt: "What makes you feel extremely happy when you have a bad day?",
+        category: "Chores at Home",
+        prompt: "Which household chore do you help your parents with at home?",
         target: "1–2 sentences",
-        hint: "Listening to music, talking to friends, playing games, eating chocolate."
+        hint: "Start with: 'I help by tidying my room / setting the dinner table.'"
       },
       {
         id: "g7_l1_14",
-        category: "House & Chores",
-        prompt: "Which household chore do you help with at home (e.g., washing dishes, tidying room)?",
+        category: "Colors & Preferences",
+        prompt: "What is your favorite color, and what thing in your room has that color?",
         target: "1–2 sentences",
-        hint: "Say what chore you do and how often."
+        hint: "Start with: 'My favorite color is blue. My school bag is blue.'"
       },
       {
         id: "g7_l1_15",
-        category: "Future Dreams",
-        prompt: "What is one country in the world you really want to travel to in the future?",
+        category: "Feelings & Mood",
+        prompt: "What makes you laugh or feel happy when you are tired?",
         target: "1–2 sentences",
-        hint: "Name the country and one thing you want to do there."
+        hint: "Start with: 'Watching funny videos / talking with friends makes me happy.'"
       }
     ],
 
-    // LEVEL 2: MIDDLE GAME (Explain, compare, describe, 2-3 connected sentences)
+    // LEVEL 2: MIDDLE GAME (A little more explanation, 2–3 sentences)
     level2: [
       {
         id: "g7_l2_01",
-        category: "Biographies & Role Models",
-        prompt: "Talk about someone you admire (a scientist, athlete, historical figure, or parent) and explain two reasons why they inspire you.",
+        category: "Weekends & Fun",
+        prompt: "What do you usually do at weekends, and why do you enjoy it?",
         target: "2–3 sentences",
-        hint: "Use phrases like: 'I admire... because he/she is...' and 'Moreover, he/she achieved...'"
+        hint: "Describe your Saturday or Sunday routine and why it is fun for you."
       },
       {
         id: "g7_l2_02",
-        category: "Wild Animals & Protection",
-        prompt: "Why are many wild animals in danger of extinction today, and what can humans do to protect them?",
+        category: "Travel & Dream Places",
+        prompt: "Describe a city or place you would like to visit in the future and explain why.",
         target: "2–3 sentences",
-        hint: "Mention habitat loss, pollution, or hunting, and creating national parks."
+        hint: "Name the city/country and 2 interesting things you want to see or do there."
       },
       {
         id: "g7_l2_03",
-        category: "Healthy Living vs Fast Food",
-        prompt: "Compare eating home-cooked fresh food with eating fast food. Which is better for teenagers and why?",
+        category: "Hobbies & Frequency",
+        prompt: "What is your favorite hobby? How often do you do it, and who do you do it with?",
         target: "2–3 sentences",
-        hint: "Use comparative adjectives: 'Home-cooked food is healthier and fresher than fast food, but...'"
+        hint: "Use frequency words like: every day, twice a week, on weekends."
       },
       {
         id: "g7_l2_04",
-        category: "Life in the City vs Village",
-        prompt: "Would you rather live in a crowded big city or a peaceful village? Give two clear reasons.",
+        category: "Healthy Living",
+        prompt: "What healthy habits do you have to stay strong and energetic?",
         target: "2–3 sentences",
-        hint: "Explain advantages of transportation/facilities vs fresh air/silence."
+        hint: "Mention drinking water, eating fruits, sleeping early, or doing sports."
       },
       {
         id: "g7_l2_05",
-        category: "Past Memories",
-        prompt: "Describe an unforgettable birthday party or family celebration you had in the past.",
+        category: "Memorable Holidays",
+        prompt: "Tell us about a fun holiday or family trip you had in the past.",
         target: "2–3 sentences",
-        hint: "Use past tense verbs: 'Last year, we celebrated... My friends came and we ate... It was unforgettable because...'"
+        hint: "Where did you go, who did you go with, and what was the best moment?"
       },
       {
         id: "g7_l2_06",
-        category: "Inventions & Science",
-        prompt: "Which modern invention has changed human life the most: the internet, airplanes, or electricity? Explain your choice.",
+        category: "City vs Village Life",
+        prompt: "Would you rather live in a big crowded city or a quiet green village? Give two reasons.",
         target: "2–3 sentences",
-        hint: "State the invention and describe how daily life would be impossible without it."
+        hint: "Compare fresh air and quiet life with shopping malls and cinemas."
       },
       {
         id: "g7_l2_07",
-        category: "Social Life & Friendship",
-        prompt: "What are the three most important qualities of a true friend? Explain why honesty matters.",
+        category: "Friendship",
+        prompt: "Why is it important to have good friends at school? How do you support each other?",
         target: "2–3 sentences",
-        hint: "Mention loyalty, honesty, sharing secrets, and supporting each other."
+        hint: "Mention sharing secrets, studying together, and having fun at break times."
       },
       {
         id: "g7_l2_08",
-        category: "Television & Media",
-        prompt: "Do you think watching television documentaries is better than watching cartoons or series? Why or why not?",
+        category: "Movies & Books",
+        prompt: "Tell us about a movie, cartoon, or book you really liked recently. What was it about?",
         target: "2–3 sentences",
-        hint: "Compare educational value with relaxation and entertainment."
+        hint: "State the name, the main character, and why the ending was great."
       },
       {
         id: "g7_l2_09",
-        category: "Environment & Recycling",
-        prompt: "Explain why recycling plastic, glass, and paper is essential for our planet's future.",
+        category: "Helping at Home",
+        prompt: "Why should children help their parents with house chores? Which chore is easiest for you?",
         target: "2–3 sentences",
-        hint: "Explain waste reduction, saving natural resources, and preventing ocean pollution."
+        hint: "Explain sharing work in the family and taking responsibility."
       },
       {
         id: "g7_l2_10",
-        category: "Celebrations & Parties",
-        prompt: "Imagine you are organizing a surprise farewell party for a classmate. What preparations must you make?",
+        category: "Dream Pet",
+        prompt: "If you could adopt any pet in the world, what animal would you choose and how would you care for it?",
         target: "2–3 sentences",
-        hint: "Mention invitations, decorating the room, ordering a cake, and buying a gift."
+        hint: "Name the pet, where it would sleep, and what food you would give it."
       },
       {
         id: "g7_l2_11",
-        category: "Sports & Fitness",
-        prompt: "Why should teenagers do regular physical exercise instead of sitting in front of computer screens all day?",
+        category: "School Breaks",
+        prompt: "What do you and your classmates like doing during 10-minute break times at school?",
         target: "2–3 sentences",
-        hint: "Mention physical health, building muscles, boosting mood, and better sleep."
+        hint: "Talk about chatting in the hallway, eating snacks, or playing in the yard."
       },
       {
         id: "g7_l2_12",
-        category: "Superstitions & Beliefs",
-        prompt: "Do you believe in good luck charms (like horseshoes, four-leaf clovers, or evil eye beads)? Why or why not?",
+        category: "Future Dreams",
+        prompt: "What job or career would you like to have when you grow up, and why?",
         target: "2–3 sentences",
-        hint: "State whether you think luck depends on superstition or hard work and preparation."
-      },
-      {
-        id: "g7_l2_13",
-        category: "Space & Planets",
-        prompt: "If astronauts discovered life on Mars, how would the world change? What would you like to ask them?",
-        target: "2–3 sentences",
-        hint: "Express curiosity about alien life, space travel, and scientific discovery."
-      },
-      {
-        id: "g7_l2_14",
-        category: "Reading Books vs Playing Games",
-        prompt: "Compare reading a thrilling fantasy book with playing a video game. Which stimulates the imagination more?",
-        target: "2–3 sentences",
-        hint: "Discuss creating images in your mind vs interactive graphics and gameplay."
-      },
-      {
-        id: "g7_l2_15",
-        category: "Weekend Plans",
-        prompt: "Describe your ideal weekend plan if you had unlimited time and could go anywhere with your best friends.",
-        target: "2–3 sentences",
-        hint: "Detail activities for Saturday morning, afternoon, and Sunday evening."
+        hint: "Doctor, teacher, pilot, engineer, gamer, artist... give a simple reason."
       }
     ],
 
-    // LEVEL 3: LATE GAME (Opinions, hypotheses, pros/cons, extended reasoning)
+    // LEVEL 3: LATE GAME (Thoughtful but classroom-friendly, 3–4 sentences)
     level3: [
       {
         id: "g7_l3_01",
-        category: "Future Predictions & AI",
-        prompt: "How do you think schools and classrooms will change in the year 2050? Will robot teachers replace human teachers?",
+        category: "School Changes",
+        prompt: "If you could change one thing about your school, what would you change and why?",
         target: "3–4 sentences",
-        hint: "Express your prediction: 'In 2050, I believe... However, robot teachers cannot understand feelings because...'"
+        hint: "Think about school hours, canteen food, sports facilities, or homework."
       },
       {
         id: "g7_l3_02",
-        category: "Environment & Climate",
-        prompt: "If you were appointed Minister of Environment for one month, what two strict rules would you enforce immediately?",
+        category: "Free Weekend",
+        prompt: "What would you do if you had a completely free weekend with your best friends and no homework?",
         target: "3–4 sentences",
-        hint: "Use conditional: 'If I were the minister, I would ban... In addition, I would require all factories to...'"
+        hint: "Plan Saturday morning, afternoon, and Sunday fun activities."
       },
       {
         id: "g7_l3_03",
-        category: "Social Media & Teen Life",
-        prompt: "Discuss one major advantage and one dangerous disadvantage of teenagers using social media apps daily.",
+        category: "Good Student Debate",
+        prompt: "Which is more important for a good student: studying hard or managing time well? Explain your opinion.",
         target: "3–4 sentences",
-        hint: "Balance communication/learning with screen addiction, cyberbullying, or lack of sleep."
+        hint: "Explain why time management helps you study without getting tired or stressed."
       },
       {
         id: "g7_l3_04",
-        category: "Time Travel Dilemma",
-        prompt: "If you had a time machine and could travel either 500 years into the past or 500 years into the future, which would you choose and why?",
+        category: "Superpower Imagination",
+        prompt: "If you could have one magical superpower (flying, invisibility, or teleportation), which would you choose and how would you use it?",
         target: "3–4 sentences",
-        hint: "Explain your curiosity about ancient history or futuristic flying cities and technology."
+        hint: "State the superpower, where you would go, and how you would help people."
       },
       {
         id: "g7_l3_05",
-        category: "School Rules Debate",
-        prompt: "Should school uniforms be mandatory for all students, or should students wear whatever they like? Give strong arguments.",
+        category: "Saving Nature",
+        prompt: "What are two simple things every 7th grade student can do to protect the environment at school?",
         target: "3–4 sentences",
-        hint: "Discuss equality and discipline versus personal freedom and self-expression."
+        hint: "Mention throwing trash in recycling bins, turning off lights, and saving water."
       },
       {
         id: "g7_l3_06",
-        category: "Space Exploration",
-        prompt: "Governments spend billions of dollars exploring outer space. Should we spend this money on space or solving poverty on Earth?",
+        category: "Smartphones in School",
+        prompt: "Do you think students should be allowed to use phones during break times at school? Give your reasons.",
         target: "3–4 sentences",
-        hint: "Weigh scientific discovery and future resources against current human needs on Earth."
+        hint: "Mention talking with friends face-to-face versus calling parents or playing games."
       },
       {
         id: "g7_l3_07",
-        category: "Global Language",
-        prompt: "Why is English considered the most important global language today, and how will speaking fluent English help your future career?",
+        category: "Learning English",
+        prompt: "Why is learning English useful for young people today? How do you practice English outside school?",
         target: "3–4 sentences",
-        hint: "Mention international business, science, travel, universities, and communicating globally."
+        hint: "Mention watching movies with subtitles, listening to music, playing games, and travel."
       },
       {
         id: "g7_l3_08",
-        category: "Artificial Intelligence vs Human Art",
-        prompt: "Can AI-generated music and paintings ever replace real human artists? Why or why not?",
+        category: "Ideal Birthday Party",
+        prompt: "Describe your dream birthday party. Where is it, who is invited, and what fun games do you play?",
         target: "3–4 sentences",
-        hint: "Argue whether AI has real human emotion, soul, suffering, and creativity."
-      },
-      {
-        id: "g7_l3_09",
-        category: "Ideal Society",
-        prompt: "What is the single biggest problem facing young people in society today, and how can schools help solve it?",
-        target: "3–4 sentences",
-        hint: "Discuss exam stress, digital distraction, peer pressure, or healthy habits."
-      },
-      {
-        id: "g7_l3_10",
-        category: "Extreme Adventure",
-        prompt: "Would you agree to spend one whole month alone on an uninhabited tropical island with only basic supplies? Why or why not?",
-        target: "3–4 sentences",
-        hint: "Explain survival skills, dealing with loneliness, and facing nature without technology."
+        hint: "Describe the cake, music, decorations, and exciting games with classmates."
       }
     ]
   },
 
   // =========================================================================
-  // GRADE 8 QUESTIONS
+  // GRADE 8 QUESTIONS (Teen life, communication, comparisons, future goals)
   // =========================================================================
   grade8: {
-    // LEVEL 1: EARLY GAME (Short personal questions, preferences, 1-2 sentence answers)
+    // LEVEL 1: EARLY GAME (Accessible teen topics, 1–2 sentences)
     level1: [
       {
         id: "g8_l1_01",
-        category: "Friendship & Qualities",
-        prompt: "What is the most important personality trait you look for in a true buddy, and why?",
+        category: "Friendship Qualities",
+        prompt: "What is the most important quality you look for in a good friend?",
         target: "1–2 sentences",
-        hint: "Trustworthiness, loyalty, honesty, sense of humor, supportive nature."
+        hint: "Start with: 'In a good friend, honesty/loyalty/kindness is most important because...'"
       },
       {
         id: "g8_l1_02",
-        category: "Teen Life & Hobbies",
-        prompt: "What is your favorite weekend activity to blow off steam and de-stress after a busy school week?",
+        category: "Teen Routines",
+        prompt: "What is your favorite activity to relax after a stressful test or busy week?",
         target: "1–2 sentences",
-        hint: "Listening to music, riding a bike, gaming, hanging out with friends."
+        hint: "Start with: 'To relax, I usually listen to music / play games / walk outside.'"
       },
       {
         id: "g8_l1_03",
-        category: "Cooking & Kitchen",
-        prompt: "What simple snack or dish can you prepare by yourself in the kitchen?",
+        category: "Simple Cooking",
+        prompt: "What is a simple snack or food you can prepare by yourself in the kitchen?",
         target: "1–2 sentences",
-        hint: "Mention the ingredients and basic cooking method (e.g., omelette, sandwich, pasta)."
+        hint: "Start with: 'I can make a toast / sandwich / fruit salad by...'"
       },
       {
         id: "g8_l1_04",
-        category: "Communication Methods",
-        prompt: "Do you prefer calling people on the phone, texting instant messages, or talking face-to-face?",
+        category: "Communication",
+        prompt: "Do you prefer sending text messages or calling your friends on the phone? Why?",
         target: "1–2 sentences",
-        hint: "State your preferred communication channel and one main reason."
+        hint: "Start with: 'I prefer texting/calling because it is faster and easier.'"
       },
       {
         id: "g8_l1_05",
-        category: "The Internet",
-        prompt: "What is the most useful website or educational platform you use to study English or school topics?",
+        category: "Internet & Apps",
+        prompt: "Which smartphone app or website do you find most useful for your schoolwork?",
         target: "1–2 sentences",
-        hint: "Name the website/platform and explain what you learn there."
+        hint: "Start with: 'I use... because it helps me learn new words and study.'"
       },
       {
         id: "g8_l1_06",
-        category: "Adventures & Extreme Sports",
-        prompt: "Which extreme sport would you be willing to try once in your life: skydiving, scuba diving, or bungee jumping?",
+        category: "Adventures & Sports",
+        prompt: "Which adventure sport would you like to try once: rafting, skateboarding, or climbing?",
         target: "1–2 sentences",
-        hint: "Choose one sport and describe the feeling of excitement/adrenaline."
+        hint: "Start with: 'I would like to try... because it sounds exciting and fun.'"
       },
       {
         id: "g8_l1_07",
-        category: "Tourism & Destinations",
-        prompt: "Do you prefer historic cultural holidays with museums or seaside beach resort holidays? Why?",
+        category: "Music & Taste",
+        prompt: "What type of music gives you the most energy when you are studying or exercising?",
         target: "1–2 sentences",
-        hint: "Contrast sightseeing ancient ruins with relaxing under the sun."
+        hint: "Start with: 'I love listening to pop/rock/hip-hop because the rhythm is energetic.'"
       },
       {
         id: "g8_l1_08",
-        category: "Chores & Responsibilities",
-        prompt: "Which chore do you find the most annoying or boring to do at home?",
+        category: "Chores & Duties",
+        prompt: "Which household chore is the most boring for you to do at home?",
         target: "1–2 sentences",
-        hint: "Ironing, taking out trash, vacuuming, dusting shelves, washing dishes."
+        hint: "Start with: 'Washing dishes / making my bed is boring because...'"
       },
       {
         id: "g8_l1_09",
-        category: "Science & Inventions",
-        prompt: "Who is a famous scientist from history that you find remarkable (e.g., Einstein, Tesla, Newton, Marie Curie)?",
+        category: "Holidays & Travel",
+        prompt: "Do you prefer summer beach holidays or historic sightseeing holidays?",
         target: "1–2 sentences",
-        hint: "Name the scientist and their key contribution or discovery."
+        hint: "Start with: 'I prefer beach/historic holidays because I love swimming/visiting museums.'"
       },
       {
         id: "g8_l1_10",
-        category: "Natural Forces & Disasters",
-        prompt: "What natural disaster do you think is the most frightening, and why?",
+        category: "Science & Inventions",
+        prompt: "Which invention do you think humans cannot live without today: smartphones, electricity, or cars?",
         target: "1–2 sentences",
-        hint: "Earthquake, tsunami, hurricane, volcanic eruption, flood, avalanche."
+        hint: "Start with: 'Electricity is most important because without it nothing works.'"
       },
       {
         id: "g8_l1_11",
-        category: "Music & Concerts",
-        prompt: "Have you ever attended a live concert or musical show? If not, whose concert do you want to see?",
+        category: "Daily Sleep",
+        prompt: "How many hours of sleep do you get each night, and do you feel awake in the morning?",
         target: "1–2 sentences",
-        hint: "Share the artist, band, or atmosphere of live musical performances."
+        hint: "Start with: 'I usually sleep 8 hours, and I feel refreshed in the morning.'"
       },
       {
         id: "g8_l1_12",
-        category: "Book & Movie Genres",
-        prompt: "Which movie genre keeps you on the edge of your seat: sci-fi, detective mystery, or action thriller?",
+        category: "Weekend Plans",
+        prompt: "What are your plans for this coming weekend with your family or friends?",
         target: "1–2 sentences",
-        hint: "Express your genre preference and what makes it thrilling."
+        hint: "Start with: 'This weekend, I am going to meet my friends and visit...'"
       },
       {
         id: "g8_l1_13",
-        category: "Healthy Habits",
-        prompt: "How many hours of sleep do you get each night, and do you feel energized in the morning?",
+        category: "Personal Goals",
+        prompt: "What is one personal goal you want to achieve before this school year ends?",
         target: "1–2 sentences",
-        hint: "State your average sleep duration and morning alertness."
+        hint: "Start with: 'My goal is to improve my English marks / read 5 books.'"
       },
       {
         id: "g8_l1_14",
-        category: "Future Career",
-        prompt: "What profession or career path are you currently dreaming of pursuing after university?",
+        category: "Favourite Book or Film",
+        prompt: "What is your favorite movie or book genre (comedy, action, sci-fi, horror) and why?",
         target: "1–2 sentences",
-        hint: "Software engineering, medicine, aviation, architecture, teaching, design."
+        hint: "Start with: 'I love comedy/action because it makes me laugh / is thrilling.'"
       },
       {
         id: "g8_l1_15",
-        category: "Inventions We Need",
-        prompt: "What fantasy invention do you wish scientists would invent right now to make school life easier?",
+        category: "Social Life",
+        prompt: "Do you like spending time alone in your room or being surrounded by friends? Why?",
         target: "1–2 sentences",
-        hint: "Instant memory chip, homework machine, teleporter to avoid morning traffic."
+        hint: "State whether you recharge alone or enjoy socializing with others."
       }
     ],
 
-    // LEVEL 2: MIDDLE GAME (Explain steps, compare, give reasons, 2-3 connected sentences)
+    // LEVEL 2: MIDDLE GAME (Explanations, comparisons, recipes, 2–3 sentences)
     level2: [
       {
         id: "g8_l2_01",
-        category: "In the Kitchen & Recipes",
-        prompt: "Explain how to prepare a traditional dish or your favorite breakfast step-by-step using linking words (First, Second, Next, Finally).",
+        category: "Kitchen & Recipes",
+        prompt: "Explain how to make your favorite sandwich, pasta, or snack using linking words (First, Next, Finally).",
         target: "2–3 sentences",
-        hint: "Use transition words: 'First, chop... Next, heat the pan with olive oil... Finally, serve it hot.'"
+        hint: "Start with: 'First, take the bread... Next, put cheese and tomato... Finally, grill it.'"
       },
       {
         id: "g8_l2_02",
-        category: "On the Phone & Etiquette",
-        prompt: "How has smartphone etiquette changed in modern times? What phone habits do you consider rude during family dinners?",
+        category: "Phone Etiquette",
+        prompt: "What phone habits do you think are rude when people are having dinner together as a family?",
         target: "2–3 sentences",
-        hint: "Discuss texting during conversations, answering calls with loud speaker, and ignoring people."
+        hint: "Discuss texting during meals, answering loud calls, and ignoring family members."
       },
       {
         id: "g8_l2_03",
-        category: "Internet Safety & Privacy",
-        prompt: "What crucial rules should teenagers follow to protect their personal privacy and stay safe from cyber threats online?",
+        category: "Friendship Disagreements",
+        prompt: "If you have a disagreement with your best friend, what is the best way to solve it peacefully?",
         target: "2–3 sentences",
-        hint: "Mention strong passwords, not sharing personal addresses, and avoiding suspicious download links."
+        hint: "Talk about listening calmly, saying sorry, and talking face-to-face."
       },
       {
         id: "g8_l2_04",
-        category: "Adventures & Extreme Sports",
-        prompt: "Why do adrenaline seekers risk their lives doing extreme sports like BASE jumping or mountaineering? Explain the psychological thrill.",
+        category: "Sports & Teenage Health",
+        prompt: "Why should teenagers do regular sports instead of sitting in front of screens all day?",
         target: "2–3 sentences",
-        hint: "Discuss overcoming fear, pushing personal limits, escaping daily boredom, and feeling alive."
+        hint: "Explain physical energy, healthy heart, feeling happy, and better focus."
       },
       {
         id: "g8_l2_05",
-        category: "Tourism & Cultural Heritage",
-        prompt: "Why is Turkey such a world-famous tourist destination? Describe two unique historical or natural attractions.",
+        category: "Famous Sights",
+        prompt: "What is the most famous historical or natural place in Turkey that every tourist should visit?",
         target: "2–3 sentences",
-        hint: "Mention Cappadocia's fairy chimneys, Pamukkale travertines, Ephesus, or Istanbul's historic Bosphorus."
+        hint: "Describe Cappadocia, Pamukkale, Ephesus, or Istanbul's historic landmarks."
       },
       {
         id: "g8_l2_06",
-        category: "Chores & Family Cooperation",
-        prompt: "Why is sharing household chores equally among all family members vital for a happy and peaceful home?",
+        category: "Family Teamwork",
+        prompt: "Why is it fair for everyone in the family to share household duties equally?",
         target: "2–3 sentences",
-        hint: "Explain fairness, relieving parents' exhaustion, teaching responsibility, and teamwork."
+        hint: "Explain that parents work hard and sharing chores makes everyone happy and relaxed."
       },
       {
         id: "g8_l2_07",
-        category: "Scientific Breakthroughs",
-        prompt: "Describe how the invention of antibiotics and vaccines revolutionized global public health over the last century.",
+        category: "Internet Safety",
+        prompt: "What are two important safety rules teenagers should follow when using the internet or social apps?",
         target: "2–3 sentences",
-        hint: "Mention curing deadly bacterial diseases, extending life expectancy, and saving millions of lives."
+        hint: "Mention keeping passwords secret and not talking to strangers online."
       },
       {
         id: "g8_l2_08",
-        category: "Natural Disasters Preparedness",
-        prompt: "What emergency items should every household keep packed in an earthquake emergency bag (survival kit)?",
+        category: "Breakfast & Energy",
+        prompt: "Why is breakfast considered the most important meal for a student before taking morning exams?",
         target: "2–3 sentences",
-        hint: "Water bottles, canned food, flashlight with spare batteries, first-aid kit, whistle, and warm blanket."
+        hint: "Explain how food gives brain energy, stops hunger, and improves concentration."
       },
       {
         id: "g8_l2_09",
-        category: "Teen Friendship Conflict",
-        prompt: "If your best friend broke a promise or shared your secret with others, how would you resolve the conflict maturely?",
+        category: "Travel & Broadening Horizons",
+        prompt: "How does traveling to a new city or foreign country help a teenager learn new things?",
         target: "2–3 sentences",
-        hint: "Describe having an honest private conversation, explaining your hurt feelings, and setting boundaries."
+        hint: "Mention tasting different foods, hearing new languages, and meeting new people."
       },
       {
         id: "g8_l2_10",
-        category: "Online Learning vs Traditional Classroom",
-        prompt: "Compare attending classes in a real physical school with online distance learning. Which provides better social interaction?",
+        category: "Eco-Friendly Transport",
+        prompt: "Why is riding bicycles or walking to school better for our town than using private cars?",
         target: "2–3 sentences",
-        hint: "Discuss face-to-face peer conversations, group projects, and teacher guidance vs sitting alone at a computer."
+        hint: "Explain reducing air pollution, keeping students fit, and saving money on fuel."
       },
       {
         id: "g8_l2_11",
-        category: "Healthy Eating & Energy",
-        prompt: "Why do many teenagers skip breakfast, and how does skipping breakfast negatively impact school concentration?",
+        category: "Team Sports & Cooperation",
+        prompt: "What does playing in a team sport like volleyball or football teach you about cooperation?",
         target: "2–3 sentences",
-        hint: "Mention morning rush, low blood sugar, lack of focus in morning classes, and midday fatigue."
+        hint: "Mention trusting teammates, passing the ball, and celebrating together."
       },
       {
         id: "g8_l2_12",
-        category: "Travel & Broadening Horizons",
-        prompt: "How does traveling to a foreign country with a completely different language and culture expand a person's mindset?",
+        category: "Science Breakthroughs",
+        prompt: "Name one scientific invention from history (like the internet, vaccines, or airplanes) and explain why it helped humanity.",
         target: "2–3 sentences",
-        hint: "Mention learning tolerance, experiencing new cuisines, speaking languages, and breaking prejudices."
-      },
-      {
-        id: "g8_l2_13",
-        category: "Eco-Friendly Transportation",
-        prompt: "Why should major metropolitan cities invest in electric bicycles and subway networks instead of building wider highways?",
-        target: "2–3 sentences",
-        hint: "Explain reducing carbon emissions, eliminating gridlock traffic, and promoting active health."
-      },
-      {
-        id: "g8_l2_14",
-        category: "Smart Homes & IoT",
-        prompt: "How do smart home technologies (voice assistants, automated lighting, robotic vacuums) make daily life convenient?",
-        target: "2–3 sentences",
-        hint: "Discuss saving time, energy efficiency, remote security control, and effortless cleaning."
-      },
-      {
-        id: "g8_l2_15",
-        category: "Role of Sports in Character",
-        prompt: "How does participating in team sports like basketball or volleyball develop leadership and cooperation skills in teenagers?",
-        target: "2–3 sentences",
-        hint: "Mention communication on the court, handling defeat gracefully, and trusting your teammates."
+        hint: "Explain how it saves lives, connects people across the globe, or makes travel fast."
       }
     ],
 
-    // LEVEL 3: LATE GAME (High-stakes reasoning, opinions, ethical dilemmas, mini-discussions)
+    // LEVEL 3: LATE GAME (Opinions, dilemmas, future paths, 3–4 sentences)
     level3: [
       {
         id: "g8_l3_01",
-        category: "Artificial Intelligence & Ethics",
-        prompt: "As artificial intelligence advances rapidly, do you think autonomous AI machines should make decisions in medicine and law? Defend your position.",
+        category: "School Uniforms Debate",
+        prompt: "Should school uniforms be mandatory for all students, or should students choose their own clothes? Explain your opinion.",
         target: "3–4 sentences",
-        hint: "Balance high computational speed and zero human fatigue with the absence of empathy, morals, and accountability."
+        hint: "Discuss equality and feeling part of a team vs comfort and personal style."
       },
       {
         id: "g8_l3_02",
-        category: "Climate Crisis & Global Responsibility",
-        prompt: "Global warming is causing extreme heatwaves and wild storms. Is the responsibility on individual citizens or large multinational corporations?",
+        category: "Future Classrooms & AI",
+        prompt: "How will classrooms and teaching be different in the year 2040? Will computers replace teachers?",
         target: "3–4 sentences",
-        hint: "Argue how corporate pollution drives emissions while individual consumer habits and green voting create demand for change."
+        hint: "Explain that computers can help with exercises, but human teachers provide kindness and guidance."
       },
       {
         id: "g8_l3_03",
-        category: "Digital Overload & Mental Health",
-        prompt: "Many experts propose banning smartphones in middle schools worldwide. Do you support this ban? Provide reasoned arguments.",
+        category: "Dream Career Path",
+        prompt: "What profession or career are you interested in for your future, and what skills do you need to learn for it?",
         target: "3–4 sentences",
-        hint: "Discuss improved classroom attention, reduced cyberbullying, and real playground friendships vs emergency safety and digital learning tools."
+        hint: "Mention your dream job (doctor, programmer, pilot, architect), university goals, and language skills."
       },
       {
         id: "g8_l3_04",
-        category: "Space Colonization vs Earth",
-        prompt: "Should humanity invest trillions of dollars into establishing permanent human colonies on Mars, or focus all resources on saving Earth's ecosystems?",
+        category: "Saving vs Spending",
+        prompt: "If you received 10.000 TL as a birthday gift today, would you save it for the future or spend it immediately? Explain why.",
         target: "3–4 sentences",
-        hint: "Discuss backup plan for human extinction and technological innovation vs the urgency of saving our only living biosphere."
+        hint: "Explain what items you might buy versus saving for a computer, bike, or future education."
       },
       {
         id: "g8_l3_05",
-        category: "Success & Hard Work vs Talent",
-        prompt: "In achieving greatness in sports, arts, or academics, what matters more: natural born talent or relentless daily discipline? Explain.",
+        category: "Smartphone Addiction",
+        prompt: "Many teenagers spend 4–5 hours on their phones every day. What are two negative effects of this, and how can we reduce screen time?",
         target: "3–4 sentences",
-        hint: "Quote or reference how talent without hard work fails when hard work beats talent."
+        hint: "Mention eye strain, less sleep, missing sports, and setting daily time limits."
       },
       {
         id: "g8_l3_06",
-        category: "Social Media Algorithms",
-        prompt: "Social media platforms use algorithms designed to keep users scrolling for hours. How does this affect teenagers' attention spans and real-life goals?",
+        category: "Success: Talent vs Hard Work",
+        prompt: "In sports, music, or school, what is more important: natural talent or daily hard work? Defend your view.",
         target: "3–4 sentences",
-        hint: "Discuss dopamine loops, reduced reading stamina, procrastination on homework, and distorted body images."
+        hint: "Explain that talent without practice is not enough, and hard work always leads to success."
       },
       {
         id: "g8_l3_07",
-        category: "Cashless Society",
-        prompt: "Will physical paper money completely disappear in the next 20 years? What are the advantages and security risks of a 100% digital economy?",
+        category: "Ideal Weekend Trip",
+        prompt: "If you could plan a 3-day class trip anywhere with your teachers and classmates, where would you go and what would you do?",
         target: "3–4 sentences",
-        hint: "Discuss speed and frictionless digital payments vs cyber hacking, power outages, and lack of financial privacy."
+        hint: "Describe the destination, hotel/camping, sightseeing, and fun evening activities."
       },
       {
         id: "g8_l3_08",
-        category: "Future of Transportation",
-        prompt: "Imagine self-driving electric cars become universal. How will city infrastructure, parking lots, and traffic accidents transform?",
+        category: "Protecting Our Planet",
+        prompt: "What is the biggest environmental problem in your city (traffic, plastic waste, air pollution), and how can citizens solve it?",
         target: "3–4 sentences",
-        hint: "Describe zero human driving errors, turning parking garages into green parks, and smooth automated traffic flow."
-      },
-      {
-        id: "g8_l3_09",
-        category: "Biodiversity & Ocean Conservation",
-        prompt: "Over 8 million tons of plastic waste enter oceans annually. What aggressive international measures should countries enact to restore marine life?",
-        target: "3–4 sentences",
-        hint: "Discuss biodegradable packaging laws, ocean cleanup vessels, and imposing heavy taxes on single-use plastics."
-      },
-      {
-        id: "g8_l3_10",
-        category: "Lifelong Learning & Skills",
-        prompt: "In a fast-changing world where jobs transform constantly, what is the most valuable skill a teenager can learn today?",
-        target: "3–4 sentences",
-        hint: "Mention adaptability, critical thinking, creative problem solving, and effective foreign language communication."
+        hint: "Mention using reusable bags, planting trees, using public transport, and recycling."
       }
     ]
   }
 };
 
-// Deal / No Deal Discussion Prompts (Short spoken justifications before making the big decision)
+// Deal / No Deal Spoken Discussion Prompts for Banker Offers
 const DEAL_DECISION_PROMPTS = [
-  "Explain to the class why your team wants to ACCEPT or REJECT this Banker's offer.",
-  "What is the mathematical risk of rejecting this offer? Tell your classmates.",
-  "Which high prize remaining on the board makes you want to keep playing (or take the deal)?",
-  "How will your team feel if you reject this deal and open the 20,000 point box next?",
-  "Convince your teammates: Is this Banker offer generous or stingy?"
+  "Explain to your classmates why your team wants to ACCEPT or REJECT this Ziraat Bankası Banker offer!",
+  "What is the mathematical risk of saying NO DEAL? Look at the remaining high prizes!",
+  "Is this offer generous or stingy compared to the remaining 250.000.000 TL jackpot?",
+  "Convince your teammates: Should we secure this guaranteed money or gamble on our Secret Box?",
+  "Tell the class: What will your team do if the next box opened is 250.000.000 TL?"
 ];
