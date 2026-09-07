@@ -1,1604 +1,3261 @@
 /**
  * WORD PATH - Curriculum & Question Database
  * Grade 7 (A2-A2+) & Grade 8 (A2+-B1)
- * Focus: Word Formation, Suffixes, Prefixes, Parts of Speech, Word Families, Contextual Choice
+ * Topic: ADJECTIVES vs ADVERBS ONLY
+ * Every question requires choosing between an Adjective and an Adverb form.
  */
 
 const STAGE_CONFIG = {
-  7: [
-    { id: 1, name: "Stage 1: Adjective or Adverb", description: "Choose between adjective (describing nouns) and adverb (describing verbs/actions).", icon: "⚡", tilesCount: 6, hasTimer: false },
-    { id: 2, name: "Stage 2: Word Families", description: "Identify the correct form belonging to root word families.", icon: "🌳", tilesCount: 6, hasTimer: false },
-    { id: 3, name: "Stage 3: Common Suffixes", description: "Master suffixes like -ly, -ful, -less, -ness, -er, and -ment.", icon: "🧩", tilesCount: 6, hasTimer: false },
-    { id: 4, name: "Stage 4: Mixed Word Forms", description: "Distinguish nouns, verbs, adjectives, and adverbs in context.", icon: "🔄", tilesCount: 6, hasTimer: true, timerSeconds: 20 },
-    { id: 5, name: "Stage 5: Context Challenge", description: "Analyze longer sentence structures to determine the precise word form.", icon: "🎯", tilesCount: 6, hasTimer: true, timerSeconds: 18 }
+  "7": [
+    {
+      "id": 1,
+      "name": "Stage 1: Basic Adjectives & Adverbs",
+      "description": "Choose between basic adjectives (describing nouns) and -ly adverbs (describing verbs).",
+      "icon": "⚡",
+      "tilesCount": 6,
+      "hasTimer": false
+    },
+    {
+      "id": 2,
+      "name": "Stage 2: Classroom & Daily Actions",
+      "description": "Identify whether the sentence needs an adjective for a noun or an adverb for an action.",
+      "icon": "🏫",
+      "tilesCount": 6,
+      "hasTimer": false
+    },
+    {
+      "id": 3,
+      "name": "Stage 3: Feelings, Manners & Descriptions",
+      "description": "Distinguish feelings and qualities from manners of action.",
+      "icon": "😊",
+      "tilesCount": 6,
+      "hasTimer": false
+    },
+    {
+      "id": 4,
+      "name": "Stage 4: Rapid Pace Challenge",
+      "description": "Fast-paced adjective and adverb identification under time pressure.",
+      "icon": "⏱️",
+      "tilesCount": 6,
+      "hasTimer": true,
+      "timerSeconds": 20
+    },
+    {
+      "id": 5,
+      "name": "Stage 5: Context Master Path",
+      "description": "Master adjective vs adverb context clues in full sentences.",
+      "icon": "🎯",
+      "tilesCount": 6,
+      "hasTimer": true,
+      "timerSeconds": 18
+    }
   ],
-  8: [
-    { id: 1, name: "Stage 1: Parts of Speech Mastery", description: "Identify advanced grammatical roles and syntactic positions in sentences.", icon: "🏛️", tilesCount: 6, hasTimer: false },
-    { id: 2, name: "Stage 2: Advanced Word Formation", description: "Form abstract nouns, descriptive adjectives, and specialized verbs.", icon: "🔬", tilesCount: 6, hasTimer: true, timerSeconds: 20 },
-    { id: 3, name: "Stage 3: Prefixes & Opposites", description: "Use negative and directional prefixes (un-, im-, in-, dis-, re-).", icon: "🧲", tilesCount: 6, hasTimer: true, timerSeconds: 18 },
-    { id: 4, name: "Stage 4: Complex Suffixes", description: "Apply advanced suffixes (-tion, -ity, -ive, -ous, -able, -ment).", icon: "⚙️", tilesCount: 6, hasTimer: true, timerSeconds: 16 },
-    { id: 5, name: "Stage 5: Context & Nuance", description: "Select the grammatically and contextually correct word form in complex sentences.", icon: "🔍", tilesCount: 6, hasTimer: true, timerSeconds: 15 },
-    { id: 6, name: "Stage 6: Master Word Path", description: "The ultimate word formation gauntlet combining all prefixes, suffixes, and word families.", icon: "👑", tilesCount: 7, hasTimer: true, timerSeconds: 14 }
+  "8": [
+    {
+      "id": 1,
+      "name": "Stage 1: Action Verbs vs Sense Verbs",
+      "description": "Sense and linking verbs (look, sound, taste, smell, feel) vs dynamic action verbs.",
+      "icon": "👁️",
+      "tilesCount": 6,
+      "hasTimer": false
+    },
+    {
+      "id": 2,
+      "name": "Stage 2: Irregular & Tricky Forms",
+      "description": "Master tricky pairs: fast/fast, hard/hardly, late/lately, good/well, high/highly.",
+      "icon": "⚡",
+      "tilesCount": 6,
+      "hasTimer": false
+    },
+    {
+      "id": 3,
+      "name": "Stage 3: Adverbs of Degree & Emphasis",
+      "description": "Identify adverbs modifying adjectives vs adjectives modifying nouns.",
+      "icon": "📊",
+      "tilesCount": 6,
+      "hasTimer": true,
+      "timerSeconds": 20
+    },
+    {
+      "id": 4,
+      "name": "Stage 4: Suffix Nuances & Tricky Pairs",
+      "description": "Distinguish tricky adjectives ending in -ly from action adverbs.",
+      "icon": "🧩",
+      "tilesCount": 6,
+      "hasTimer": true,
+      "timerSeconds": 18
+    },
+    {
+      "id": 5,
+      "name": "Stage 5: Advanced Sentence Contexts",
+      "description": "Choose the precise word form in complex academic and descriptive sentences.",
+      "icon": "🔍",
+      "tilesCount": 6,
+      "hasTimer": true,
+      "timerSeconds": 16
+    },
+    {
+      "id": 6,
+      "name": "Stage 6: Grand Championship Gauntlet",
+      "description": "The ultimate adjective vs adverb mastery journey across all patterns.",
+      "icon": "👑",
+      "tilesCount": 7,
+      "hasTimer": true,
+      "timerSeconds": 15
+    }
   ]
 };
 
 const GRADE_7_QUESTIONS = [
-  // ==================== STAGE 1: ADJECTIVE OR ADVERB ====================
   {
-    id: "g7_s1_01",
-    stage: 1,
-    question: "She speaks English ______.",
-    options: ["fluent", "fluently", "fluency", "influence"],
-    correctAnswer: "fluently",
-    partOfSpeech: "Adverb",
-    rule: "ADVERB → describes how someone speaks (a verb).",
-    explanation: "Fluently is an adverb describing the verb 'speaks'.",
-    rootWord: "FLUENT",
-    wordFamily: [
-      { word: "fluent", pos: "Adjective" },
-      { word: "fluently", pos: "Adverb" },
-      { word: "fluency", pos: "Noun" }
+    "id": "g7_s1_01",
+    "stage": 1,
+    "question": "She sings ______ in the school choir.",
+    "options": [
+      "beautifully",
+      "beautiful"
+    ],
+    "correctAnswer": "beautifully",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how she sings (the verb).",
+    "explanation": "'Beautifully' is an adverb describing the action verb 'sings'.",
+    "rootWord": "BEAUTY",
+    "wordFamily": [
+      {
+        "word": "beautiful",
+        "pos": "Adjective"
+      },
+      {
+        "word": "beautifully",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s1_02",
-    stage: 1,
-    question: "He is a very ______ driver.",
-    options: ["careful", "carefully", "carefulness", "caringly"],
-    correctAnswer: "careful",
-    partOfSpeech: "Adjective",
-    rule: "ADJECTIVE → describes the noun 'driver'.",
-    explanation: "Careful is an adjective modifying the noun 'driver'.",
-    rootWord: "CARE",
-    wordFamily: [
-      { word: "care", pos: "Verb / Noun" },
-      { word: "careful", pos: "Adjective" },
-      { word: "carefully", pos: "Adverb" },
-      { word: "careless", pos: "Adjective" }
+    "id": "g7_s1_02",
+    "stage": 1,
+    "question": "He is a very ______ driver who always obeys the speed limit.",
+    "options": [
+      "carefully",
+      "careful"
+    ],
+    "correctAnswer": "careful",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → describes the noun 'driver'.",
+    "explanation": "'Careful' is an adjective that modifies the noun 'driver'.",
+    "rootWord": "CARE",
+    "wordFamily": [
+      {
+        "word": "careful",
+        "pos": "Adjective"
+      },
+      {
+        "word": "carefully",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s1_03",
-    stage: 1,
-    question: "The little boy ran ______ across the playground.",
-    options: ["quick", "quickly", "quickness", "quicker"],
-    correctAnswer: "quickly",
-    partOfSpeech: "Adverb",
-    rule: "ADVERB → describes how he ran (a verb).",
-    explanation: "Quickly tells us how the boy ran.",
-    rootWord: "QUICK",
-    wordFamily: [
-      { word: "quick", pos: "Adjective" },
-      { word: "quickly", pos: "Adverb" },
-      { word: "quickness", pos: "Noun" }
+    "id": "g7_s1_03",
+    "stage": 1,
+    "question": "The little boy ran ______ across the playground.",
+    "options": [
+      "quickly",
+      "quick"
+    ],
+    "correctAnswer": "quickly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how he ran (the verb).",
+    "explanation": "'Quickly' is an adverb telling us the manner in which the boy ran.",
+    "rootWord": "QUICK",
+    "wordFamily": [
+      {
+        "word": "quick",
+        "pos": "Adjective"
+      },
+      {
+        "word": "quickly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s1_04",
-    stage: 1,
-    question: "The classroom was completely ______ during the exam.",
-    options: ["silent", "silently", "silence", "silencer"],
-    correctAnswer: "silent",
-    partOfSpeech: "Adjective",
-    rule: "ADJECTIVE → follows the linking verb 'was' to describe the classroom.",
-    explanation: "Silent is an adjective describing the condition of the classroom.",
-    rootWord: "SILENT",
-    wordFamily: [
-      { word: "silent", pos: "Adjective" },
-      { word: "silently", pos: "Adverb" },
-      { word: "silence", pos: "Noun" }
+    "id": "g7_s1_04",
+    "stage": 1,
+    "question": "The classroom was completely ______ during the final exam.",
+    "options": [
+      "silently",
+      "silent"
+    ],
+    "correctAnswer": "silent",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → follows the linking verb 'was' to describe the classroom.",
+    "explanation": "'Silent' is an adjective describing the condition of the classroom.",
+    "rootWord": "SILENCE",
+    "wordFamily": [
+      {
+        "word": "silent",
+        "pos": "Adjective"
+      },
+      {
+        "word": "silently",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s1_05",
-    stage: 1,
-    question: "The music was playing too ______ in the room.",
-    options: ["loud", "loudly", "loudness", "louder"],
-    correctAnswer: "loudly",
-    partOfSpeech: "Adverb",
-    rule: "ADVERB → describes the verb 'was playing'.",
-    explanation: "Loudly describes how the music was playing.",
-    rootWord: "LOUD",
-    wordFamily: [
-      { word: "loud", pos: "Adjective" },
-      { word: "loudly", pos: "Adverb" },
-      { word: "loudness", pos: "Noun" }
+    "id": "g7_s1_05",
+    "stage": 1,
+    "question": "The music was playing too ______ in the living room.",
+    "options": [
+      "loudly",
+      "loud"
+    ],
+    "correctAnswer": "loudly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes the verb phrase 'was playing'.",
+    "explanation": "'Loudly' describes how the music was playing.",
+    "rootWord": "LOUD",
+    "wordFamily": [
+      {
+        "word": "loud",
+        "pos": "Adjective"
+      },
+      {
+        "word": "loudly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s1_06",
-    stage: 1,
-    question: "We solved the math puzzle ______.",
-    options: ["easy", "easily", "easiness", "ease"],
-    correctAnswer: "easily",
-    partOfSpeech: "Adverb",
-    rule: "ADVERB → describes how we solved the puzzle.",
-    explanation: "Easily modifies the action verb 'solved'.",
-    rootWord: "EASY",
-    wordFamily: [
-      { word: "easy", pos: "Adjective" },
-      { word: "easily", pos: "Adverb" },
-      { word: "easiness", pos: "Noun" }
+    "id": "g7_s1_06",
+    "stage": 1,
+    "question": "We solved the math puzzle ______ in just five minutes.",
+    "options": [
+      "easy",
+      "easily"
+    ],
+    "correctAnswer": "easily",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how we solved the puzzle.",
+    "explanation": "'Easily' is an adverb modifying the action verb 'solved'.",
+    "rootWord": "EASY",
+    "wordFamily": [
+      {
+        "word": "easy",
+        "pos": "Adjective"
+      },
+      {
+        "word": "easily",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s1_07",
-    stage: 1,
-    question: "They have a very ______ house near the lake.",
-    options: ["peaceful", "peacefully", "peace", "peacefulness"],
-    correctAnswer: "peaceful",
-    partOfSpeech: "Adjective",
-    rule: "ADJECTIVE → describes the noun 'house'.",
-    explanation: "Peaceful is an adjective describing what kind of house it is.",
-    rootWord: "PEACE",
-    wordFamily: [
-      { word: "peace", pos: "Noun" },
-      { word: "peaceful", pos: "Adjective" },
-      { word: "peacefully", pos: "Adverb" }
+    "id": "g7_s1_07",
+    "stage": 1,
+    "question": "They live in a very ______ cottage near the mountain lake.",
+    "options": [
+      "peaceful",
+      "peacefully"
+    ],
+    "correctAnswer": "peaceful",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → describes what kind of cottage it is (noun).",
+    "explanation": "'Peaceful' is an adjective describing the noun 'cottage'.",
+    "rootWord": "PEACE",
+    "wordFamily": [
+      {
+        "word": "peaceful",
+        "pos": "Adjective"
+      },
+      {
+        "word": "peacefully",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s1_08",
-    stage: 1,
-    question: "The teacher waited ______ for the students to settle down.",
-    options: ["patient", "patiently", "patience", "impatient"],
-    correctAnswer: "patiently",
-    partOfSpeech: "Adverb",
-    rule: "ADVERB → describes how the teacher waited.",
-    explanation: "Patiently tells the manner in which the teacher waited.",
-    rootWord: "PATIENT",
-    wordFamily: [
-      { word: "patient", pos: "Adjective / Noun" },
-      { word: "patiently", pos: "Adverb" },
-      { word: "patience", pos: "Noun" }
+    "id": "g7_s1_08",
+    "stage": 1,
+    "question": "The teacher waited ______ for the students to settle down.",
+    "options": [
+      "patient",
+      "patiently"
+    ],
+    "correctAnswer": "patiently",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how the teacher waited.",
+    "explanation": "'Patiently' describes the manner of waiting (verb).",
+    "rootWord": "PATIENT",
+    "wordFamily": [
+      {
+        "word": "patient",
+        "pos": "Adjective"
+      },
+      {
+        "word": "patiently",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s1_09",
-    stage: 1,
-    question: "It was a ______ morning with no clouds in the sky.",
-    options: ["clear", "clearly", "clearness", "clarify"],
-    correctAnswer: "clear",
-    partOfSpeech: "Adjective",
-    rule: "ADJECTIVE → modifies the noun 'morning'.",
-    explanation: "Clear is an adjective describing the morning.",
-    rootWord: "CLEAR",
-    wordFamily: [
-      { word: "clear", pos: "Adjective" },
-      { word: "clearly", pos: "Adverb" },
-      { word: "clarity", pos: "Noun" }
+    "id": "g7_s1_09",
+    "stage": 1,
+    "question": "It was a ______ day with stormy rain and heavy winds.",
+    "options": [
+      "terrible",
+      "terribly"
+    ],
+    "correctAnswer": "terrible",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → modifies the noun 'day'.",
+    "explanation": "'Terrible' is an adjective describing the noun 'day'.",
+    "rootWord": "TERROR",
+    "wordFamily": [
+      {
+        "word": "terrible",
+        "pos": "Adjective"
+      },
+      {
+        "word": "terribly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s1_10",
-    stage: 1,
-    question: "The firefighter entered the burning building ______.",
-    options: ["brave", "bravely", "bravery", "braver"],
-    correctAnswer: "bravely",
-    partOfSpeech: "Adverb",
-    rule: "ADVERB → describes the action verb 'entered'.",
-    explanation: "Bravely describes the manner of entering.",
-    rootWord: "BRAVE",
-    wordFamily: [
-      { word: "brave", pos: "Adjective" },
-      { word: "bravely", pos: "Adverb" },
-      { word: "bravery", pos: "Noun" }
+    "id": "g7_s1_10",
+    "stage": 1,
+    "question": "She speaks English ______ after living abroad for three years.",
+    "options": [
+      "fluent",
+      "fluently"
+    ],
+    "correctAnswer": "fluently",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how she speaks (the verb).",
+    "explanation": "'Fluently' is an adverb modifying the action verb 'speaks'.",
+    "rootWord": "FLUENT",
+    "wordFamily": [
+      {
+        "word": "fluent",
+        "pos": "Adjective"
+      },
+      {
+        "word": "fluently",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s1_11",
-    stage: 1,
-    question: "The polite student answered every question ______.",
-    options: ["polite", "politely", "politeness", "impolite"],
-    correctAnswer: "politely",
-    partOfSpeech: "Adverb",
-    rule: "ADVERB → describes how the student answered.",
-    explanation: "Politely describes the action of answering.",
-    rootWord: "POLITE",
-    wordFamily: [
-      { word: "polite", pos: "Adjective" },
-      { word: "politely", pos: "Adverb" },
-      { word: "politeness", pos: "Noun" }
+    "id": "g7_s1_11",
+    "stage": 1,
+    "question": "He gave a ______ smile when he met his grandparents.",
+    "options": [
+      "warm",
+      "warmly"
+    ],
+    "correctAnswer": "warm",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → describes the noun 'smile'.",
+    "explanation": "'Warm' is an adjective describing what kind of smile it was.",
+    "rootWord": "WARM",
+    "wordFamily": [
+      {
+        "word": "warm",
+        "pos": "Adjective"
+      },
+      {
+        "word": "warmly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s1_12",
-    stage: 1,
-    question: "We had a ______ time at the science fair.",
-    options: ["wonderful", "wonderfully", "wonder", "wondering"],
-    correctAnswer: "wonderful",
-    partOfSpeech: "Adjective",
-    rule: "ADJECTIVE → describes the noun 'time'.",
-    explanation: "Wonderful describes the experience (noun).",
-    rootWord: "WONDER",
-    wordFamily: [
-      { word: "wonder", pos: "Noun / Verb" },
-      { word: "wonderful", pos: "Adjective" },
-      { word: "wonderfully", pos: "Adverb" }
-    ]
-  },
-
-  // ==================== STAGE 2: WORD FAMILIES ====================
-  {
-    id: "g7_s2_01",
-    stage: 2,
-    question: "Her act of ______ touched everyone's heart.",
-    options: ["kind", "kindly", "kindness", "kinder"],
-    correctAnswer: "kindness",
-    partOfSpeech: "Noun",
-    rule: "NOUN → needed after preposition 'of' as the object.",
-    explanation: "Kindness is the noun form indicating the quality of being kind.",
-    rootWord: "KIND",
-    wordFamily: [
-      { word: "kind", pos: "Adjective" },
-      { word: "kindly", pos: "Adverb" },
-      { word: "kindness", pos: "Noun" }
+    "id": "g7_s1_12",
+    "stage": 1,
+    "question": "The children played ______ in the sandbox all morning.",
+    "options": [
+      "happy",
+      "happily"
+    ],
+    "correctAnswer": "happily",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how the children played (verb).",
+    "explanation": "'Happily' is an adverb telling how the action was performed.",
+    "rootWord": "HAPPY",
+    "wordFamily": [
+      {
+        "word": "happy",
+        "pos": "Adjective"
+      },
+      {
+        "word": "happily",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s2_02",
-    stage: 2,
-    question: "Our English ______ gave us an exciting assignment.",
-    options: ["teach", "teacher", "teachable", "taught"],
-    correctAnswer: "teacher",
-    partOfSpeech: "Noun",
-    rule: "NOUN → person who performs the action (suffix -er).",
-    explanation: "Teacher is the person noun for one who teaches.",
-    rootWord: "TEACH",
-    wordFamily: [
-      { word: "teach", pos: "Verb" },
-      { word: "teacher", pos: "Noun (Person)" },
-      { word: "teaching", pos: "Noun / Gerund" }
+    "id": "g7_s2_01",
+    "stage": 2,
+    "question": "Please listen ______ while the teacher explains the science experiment.",
+    "options": [
+      "carefully",
+      "careful"
+    ],
+    "correctAnswer": "carefully",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → modifies the imperative verb 'listen'.",
+    "explanation": "'Carefully' describes how you should listen.",
+    "rootWord": "CARE",
+    "wordFamily": [
+      {
+        "word": "careful",
+        "pos": "Adjective"
+      },
+      {
+        "word": "carefully",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s2_03",
-    stage: 2,
-    question: "The ______ of the new computer game took two years.",
-    options: ["develop", "development", "developing", "developed"],
-    correctAnswer: "development",
-    partOfSpeech: "Noun",
-    rule: "NOUN → needed after the article 'The' as sentence subject.",
-    explanation: "Development is the noun form with suffix -ment.",
-    rootWord: "DEVELOP",
-    wordFamily: [
-      { word: "develop", pos: "Verb" },
-      { word: "development", pos: "Noun" },
-      { word: "developer", pos: "Noun (Person)" }
+    "id": "g7_s2_02",
+    "stage": 2,
+    "question": "She is a ______ student who always finishes her homework on time.",
+    "options": [
+      "seriously",
+      "serious"
+    ],
+    "correctAnswer": "serious",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → describes the noun 'student'.",
+    "explanation": "'Serious' is an adjective describing the student's personality.",
+    "rootWord": "SERIOUS",
+    "wordFamily": [
+      {
+        "word": "serious",
+        "pos": "Adjective"
+      },
+      {
+        "word": "seriously",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s2_04",
-    stage: 2,
-    question: "Thank you for the ______ advice you gave me.",
-    options: ["help", "helpful", "helpfully", "helpless"],
-    correctAnswer: "helpful",
-    partOfSpeech: "Adjective",
-    rule: "ADJECTIVE → describes the noun 'advice'.",
-    explanation: "Helpful means full of help, describing the advice.",
-    rootWord: "HELP",
-    wordFamily: [
-      { word: "help", pos: "Verb / Noun" },
-      { word: "helpful", pos: "Adjective" },
-      { word: "helpfully", pos: "Adverb" },
-      { word: "helpless", pos: "Adjective (Opposite)" }
+    "id": "g7_s2_03",
+    "stage": 2,
+    "question": "He answered every question ______ on the English quiz.",
+    "options": [
+      "correctly",
+      "correct"
+    ],
+    "correctAnswer": "correctly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how he answered the questions (verb).",
+    "explanation": "'Correctly' is an adverb modifying the verb 'answered'.",
+    "rootWord": "CORRECT",
+    "wordFamily": [
+      {
+        "word": "correct",
+        "pos": "Adjective"
+      },
+      {
+        "word": "correctly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s2_05",
-    stage: 2,
-    question: "True ______ brings peace and satisfaction in life.",
-    options: ["happy", "happily", "happiness", "happier"],
-    correctAnswer: "happiness",
-    partOfSpeech: "Noun",
-    rule: "NOUN → needed after adjective 'True' as subject.",
-    explanation: "Happiness is the state noun created with suffix -ness.",
-    rootWord: "HAPPY",
-    wordFamily: [
-      { word: "happy", pos: "Adjective" },
-      { word: "happily", pos: "Adverb" },
-      { word: "happiness", pos: "Noun" }
+    "id": "g7_s2_04",
+    "stage": 2,
+    "question": "The grandfather clock ticked ______ in the quiet hallway.",
+    "options": [
+      "slow",
+      "slowly"
+    ],
+    "correctAnswer": "slowly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how the clock ticked.",
+    "explanation": "'Slowly' tells us the manner of ticking.",
+    "rootWord": "SLOW",
+    "wordFamily": [
+      {
+        "word": "slow",
+        "pos": "Adjective"
+      },
+      {
+        "word": "slowly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s2_06",
-    stage: 2,
-    question: "Thomas Edison was a brilliant ______.",
-    options: ["invent", "inventor", "invention", "inventive"],
-    correctAnswer: "inventor",
-    partOfSpeech: "Noun",
-    rule: "NOUN (Person) → describes the person who creates inventions.",
-    explanation: "Inventor is the person noun for someone who invents.",
-    rootWord: "INVENT",
-    wordFamily: [
-      { word: "invent", pos: "Verb" },
-      { word: "inventor", pos: "Noun (Person)" },
-      { word: "invention", pos: "Noun (Thing)" },
-      { word: "inventive", pos: "Adjective" }
+    "id": "g7_s2_05",
+    "stage": 2,
+    "question": "They bought a very ______ sofa for their new living room.",
+    "options": [
+      "comfortable",
+      "comfortably"
+    ],
+    "correctAnswer": "comfortable",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → describes the noun 'sofa'.",
+    "explanation": "'Comfortable' is an adjective describing the quality of the sofa.",
+    "rootWord": "COMFORT",
+    "wordFamily": [
+      {
+        "word": "comfortable",
+        "pos": "Adjective"
+      },
+      {
+        "word": "comfortably",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s2_07",
-    stage: 2,
-    question: "They have a long-lasting ______ that started in primary school.",
-    options: ["friend", "friendly", "friendship", "friendless"],
-    correctAnswer: "friendship",
-    partOfSpeech: "Noun",
-    rule: "NOUN → describes the relationship between friends.",
-    explanation: "Friendship is the abstract noun for the bond between friends.",
-    rootWord: "FRIEND",
-    wordFamily: [
-      { word: "friend", pos: "Noun (Person)" },
-      { word: "friendly", pos: "Adjective" },
-      { word: "friendship", pos: "Noun (Relationship)" }
+    "id": "g7_s2_06",
+    "stage": 2,
+    "question": "She whispered ______ so she would not wake the sleeping baby.",
+    "options": [
+      "soft",
+      "softly"
+    ],
+    "correctAnswer": "softly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how she whispered (verb).",
+    "explanation": "'Softly' modifies the action verb 'whispered'.",
+    "rootWord": "SOFT",
+    "wordFamily": [
+      {
+        "word": "soft",
+        "pos": "Adjective"
+      },
+      {
+        "word": "softly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s2_08",
-    stage: 2,
-    question: "Walking on thin ice is extremely ______.",
-    options: ["danger", "dangerous", "dangerously", "endanger"],
-    correctAnswer: "dangerous",
-    partOfSpeech: "Adjective",
-    rule: "ADJECTIVE → describes the subject after linking verb 'is'.",
-    explanation: "Dangerous is the adjective with suffix -ous.",
-    rootWord: "DANGER",
-    wordFamily: [
-      { word: "danger", pos: "Noun" },
-      { word: "dangerous", pos: "Adjective" },
-      { word: "dangerously", pos: "Adverb" }
+    "id": "g7_s2_07",
+    "stage": 2,
+    "question": "The midday sun was exceptionally ______ in the summer sky.",
+    "options": [
+      "bright",
+      "brightly"
+    ],
+    "correctAnswer": "bright",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → follows linking verb 'was' to describe the sun.",
+    "explanation": "'Bright' describes the noun 'sun'.",
+    "rootWord": "BRIGHT",
+    "wordFamily": [
+      {
+        "word": "bright",
+        "pos": "Adjective"
+      },
+      {
+        "word": "brightly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s2_09",
-    stage: 2,
-    question: "The artist admired the natural ______ of the mountain view.",
-    options: ["beauty", "beautiful", "beautifully", "beautify"],
-    correctAnswer: "beauty",
-    partOfSpeech: "Noun",
-    rule: "NOUN → direct object after the adjective 'natural'.",
-    explanation: "Beauty is the noun naming the quality.",
-    rootWord: "BEAUTY",
-    wordFamily: [
-      { word: "beauty", pos: "Noun" },
-      { word: "beautiful", pos: "Adjective" },
-      { word: "beautifully", pos: "Adverb" }
+    "id": "g7_s2_08",
+    "stage": 2,
+    "question": "He closed the library door ______ so as not to disturb readers.",
+    "options": [
+      "quiet",
+      "quietly"
+    ],
+    "correctAnswer": "quietly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how he closed the door (verb).",
+    "explanation": "'Quietly' is an adverb modifying 'closed'.",
+    "rootWord": "QUIET",
+    "wordFamily": [
+      {
+        "word": "quiet",
+        "pos": "Adjective"
+      },
+      {
+        "word": "quietly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s2_10",
-    stage: 2,
-    question: "Higher ______ opens doors to many great opportunities.",
-    options: ["educate", "education", "educational", "educator"],
-    correctAnswer: "education",
-    partOfSpeech: "Noun",
-    rule: "NOUN → head noun modified by adjective 'Higher'.",
-    explanation: "Education is the noun with suffix -tion.",
-    rootWord: "EDUCATE",
-    wordFamily: [
-      { word: "educate", pos: "Verb" },
-      { word: "education", pos: "Noun" },
-      { word: "educational", pos: "Adjective" },
-      { word: "educator", pos: "Noun (Person)" }
+    "id": "g7_s2_09",
+    "stage": 2,
+    "question": "My mother prepared a ______ dinner for our family guests.",
+    "options": [
+      "delicious",
+      "deliciously"
+    ],
+    "correctAnswer": "delicious",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → describes the noun 'dinner'.",
+    "explanation": "'Delicious' is an adjective describing what kind of dinner was made.",
+    "rootWord": "DELIGHT",
+    "wordFamily": [
+      {
+        "word": "delicious",
+        "pos": "Adjective"
+      },
+      {
+        "word": "deliciously",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s2_11",
-    stage: 2,
-    question: "She showed great ______ when solving the complex puzzle.",
-    options: ["create", "creative", "creatively", "creativity"],
-    correctAnswer: "creativity",
-    partOfSpeech: "Noun",
-    rule: "NOUN → object of the verb 'showed' after adjective 'great'.",
-    explanation: "Creativity is the noun describing inventive ability.",
-    rootWord: "CREATE",
-    wordFamily: [
-      { word: "create", pos: "Verb" },
-      { word: "creative", pos: "Adjective" },
-      { word: "creatively", pos: "Adverb" },
-      { word: "creativity", pos: "Noun" }
+    "id": "g7_s2_10",
+    "stage": 2,
+    "question": "The gymnast moved ______ across the balance beam.",
+    "options": [
+      "graceful",
+      "gracefully"
+    ],
+    "correctAnswer": "gracefully",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how the gymnast moved (verb).",
+    "explanation": "'Gracefully' tells how the movement was performed.",
+    "rootWord": "GRACE",
+    "wordFamily": [
+      {
+        "word": "graceful",
+        "pos": "Adjective"
+      },
+      {
+        "word": "gracefully",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s2_12",
-    stage: 2,
-    question: "The students cheered with great ______ when they won the trophy.",
-    options: ["excite", "excited", "excitement", "excitingly"],
-    correctAnswer: "excitement",
-    partOfSpeech: "Noun",
-    rule: "NOUN → object following preposition 'with' and adjective 'great'.",
-    explanation: "Excitement is the noun form denoting enthusiasm and joy.",
-    rootWord: "EXCITE",
-    wordFamily: [
-      { word: "excite", pos: "Verb" },
-      { word: "excited", pos: "Adjective" },
-      { word: "exciting", pos: "Adjective" },
-      { word: "excitement", pos: "Noun" }
-    ]
-  },
-
-  // ==================== STAGE 3: COMMON SUFFIXES ====================
-  {
-    id: "g7_s3_01",
-    stage: 3,
-    question: "The stars shone brightly in the total ______.",
-    options: ["dark", "darkly", "darkness", "darken"],
-    correctAnswer: "darkness",
-    partOfSpeech: "Noun",
-    rule: "SUFFIX -ness → turns adjective 'dark' into noun 'darkness'.",
-    explanation: "Darkness is a noun meaning the state of being dark.",
-    rootWord: "DARK",
-    wordFamily: [
-      { word: "dark", pos: "Adjective" },
-      { word: "darkly", pos: "Adverb" },
-      { word: "darkness", pos: "Noun" }
+    "id": "g7_s2_11",
+    "stage": 2,
+    "question": "The captain made a ______ decision during the storm.",
+    "options": [
+      "wise",
+      "wisely"
+    ],
+    "correctAnswer": "wise",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → describes the noun 'decision'.",
+    "explanation": "'Wise' is an adjective describing the decision.",
+    "rootWord": "WISDOM",
+    "wordFamily": [
+      {
+        "word": "wise",
+        "pos": "Adjective"
+      },
+      {
+        "word": "wisely",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s3_02",
-    stage: 3,
-    question: "Without his glasses, he felt completely ______.",
-    options: ["help", "helpful", "helpless", "helpfully"],
-    correctAnswer: "helpless",
-    partOfSpeech: "Adjective",
-    rule: "SUFFIX -less → means 'without' (unable to help oneself).",
-    explanation: "Helpless means without power or ability to help oneself.",
-    rootWord: "HELP",
-    wordFamily: [
-      { word: "help", pos: "Verb / Noun" },
-      { word: "helpful", pos: "Adjective (+)" },
-      { word: "helpless", pos: "Adjective (-)" }
+    "id": "g7_s2_12",
+    "stage": 2,
+    "question": "The professor explained the math concept ______ on the board.",
+    "options": [
+      "clear",
+      "clearly"
+    ],
+    "correctAnswer": "clearly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how the professor explained (verb).",
+    "explanation": "'Clearly' is an adverb modifying the action verb 'explained'.",
+    "rootWord": "CLEAR",
+    "wordFamily": [
+      {
+        "word": "clear",
+        "pos": "Adjective"
+      },
+      {
+        "word": "clearly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s3_03",
-    stage: 3,
-    question: "The bus ______ safely drove us to the museum.",
-    options: ["drive", "driver", "driving", "driven"],
-    correctAnswer: "driver",
-    partOfSpeech: "Noun",
-    rule: "SUFFIX -er → creates person noun who performs the action.",
-    explanation: "Driver is the person who drives the bus.",
-    rootWord: "DRIVE",
-    wordFamily: [
-      { word: "drive", pos: "Verb" },
-      { word: "driver", pos: "Noun (Person)" },
-      { word: "driving", pos: "Noun / Gerund" }
+    "id": "g7_s3_01",
+    "stage": 3,
+    "question": "The nurse held the newborn baby ______.",
+    "options": [
+      "gently",
+      "gentle"
+    ],
+    "correctAnswer": "gently",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how the nurse held the baby (verb).",
+    "explanation": "'Gently' modifies the action verb 'held'.",
+    "rootWord": "GENTLE",
+    "wordFamily": [
+      {
+        "word": "gentle",
+        "pos": "Adjective"
+      },
+      {
+        "word": "gently",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s3_04",
-    stage: 3,
-    question: "Winning the national championship was a huge ______.",
-    options: ["achieve", "achievement", "achieving", "achiever"],
-    correctAnswer: "achievement",
-    partOfSpeech: "Noun",
-    rule: "SUFFIX -ment → creates noun expressing an accomplishment.",
-    explanation: "Achievement is the noun naming the accomplished goal.",
-    rootWord: "ACHIEVE",
-    wordFamily: [
-      { word: "achieve", pos: "Verb" },
-      { word: "achievement", pos: "Noun" },
-      { word: "achiever", pos: "Noun (Person)" }
+    "id": "g7_s3_02",
+    "stage": 3,
+    "question": "We were very ______ to receive an invitation to the festival.",
+    "options": [
+      "gladly",
+      "glad"
+    ],
+    "correctAnswer": "glad",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → follows linking verb 'were' to describe our feeling.",
+    "explanation": "'Glad' is a predicate adjective describing the subject 'We'.",
+    "rootWord": "GLAD",
+    "wordFamily": [
+      {
+        "word": "glad",
+        "pos": "Adjective"
+      },
+      {
+        "word": "gladly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s3_05",
-    stage: 3,
-    question: "We are deeply ______ for all your support.",
-    options: ["thank", "thankful", "thankfully", "thankfulness"],
-    correctAnswer: "thankful",
-    partOfSpeech: "Adjective",
-    rule: "SUFFIX -ful → means 'full of' (full of thanks).",
-    explanation: "Thankful is an adjective describing our feeling.",
-    rootWord: "THANK",
-    wordFamily: [
-      { word: "thank", pos: "Verb" },
-      { word: "thankful", pos: "Adjective" },
-      { word: "thankfully", pos: "Adverb" }
+    "id": "g7_s3_03",
+    "stage": 3,
+    "question": "He smiled ______ when he showed his parents the gold medal.",
+    "options": [
+      "proudly",
+      "proud"
+    ],
+    "correctAnswer": "proudly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how he smiled (verb).",
+    "explanation": "'Proudly' is an adverb telling the manner of smiling.",
+    "rootWord": "PRIDE",
+    "wordFamily": [
+      {
+        "word": "proud",
+        "pos": "Adjective"
+      },
+      {
+        "word": "proudly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s3_06",
-    stage: 3,
-    question: "The injection was fast and completely ______.",
-    options: ["pain", "painful", "painless", "painfully"],
-    correctAnswer: "painless",
-    partOfSpeech: "Adjective",
-    rule: "SUFFIX -less → means 'free from pain'.",
-    explanation: "Painless means causing no pain whatsoever.",
-    rootWord: "PAIN",
-    wordFamily: [
-      { word: "pain", pos: "Noun" },
-      { word: "painful", pos: "Adjective" },
-      { word: "painless", pos: "Adjective" }
+    "id": "g7_s3_04",
+    "stage": 3,
+    "question": "The firefighter was exceptionally ______ during the rescue.",
+    "options": [
+      "bravely",
+      "brave"
+    ],
+    "correctAnswer": "brave",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → describes the noun 'firefighter'.",
+    "explanation": "'Brave' is an adjective describing the firefighter's character.",
+    "rootWord": "BRAVERY",
+    "wordFamily": [
+      {
+        "word": "brave",
+        "pos": "Adjective"
+      },
+      {
+        "word": "bravely",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s3_07",
-    stage: 3,
-    question: "Reading books brings a lot of ______ to my grandmother.",
-    options: ["enjoy", "enjoyment", "enjoyable", "enjoyably"],
-    correctAnswer: "enjoyment",
-    partOfSpeech: "Noun",
-    rule: "SUFFIX -ment → forms noun of state/feeling from verb 'enjoy'.",
-    explanation: "Enjoyment is the noun describing the feeling of pleasure.",
-    rootWord: "ENJOY",
-    wordFamily: [
-      { word: "enjoy", pos: "Verb" },
-      { word: "enjoyment", pos: "Noun" },
-      { word: "enjoyable", pos: "Adjective" }
+    "id": "g7_s3_05",
+    "stage": 3,
+    "question": "The young boy spoke ______ to the bus driver.",
+    "options": [
+      "politely",
+      "polite"
+    ],
+    "correctAnswer": "politely",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how he spoke (verb).",
+    "explanation": "'Politely' describes the manner of speaking.",
+    "rootWord": "POLITE",
+    "wordFamily": [
+      {
+        "word": "polite",
+        "pos": "Adjective"
+      },
+      {
+        "word": "politely",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s3_08",
-    stage: 3,
-    question: "A fast ______ won the 100-meter freestyle race.",
-    options: ["swim", "swimmer", "swimming", "swam"],
-    correctAnswer: "swimmer",
-    partOfSpeech: "Noun",
-    rule: "SUFFIX -er → indicates person performing the swimming.",
-    explanation: "Swimmer is the noun for a person who swims.",
-    rootWord: "SWIM",
-    wordFamily: [
-      { word: "swim", pos: "Verb" },
-      { word: "swimmer", pos: "Noun (Person)" },
-      { word: "swimming", pos: "Noun / Gerund" }
+    "id": "g7_s3_06",
+    "stage": 3,
+    "question": "Those fluffy kittens are really ______.",
+    "options": [
+      "cutely",
+      "cute"
+    ],
+    "correctAnswer": "cute",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → follows linking verb 'are' to describe the kittens.",
+    "explanation": "'Cute' is an adjective describing the kittens.",
+    "rootWord": "CUTE",
+    "wordFamily": [
+      {
+        "word": "cute",
+        "pos": "Adjective"
+      },
+      {
+        "word": "cutely",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s3_09",
-    stage: 3,
-    question: "The dessert had the perfect level of ______.",
-    options: ["sweet", "sweetly", "sweetness", "sweeten"],
-    correctAnswer: "sweetness",
-    partOfSpeech: "Noun",
-    rule: "SUFFIX -ness → transforms adjective 'sweet' into noun 'sweetness'.",
-    explanation: "Sweetness is the noun measuring how sweet something tastes.",
-    rootWord: "SWEET",
-    wordFamily: [
-      { word: "sweet", pos: "Adjective" },
-      { word: "sweetly", pos: "Adverb" },
-      { word: "sweetness", pos: "Noun" }
+    "id": "g7_s3_07",
+    "stage": 3,
+    "question": "She solved the mystery ______ by following the hidden clues.",
+    "options": [
+      "cleverly",
+      "clever"
+    ],
+    "correctAnswer": "cleverly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how she solved the mystery (verb).",
+    "explanation": "'Cleverly' is an adverb modifying 'solved'.",
+    "rootWord": "CLEVER",
+    "wordFamily": [
+      {
+        "word": "clever",
+        "pos": "Adjective"
+      },
+      {
+        "word": "cleverly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s3_10",
-    stage: 3,
-    question: "The famous ______ displayed her new landscape paintings in the gallery.",
-    options: ["paint", "painter", "painting", "painted"],
-    correctAnswer: "painter",
-    partOfSpeech: "Noun",
-    rule: "SUFFIX -er → creates noun for the artist who paints.",
-    explanation: "Painter is the person noun for an artist creating paintings.",
-    rootWord: "PAINT",
-    wordFamily: [
-      { word: "paint", pos: "Verb / Noun" },
-      { word: "painter", pos: "Noun (Person)" },
-      { word: "painting", pos: "Noun (Artwork)" }
-    ]
-  },
-
-  // ==================== STAGE 4: MIXED WORD FORMS ====================
-  {
-    id: "g7_s4_01",
-    stage: 4,
-    question: "The children played ______ in the green meadow.",
-    options: ["happy", "happiness", "happily", "happier"],
-    correctAnswer: "happily",
-    partOfSpeech: "Adverb",
-    rule: "ADVERB → describes how they played (action verb).",
-    explanation: "Happily tells the manner of playing.",
-    rootWord: "HAPPY",
-    wordFamily: [
-      { word: "happy", pos: "Adjective" },
-      { word: "happily", pos: "Adverb" },
-      { word: "happiness", pos: "Noun" }
+    "id": "g7_s3_08",
+    "stage": 3,
+    "question": "The mountain trail was very ______ and rocky.",
+    "options": [
+      "steeply",
+      "steep"
+    ],
+    "correctAnswer": "steep",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → describes the noun 'trail'.",
+    "explanation": "'Steep' is an adjective modifying the noun 'trail'.",
+    "rootWord": "STEEP",
+    "wordFamily": [
+      {
+        "word": "steep",
+        "pos": "Adjective"
+      },
+      {
+        "word": "steeply",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s4_02",
-    stage: 4,
-    question: "Good nutrition is necessary for healthy ______.",
-    options: ["grow", "growth", "growing", "grown"],
-    correctAnswer: "growth",
-    partOfSpeech: "Noun",
-    rule: "NOUN → needed after adjective 'healthy'.",
-    explanation: "Growth is the noun form of the verb grow.",
-    rootWord: "GROW",
-    wordFamily: [
-      { word: "grow", pos: "Verb" },
-      { word: "growth", pos: "Noun" },
-      { word: "growing", pos: "Adjective / Participle" }
+    "id": "g7_s3_09",
+    "stage": 3,
+    "question": "The soldiers fought ______ to defend the ancient castle.",
+    "options": [
+      "bravely",
+      "brave"
+    ],
+    "correctAnswer": "bravely",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how the soldiers fought (verb).",
+    "explanation": "'Bravely' modifies the action verb 'fought'.",
+    "rootWord": "BRAVERY",
+    "wordFamily": [
+      {
+        "word": "brave",
+        "pos": "Adjective"
+      },
+      {
+        "word": "bravely",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s4_03",
-    stage: 4,
-    question: "The scientist made an important ______ yesterday.",
-    options: ["discover", "discovery", "discoverer", "discovering"],
-    correctAnswer: "discovery",
-    partOfSpeech: "Noun",
-    rule: "NOUN → object of the action 'made'.",
-    explanation: "Discovery is the noun for the thing found or uncovered.",
-    rootWord: "DISCOVER",
-    wordFamily: [
-      { word: "discover", pos: "Verb" },
-      { word: "discovery", pos: "Noun" },
-      { word: "discoverer", pos: "Noun (Person)" }
+    "id": "g7_s3_10",
+    "stage": 3,
+    "question": "She tied a ______ knot around the package.",
+    "options": [
+      "tightly",
+      "tight"
+    ],
+    "correctAnswer": "tight",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → describes the noun 'knot'.",
+    "explanation": "'Tight' is an adjective modifying the noun 'knot'.",
+    "rootWord": "TIGHT",
+    "wordFamily": [
+      {
+        "word": "tight",
+        "pos": "Adjective"
+      },
+      {
+        "word": "tightly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s4_04",
-    stage: 4,
-    question: "She is a very ______ student who always finishes her homework.",
-    options: ["responsible", "responsibly", "responsibility", "response"],
-    correctAnswer: "responsible",
-    partOfSpeech: "Adjective",
-    rule: "ADJECTIVE → modifies the noun 'student'.",
-    explanation: "Responsible is the adjective describing the student's character.",
-    rootWord: "RESPOND",
-    wordFamily: [
-      { word: "respond", pos: "Verb" },
-      { word: "responsible", pos: "Adjective" },
-      { word: "responsibly", pos: "Adverb" },
-      { word: "responsibility", pos: "Noun" }
+    "id": "g7_s3_11",
+    "stage": 3,
+    "question": "He sighed ______ after hearing the disappointing news.",
+    "options": [
+      "sadly",
+      "sad"
+    ],
+    "correctAnswer": "sadly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how he sighed (verb).",
+    "explanation": "'Sadly' is an adverb telling how the action occurred.",
+    "rootWord": "SAD",
+    "wordFamily": [
+      {
+        "word": "sad",
+        "pos": "Adjective"
+      },
+      {
+        "word": "sadly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s4_05",
-    stage: 4,
-    question: "The choir sang ______ during the school festival.",
-    options: ["beautiful", "beautifully", "beauty", "beauties"],
-    correctAnswer: "beautifully",
-    partOfSpeech: "Adverb",
-    rule: "ADVERB → modifies the past tense verb 'sang'.",
-    explanation: "Beautifully describes how the singing sounded.",
-    rootWord: "BEAUTY",
-    wordFamily: [
-      { word: "beauty", pos: "Noun" },
-      { word: "beautiful", pos: "Adjective" },
-      { word: "beautifully", pos: "Adverb" }
+    "id": "g7_s3_12",
+    "stage": 3,
+    "question": "The fresh strawberries taste wonderfully ______.",
+    "options": [
+      "sweetly",
+      "sweet"
+    ],
+    "correctAnswer": "sweet",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → sense verb 'taste' takes a predicate adjective.",
+    "explanation": "'Sweet' is an adjective describing the taste of strawberries.",
+    "rootWord": "SWEET",
+    "wordFamily": [
+      {
+        "word": "sweet",
+        "pos": "Adjective"
+      },
+      {
+        "word": "sweetly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s4_06",
-    stage: 4,
-    question: "We need your ______ on this official document.",
-    options: ["sign", "signature", "signed", "signing"],
-    correctAnswer: "signature",
-    partOfSpeech: "Noun",
-    rule: "NOUN → follows possessive 'your' as direct object.",
-    explanation: "Signature is the noun for a person's written name.",
-    rootWord: "SIGN",
-    wordFamily: [
-      { word: "sign", pos: "Verb / Noun" },
-      { word: "signature", pos: "Noun" }
+    "id": "g7_s4_01",
+    "stage": 4,
+    "question": "The birds chirped ______ in the tall oak tree.",
+    "options": [
+      "cheerfully",
+      "cheerful"
+    ],
+    "correctAnswer": "cheerfully",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how the birds chirped (verb).",
+    "explanation": "'Cheerfully' is an adverb modifying 'chirped'.",
+    "rootWord": "CHEER",
+    "wordFamily": [
+      {
+        "word": "cheerful",
+        "pos": "Adjective"
+      },
+      {
+        "word": "cheerfully",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s4_07",
-    stage: 4,
-    question: "The magician performed an incredible trick ______.",
-    options: ["skill", "skillful", "skillfully", "skilled"],
-    correctAnswer: "skillfully",
-    partOfSpeech: "Adverb",
-    rule: "ADVERB → describes how the trick was performed.",
-    explanation: "Skillfully tells the manner of performing the trick.",
-    rootWord: "SKILL",
-    wordFamily: [
-      { word: "skill", pos: "Noun" },
-      { word: "skillful", pos: "Adjective" },
-      { word: "skillfully", pos: "Adverb" }
+    "id": "g7_s4_02",
+    "stage": 4,
+    "question": "It was a ______ morning in the mountains with frost on the grass.",
+    "options": [
+      "chillily",
+      "chilly"
+    ],
+    "correctAnswer": "chilly",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → describes the noun 'morning'.",
+    "explanation": "'Chilly' is an adjective describing the cold temperature of the morning.",
+    "rootWord": "CHILL",
+    "wordFamily": [
+      {
+        "word": "chilly",
+        "pos": "Adjective"
+      }
     ]
   },
   {
-    id: "g7_s4_08",
-    stage: 4,
-    question: "The doctor gave me a clear ______ of what caused the fever.",
-    options: ["explain", "explanation", "explanatory", "explaining"],
-    correctAnswer: "explanation",
-    partOfSpeech: "Noun",
-    rule: "NOUN → head noun modified by adjective 'clear'.",
-    explanation: "Explanation is the noun form for the clarification given.",
-    rootWord: "EXPLAIN",
-    wordFamily: [
-      { word: "explain", pos: "Verb" },
-      { word: "explanation", pos: "Noun" },
-      { word: "explanatory", pos: "Adjective" }
-    ]
-  },
-
-  // ==================== STAGE 5: CONTEXT CHALLENGE ====================
-  {
-    id: "g7_s5_01",
-    stage: 5,
-    question: "Although the storm was severe, the crew landed the plane ______.",
-    options: ["safe", "safely", "safety", "safeness"],
-    correctAnswer: "safely",
-    partOfSpeech: "Adverb",
-    rule: "ADVERB → describes how the plane was landed.",
-    explanation: "Safely modifies the verb 'landed'.",
-    rootWord: "SAFE",
-    wordFamily: [
-      { word: "safe", pos: "Adjective" },
-      { word: "safely", pos: "Adverb" },
-      { word: "safety", pos: "Noun" }
+    "id": "g7_s4_03",
+    "stage": 4,
+    "question": "Our school team completed the race ______ despite bad weather.",
+    "options": [
+      "successfully",
+      "successful"
+    ],
+    "correctAnswer": "successfully",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how the team completed the race (verb).",
+    "explanation": "'Successfully' is an adverb modifying 'completed'.",
+    "rootWord": "SUCCESS",
+    "wordFamily": [
+      {
+        "word": "successful",
+        "pos": "Adjective"
+      },
+      {
+        "word": "successfully",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s5_02",
-    stage: 5,
-    question: "Regular exercise and fresh fruit are ______ for your health.",
-    options: ["benefit", "beneficial", "beneficially", "benefactor"],
-    correctAnswer: "beneficial",
-    partOfSpeech: "Adjective",
-    rule: "ADJECTIVE → predicate adjective describing the subject.",
-    explanation: "Beneficial means producing good or helpful results.",
-    rootWord: "BENEFIT",
-    wordFamily: [
-      { word: "benefit", pos: "Noun / Verb" },
-      { word: "beneficial", pos: "Adjective" },
-      { word: "beneficially", pos: "Adverb" }
+    "id": "g7_s4_04",
+    "stage": 4,
+    "question": "The guard gave the visitors a ______ look at the gate.",
+    "options": [
+      "suspiciously",
+      "suspicious"
+    ],
+    "correctAnswer": "suspicious",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → describes the noun 'look'.",
+    "explanation": "'Suspicious' describes the type of look given.",
+    "rootWord": "SUSPICION",
+    "wordFamily": [
+      {
+        "word": "suspicious",
+        "pos": "Adjective"
+      },
+      {
+        "word": "suspiciously",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s5_03",
-    stage: 5,
-    question: "The new library offers free internet ______ to all students.",
-    options: ["connect", "connection", "connecting", "connected"],
-    correctAnswer: "connection",
-    partOfSpeech: "Noun",
-    rule: "NOUN → acts as compound noun with 'internet connection'.",
-    explanation: "Connection is the noun formed from the verb connect.",
-    rootWord: "CONNECT",
-    wordFamily: [
-      { word: "connect", pos: "Verb" },
-      { word: "connection", pos: "Noun" },
-      { word: "connected", pos: "Adjective" }
+    "id": "g7_s4_05",
+    "stage": 4,
+    "question": "He laughed ______ at the comedian's clever joke.",
+    "options": [
+      "heartily",
+      "hearty"
+    ],
+    "correctAnswer": "heartily",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how he laughed (verb).",
+    "explanation": "'Heartily' is an adverb modifying the action verb 'laughed'.",
+    "rootWord": "HEART",
+    "wordFamily": [
+      {
+        "word": "hearty",
+        "pos": "Adjective"
+      },
+      {
+        "word": "heartily",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s5_04",
-    stage: 5,
-    question: "He solved the riddle so ______ that the teacher was impressed.",
-    options: ["clever", "cleverly", "cleverness", "cleverest"],
-    correctAnswer: "cleverly",
-    partOfSpeech: "Adverb",
-    rule: "ADVERB → modified by 'so' to describe the action 'solved'.",
-    explanation: "Cleverly describes the manner of solving.",
-    rootWord: "CLEVER",
-    wordFamily: [
-      { word: "clever", pos: "Adjective" },
-      { word: "cleverly", pos: "Adverb" },
-      { word: "cleverness", pos: "Noun" }
+    "id": "g7_s4_06",
+    "stage": 4,
+    "question": "We watched a ______ documentary about deep ocean creatures.",
+    "options": [
+      "fascinatingly",
+      "fascinating"
+    ],
+    "correctAnswer": "fascinating",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → describes the noun 'documentary'.",
+    "explanation": "'Fascinating' is an adjective describing the film.",
+    "rootWord": "FASCINATE",
+    "wordFamily": [
+      {
+        "word": "fascinating",
+        "pos": "Adjective"
+      },
+      {
+        "word": "fascinatingly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s5_05",
-    stage: 5,
-    question: "Wearing a helmet ensures your personal ______ while riding.",
-    options: ["safe", "safely", "safety", "safekeeping"],
-    correctAnswer: "safety",
-    partOfSpeech: "Noun",
-    rule: "NOUN → direct object modified by adjective 'personal'.",
-    explanation: "Safety is the noun naming the condition of being protected.",
-    rootWord: "SAFE",
-    wordFamily: [
-      { word: "safe", pos: "Adjective" },
-      { word: "safely", pos: "Adverb" },
-      { word: "safety", pos: "Noun" }
+    "id": "g7_s4_07",
+    "stage": 4,
+    "question": "The calm river flowed ______ through the quiet valley.",
+    "options": [
+      "calmly",
+      "calm"
+    ],
+    "correctAnswer": "calmly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how the river flowed (verb).",
+    "explanation": "'Calmly' describes the peaceful manner of flowing.",
+    "rootWord": "CALM",
+    "wordFamily": [
+      {
+        "word": "calm",
+        "pos": "Adjective"
+      },
+      {
+        "word": "calmly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s5_06",
-    stage: 5,
-    question: "The young athlete trained ______ every day before the competition.",
-    options: ["hard", "hardly", "hardness", "harder"],
-    correctAnswer: "hard",
-    partOfSpeech: "Adverb",
-    rule: "ADVERB (Irregular) → 'hard' means with great effort; 'hardly' means almost not.",
-    explanation: "Hard is the adverb meaning intensely. (Note: hardly means barely).",
-    rootWord: "HARD",
-    wordFamily: [
-      { word: "hard", pos: "Adjective / Adverb" },
-      { word: "hardness", pos: "Noun" },
-      { word: "harden", pos: "Verb" }
+    "id": "g7_s4_08",
+    "stage": 4,
+    "question": "The magician gave an ______ performance at the school assembly.",
+    "options": [
+      "impressively",
+      "impressive"
+    ],
+    "correctAnswer": "impressive",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → describes the noun 'performance'.",
+    "explanation": "'Impressive' is an adjective modifying 'performance'.",
+    "rootWord": "IMPRESS",
+    "wordFamily": [
+      {
+        "word": "impressive",
+        "pos": "Adjective"
+      },
+      {
+        "word": "impressively",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s5_07",
-    stage: 5,
-    question: "Due to foggy weather, the airplane had to land with extreme ______.",
-    options: ["caution", "cautious", "cautiously", "cautionary"],
-    correctAnswer: "caution",
-    partOfSpeech: "Noun",
-    rule: "NOUN → object of preposition 'with' modified by adjective 'extreme'.",
-    explanation: "Caution is the noun meaning carefulness in the face of danger.",
-    rootWord: "CAUTION",
-    wordFamily: [
-      { word: "caution", pos: "Noun / Verb" },
-      { word: "cautious", pos: "Adjective" },
-      { word: "cautiously", pos: "Adverb" }
+    "id": "g7_s4_09",
+    "stage": 4,
+    "question": "The winter storm blew ______ across the frozen lake.",
+    "options": [
+      "fiercely",
+      "fierce"
+    ],
+    "correctAnswer": "fiercely",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how the storm blew (verb).",
+    "explanation": "'Fiercely' is an adverb modifying the action verb 'blew'.",
+    "rootWord": "FIERCE",
+    "wordFamily": [
+      {
+        "word": "fierce",
+        "pos": "Adjective"
+      },
+      {
+        "word": "fiercely",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g7_s5_08",
-    stage: 5,
-    question: "The team celebrated their ______ victory at the banquet.",
-    options: ["glory", "glorious", "gloriously", "glorify"],
-    correctAnswer: "glorious",
-    partOfSpeech: "Adjective",
-    rule: "ADJECTIVE → modifies the noun 'victory'.",
-    explanation: "Glorious describes a wonderful, triumphant victory.",
-    rootWord: "GLORY",
-    wordFamily: [
-      { word: "glory", pos: "Noun" },
-      { word: "glorious", pos: "Adjective" },
-      { word: "gloriously", pos: "Adverb" }
+    "id": "g7_s4_10",
+    "stage": 4,
+    "question": "The marathon runners felt completely ______ after the finish line.",
+    "options": [
+      "tiredly",
+      "tired"
+    ],
+    "correctAnswer": "tired",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → follows linking verb 'felt' to describe the runners.",
+    "explanation": "'Tired' is a predicate adjective describing the runners' state.",
+    "rootWord": "TIRE",
+    "wordFamily": [
+      {
+        "word": "tired",
+        "pos": "Adjective"
+      },
+      {
+        "word": "tirelessly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g7_s4_11",
+    "stage": 4,
+    "question": "The host greeted each guest ______ at the entrance door.",
+    "options": [
+      "warmly",
+      "warm"
+    ],
+    "correctAnswer": "warmly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how the host greeted the guests (verb).",
+    "explanation": "'Warmly' modifies the action verb 'greeted'.",
+    "rootWord": "WARM",
+    "wordFamily": [
+      {
+        "word": "warm",
+        "pos": "Adjective"
+      },
+      {
+        "word": "warmly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g7_s4_12",
+    "stage": 4,
+    "question": "The math instructions were very ______ and easy to follow.",
+    "options": [
+      "simply",
+      "simple"
+    ],
+    "correctAnswer": "simple",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → follows linking verb 'were' to describe instructions.",
+    "explanation": "'Simple' is an adjective describing the instructions.",
+    "rootWord": "SIMPLE",
+    "wordFamily": [
+      {
+        "word": "simple",
+        "pos": "Adjective"
+      },
+      {
+        "word": "simply",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g7_s5_01",
+    "stage": 5,
+    "question": "The skilled artist painted the mountain view ______.",
+    "options": [
+      "skillfully",
+      "skillful"
+    ],
+    "correctAnswer": "skillfully",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how the artist painted (verb).",
+    "explanation": "'Skillfully' is an adverb telling how the painting was done.",
+    "rootWord": "SKILL",
+    "wordFamily": [
+      {
+        "word": "skillful",
+        "pos": "Adjective"
+      },
+      {
+        "word": "skillfully",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g7_s5_02",
+    "stage": 5,
+    "question": "He is a ______ tennis player who won three junior tournaments.",
+    "options": [
+      "skillfully",
+      "skillful"
+    ],
+    "correctAnswer": "skillful",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → describes the noun 'player'.",
+    "explanation": "'Skillful' is an adjective describing the tennis player.",
+    "rootWord": "SKILL",
+    "wordFamily": [
+      {
+        "word": "skillful",
+        "pos": "Adjective"
+      },
+      {
+        "word": "skillfully",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g7_s5_03",
+    "stage": 5,
+    "question": "The ballerina danced ______ across the wooden stage floor.",
+    "options": [
+      "elegantly",
+      "elegant"
+    ],
+    "correctAnswer": "elegantly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how the ballerina danced (verb).",
+    "explanation": "'Elegantly' modifies the action verb 'danced'.",
+    "rootWord": "ELEGANCE",
+    "wordFamily": [
+      {
+        "word": "elegant",
+        "pos": "Adjective"
+      },
+      {
+        "word": "elegantly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g7_s5_04",
+    "stage": 5,
+    "question": "The museum displayed ______ golden statues from ancient Rome.",
+    "options": [
+      "splendidly",
+      "splendid"
+    ],
+    "correctAnswer": "splendid",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → describes the noun 'statues'.",
+    "explanation": "'Splendid' is an adjective describing the magnificent statues.",
+    "rootWord": "SPLENDOR",
+    "wordFamily": [
+      {
+        "word": "splendid",
+        "pos": "Adjective"
+      },
+      {
+        "word": "splendidly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g7_s5_05",
+    "stage": 5,
+    "question": "The secretary typed the urgent letter ______ on her computer.",
+    "options": [
+      "swiftly",
+      "swift"
+    ],
+    "correctAnswer": "swiftly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how she typed the letter (verb).",
+    "explanation": "'Swiftly' is an adverb modifying 'typed'.",
+    "rootWord": "SWIFT",
+    "wordFamily": [
+      {
+        "word": "swift",
+        "pos": "Adjective"
+      },
+      {
+        "word": "swiftly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g7_s5_06",
+    "stage": 5,
+    "question": "The science museum tour was both fun and ______ for all students.",
+    "options": [
+      "educationally",
+      "educational"
+    ],
+    "correctAnswer": "educational",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → describes the noun 'tour'.",
+    "explanation": "'Educational' is an adjective describing the tour.",
+    "rootWord": "EDUCATE",
+    "wordFamily": [
+      {
+        "word": "educational",
+        "pos": "Adjective"
+      },
+      {
+        "word": "educationally",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g7_s5_07",
+    "stage": 5,
+    "question": "The black cat crept ______ towards the bird on the fence.",
+    "options": [
+      "stealthily",
+      "stealthy"
+    ],
+    "correctAnswer": "stealthily",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how the cat crept (verb).",
+    "explanation": "'Stealthily' is an adverb telling how the cat moved.",
+    "rootWord": "STEALTH",
+    "wordFamily": [
+      {
+        "word": "stealthy",
+        "pos": "Adjective"
+      },
+      {
+        "word": "stealthily",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g7_s5_08",
+    "stage": 5,
+    "question": "It was an ______ mistake that anyone could have made in that rush.",
+    "options": [
+      "honestly",
+      "honest"
+    ],
+    "correctAnswer": "honest",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → describes the noun 'mistake'.",
+    "explanation": "'Honest' is an adjective describing the mistake.",
+    "rootWord": "HONEST",
+    "wordFamily": [
+      {
+        "word": "honest",
+        "pos": "Adjective"
+      },
+      {
+        "word": "honestly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g7_s5_09",
+    "stage": 5,
+    "question": "The customer service agent answered the phone ______.",
+    "options": [
+      "promptly",
+      "prompt"
+    ],
+    "correctAnswer": "promptly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how the agent answered (verb).",
+    "explanation": "'Promptly' is an adverb modifying 'answered'.",
+    "rootWord": "PROMPT",
+    "wordFamily": [
+      {
+        "word": "prompt",
+        "pos": "Adjective"
+      },
+      {
+        "word": "promptly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g7_s5_10",
+    "stage": 5,
+    "question": "The winter night outside was ______ freezing and pitch black.",
+    "options": [
+      "terrible",
+      "terribly"
+    ],
+    "correctAnswer": "terribly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → modifies the adjective 'freezing'.",
+    "explanation": "'Terribly' is an adverb of degree modifying the adjective 'freezing'.",
+    "rootWord": "TERROR",
+    "wordFamily": [
+      {
+        "word": "terrible",
+        "pos": "Adjective"
+      },
+      {
+        "word": "terribly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g7_s5_11",
+    "stage": 5,
+    "question": "The speaker gave a ______ summary of the entire novel.",
+    "options": [
+      "brief",
+      "briefly"
+    ],
+    "correctAnswer": "brief",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE → describes the noun 'summary'.",
+    "explanation": "'Brief' is an adjective describing the short summary.",
+    "rootWord": "BRIEF",
+    "wordFamily": [
+      {
+        "word": "brief",
+        "pos": "Adjective"
+      },
+      {
+        "word": "briefly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g7_s5_12",
+    "stage": 5,
+    "question": "The astronaut stepped ______ down the ladder onto the lunar dirt.",
+    "options": [
+      "cautious",
+      "cautiously"
+    ],
+    "correctAnswer": "cautiously",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB → describes how the astronaut stepped (verb).",
+    "explanation": "'Cautiously' is an adverb describing the careful manner of movement.",
+    "rootWord": "CAUTION",
+    "wordFamily": [
+      {
+        "word": "cautious",
+        "pos": "Adjective"
+      },
+      {
+        "word": "cautiously",
+        "pos": "Adverb"
+      }
     ]
   }
 ];
 
 const GRADE_8_QUESTIONS = [
-  // ==================== STAGE 1: PARTS OF SPEECH MASTERY ====================
   {
-    id: "g8_s1_01",
-    stage: 1,
-    question: "The company announced a significant ______ in annual profits.",
-    options: ["grow", "growth", "growing", "grown"],
-    correctAnswer: "growth",
-    partOfSpeech: "Noun",
-    rule: "NOUN → needed after adjective 'significant' as object of verb 'announced'.",
-    explanation: "Growth is the noun referring to an increase in size or amount.",
-    rootWord: "GROW",
-    wordFamily: [
-      { word: "grow", pos: "Verb" },
-      { word: "growth", pos: "Noun" },
-      { word: "growing", pos: "Adjective" }
+    "id": "g8_s1_01",
+    "stage": 1,
+    "question": "The hot tomato soup smells ______ with fresh basil.",
+    "options": [
+      "delicious",
+      "deliciously"
+    ],
+    "correctAnswer": "delicious",
+    "partOfSpeech": "Adjective",
+    "rule": "SENSE VERB 'smells' takes a predicate ADJECTIVE.",
+    "explanation": "'Delicious' describes the quality of the soup, not an action.",
+    "rootWord": "DELIGHT",
+    "wordFamily": [
+      {
+        "word": "delicious",
+        "pos": "Adjective"
+      },
+      {
+        "word": "deliciously",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s1_02",
-    stage: 1,
-    question: "She completed the challenging assignment ______.",
-    options: ["success", "successful", "successfully", "succeed"],
-    correctAnswer: "successfully",
-    partOfSpeech: "Adverb",
-    rule: "ADVERB → modifies the complete predicate 'completed the assignment'.",
-    explanation: "Successfully is an adverb with suffix -ly modifying completed.",
-    rootWord: "SUCCESS",
-    wordFamily: [
-      { word: "succeed", pos: "Verb" },
-      { word: "success", pos: "Noun" },
-      { word: "successful", pos: "Adjective" },
-      { word: "successfully", pos: "Adverb" }
+    "id": "g8_s1_02",
+    "stage": 1,
+    "question": "The starving puppy ate the food ______ from its bowl.",
+    "options": [
+      "greedy",
+      "greedily"
+    ],
+    "correctAnswer": "greedily",
+    "partOfSpeech": "Adverb",
+    "rule": "ACTION VERB 'ate' requires an ADVERB of manner.",
+    "explanation": "'Greedily' describes how the puppy performed the action of eating.",
+    "rootWord": "GREED",
+    "wordFamily": [
+      {
+        "word": "greedy",
+        "pos": "Adjective"
+      },
+      {
+        "word": "greedily",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s1_03",
-    stage: 1,
-    question: "Solar panels are an ______ way to generate clean energy.",
-    options: ["effect", "effective", "effectively", "effectiveness"],
-    correctAnswer: "effective",
-    partOfSpeech: "Adjective",
-    rule: "ADJECTIVE → describes the noun 'way' with suffix -ive.",
-    explanation: "Effective is an adjective meaning producing the intended result.",
-    rootWord: "EFFECT",
-    wordFamily: [
-      { word: "effect", pos: "Noun" },
-      { word: "effective", pos: "Adjective" },
-      { word: "effectively", pos: "Adverb" },
-      { word: "effectiveness", pos: "Noun" }
+    "id": "g8_s1_03",
+    "stage": 1,
+    "question": "Your floral perfume smells very ______ and fresh.",
+    "options": [
+      "sweet",
+      "sweetly"
+    ],
+    "correctAnswer": "sweet",
+    "partOfSpeech": "Adjective",
+    "rule": "LINKING / SENSE VERB 'smells' takes an ADJECTIVE.",
+    "explanation": "'Sweet' is a predicate adjective modifying the subject 'perfume'.",
+    "rootWord": "SWEET",
+    "wordFamily": [
+      {
+        "word": "sweet",
+        "pos": "Adjective"
+      },
+      {
+        "word": "sweetly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s1_04",
-    stage: 1,
-    question: "The manager praised his staff for their high ______.",
-    options: ["produce", "productive", "productively", "productivity"],
-    correctAnswer: "productivity",
-    partOfSpeech: "Noun",
-    rule: "NOUN → abstract noun ending in -ity following adjective 'high'.",
-    explanation: "Productivity is the noun measuring rate of production.",
-    rootWord: "PRODUCE",
-    wordFamily: [
-      { word: "produce", pos: "Verb" },
-      { word: "product", pos: "Noun" },
-      { word: "productive", pos: "Adjective" },
-      { word: "productivity", pos: "Noun" }
+    "id": "g8_s1_04",
+    "stage": 1,
+    "question": "The soprano sang ______ at the opera house.",
+    "options": [
+      "sweet",
+      "sweetly"
+    ],
+    "correctAnswer": "sweetly",
+    "partOfSpeech": "Adverb",
+    "rule": "ACTION VERB 'sang' takes an ADVERB to describe the singing.",
+    "explanation": "'Sweetly' describes the manner in which the soprano sang.",
+    "rootWord": "SWEET",
+    "wordFamily": [
+      {
+        "word": "sweet",
+        "pos": "Adjective"
+      },
+      {
+        "word": "sweetly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s1_05",
-    stage: 1,
-    question: "He gave a very ______ speech that inspired the whole audience.",
-    options: ["power", "powerful", "powerfully", "powerless"],
-    correctAnswer: "powerful",
-    partOfSpeech: "Adjective",
-    rule: "ADJECTIVE → modifies the noun 'speech'.",
-    explanation: "Powerful is the adjective describing the strength of the speech.",
-    rootWord: "POWER",
-    wordFamily: [
-      { word: "power", pos: "Noun" },
-      { word: "powerful", pos: "Adjective" },
-      { word: "powerfully", pos: "Adverb" }
+    "id": "g8_s1_05",
+    "stage": 1,
+    "question": "Her explanation sounded completely ______ to the whole committee.",
+    "options": [
+      "convincing",
+      "convincingly"
+    ],
+    "correctAnswer": "convincing",
+    "partOfSpeech": "Adjective",
+    "rule": "LINKING VERB 'sounded' connects to a predicate ADJECTIVE.",
+    "explanation": "'Convincing' is an adjective describing 'explanation'.",
+    "rootWord": "CONVINCE",
+    "wordFamily": [
+      {
+        "word": "convincing",
+        "pos": "Adjective"
+      },
+      {
+        "word": "convincingly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s1_06",
-    stage: 1,
-    question: "Please check your calculations ______ before submitting the test.",
-    options: ["careful", "carefully", "carefulness", "care"],
-    correctAnswer: "carefully",
-    partOfSpeech: "Adverb",
-    rule: "ADVERB → modifies the imperative verb phrase 'check your calculations'.",
-    explanation: "Carefully tells how the calculations should be checked.",
-    rootWord: "CARE",
-    wordFamily: [
-      { word: "care", pos: "Verb / Noun" },
-      { word: "careful", pos: "Adjective" },
-      { word: "carefully", pos: "Adverb" }
+    "id": "g8_s1_06",
+    "stage": 1,
+    "question": "The attorney argued ______ before the judge and jury.",
+    "options": [
+      "convincing",
+      "convincingly"
+    ],
+    "correctAnswer": "convincingly",
+    "partOfSpeech": "Adverb",
+    "rule": "ACTION VERB 'argued' is modified by an ADVERB.",
+    "explanation": "'Convincingly' describes how the lawyer presented the case.",
+    "rootWord": "CONVINCE",
+    "wordFamily": [
+      {
+        "word": "convincing",
+        "pos": "Adjective"
+      },
+      {
+        "word": "convincingly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s1_07",
-    stage: 1,
-    question: "The government took immediate ______ to improve road safety.",
-    options: ["act", "action", "active", "actively"],
-    correctAnswer: "action",
-    partOfSpeech: "Noun",
-    rule: "NOUN → object of the transitive verb 'took'.",
-    explanation: "Action is the noun meaning steps taken to accomplish a purpose.",
-    rootWord: "ACT",
-    wordFamily: [
-      { word: "act", pos: "Verb / Noun" },
-      { word: "action", pos: "Noun" },
-      { word: "active", pos: "Adjective" },
-      { word: "actively", pos: "Adverb" }
+    "id": "g8_s1_07",
+    "stage": 1,
+    "question": "The new school blazer looks very ______ on you.",
+    "options": [
+      "smart",
+      "smartly"
+    ],
+    "correctAnswer": "smart",
+    "partOfSpeech": "Adjective",
+    "rule": "SENSE VERB 'looks' takes a predicate ADJECTIVE.",
+    "explanation": "'Smart' describes your appearance in the blazer.",
+    "rootWord": "SMART",
+    "wordFamily": [
+      {
+        "word": "smart",
+        "pos": "Adjective"
+      },
+      {
+        "word": "smartly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s1_08",
-    stage: 1,
-    question: "The scientist examined the ancient fossils ______.",
-    options: ["thorough", "thoroughly", "thoroughness", "through"],
-    correctAnswer: "thoroughly",
-    partOfSpeech: "Adverb",
-    rule: "ADVERB → describes the verb 'examined' with great care.",
-    explanation: "Thoroughly means in a complete and detailed manner.",
-    rootWord: "THOROUGH",
-    wordFamily: [
-      { word: "thorough", pos: "Adjective" },
-      { word: "thoroughly", pos: "Adverb" },
-      { word: "thoroughness", pos: "Noun" }
+    "id": "g8_s1_08",
+    "stage": 1,
+    "question": "He dressed ______ in a dark suit for his job interview.",
+    "options": [
+      "smart",
+      "smartly"
+    ],
+    "correctAnswer": "smartly",
+    "partOfSpeech": "Adverb",
+    "rule": "ACTION VERB 'dressed' is modified by an ADVERB.",
+    "explanation": "'Smartly' tells us how he dressed for the occasion.",
+    "rootWord": "SMART",
+    "wordFamily": [
+      {
+        "word": "smart",
+        "pos": "Adjective"
+      },
+      {
+        "word": "smartly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s1_09",
-    stage: 1,
-    question: "She made a valuable ______ to the research project.",
-    options: ["contribute", "contribution", "contributor", "contributing"],
-    correctAnswer: "contribution",
-    partOfSpeech: "Noun",
-    rule: "NOUN → head noun modified by adjective 'valuable'.",
-    explanation: "Contribution is the noun meaning something given or provided.",
-    rootWord: "CONTRIBUTE",
-    wordFamily: [
-      { word: "contribute", pos: "Verb" },
-      { word: "contribution", pos: "Noun" },
-      { word: "contributor", pos: "Noun (Person)" }
+    "id": "g8_s1_09",
+    "stage": 1,
+    "question": "The smooth velvet curtain feels remarkably ______ to the touch.",
+    "options": [
+      "smooth",
+      "smoothly"
+    ],
+    "correctAnswer": "smooth",
+    "partOfSpeech": "Adjective",
+    "rule": "SENSE VERB 'feels' takes a predicate ADJECTIVE.",
+    "explanation": "'Smooth' describes the physical texture of the velvet.",
+    "rootWord": "SMOOTH",
+    "wordFamily": [
+      {
+        "word": "smooth",
+        "pos": "Adjective"
+      },
+      {
+        "word": "smoothly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s1_10",
-    stage: 1,
-    question: "The orchestra delivered an ______ performance last night.",
-    options: ["impress", "impressive", "impressively", "impression"],
-    correctAnswer: "impressive",
-    partOfSpeech: "Adjective",
-    rule: "ADJECTIVE → modifies the noun 'performance'.",
-    explanation: "Impressive is the adjective denoting great excellence.",
-    rootWord: "IMPRESS",
-    wordFamily: [
-      { word: "impress", pos: "Verb" },
-      { word: "impressive", pos: "Adjective" },
-      { word: "impressively", pos: "Adverb" },
-      { word: "impression", pos: "Noun" }
-    ]
-  },
-
-  // ==================== STAGE 2: ADVANCED WORD FORMATION ====================
-  {
-    id: "g8_s2_01",
-    stage: 2,
-    question: "The architect presented an innovative ______ for the new bridge.",
-    options: ["create", "creative", "creativity", "creation"],
-    correctAnswer: "creation",
-    partOfSpeech: "Noun",
-    rule: "NOUN → direct object denoting the finished concrete work.",
-    explanation: "Creation refers to the resulting work/design created.",
-    rootWord: "CREATE",
-    wordFamily: [
-      { word: "create", pos: "Verb" },
-      { word: "creative", pos: "Adjective" },
-      { word: "creation", pos: "Noun (Object)" },
-      { word: "creativity", pos: "Noun (Quality)" }
+    "id": "g8_s1_10",
+    "stage": 1,
+    "question": "The airplane landed ______ despite the sudden gust of wind.",
+    "options": [
+      "smooth",
+      "smoothly"
+    ],
+    "correctAnswer": "smoothly",
+    "partOfSpeech": "Adverb",
+    "rule": "ACTION VERB 'landed' is modified by an ADVERB.",
+    "explanation": "'Smoothly' describes how the landing action occurred.",
+    "rootWord": "SMOOTH",
+    "wordFamily": [
+      {
+        "word": "smooth",
+        "pos": "Adjective"
+      },
+      {
+        "word": "smoothly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s2_02",
-    stage: 2,
-    question: "Air pollution is an urgent ______ problem in big cities.",
-    options: ["environment", "environmental", "environmentally", "environmentalist"],
-    correctAnswer: "environmental",
-    partOfSpeech: "Adjective",
-    rule: "SUFFIX -al → transforms noun 'environment' into adjective.",
-    explanation: "Environmental is the adjective modifying 'problem'.",
-    rootWord: "ENVIRONMENT",
-    wordFamily: [
-      { word: "environment", pos: "Noun" },
-      { word: "environmental", pos: "Adjective" },
-      { word: "environmentally", pos: "Adverb" }
+    "id": "g8_s1_11",
+    "stage": 1,
+    "question": "The patients looked ______ while waiting for the doctor.",
+    "options": [
+      "anxious",
+      "anxiously"
+    ],
+    "correctAnswer": "anxious",
+    "partOfSpeech": "Adjective",
+    "rule": "LINKING VERB 'looked' connects to the predicate ADJECTIVE.",
+    "explanation": "'Anxious' describes the emotional state of the patients.",
+    "rootWord": "ANXIETY",
+    "wordFamily": [
+      {
+        "word": "anxious",
+        "pos": "Adjective"
+      },
+      {
+        "word": "anxiously",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s2_03",
-    stage: 2,
-    question: "The delegates had a heated ______ regarding climate policy.",
-    options: ["discuss", "discussion", "discussing", "discussable"],
-    correctAnswer: "discussion",
-    partOfSpeech: "Noun",
-    rule: "SUFFIX -ion → creates noun from verb 'discuss'.",
-    explanation: "Discussion is the noun meaning a conversation about a topic.",
-    rootWord: "DISCUSS",
-    wordFamily: [
-      { word: "discuss", pos: "Verb" },
-      { word: "discussion", pos: "Noun" }
+    "id": "g8_s1_12",
+    "stage": 1,
+    "question": "She glanced ______ at the ticking wall clock during the test.",
+    "options": [
+      "anxious",
+      "anxiously"
+    ],
+    "correctAnswer": "anxiously",
+    "partOfSpeech": "Adverb",
+    "rule": "ACTION VERB 'glanced' requires an ADVERB of manner.",
+    "explanation": "'Anxiously' describes the way she glanced at the clock.",
+    "rootWord": "ANXIETY",
+    "wordFamily": [
+      {
+        "word": "anxious",
+        "pos": "Adjective"
+      },
+      {
+        "word": "anxiously",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s2_04",
-    stage: 2,
-    question: "Her remarkable ______ allowed her to master five languages.",
-    options: ["able", "ability", "ably", "enable"],
-    correctAnswer: "ability",
-    partOfSpeech: "Noun",
-    rule: "SUFFIX -ity → creates noun from adjective 'able'.",
-    explanation: "Ability is the noun expressing the power or skill to do something.",
-    rootWord: "ABLE",
-    wordFamily: [
-      { word: "able", pos: "Adjective" },
-      { word: "ability", pos: "Noun" },
-      { word: "enable", pos: "Verb" },
-      { word: "disabled", pos: "Adjective" }
+    "id": "g8_s2_01",
+    "stage": 2,
+    "question": "He studies very ______ every evening to pass his exams.",
+    "options": [
+      "hard",
+      "hardly"
+    ],
+    "correctAnswer": "hard",
+    "partOfSpeech": "Adverb",
+    "rule": "HARD (adverb) = with great effort. ('Hardly' means almost not).",
+    "explanation": "'Hard' is the correct adverb meaning with energetic effort.",
+    "rootWord": "HARD",
+    "wordFamily": [
+      {
+        "word": "hard",
+        "pos": "Adjective / Adverb"
+      },
+      {
+        "word": "hardly",
+        "pos": "Adverb (Almost not)"
+      }
     ]
   },
   {
-    id: "g8_s2_05",
-    stage: 2,
-    question: "This lightweight plastic bottle is completely ______.",
-    options: ["recycle", "recyclable", "recycling", "recycled"],
-    correctAnswer: "recyclable",
-    partOfSpeech: "Adjective",
-    rule: "SUFFIX -able → means capable of being recycled.",
-    explanation: "Recyclable is an adjective meaning fit for recycling.",
-    rootWord: "RECYCLE",
-    wordFamily: [
-      { word: "recycle", pos: "Verb" },
-      { word: "recyclable", pos: "Adjective" },
-      { word: "recycling", pos: "Noun" }
+    "id": "g8_s2_02",
+    "stage": 2,
+    "question": "There was so much noise that I could ______ hear the speaker.",
+    "options": [
+      "hard",
+      "hardly"
+    ],
+    "correctAnswer": "hardly",
+    "partOfSpeech": "Adverb",
+    "rule": "HARDLY (adverb) = barely or almost not at all.",
+    "explanation": "'Hardly' means with great difficulty or almost not.",
+    "rootWord": "HARD",
+    "wordFamily": [
+      {
+        "word": "hard",
+        "pos": "Adjective / Adverb"
+      },
+      {
+        "word": "hardly",
+        "pos": "Adverb (Almost not)"
+      }
     ]
   },
   {
-    id: "g8_s2_06",
-    stage: 2,
-    question: "The scientist published her ______ findings in a journal.",
-    options: ["science", "scientific", "scientifically", "scientist"],
-    correctAnswer: "scientific",
-    partOfSpeech: "Adjective",
-    rule: "SUFFIX -ic → forms adjective modifying 'findings'.",
-    explanation: "Scientific is the adjective relating to science.",
-    rootWord: "SCIENCE",
-    wordFamily: [
-      { word: "science", pos: "Noun" },
-      { word: "scientific", pos: "Adjective" },
-      { word: "scientifically", pos: "Adverb" },
-      { word: "scientist", pos: "Noun (Person)" }
+    "id": "g8_s2_03",
+    "stage": 2,
+    "question": "She is a ______ runner who holds the district record.",
+    "options": [
+      "fast",
+      "fastly"
+    ],
+    "correctAnswer": "fast",
+    "partOfSpeech": "Adjective",
+    "rule": "FAST is both adjective and adverb (the word 'fastly' does not exist in English).",
+    "explanation": "'Fast' is an adjective modifying the noun 'runner'.",
+    "rootWord": "FAST",
+    "wordFamily": [
+      {
+        "word": "fast",
+        "pos": "Adjective / Adverb"
+      }
     ]
   },
   {
-    id: "g8_s2_07",
-    stage: 2,
-    question: "The museum guide gave us a fascinating ______ of ancient Rome.",
-    options: ["describe", "description", "descriptive", "describing"],
-    correctAnswer: "description",
-    partOfSpeech: "Noun",
-    rule: "SUFFIX -tion → creates abstract noun from verb 'describe'.",
-    explanation: "Description is the noun meaning a detailed account.",
-    rootWord: "DESCRIBE",
-    wordFamily: [
-      { word: "describe", pos: "Verb" },
-      { word: "description", pos: "Noun" },
-      { word: "descriptive", pos: "Adjective" }
-    ]
-  },
-
-  // ==================== STAGE 3: PREFIXES & OPPOSITES ====================
-  {
-    id: "g8_s3_01",
-    stage: 3,
-    question: "It is ______ to finish all this homework in just five minutes.",
-    options: ["possible", "impossible", "possibility", "possibly"],
-    correctAnswer: "impossible",
-    partOfSpeech: "Adjective",
-    rule: "PREFIX im- → means 'not' before root 'possible'.",
-    explanation: "Impossible means not possible; five minutes is not enough time.",
-    rootWord: "POSSIBLE",
-    wordFamily: [
-      { word: "possible", pos: "Adjective" },
-      { word: "impossible", pos: "Adjective (Opposite)" },
-      { word: "possibility", pos: "Noun" }
+    "id": "g8_s2_04",
+    "stage": 2,
+    "question": "The cheetah can sprint remarkably ______ across the grassland.",
+    "options": [
+      "fastly",
+      "fast"
+    ],
+    "correctAnswer": "fast",
+    "partOfSpeech": "Adverb",
+    "rule": "FAST is the adverb form describing speed ('fastly' is incorrect).",
+    "explanation": "'Fast' modifies the verb 'sprint'.",
+    "rootWord": "FAST",
+    "wordFamily": [
+      {
+        "word": "fast",
+        "pos": "Adjective / Adverb"
+      }
     ]
   },
   {
-    id: "g8_s3_02",
-    stage: 3,
-    question: "They strongly ______ with the new club regulations.",
-    options: ["agree", "disagree", "agreement", "agreeable"],
-    correctAnswer: "disagree",
-    partOfSpeech: "Verb",
-    rule: "PREFIX dis- → makes the verb opposite (to not agree).",
-    explanation: "Disagree means to have a different opinion.",
-    rootWord: "AGREE",
-    wordFamily: [
-      { word: "agree", pos: "Verb" },
-      { word: "disagree", pos: "Verb (Opposite)" },
-      { word: "agreement", pos: "Noun" }
+    "id": "g8_s2_05",
+    "stage": 2,
+    "question": "She speaks Spanish very ______ because her mother is from Madrid.",
+    "options": [
+      "well",
+      "good"
+    ],
+    "correctAnswer": "well",
+    "partOfSpeech": "Adverb",
+    "rule": "WELL is the adverb of manner modifying the verb 'speaks'.",
+    "explanation": "'Well' describes how she speaks (good is an adjective).",
+    "rootWord": "GOOD",
+    "wordFamily": [
+      {
+        "word": "good",
+        "pos": "Adjective"
+      },
+      {
+        "word": "well",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s3_03",
-    stage: 3,
-    question: "The referee's decision was unfair and totally ______.",
-    options: ["justice", "just", "unjust", "justly"],
-    correctAnswer: "unjust",
-    partOfSpeech: "Adjective",
-    rule: "PREFIX un- → creates negative adjective meaning not fair.",
-    explanation: "Unjust is a synonym for unfair (prefix un- + just).",
-    rootWord: "JUST",
-    wordFamily: [
-      { word: "just", pos: "Adjective" },
-      { word: "unjust", pos: "Adjective (Opposite)" },
-      { word: "justice", pos: "Noun" }
+    "id": "g8_s2_06",
+    "stage": 2,
+    "question": "He is a ______ tennis player with excellent technique.",
+    "options": [
+      "well",
+      "good"
+    ],
+    "correctAnswer": "good",
+    "partOfSpeech": "Adjective",
+    "rule": "GOOD is an adjective describing the noun 'player'.",
+    "explanation": "'Good' modifies the noun 'player'.",
+    "rootWord": "GOOD",
+    "wordFamily": [
+      {
+        "word": "good",
+        "pos": "Adjective"
+      },
+      {
+        "word": "well",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s3_04",
-    stage: 3,
-    question: "Microorganisms are ______ to the naked human eye.",
-    options: ["visible", "invisible", "visibility", "visibly"],
-    correctAnswer: "invisible",
-    partOfSpeech: "Adjective",
-    rule: "PREFIX in- → means 'not visible'.",
-    explanation: "Invisible means unable to be seen without a microscope.",
-    rootWord: "VISIBLE",
-    wordFamily: [
-      { word: "visible", pos: "Adjective" },
-      { word: "invisible", pos: "Adjective (Opposite)" },
-      { word: "visibility", pos: "Noun" }
+    "id": "g8_s2_07",
+    "stage": 2,
+    "question": "The evening train arrived ______ due to heavy track maintenance.",
+    "options": [
+      "late",
+      "lately"
+    ],
+    "correctAnswer": "late",
+    "partOfSpeech": "Adverb",
+    "rule": "LATE (adverb) = after the scheduled time. ('Lately' means recently).",
+    "explanation": "'Late' indicates arriving past the scheduled arrival time.",
+    "rootWord": "LATE",
+    "wordFamily": [
+      {
+        "word": "late",
+        "pos": "Adjective / Adverb"
+      },
+      {
+        "word": "lately",
+        "pos": "Adverb (Recently)"
+      }
     ]
   },
   {
-    id: "g8_s3_05",
-    stage: 3,
-    question: "The author decided to ______ the final chapter of his novel.",
-    options: ["write", "rewrite", "writer", "written"],
-    correctAnswer: "rewrite",
-    partOfSpeech: "Verb",
-    rule: "PREFIX re- → means 'to do again'.",
-    explanation: "Rewrite means to write something again to improve it.",
-    rootWord: "WRITE",
-    wordFamily: [
-      { word: "write", pos: "Verb" },
-      { word: "rewrite", pos: "Verb (Again)" },
-      { word: "writer", pos: "Noun (Person)" }
+    "id": "g8_s2_08",
+    "stage": 2,
+    "question": "Have you read any thrilling mystery novels ______?",
+    "options": [
+      "late",
+      "lately"
+    ],
+    "correctAnswer": "lately",
+    "partOfSpeech": "Adverb",
+    "rule": "LATELY (adverb) = in recent times / recently.",
+    "explanation": "'Lately' means recently in time.",
+    "rootWord": "LATE",
+    "wordFamily": [
+      {
+        "word": "late",
+        "pos": "Adjective / Adverb"
+      },
+      {
+        "word": "lately",
+        "pos": "Adverb (Recently)"
+      }
     ]
   },
   {
-    id: "g8_s3_06",
-    stage: 3,
-    question: "Cheating on an exam is fundamentally ______ and wrong.",
-    options: ["honest", "dishonest", "honestly", "honesty"],
-    correctAnswer: "dishonest",
-    partOfSpeech: "Adjective",
-    rule: "PREFIX dis- → forms opposite adjective of honest.",
-    explanation: "Dishonest means not truthful or fair.",
-    rootWord: "HONEST",
-    wordFamily: [
-      { word: "honest", pos: "Adjective" },
-      { word: "dishonest", pos: "Adjective (Opposite)" },
-      { word: "honesty", pos: "Noun" }
+    "id": "g8_s2_09",
+    "stage": 2,
+    "question": "The mountain hawk soared ______ above the rocky peaks.",
+    "options": [
+      "high",
+      "highly"
+    ],
+    "correctAnswer": "high",
+    "partOfSpeech": "Adverb",
+    "rule": "HIGH (adverb) = at a great altitude in physical space.",
+    "explanation": "'High' describes physical altitude above the ground.",
+    "rootWord": "HIGH",
+    "wordFamily": [
+      {
+        "word": "high",
+        "pos": "Adjective / Adverb"
+      },
+      {
+        "word": "highly",
+        "pos": "Adverb (To a high degree)"
+      }
     ]
   },
   {
-    id: "g8_s3_07",
-    stage: 3,
-    question: "After years of dispute, the neighboring countries began to ______.",
-    options: ["connect", "reconnect", "connection", "disconnected"],
-    correctAnswer: "reconnect",
-    partOfSpeech: "Verb",
-    rule: "PREFIX re- → means to connect again after being separated.",
-    explanation: "Reconnect means to establish ties again.",
-    rootWord: "CONNECT",
-    wordFamily: [
-      { word: "connect", pos: "Verb" },
-      { word: "reconnect", pos: "Verb (Again)" },
-      { word: "connection", pos: "Noun" }
-    ]
-  },
-
-  // ==================== STAGE 4: COMPLEX SUFFIXES ====================
-  {
-    id: "g8_s4_01",
-    stage: 4,
-    question: "The teacher asked for a clear ______ of the grammar rule.",
-    options: ["explain", "explanation", "explanatory", "explaining"],
-    correctAnswer: "explanation",
-    partOfSpeech: "Noun",
-    rule: "SUFFIX -ation → forms abstract noun from verb 'explain'.",
-    explanation: "Explanation is the noun for a statement that makes things clear.",
-    rootWord: "EXPLAIN",
-    wordFamily: [
-      { word: "explain", pos: "Verb" },
-      { word: "explanation", pos: "Noun" },
-      { word: "explanatory", pos: "Adjective" }
+    "id": "g8_s2_10",
+    "stage": 2,
+    "question": "The head scientist is ______ respected by her colleagues worldwide.",
+    "options": [
+      "high",
+      "highly"
+    ],
+    "correctAnswer": "highly",
+    "partOfSpeech": "Adverb",
+    "rule": "HIGHLY (adverb) = to a high degree / very much.",
+    "explanation": "'Highly' modifies the adjective/participle 'respected'.",
+    "rootWord": "HIGH",
+    "wordFamily": [
+      {
+        "word": "high",
+        "pos": "Adjective / Adverb"
+      },
+      {
+        "word": "highly",
+        "pos": "Adverb (To a high degree)"
+      }
     ]
   },
   {
-    id: "g8_s4_02",
-    stage: 4,
-    question: "The Grand Canyon is known for its ______ rock formations.",
-    options: ["glory", "glorious", "glorify", "gloriously"],
-    correctAnswer: "glorious",
-    partOfSpeech: "Adjective",
-    rule: "SUFFIX -ous → forms adjective meaning full of glory / magnificent.",
-    explanation: "Glorious describes the impressive natural beauty.",
-    rootWord: "GLORY",
-    wordFamily: [
-      { word: "glory", pos: "Noun" },
-      { word: "glorious", pos: "Adjective" },
-      { word: "gloriously", pos: "Adverb" }
+    "id": "g8_s2_11",
+    "stage": 2,
+    "question": "The submarine dived ______ into the dark oceanic trench.",
+    "options": [
+      "deep",
+      "deeply"
+    ],
+    "correctAnswer": "deep",
+    "partOfSpeech": "Adverb",
+    "rule": "DEEP (adverb) = to a great physical distance down.",
+    "explanation": "'Deep' refers to physical depth beneath the surface.",
+    "rootWord": "DEEP",
+    "wordFamily": [
+      {
+        "word": "deep",
+        "pos": "Adjective / Adverb"
+      },
+      {
+        "word": "deeply",
+        "pos": "Adverb (Emotionally / profoundly)"
+      }
     ]
   },
   {
-    id: "g8_s4_03",
-    stage: 4,
-    question: "The city council made a major ______ to reduce road traffic.",
-    options: ["decide", "decision", "decisive", "decisively"],
-    correctAnswer: "decision",
-    partOfSpeech: "Noun",
-    rule: "SUFFIX -sion → forms noun from root 'decide'.",
-    explanation: "Decision is the noun for a choice made after thinking.",
-    rootWord: "DECIDE",
-    wordFamily: [
-      { word: "decide", pos: "Verb" },
-      { word: "decision", pos: "Noun" },
-      { word: "decisive", pos: "Adjective" }
+    "id": "g8_s2_12",
+    "stage": 2,
+    "question": "We were ______ moved by the violinist's emotional concert.",
+    "options": [
+      "deep",
+      "deeply"
+    ],
+    "correctAnswer": "deeply",
+    "partOfSpeech": "Adverb",
+    "rule": "DEEPLY (adverb) = profoundly or intensely on an emotional level.",
+    "explanation": "'Deeply' modifies the participle 'moved'.",
+    "rootWord": "DEEP",
+    "wordFamily": [
+      {
+        "word": "deep",
+        "pos": "Adjective / Adverb"
+      },
+      {
+        "word": "deeply",
+        "pos": "Adverb (Profoundly)"
+      }
     ]
   },
   {
-    id: "g8_s4_04",
-    stage: 4,
-    question: "It is ______ to wear sunscreen when the UV index is high.",
-    options: ["advise", "advisable", "advice", "advisedly"],
-    correctAnswer: "advisable",
-    partOfSpeech: "Adjective",
-    rule: "SUFFIX -able → forms adjective meaning 'recommended / sensible'.",
-    explanation: "Advisable is the adjective meaning wise or sensible to do.",
-    rootWord: "ADVISE",
-    wordFamily: [
-      { word: "advise", pos: "Verb" },
-      { word: "advice", pos: "Noun" },
-      { word: "advisable", pos: "Adjective" }
+    "id": "g8_s3_01",
+    "stage": 3,
+    "question": "The physics competition was ______ challenging for all contestants.",
+    "options": [
+      "extremely",
+      "extreme"
+    ],
+    "correctAnswer": "extremely",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB OF DEGREE modifies the adjective 'challenging'.",
+    "explanation": "'Extremely' intensifies the adjective 'challenging'.",
+    "rootWord": "EXTREME",
+    "wordFamily": [
+      {
+        "word": "extreme",
+        "pos": "Adjective"
+      },
+      {
+        "word": "extremely",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s4_05",
-    stage: 4,
-    question: "Good communication helps resolve ______ between friends.",
-    options: ["differ", "different", "difference", "differently"],
-    correctAnswer: "difference",
-    partOfSpeech: "Noun",
-    rule: "SUFFIX -ence → creates abstract noun from root 'differ'.",
-    explanation: "Difference is the noun representing disagreement or distinction.",
-    rootWord: "DIFFER",
-    wordFamily: [
-      { word: "differ", pos: "Verb" },
-      { word: "different", pos: "Adjective" },
-      { word: "differently", pos: "Adverb" },
-      { word: "difference", pos: "Noun" }
+    "id": "g8_s3_02",
+    "stage": 3,
+    "question": "They had to endure ______ cold weather at the South Pole.",
+    "options": [
+      "extremely",
+      "extreme"
+    ],
+    "correctAnswer": "extreme",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE describes the noun phrase 'cold weather'.",
+    "explanation": "'Extreme' is an adjective modifying 'cold weather'.",
+    "rootWord": "EXTREME",
+    "wordFamily": [
+      {
+        "word": "extreme",
+        "pos": "Adjective"
+      },
+      {
+        "word": "extremely",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s4_06",
-    stage: 4,
-    question: "The detective conducted an ______ search of the crime scene.",
-    options: ["exhaust", "exhaustive", "exhaustingly", "exhaustion"],
-    correctAnswer: "exhaustive",
-    partOfSpeech: "Adjective",
-    rule: "SUFFIX -ive → forms adjective meaning thorough / comprehensive.",
-    explanation: "Exhaustive means complete and including everything possible.",
-    rootWord: "EXHAUST",
-    wordFamily: [
-      { word: "exhaust", pos: "Verb" },
-      { word: "exhausted", pos: "Adjective (Tired)" },
-      { word: "exhaustive", pos: "Adjective (Thorough)" },
-      { word: "exhaustion", pos: "Noun" }
+    "id": "g8_s3_03",
+    "stage": 3,
+    "question": "Her mathematical calculation was ______ correct.",
+    "options": [
+      "absolutely",
+      "absolute"
+    ],
+    "correctAnswer": "absolutely",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB OF DEGREE modifies the adjective 'correct'.",
+    "explanation": "'Absolutely' tells to what degree the answer was correct.",
+    "rootWord": "ABSOLUTE",
+    "wordFamily": [
+      {
+        "word": "absolute",
+        "pos": "Adjective"
+      },
+      {
+        "word": "absolutely",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s4_07",
-    stage: 4,
-    question: "The manager's ______ leadership inspired the entire engineering department.",
-    options: ["create", "creative", "creatively", "creator"],
-    correctAnswer: "creative",
-    partOfSpeech: "Adjective",
-    rule: "SUFFIX -ive → transforms root 'create' into descriptive adjective.",
-    explanation: "Creative is the adjective describing imaginative leadership.",
-    rootWord: "CREATE",
-    wordFamily: [
-      { word: "create", pos: "Verb" },
-      { word: "creative", pos: "Adjective" },
-      { word: "creativity", pos: "Noun" }
-    ]
-  },
-
-  // ==================== STAGE 5: CONTEXT & NUANCE ====================
-  {
-    id: "g8_s5_01",
-    stage: 5,
-    question: "Due to heavy traffic, it was ______ that we would arrive on time.",
-    options: ["likely", "unlikely", "likelihood", "like"],
-    correctAnswer: "unlikely",
-    partOfSpeech: "Adjective",
-    rule: "CONTEXT → heavy traffic makes arriving on time not probable.",
-    explanation: "Unlikely means not probable, matching the context of heavy traffic.",
-    rootWord: "LIKE",
-    wordFamily: [
-      { word: "likely", pos: "Adjective" },
-      { word: "unlikely", pos: "Adjective (Opposite)" },
-      { word: "likelihood", pos: "Noun" }
+    "id": "g8_s3_04",
+    "stage": 3,
+    "question": "The king held ______ power throughout his realm.",
+    "options": [
+      "absolutely",
+      "absolute"
+    ],
+    "correctAnswer": "absolute",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE describes the noun 'power'.",
+    "explanation": "'Absolute' is an adjective modifying the noun 'power'.",
+    "rootWord": "ABSOLUTE",
+    "wordFamily": [
+      {
+        "word": "absolute",
+        "pos": "Adjective"
+      },
+      {
+        "word": "absolutely",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s5_02",
-    stage: 5,
-    question: "The software update greatly improved the computer's ______.",
-    options: ["perform", "performance", "performer", "performing"],
-    correctAnswer: "performance",
-    partOfSpeech: "Noun",
-    rule: "SUFFIX -ance → forms noun denoting functioning/efficiency.",
-    explanation: "Performance refers to how efficiently the computer operates.",
-    rootWord: "PERFORM",
-    wordFamily: [
-      { word: "perform", pos: "Verb" },
-      { word: "performer", pos: "Noun (Person)" },
-      { word: "performance", pos: "Noun (Operation)" }
+    "id": "g8_s3_05",
+    "stage": 3,
+    "question": "The weather in December was ______ mild this season.",
+    "options": [
+      "unusually",
+      "unusual"
+    ],
+    "correctAnswer": "unusually",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB modifies the adjective 'mild'.",
+    "explanation": "'Unusually' modifies the adjective 'mild' to show degree.",
+    "rootWord": "USUAL",
+    "wordFamily": [
+      {
+        "word": "unusual",
+        "pos": "Adjective"
+      },
+      {
+        "word": "unusually",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s5_03",
-    stage: 5,
-    question: "Leaving your front door unlocked is completely ______.",
-    options: ["responsible", "irresponsible", "responsibility", "responsibly"],
-    correctAnswer: "irresponsible",
-    partOfSpeech: "Adjective",
-    rule: "PREFIX ir- → forms negative adjective meaning careless/unsafe.",
-    explanation: "Irresponsible means showing lack of care or good judgment.",
-    rootWord: "RESPONSIBLE",
-    wordFamily: [
-      { word: "responsible", pos: "Adjective" },
-      { word: "irresponsible", pos: "Adjective (Opposite)" },
-      { word: "responsibility", pos: "Noun" }
+    "id": "g8_s3_06",
+    "stage": 3,
+    "question": "The archaeologists found an ______ artifact buried under the sand.",
+    "options": [
+      "unusually",
+      "unusual"
+    ],
+    "correctAnswer": "unusual",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE describes the noun 'artifact'.",
+    "explanation": "'Unusual' is an adjective describing what kind of artifact was found.",
+    "rootWord": "USUAL",
+    "wordFamily": [
+      {
+        "word": "unusual",
+        "pos": "Adjective"
+      },
+      {
+        "word": "unusually",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s5_04",
-    stage: 5,
-    question: "The young pianist played the complex sonata ______.",
-    options: ["flaw", "flawless", "flawlessly", "flawed"],
-    correctAnswer: "flawlessly",
-    partOfSpeech: "Adverb",
-    rule: "SUFFIX -lessly → creates adverb meaning without any mistakes.",
-    explanation: "Flawlessly describes the perfect manner of playing.",
-    rootWord: "FLAW",
-    wordFamily: [
-      { word: "flaw", pos: "Noun" },
-      { word: "flawless", pos: "Adjective" },
-      { word: "flawlessly", pos: "Adverb" }
+    "id": "g8_s3_07",
+    "stage": 3,
+    "question": "Her test score was ______ higher than last semester.",
+    "options": [
+      "significantly",
+      "significant"
+    ],
+    "correctAnswer": "significantly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB modifies the comparative adjective 'higher'.",
+    "explanation": "'Significantly' is an adverb of degree modifying 'higher'.",
+    "rootWord": "SIGNIFICANCE",
+    "wordFamily": [
+      {
+        "word": "significant",
+        "pos": "Adjective"
+      },
+      {
+        "word": "significantly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s5_05",
-    stage: 5,
-    question: "His ______ to admit mistakes made resolving the conflict hard.",
-    options: ["refuse", "refusal", "refusing", "refused"],
-    correctAnswer: "refusal",
-    partOfSpeech: "Noun",
-    rule: "SUFFIX -al → transforms verb 'refuse' into noun 'refusal'.",
-    explanation: "Refusal is the noun meaning the act of refusing.",
-    rootWord: "REFUSE",
-    wordFamily: [
-      { word: "refuse", pos: "Verb" },
-      { word: "refusal", pos: "Noun" }
+    "id": "g8_s3_08",
+    "stage": 3,
+    "question": "The school announced a ______ change in the daily timetable.",
+    "options": [
+      "significantly",
+      "significant"
+    ],
+    "correctAnswer": "significant",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE describes the noun 'change'.",
+    "explanation": "'Significant' describes the importance of the change.",
+    "rootWord": "SIGNIFICANCE",
+    "wordFamily": [
+      {
+        "word": "significant",
+        "pos": "Adjective"
+      },
+      {
+        "word": "significantly",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s5_06",
-    stage: 5,
-    question: "Volunteering at the shelter gave him a deep sense of ______.",
-    options: ["satisfy", "satisfaction", "satisfactory", "satisfyingly"],
-    correctAnswer: "satisfaction",
-    partOfSpeech: "Noun",
-    rule: "NOUN → object of preposition 'of' indicating emotional fulfillment.",
-    explanation: "Satisfaction is the noun denoting a feeling of fulfillment.",
-    rootWord: "SATISFY",
-    wordFamily: [
-      { word: "satisfy", pos: "Verb" },
-      { word: "satisfaction", pos: "Noun" },
-      { word: "satisfactory", pos: "Adjective" }
+    "id": "g8_s3_09",
+    "stage": 3,
+    "question": "The hikers were ______ exhausted after climbing for eight hours.",
+    "options": [
+      "completely",
+      "complete"
+    ],
+    "correctAnswer": "completely",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB modifies the adjective 'exhausted'.",
+    "explanation": "'Completely' is an adverb of degree modifying 'exhausted'.",
+    "rootWord": "COMPLETE",
+    "wordFamily": [
+      {
+        "word": "complete",
+        "pos": "Adjective"
+      },
+      {
+        "word": "completely",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s5_07",
-    stage: 5,
-    question: "Because of incomplete data, the scientist's conclusions were ______.",
-    options: ["accurate", "inaccurate", "accurately", "accuracy"],
-    correctAnswer: "inaccurate",
-    partOfSpeech: "Adjective",
-    rule: "PREFIX in- → forms opposite adjective meaning containing mistakes.",
-    explanation: "Inaccurate means not correct due to flawed or missing data.",
-    rootWord: "ACCURATE",
-    wordFamily: [
-      { word: "accurate", pos: "Adjective" },
-      { word: "inaccurate", pos: "Adjective (Opposite)" },
-      { word: "accuracy", pos: "Noun" }
-    ]
-  },
-
-  // ==================== STAGE 6: MASTER WORD PATH ====================
-  {
-    id: "g8_s6_01",
-    stage: 6,
-    question: "The scientist's breakthrough gained ______ recognition.",
-    options: ["nation", "national", "international", "internationally"],
-    correctAnswer: "international",
-    partOfSpeech: "Adjective",
-    rule: "PREFIX inter- + SUFFIX -al → creates adjective 'across nations'.",
-    explanation: "International is the adjective describing worldwide recognition.",
-    rootWord: "NATION",
-    wordFamily: [
-      { word: "nation", pos: "Noun" },
-      { word: "national", pos: "Adjective" },
-      { word: "international", pos: "Adjective" },
-      { word: "internationally", pos: "Adverb" }
+    "id": "g8_s3_10",
+    "stage": 3,
+    "question": "She provided a ______ list of all historical dates required.",
+    "options": [
+      "completely",
+      "complete"
+    ],
+    "correctAnswer": "complete",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE describes the noun 'list'.",
+    "explanation": "'Complete' is an adjective modifying the noun 'list'.",
+    "rootWord": "COMPLETE",
+    "wordFamily": [
+      {
+        "word": "complete",
+        "pos": "Adjective"
+      },
+      {
+        "word": "completely",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s6_02",
-    stage: 6,
-    question: "Without proper training, operating heavy machinery is ______.",
-    options: ["hazard", "hazardous", "hazardously", "hazardless"],
-    correctAnswer: "hazardous",
-    partOfSpeech: "Adjective",
-    rule: "SUFFIX -ous → creates adjective meaning dangerous/risky.",
-    explanation: "Hazardous means involving risk or danger.",
-    rootWord: "HAZARD",
-    wordFamily: [
-      { word: "hazard", pos: "Noun" },
-      { word: "hazardous", pos: "Adjective" },
-      { word: "hazardously", pos: "Adverb" }
+    "id": "g8_s3_11",
+    "stage": 3,
+    "question": "The solar car is ______ energy efficient on sunny days.",
+    "options": [
+      "remarkably",
+      "remarkable"
+    ],
+    "correctAnswer": "remarkably",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB modifies the compound adjective 'energy efficient'.",
+    "explanation": "'Remarkably' describes the degree of efficiency.",
+    "rootWord": "REMARK",
+    "wordFamily": [
+      {
+        "word": "remarkable",
+        "pos": "Adjective"
+      },
+      {
+        "word": "remarkably",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s6_03",
-    stage: 6,
-    question: "Her ______ response helped calm down the anxious crowd.",
-    options: ["sympathy", "sympathize", "sympathetic", "sympathetically"],
-    correctAnswer: "sympathetic",
-    partOfSpeech: "Adjective",
-    rule: "SUFFIX -etic → forms adjective modifying 'response'.",
-    explanation: "Sympathetic describes a compassionate, caring response.",
-    rootWord: "SYMPATHY",
-    wordFamily: [
-      { word: "sympathy", pos: "Noun" },
-      { word: "sympathize", pos: "Verb" },
-      { word: "sympathetic", pos: "Adjective" },
-      { word: "sympathetically", pos: "Adverb" }
+    "id": "g8_s3_12",
+    "stage": 3,
+    "question": "The young pianist demonstrated ______ talent in the competition.",
+    "options": [
+      "remarkably",
+      "remarkable"
+    ],
+    "correctAnswer": "remarkable",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE describes the noun 'talent'.",
+    "explanation": "'Remarkable' is an adjective modifying the noun 'talent'.",
+    "rootWord": "REMARK",
+    "wordFamily": [
+      {
+        "word": "remarkable",
+        "pos": "Adjective"
+      },
+      {
+        "word": "remarkably",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s6_04",
-    stage: 6,
-    question: "The medicine provided instant ______ from the sharp headache.",
-    options: ["relieve", "relief", "relieving", "relieved"],
-    correctAnswer: "relief",
-    partOfSpeech: "Noun",
-    rule: "NOUN → direct object naming the feeling of freedom from pain.",
-    explanation: "Relief is the noun form of the verb relieve.",
-    rootWord: "RELIEVE",
-    wordFamily: [
-      { word: "relieve", pos: "Verb" },
-      { word: "relief", pos: "Noun" },
-      { word: "relieved", pos: "Adjective" }
+    "id": "g8_s4_01",
+    "stage": 4,
+    "question": "The local villagers welcomed the tourists in a very ______ way.",
+    "options": [
+      "friendly",
+      "friendlily"
+    ],
+    "correctAnswer": "friendly",
+    "partOfSpeech": "Adjective",
+    "rule": "FRIENDLY is an ADJECTIVE ending in -ly describing the noun 'way'.",
+    "explanation": "'Friendly' is an adjective (English rarely uses 'friendlily').",
+    "rootWord": "FRIEND",
+    "wordFamily": [
+      {
+        "word": "friendly",
+        "pos": "Adjective"
+      }
     ]
   },
   {
-    id: "g8_s6_05",
-    stage: 6,
-    question: "The detective searched ______ for any clues left in the room.",
-    options: ["tireless", "tirelessly", "tired", "tirelessness"],
-    correctAnswer: "tirelessly",
-    partOfSpeech: "Adverb",
-    rule: "SUFFIX -ly on 'tireless' → describes manner of persistent searching.",
-    explanation: "Tirelessly means working with endless energy without giving up.",
-    rootWord: "TIRE",
-    wordFamily: [
-      { word: "tire", pos: "Verb" },
-      { word: "tired", pos: "Adjective" },
-      { word: "tireless", pos: "Adjective" },
-      { word: "tirelessly", pos: "Adverb" }
+    "id": "g8_s4_02",
+    "stage": 4,
+    "question": "The garden looks exceptionally ______ in the morning light.",
+    "options": [
+      "lovelily",
+      "lovely"
+    ],
+    "correctAnswer": "lovely",
+    "partOfSpeech": "Adjective",
+    "rule": "LOVELY is an ADJECTIVE ending in -ly after linking verb 'looks'.",
+    "explanation": "'Lovely' is an adjective describing the appearance of the garden.",
+    "rootWord": "LOVE",
+    "wordFamily": [
+      {
+        "word": "lovely",
+        "pos": "Adjective"
+      }
     ]
   },
   {
-    id: "g8_s6_06",
-    stage: 6,
-    question: "Modern aerospace engineers develop engines of incredible ______.",
-    options: ["efficient", "efficiently", "efficiency", "inefficient"],
-    correctAnswer: "efficiency",
-    partOfSpeech: "Noun",
-    rule: "SUFFIX -cy → forms abstract noun after preposition 'of'.",
-    explanation: "Efficiency is the noun denoting optimal performance with zero waste.",
-    rootWord: "EFFICIENT",
-    wordFamily: [
-      { word: "efficient", pos: "Adjective" },
-      { word: "efficiently", pos: "Adverb" },
-      { word: "efficiency", pos: "Noun" },
-      { word: "inefficient", pos: "Adjective (Opposite)" }
+    "id": "g8_s4_03",
+    "stage": 4,
+    "question": "The detective organized the clues ______ to find the culprit.",
+    "options": [
+      "logically",
+      "logical"
+    ],
+    "correctAnswer": "logically",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB modifies the action verb 'organized'.",
+    "explanation": "'Logically' describes how the detective organized the clues.",
+    "rootWord": "LOGIC",
+    "wordFamily": [
+      {
+        "word": "logical",
+        "pos": "Adjective"
+      },
+      {
+        "word": "logically",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s6_07",
-    stage: 6,
-    question: "The student council president spoke with great ______ and poise.",
-    options: ["confident", "confidently", "confidence", "confidential"],
-    correctAnswer: "confidence",
-    partOfSpeech: "Noun",
-    rule: "SUFFIX -ence → forms noun denoting the feeling of trust/assurance.",
-    explanation: "Confidence is the noun describing self-assurance.",
-    rootWord: "CONFIDE",
-    wordFamily: [
-      { word: "confide", pos: "Verb" },
-      { word: "confident", pos: "Adjective" },
-      { word: "confidently", pos: "Adverb" },
-      { word: "confidence", pos: "Noun" }
+    "id": "g8_s4_04",
+    "stage": 4,
+    "question": "He presented a ______ argument that convinced everyone.",
+    "options": [
+      "logically",
+      "logical"
+    ],
+    "correctAnswer": "logical",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE describes the noun 'argument'.",
+    "explanation": "'Logical' is an adjective modifying 'argument'.",
+    "rootWord": "LOGIC",
+    "wordFamily": [
+      {
+        "word": "logical",
+        "pos": "Adjective"
+      },
+      {
+        "word": "logically",
+        "pos": "Adverb"
+      }
     ]
   },
   {
-    id: "g8_s6_08",
-    stage: 6,
-    question: "The environmental group fought to ______ the ancient forest.",
-    options: ["protect", "protection", "protective", "protectively"],
-    correctAnswer: "protect",
-    partOfSpeech: "Verb",
-    rule: "VERB (Infinitive) → needed after infinitive marker 'to'.",
-    explanation: "Protect is the base verb form required after 'to'.",
-    rootWord: "PROTECT",
-    wordFamily: [
-      { word: "protect", pos: "Verb" },
-      { word: "protection", pos: "Noun" },
-      { word: "protective", pos: "Adjective" }
+    "id": "g8_s4_05",
+    "stage": 4,
+    "question": "The guard dog growled ______ when the intruder approached.",
+    "options": [
+      "menacingly",
+      "menacing"
+    ],
+    "correctAnswer": "menacingly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB modifies the action verb 'growled'.",
+    "explanation": "'Menacingly' describes the threatening manner of growling.",
+    "rootWord": "MENACE",
+    "wordFamily": [
+      {
+        "word": "menacing",
+        "pos": "Adjective"
+      },
+      {
+        "word": "menacingly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s4_06",
+    "stage": 4,
+    "question": "The dark storm clouds presented a ______ sight over the bay.",
+    "options": [
+      "menacingly",
+      "menacing"
+    ],
+    "correctAnswer": "menacing",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE describes the noun 'sight'.",
+    "explanation": "'Menacing' is an adjective describing the clouds.",
+    "rootWord": "MENACE",
+    "wordFamily": [
+      {
+        "word": "menacing",
+        "pos": "Adjective"
+      },
+      {
+        "word": "menacingly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s4_07",
+    "stage": 4,
+    "question": "The gymnast performed a ______ routine with zero errors.",
+    "options": [
+      "flawless",
+      "flawlessly"
+    ],
+    "correctAnswer": "flawless",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE describes the noun 'routine'.",
+    "explanation": "'Flawless' is an adjective describing the perfect routine.",
+    "rootWord": "FLAW",
+    "wordFamily": [
+      {
+        "word": "flawless",
+        "pos": "Adjective"
+      },
+      {
+        "word": "flawlessly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s4_08",
+    "stage": 4,
+    "question": "The orchestra executed the complex piece ______.",
+    "options": [
+      "flawless",
+      "flawlessly"
+    ],
+    "correctAnswer": "flawlessly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB modifies the action verb 'executed'.",
+    "explanation": "'Flawlessly' tells how the piece was played.",
+    "rootWord": "FLAW",
+    "wordFamily": [
+      {
+        "word": "flawless",
+        "pos": "Adjective"
+      },
+      {
+        "word": "flawlessly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s4_09",
+    "stage": 4,
+    "question": "The factory fumes created a ______ polluted atmosphere.",
+    "options": [
+      "heavily",
+      "heavy"
+    ],
+    "correctAnswer": "heavily",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB modifies the participial adjective 'polluted'.",
+    "explanation": "'Heavily' is an adverb of degree modifying 'polluted'.",
+    "rootWord": "HEAVY",
+    "wordFamily": [
+      {
+        "word": "heavy",
+        "pos": "Adjective"
+      },
+      {
+        "word": "heavily",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s4_10",
+    "stage": 4,
+    "question": "The delivery truck was carrying a ______ iron load.",
+    "options": [
+      "heavily",
+      "heavy"
+    ],
+    "correctAnswer": "heavy",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE describes the noun 'load'.",
+    "explanation": "'Heavy' is an adjective modifying the noun 'load'.",
+    "rootWord": "HEAVY",
+    "wordFamily": [
+      {
+        "word": "heavy",
+        "pos": "Adjective"
+      },
+      {
+        "word": "heavily",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s4_11",
+    "stage": 4,
+    "question": "The teenager drove ______ on the slippery mountain pass.",
+    "options": [
+      "recklessly",
+      "reckless"
+    ],
+    "correctAnswer": "recklessly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB modifies the action verb 'drove'.",
+    "explanation": "'Recklessly' describes the dangerous manner of driving.",
+    "rootWord": "RECKLESS",
+    "wordFamily": [
+      {
+        "word": "reckless",
+        "pos": "Adjective"
+      },
+      {
+        "word": "recklessly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s4_12",
+    "stage": 4,
+    "question": "His ______ behavior put everyone in the vehicle in danger.",
+    "options": [
+      "recklessly",
+      "reckless"
+    ],
+    "correctAnswer": "reckless",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE describes the noun 'behavior'.",
+    "explanation": "'Reckless' is an adjective modifying 'behavior'.",
+    "rootWord": "RECKLESS",
+    "wordFamily": [
+      {
+        "word": "reckless",
+        "pos": "Adjective"
+      },
+      {
+        "word": "recklessly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s5_01",
+    "stage": 5,
+    "question": "The brain surgeon operated ______ to remove the tumor.",
+    "options": [
+      "delicately",
+      "delicate"
+    ],
+    "correctAnswer": "delicately",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB modifies the action verb 'operated'.",
+    "explanation": "'Delicately' describes the precise and careful manner of surgery.",
+    "rootWord": "DELICATE",
+    "wordFamily": [
+      {
+        "word": "delicate",
+        "pos": "Adjective"
+      },
+      {
+        "word": "delicately",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s5_02",
+    "stage": 5,
+    "question": "The antique glass vase is extremely ______ and breakable.",
+    "options": [
+      "delicately",
+      "delicate"
+    ],
+    "correctAnswer": "delicate",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE follows linking verb 'is' to describe the vase.",
+    "explanation": "'Delicate' is an adjective describing the fragility of the vase.",
+    "rootWord": "DELICATE",
+    "wordFamily": [
+      {
+        "word": "delicate",
+        "pos": "Adjective"
+      },
+      {
+        "word": "delicately",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s5_03",
+    "stage": 5,
+    "question": "The company responded ______ to the customer's complaint.",
+    "options": [
+      "professionally",
+      "professional"
+    ],
+    "correctAnswer": "professionally",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB modifies the action verb 'responded'.",
+    "explanation": "'Professionally' describes how the response was conducted.",
+    "rootWord": "PROFESSION",
+    "wordFamily": [
+      {
+        "word": "professional",
+        "pos": "Adjective"
+      },
+      {
+        "word": "professionally",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s4_04",
+    "stage": 5,
+    "question": "She is a highly ______ architect with twenty years of experience.",
+    "options": [
+      "professionally",
+      "professional"
+    ],
+    "correctAnswer": "professional",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE describes the noun 'architect'.",
+    "explanation": "'Professional' describes the competence of the architect.",
+    "rootWord": "PROFESSION",
+    "wordFamily": [
+      {
+        "word": "professional",
+        "pos": "Adjective"
+      },
+      {
+        "word": "professionally",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s5_05",
+    "stage": 5,
+    "question": "The robotics team solved the obstacle challenge ______.",
+    "options": [
+      "innovatively",
+      "innovative"
+    ],
+    "correctAnswer": "innovatively",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB modifies the action verb 'solved'.",
+    "explanation": "'Innovatively' describes the creative manner of problem solving.",
+    "rootWord": "INNOVATE",
+    "wordFamily": [
+      {
+        "word": "innovative",
+        "pos": "Adjective"
+      },
+      {
+        "word": "innovatively",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s5_06",
+    "stage": 5,
+    "question": "The engineers created an ______ solar desalination device.",
+    "options": [
+      "innovatively",
+      "innovative"
+    ],
+    "correctAnswer": "innovative",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE describes the noun 'device'.",
+    "explanation": "'Innovative' is an adjective modifying 'device'.",
+    "rootWord": "INNOVATE",
+    "wordFamily": [
+      {
+        "word": "innovative",
+        "pos": "Adjective"
+      },
+      {
+        "word": "innovatively",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s5_07",
+    "stage": 5,
+    "question": "The company's renewable energy production increased ______ this year.",
+    "options": [
+      "dramatically",
+      "dramatic"
+    ],
+    "correctAnswer": "dramatically",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB modifies the verb 'increased'.",
+    "explanation": "'Dramatically' tells how rapid and large the increase was.",
+    "rootWord": "DRAMA",
+    "wordFamily": [
+      {
+        "word": "dramatic",
+        "pos": "Adjective"
+      },
+      {
+        "word": "dramatically",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s5_08",
+    "stage": 5,
+    "question": "There was a ______ sunset over the coastal mountains.",
+    "options": [
+      "dramatically",
+      "dramatic"
+    ],
+    "correctAnswer": "dramatic",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE describes the noun 'sunset'.",
+    "explanation": "'Dramatic' is an adjective describing the vivid sunset.",
+    "rootWord": "DRAMA",
+    "wordFamily": [
+      {
+        "word": "dramatic",
+        "pos": "Adjective"
+      },
+      {
+        "word": "dramatically",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s5_09",
+    "stage": 5,
+    "question": "The environmentalist spoke ______ about ocean conservation.",
+    "options": [
+      "passionately",
+      "passionate"
+    ],
+    "correctAnswer": "passionately",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB modifies the action verb 'spoke'.",
+    "explanation": "'Passionately' describes the heartfelt manner of speaking.",
+    "rootWord": "PASSION",
+    "wordFamily": [
+      {
+        "word": "passionate",
+        "pos": "Adjective"
+      },
+      {
+        "word": "passionately",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s5_10",
+    "stage": 5,
+    "question": "She has a ______ interest in wildlife photography.",
+    "options": [
+      "passionately",
+      "passionate"
+    ],
+    "correctAnswer": "passionate",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE describes the noun 'interest'.",
+    "explanation": "'Passionate' is an adjective describing the intensity of interest.",
+    "rootWord": "PASSION",
+    "wordFamily": [
+      {
+        "word": "passionate",
+        "pos": "Adjective"
+      },
+      {
+        "word": "passionately",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s5_11",
+    "stage": 5,
+    "question": "The excited children waited ______ for the festival parade to start.",
+    "options": [
+      "eagerly",
+      "eager"
+    ],
+    "correctAnswer": "eagerly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB modifies the action verb 'waited'.",
+    "explanation": "'Eagerly' tells how the children waited.",
+    "rootWord": "EAGER",
+    "wordFamily": [
+      {
+        "word": "eager",
+        "pos": "Adjective"
+      },
+      {
+        "word": "eagerly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s5_12",
+    "stage": 5,
+    "question": "The students were ______ to begin their science experiment.",
+    "options": [
+      "eagerly",
+      "eager"
+    ],
+    "correctAnswer": "eager",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE follows linking verb 'were' to describe the students.",
+    "explanation": "'Eager' is a predicate adjective modifying 'students'.",
+    "rootWord": "EAGER",
+    "wordFamily": [
+      {
+        "word": "eager",
+        "pos": "Adjective"
+      },
+      {
+        "word": "eagerly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s6_01",
+    "stage": 6,
+    "question": "The philharmonic orchestra played Beethoven's fifth symphony ______.",
+    "options": [
+      "magnificently",
+      "magnificent"
+    ],
+    "correctAnswer": "magnificently",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB modifies the action verb 'played'.",
+    "explanation": "'Magnificently' describes the splendid execution of the music.",
+    "rootWord": "MAGNIFICENCE",
+    "wordFamily": [
+      {
+        "word": "magnificent",
+        "pos": "Adjective"
+      },
+      {
+        "word": "magnificently",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s6_02",
+    "stage": 6,
+    "question": "The ancient stone palace is a ______ architectural achievement.",
+    "options": [
+      "magnificently",
+      "magnificent"
+    ],
+    "correctAnswer": "magnificent",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE describes the noun 'achievement'.",
+    "explanation": "'Magnificent' is an adjective modifying 'achievement'.",
+    "rootWord": "MAGNIFICENCE",
+    "wordFamily": [
+      {
+        "word": "magnificent",
+        "pos": "Adjective"
+      },
+      {
+        "word": "magnificently",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s6_03",
+    "stage": 6,
+    "question": "The forensic investigator examined every detail ______.",
+    "options": [
+      "thoroughly",
+      "thorough"
+    ],
+    "correctAnswer": "thoroughly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB modifies the action verb 'examined'.",
+    "explanation": "'Thoroughly' tells the complete and careful way the exam was done.",
+    "rootWord": "THOROUGH",
+    "wordFamily": [
+      {
+        "word": "thorough",
+        "pos": "Adjective"
+      },
+      {
+        "word": "thoroughly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s6_04",
+    "stage": 6,
+    "question": "She conducted a ______ review of all financial records.",
+    "options": [
+      "thoroughly",
+      "thorough"
+    ],
+    "correctAnswer": "thorough",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE describes the noun 'review'.",
+    "explanation": "'Thorough' describes the detailed quality of the review.",
+    "rootWord": "THOROUGH",
+    "wordFamily": [
+      {
+        "word": "thorough",
+        "pos": "Adjective"
+      },
+      {
+        "word": "thoroughly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s6_05",
+    "stage": 6,
+    "question": "The automated robotic arm performs its tasks ______ without errors.",
+    "options": [
+      "consistently",
+      "consistent"
+    ],
+    "correctAnswer": "consistently",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB modifies the action verb 'performs'.",
+    "explanation": "'Consistently' describes the regular, steady performance.",
+    "rootWord": "CONSISTENCY",
+    "wordFamily": [
+      {
+        "word": "consistent",
+        "pos": "Adjective"
+      },
+      {
+        "word": "consistently",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s6_06",
+    "stage": 6,
+    "question": "His academic scores have been ______ throughout the academic year.",
+    "options": [
+      "consistently",
+      "consistent"
+    ],
+    "correctAnswer": "consistent",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE follows linking verb 'have been' to describe scores.",
+    "explanation": "'Consistent' is a predicate adjective describing 'scores'.",
+    "rootWord": "CONSISTENCY",
+    "wordFamily": [
+      {
+        "word": "consistent",
+        "pos": "Adjective"
+      },
+      {
+        "word": "consistently",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s6_07",
+    "stage": 6,
+    "question": "The mountaineer held ______ onto the icy rope during the descent.",
+    "options": [
+      "firmly",
+      "firm"
+    ],
+    "correctAnswer": "firmly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB modifies the action verb 'held'.",
+    "explanation": "'Firmly' describes the tight, secure manner of holding.",
+    "rootWord": "FIRM",
+    "wordFamily": [
+      {
+        "word": "firm",
+        "pos": "Adjective"
+      },
+      {
+        "word": "firmly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s6_08",
+    "stage": 6,
+    "question": "The partners formed a ______ agreement before starting the project.",
+    "options": [
+      "firmly",
+      "firm"
+    ],
+    "correctAnswer": "firm",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE describes the noun 'agreement'.",
+    "explanation": "'Firm' describes the solid quality of the agreement.",
+    "rootWord": "FIRM",
+    "wordFamily": [
+      {
+        "word": "firm",
+        "pos": "Adjective"
+      },
+      {
+        "word": "firmly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s6_09",
+    "stage": 6,
+    "question": "The medical volunteers worked ______ to help the injured victims.",
+    "options": [
+      "tirelessly",
+      "tireless"
+    ],
+    "correctAnswer": "tirelessly",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB modifies the action verb 'worked'.",
+    "explanation": "'Tirelessly' describes working with unyielding energy.",
+    "rootWord": "TIRE",
+    "wordFamily": [
+      {
+        "word": "tireless",
+        "pos": "Adjective"
+      },
+      {
+        "word": "tirelessly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s6_10",
+    "stage": 6,
+    "question": "Her ______ dedication transformed the community library.",
+    "options": [
+      "tirelessly",
+      "tireless"
+    ],
+    "correctAnswer": "tireless",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE describes the noun 'dedication'.",
+    "explanation": "'Tireless' is an adjective modifying the noun 'dedication'.",
+    "rootWord": "TIRE",
+    "wordFamily": [
+      {
+        "word": "tireless",
+        "pos": "Adjective"
+      },
+      {
+        "word": "tirelessly",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s6_11",
+    "stage": 6,
+    "question": "Modern electric motors run ______ with minimal battery drain.",
+    "options": [
+      "efficiently",
+      "efficient"
+    ],
+    "correctAnswer": "efficiently",
+    "partOfSpeech": "Adverb",
+    "rule": "ADVERB modifies the action verb 'run'.",
+    "explanation": "'Efficiently' describes how the motors operate.",
+    "rootWord": "EFFICIENCY",
+    "wordFamily": [
+      {
+        "word": "efficient",
+        "pos": "Adjective"
+      },
+      {
+        "word": "efficiently",
+        "pos": "Adverb"
+      }
+    ]
+  },
+  {
+    "id": "g8_s6_12",
+    "stage": 6,
+    "question": "The school installed an ______ solar heating system on the roof.",
+    "options": [
+      "efficiently",
+      "efficient"
+    ],
+    "correctAnswer": "efficient",
+    "partOfSpeech": "Adjective",
+    "rule": "ADJECTIVE describes the noun 'system'.",
+    "explanation": "'Efficient' is an adjective describing the solar system.",
+    "rootWord": "EFFICIENCY",
+    "wordFamily": [
+      {
+        "word": "efficient",
+        "pos": "Adjective"
+      },
+      {
+        "word": "efficiently",
+        "pos": "Adverb"
+      }
     ]
   }
 ];

@@ -1,7 +1,8 @@
 /**
  * WORD PATH - Core Game Engine
  * Manages game state, path generation, animated token movement,
- * question lifecycle, scoring, streak system, and accessibility hotkeys.
+ * question lifecycle, balanced answer positioning, scoring, streak system,
+ * and accessibility hotkeys.
  */
 
 class WordPathGame {
@@ -21,6 +22,12 @@ class WordPathGame {
     this.totalAttempts = 0;
     this.stageCorrect = 0;
     this.stageAttempts = 0;
+
+    // Balanced Answer Placement Tracker (Guarantees ~50% A / 50% B with max 2 consecutive same letter)
+    this.lastAnswerPosition = null; // 0 for 'A', 1 for 'B'
+    this.consecutiveSamePositionCount = 0;
+    this.totalOptionACount = 0;
+    this.totalOptionBCount = 0;
 
     // Timer
     this.timerInterval = null;
@@ -219,13 +226,11 @@ class WordPathGame {
       }
     }
 
-    // Option Keys (1-4 or A-D)
+    // Option Keys (1-2 or A-B)
     if (!this.isAnswerLocked && this.activeScreen === 'game') {
       let optionIndex = -1;
       if (e.key === '1' || e.key === 'a' || e.key === 'A') optionIndex = 0;
       else if (e.key === '2' || e.key === 'b' || e.key === 'B') optionIndex = 1;
-      else if (e.key === '3' || e.key === 'c' || e.key === 'C') optionIndex = 2;
-      else if (e.key === '4' || e.key === 'd' || e.key === 'D') optionIndex = 3;
 
       if (optionIndex >= 0) {
         const optionButtons = this.optionsGrid.querySelectorAll('.btn-option');
@@ -264,6 +269,12 @@ class WordPathGame {
     this.totalCorrect = 0;
     this.totalAttempts = 0;
     this.usedQuestionIds.clear();
+
+    // Reset answer distribution trackers
+    this.lastAnswerPosition = null;
+    this.consecutiveSamePositionCount = 0;
+    this.totalOptionACount = 0;
+    this.totalOptionBCount = 0;
 
     this.activeScreen = 'game';
     this.screenMenu.classList.remove('active');
@@ -457,17 +468,50 @@ class WordPathGame {
       this.rootWordBadge.style.display = 'none';
     }
 
-    this.questionStageTag.textContent = `Grade ${this.currentGrade} • ${q.partOfSpeech || 'Word Formation'}`;
+    this.questionStageTag.textContent = `Grade ${this.currentGrade} • ${q.partOfSpeech || 'Adjective vs Adverb'}`;
 
     // Sentence Box with Blank Highlight
     const formattedSentence = q.question.replace('______', '<span class="blank-highlight">______</span>');
     this.sentenceContainer.innerHTML = `<p class="sentence-text">${formattedSentence}</p>`;
 
+    // Determine balanced position for the correct answer (anti-streak logic)
+    let targetIndex = 0; // 0 for Option A, 1 for Option B
+
+    if (this.consecutiveSamePositionCount >= 2) {
+      // Switch to opposite position to prevent streaks > 2 (e.g. AAAAA or BBBBB)
+      targetIndex = this.lastAnswerPosition === 0 ? 1 : 0;
+    } else if (this.totalOptionACount > this.totalOptionBCount + 1) {
+      targetIndex = 1; // Balance towards B
+    } else if (this.totalOptionBCount > this.totalOptionACount + 1) {
+      targetIndex = 0; // Balance towards A
+    } else {
+      targetIndex = Math.random() < 0.5 ? 0 : 1;
+    }
+
+    // Update tracking
+    if (this.lastAnswerPosition === targetIndex) {
+      this.consecutiveSamePositionCount++;
+    } else {
+      this.lastAnswerPosition = targetIndex;
+      this.consecutiveSamePositionCount = 1;
+    }
+
+    if (targetIndex === 0) {
+      this.totalOptionACount++;
+    } else {
+      this.totalOptionBCount++;
+    }
+
+    const correctAnswer = q.correctAnswer;
+    const otherOption = q.options.find(opt => opt.toLowerCase().trim() !== correctAnswer.toLowerCase().trim()) || (q.options[0] === correctAnswer ? q.options[1] : q.options[0]);
+
+    const activeOptions = targetIndex === 0 ? [correctAnswer, otherOption] : [otherOption, correctAnswer];
+
     // Options Buttons
     this.optionsGrid.innerHTML = '';
-    const keys = ['A', 'B', 'C', 'D'];
+    const keys = ['A', 'B'];
 
-    q.options.forEach((opt, idx) => {
+    activeOptions.forEach((opt, idx) => {
       const btn = document.createElement('button');
       btn.className = 'btn-option';
       btn.setAttribute('type', 'button');
@@ -664,7 +708,7 @@ class WordPathGame {
     }
 
     this.stageClearTitle.textContent = `${currentStage.name} Cleared! 🎉`;
-    this.stageClearDesc.textContent = `Great word formation mastery! Ready for the next challenge path?`;
+    this.stageClearDesc.textContent = `Great Adjectives & Adverbs mastery! Ready for the next path?`;
     this.stageClearScore.textContent = this.score;
     this.stageClearAccuracy.textContent = `${accuracy}%`;
     this.stageClearStreak.textContent = `x${this.streak}`;
