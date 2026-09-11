@@ -1,1940 +1,1614 @@
 /**
  * Keep or Pass — Game Script
- * Team-based vocabulary and strategy game with procedural Web Audio
- * Featuring a balanced, curriculum-aligned Question Bank (157 Grade 7 + 158 Grade 8 = 315 unique questions)
- * and a persistent Fisher-Yates Shuffled Question Deck system.
+ * Team-based English Grammar Strategy Game with Procedural Web Audio
+ * Featuring 100+ Grade 7 Grammar Questions + 100+ Grade 8 Grammar Questions
+ * Full KEEP / PASS transfer mechanics, randomized answer choices, and session non-repetition.
  */
 
 // ==========================================
-// 1. GRADE 7 QUESTION BANK (157 CURATED QUESTIONS)
+// 1. GRADE 7 GRAMMAR QUESTION BANK (110+ CURATED QUESTIONS)
 // ==========================================
 const GRADE_7_QUESTIONS = [
+  // --- Simple Present & Habits ---
   {
-    "question": "Which word describes a person who always shares and buys gifts for friends?",
-    "category": "Appearance & Personality",
-    "grade": 7,
-    "difficulty": 1
+    question: "Sarah usually ___ to school by bicycle, but today she is taking the bus.",
+    options: ["goes", "go", "is going", "went"],
+    answer: "goes",
+    category: "Simple Present",
+    grade: 7
   },
   {
-    "question": "What is the opposite of 'HONEST'?",
-    "category": "Appearance & Personality",
-    "grade": 7,
-    "difficulty": 1
+    question: "My father ___ coffee in the morning; he prefers drinking hot tea.",
+    options: ["doesn't drink", "don't drink", "isn't drinking", "not drink"],
+    answer: "doesn't drink",
+    category: "Simple Present Negative",
+    grade: 7
   },
   {
-    "question": "Which adjective describes someone who always arrives exactly on time?",
-    "category": "Appearance & Personality",
-    "grade": 7,
-    "difficulty": 2
+    question: "___ your brother play the electric guitar in the school band?",
+    options: ["Does", "Do", "Is", "Are"],
+    answer: "Does",
+    category: "Simple Present Questions",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: Mark is very ___. He never changes his mind easily.",
-    "category": "Appearance & Personality",
-    "grade": 7,
-    "difficulty": 2
+    question: "Water ___ at 100 degrees Celsius under normal atmospheric pressure.",
+    options: ["boils", "boil", "is boiling", "boiled"],
+    answer: "boils",
+    category: "General Facts",
+    grade: 7
   },
   {
-    "question": "Which word describes someone who feels nervous when speaking in front of people?",
-    "category": "Appearance & Personality",
-    "grade": 7,
-    "difficulty": 1
+    question: "How often ___ they visit their grandparents in the countryside?",
+    options: ["do", "does", "are", "have"],
+    answer: "do",
+    category: "Frequency Questions",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: A person who drops things and breaks cups by accident is ___.",
-    "category": "Appearance & Personality",
-    "grade": 7,
-    "difficulty": 2
+    question: "Leo is very punctual; he is ___ late for his morning classes.",
+    options: ["never", "always", "usually", "often"],
+    answer: "never",
+    category: "Adverbs of Frequency",
+    grade: 7
   },
   {
-    "question": "What is the opposite of 'GENEROUS'?",
-    "category": "Appearance & Personality",
-    "grade": 7,
-    "difficulty": 1
+    question: "Which sentence has the CORRECT adverb of frequency word order?",
+    options: [
+      "She always eats breakfast before leaving.",
+      "She eats always breakfast before leaving.",
+      "Always she eats breakfast before leaving.",
+      "She eats breakfast always before leaving."
+    ],
+    answer: "She always eats breakfast before leaving.",
+    category: "Adverb Word Order",
+    grade: 7
   },
+
+  // --- Present Continuous & At the Moment ---
   {
-    "question": "Which adjective describes a calm person who is friendly and not easily worried?",
-    "category": "Appearance & Personality",
-    "grade": 7,
-    "difficulty": 2
+    question: "Listen! Somebody ___ on the front door.",
+    options: ["is knocking", "knocks", "knock", "are knocking"],
+    answer: "is knocking",
+    category: "Present Continuous",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: She has curly blonde hair and bright blue ___.",
-    "category": "Appearance & Personality",
-    "grade": 7,
-    "difficulty": 1
+    question: "Right now, the students ___ a science experiment in the laboratory.",
+    options: ["are conducting", "conduct", "is conducting", "conducted"],
+    answer: "are conducting",
+    category: "Present Continuous",
+    grade: 7
   },
   {
-    "question": "What do we call the small natural brown spots on someone's skin?",
-    "category": "Appearance & Personality",
-    "grade": 7,
-    "difficulty": 3
+    question: "Why ___ you wearing a heavy coat on such a warm sunny day?",
+    options: ["are", "do", "is", "have"],
+    answer: "are",
+    category: "Present Continuous Questions",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: He exercises every day to stay strong and ___.",
-    "category": "Appearance & Personality",
-    "grade": 7,
-    "difficulty": 1
+    question: "Look at the baby! She ___ her very first steps.",
+    options: ["is taking", "takes", "take", "are taking"],
+    answer: "is taking",
+    category: "Present Continuous",
+    grade: 7
   },
   {
-    "question": "What is the comparative form of the adjective 'TALL'?",
-    "category": "Appearance & Personality",
-    "grade": 7,
-    "difficulty": 1
+    question: "Quiet please! The principal ___ an important announcement over the intercom.",
+    options: ["is making", "makes", "make", "made"],
+    answer: "is making",
+    category: "Present Continuous",
+    grade: 7
   },
+
+  // --- Simple Past & Irregular Verbs ---
   {
-    "question": "Fill in the blank: My grandfather has a grey ___ on his chin.",
-    "category": "Appearance & Personality",
-    "grade": 7,
-    "difficulty": 1
+    question: "Yesterday afternoon, we ___ a thrilling basketball tournament match.",
+    options: ["watched", "watch", "are watching", "watches"],
+    answer: "watched",
+    category: "Simple Past Regular",
+    grade: 7
   },
   {
-    "question": "Which adjective describes someone who likes meeting people and making friends?",
-    "category": "Appearance & Personality",
-    "grade": 7,
-    "difficulty": 2
+    question: "Elena ___ to Paris with her family during the last winter holiday.",
+    options: ["went", "goes", "gone", "goed"],
+    answer: "went",
+    category: "Simple Past Irregular",
+    grade: 7
   },
   {
-    "question": "Complete: John is more ___ (hardworking) than his brother.",
-    "category": "Appearance & Personality",
-    "grade": 7,
-    "difficulty": 2
+    question: "He ___ his keys on the kitchen table two hours ago.",
+    options: ["left", "leaves", "leaved", "is leaving"],
+    answer: "left",
+    category: "Simple Past Irregular",
+    grade: 7
   },
   {
-    "question": "Which sport is played with a racket, a shuttlecock, and a high net?",
-    "category": "Sports",
-    "grade": 7,
-    "difficulty": 2
+    question: "They ___ not enjoy the horror movie because it was too scary.",
+    options: ["did", "do", "were", "are"],
+    answer: "did",
+    category: "Simple Past Negative",
+    grade: 7
   },
   {
-    "question": "What protective gear must a cyclist wear on their head for safety?",
-    "category": "Sports",
-    "grade": 7,
-    "difficulty": 1
+    question: "What time ___ you arrive at the airport last night?",
+    options: ["did", "do", "were", "have"],
+    answer: "did",
+    category: "Simple Past Questions",
+    grade: 7
   },
   {
-    "question": "Which sport takes place inside a swimming pool?",
-    "category": "Sports",
-    "grade": 7,
-    "difficulty": 1
+    question: "Maya ___ a beautiful handmade birthday card for her best friend.",
+    options: ["bought", "buyed", "buys", "is buying"],
+    answer: "bought",
+    category: "Simple Past Irregular",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: You need a bow and ___ to practice archery.",
-    "category": "Sports",
-    "grade": 7,
-    "difficulty": 3
+    question: "Kenji ___ his arm while playing soccer in the park last Sunday.",
+    options: ["broke", "breaked", "breaks", "broken"],
+    answer: "broke",
+    category: "Simple Past Irregular",
+    grade: 7
   },
   {
-    "question": "What do swimmers wear over their eyes to see clearly underwater?",
-    "category": "Sports",
-    "grade": 7,
-    "difficulty": 2
+    question: "The teacher ___ the grammar rules clearly to the whole class yesterday.",
+    options: ["explained", "explains", "explain", "is explaining"],
+    answer: "explained",
+    category: "Simple Past Regular",
+    grade: 7
   },
+
+  // --- To Be: am / is / are / was / were ---
   {
-    "question": "Which sport is played on snowy mountain slopes with two long boards?",
-    "category": "Sports",
-    "grade": 7,
-    "difficulty": 1
+    question: "Where ___ you at eight o'clock yesterday evening?",
+    options: ["were", "was", "are", "did"],
+    answer: "were",
+    category: "Past of To Be",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: How ___ do you train? — Twice every week.",
-    "category": "Sports",
-    "grade": 7,
-    "difficulty": 1
+    question: "Neither of the boys ___ at school yesterday because they were ill.",
+    options: ["was", "were", "are", "did"],
+    answer: "was",
+    category: "Subject-Verb Agreement",
+    grade: 7
   },
   {
-    "question": "Which of these is an outdoor nature sport: chess or hiking?",
-    "category": "Sports",
-    "grade": 7,
-    "difficulty": 1
+    question: "The weather ___ cold and stormy last weekend, so we stayed home.",
+    options: ["was", "is", "were", "did"],
+    answer: "was",
+    category: "Past of To Be",
+    grade: 7
   },
   {
-    "question": "What do we call a match that ends with the same score for both teams (e.g. 1-1)?",
-    "category": "Sports",
-    "grade": 7,
-    "difficulty": 3
+    question: "___ there any fresh oranges left in the fruit basket?",
+    options: ["Are", "Is", "Do", "Does"],
+    answer: "Are",
+    category: "There is / There are",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: Professional athletes must eat a ___ diet to stay healthy.",
-    "category": "Sports",
-    "grade": 7,
-    "difficulty": 2
+    question: "There ___ a large historical monument in the center of the town square.",
+    options: ["is", "are", "were", "be"],
+    answer: "is",
+    category: "There is / There are",
+    grade: 7
   },
   {
-    "question": "What piece of equipment is used to hit the ball in baseball?",
-    "category": "Sports",
-    "grade": 7,
-    "difficulty": 2
+    question: "There ___ no computers in classrooms a hundred years ago.",
+    options: ["were", "was", "are", "did"],
+    answer: "were",
+    category: "There was / There were",
+    grade: 7
   },
+
+  // --- Modals: can, can't, could, should, must, have to ---
   {
-    "question": "Which team sport has 11 players on each side on a grass pitch?",
-    "category": "Sports",
-    "grade": 7,
-    "difficulty": 1
+    question: "You ___ touch the hot stove burner; you will burn your fingers!",
+    options: ["mustn't", "must", "can", "should"],
+    answer: "mustn't",
+    category: "Modals of Prohibition",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: The champion was awarded a gold ___ at the tournament.",
-    "category": "Sports",
-    "grade": 7,
-    "difficulty": 2
+    question: "I have a terrible toothache. — You ___ see a dentist as soon as possible.",
+    options: ["should", "mustn't", "can't", "shall"],
+    answer: "should",
+    category: "Modals of Advice",
+    grade: 7
   },
   {
-    "question": "Which verb do we use with basketball: PLAY, DO, or GO?",
-    "category": "Sports",
-    "grade": 7,
-    "difficulty": 1
+    question: "When Lucas was five years old, he ___ already swim across the pool.",
+    options: ["could", "can", "must", "should"],
+    answer: "could",
+    category: "Past Ability",
+    grade: 7
   },
   {
-    "question": "Which verb do we use with gymnastics: PLAY, DO, or GO?",
-    "category": "Sports",
-    "grade": 7,
-    "difficulty": 2
+    question: "Tomorrow is Sunday, so we ___ wake up early for school.",
+    options: ["don't have to", "mustn't", "can't", "have to not"],
+    answer: "don't have to",
+    category: "Lack of Obligation",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: Thomas Edison was a famous inventor who was ___ in 1847.",
-    "category": "Biographies",
-    "grade": 7,
-    "difficulty": 1
+    question: "All museum visitors ___ buy a valid ticket before entering the gallery.",
+    options: ["have to", "can't", "shouldn't", "may not"],
+    answer: "have to",
+    category: "Obligation",
+    grade: 7
   },
   {
-    "question": "What do we call a book written about a real person's life history?",
-    "category": "Biographies",
-    "grade": 7,
-    "difficulty": 2
+    question: "You ___ speak loudly in the library; it is strictly prohibited.",
+    options: ["mustn't", "don't have to", "can", "should"],
+    answer: "mustn't",
+    category: "Modals of Prohibition",
+    grade: 7
   },
+
+  // --- Comparatives & Superlatives ---
   {
-    "question": "What is the past simple form of the irregular verb 'WRITE'?",
-    "category": "Biographies",
-    "grade": 7,
-    "difficulty": 2
+    question: "Mount Everest is the ___ mountain peak in the world.",
+    options: ["highest", "higher", "most high", "more high"],
+    answer: "highest",
+    category: "Superlatives",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: Albert Einstein ___ (win) the Nobel Prize in Physics in 1921.",
-    "category": "Biographies",
-    "grade": 7,
-    "difficulty": 2
+    question: "A cheetah runs much ___ than a lion.",
+    options: ["faster", "fastest", "more fast", "most fast"],
+    answer: "faster",
+    category: "Comparatives",
+    grade: 7
   },
   {
-    "question": "What is the past simple form of the regular verb 'DISCOVER'?",
-    "category": "Biographies",
-    "grade": 7,
-    "difficulty": 2
+    question: "Health is ___ than wealth and expensive possessions.",
+    options: ["more important", "most important", "importanter", "as important"],
+    answer: "more important",
+    category: "Comparatives",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: After high school, she went to university to ___ chemistry.",
-    "category": "Biographies",
-    "grade": 7,
-    "difficulty": 2
+    question: "This was the ___ movie I have ever watched in a cinema.",
+    options: ["worst", "baddest", "worse", "badder"],
+    answer: "worst",
+    category: "Irregular Superlatives",
+    grade: 7
   },
   {
-    "question": "What word means to complete school or university and receive a diploma?",
-    "category": "Biographies",
-    "grade": 7,
-    "difficulty": 3
+    question: "My new laptop is ___ than my old desktop computer.",
+    options: ["better", "gooder", "best", "more good"],
+    answer: "better",
+    category: "Irregular Comparatives",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: Alexander Graham Bell ___ the first electric telephone.",
-    "category": "Biographies",
-    "grade": 7,
-    "difficulty": 2
+    question: "Which planet is the ___ to the sun in our solar system?",
+    options: ["closest", "closer", "most close", "more close"],
+    answer: "closest",
+    category: "Superlatives",
+    grade: 7
   },
+
+  // --- Quantifiers: some, any, much, many, a lot of, a few, a little ---
   {
-    "question": "What is the past simple of the verb 'GO'?",
-    "category": "Biographies",
-    "grade": 7,
-    "difficulty": 1
+    question: "We do not have ___ milk left in the refrigerator for breakfast.",
+    options: ["any", "some", "many", "a few"],
+    answer: "any",
+    category: "Quantifiers",
+    grade: 7
   },
   {
-    "question": "What is the past simple of the verb 'BECOME'?",
-    "category": "Biographies",
-    "grade": 7,
-    "difficulty": 2
+    question: "Would you like ___ warm honey with your herbal tea?",
+    options: ["some", "any", "many", "a few"],
+    answer: "some",
+    category: "Offers with Some",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: Aziz Sancar received the Nobel Prize for his scientific ___ in DNA repair.",
-    "category": "Biographies",
-    "grade": 7,
-    "difficulty": 3
+    question: "How ___ books did you borrow from the school library this week?",
+    options: ["many", "much", "any", "some"],
+    answer: "many",
+    category: "Countable Quantifiers",
+    grade: 7
   },
   {
-    "question": "What do we call a historical time period of 100 years?",
-    "category": "Biographies",
-    "grade": 7,
-    "difficulty": 3
+    question: "How ___ sugar do you usually put in your morning coffee?",
+    options: ["much", "many", "few", "a few"],
+    answer: "much",
+    category: "Uncountable Quantifiers",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: Mozart started composing musical pieces when he was a little ___.",
-    "category": "Biographies",
-    "grade": 7,
-    "difficulty": 1
+    question: "There are only ___ students present in the art studio today.",
+    options: ["a few", "a little", "much", "any"],
+    answer: "a few",
+    category: "Countable Quantifiers",
+    grade: 7
   },
   {
-    "question": "What is the opposite of 'FAIL' when taking a school test?",
-    "category": "Biographies",
-    "grade": 7,
-    "difficulty": 1
+    question: "I only need ___ time to finish solving this geometry problem.",
+    options: ["a little", "a few", "many", "any"],
+    answer: "a little",
+    category: "Uncountable Quantifiers",
+    grade: 7
   },
+
+  // --- Pronouns & Possessives ---
   {
-    "question": "Which wild mammal is the largest living creature in the oceans?",
-    "category": "Wild Animals",
-    "grade": 7,
-    "difficulty": 1
+    question: "That blue backpack is not mine; it belongs to Tariq. It is ___ .",
+    options: ["his", "him", "her", "he"],
+    answer: "his",
+    category: "Possessive Pronouns",
+    grade: 7
   },
   {
-    "question": "What do we call wild animals that feed only on meat?",
-    "category": "Wild Animals",
-    "grade": 7,
-    "difficulty": 3
+    question: "The little cat washed ___ face with its tiny paws.",
+    options: ["its", "it's", "it", "their"],
+    answer: "its",
+    category: "Possessive Adjectives",
+    grade: 7
   },
   {
-    "question": "What do we call animals that feed only on plants and leaves?",
-    "category": "Wild Animals",
-    "grade": 7,
-    "difficulty": 3
+    question: "Sofia and ___ went to the science museum together on Saturday.",
+    options: ["I", "me", "myself", "mine"],
+    answer: "I",
+    category: "Subject Pronouns",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: Animal species that no longer exist anywhere on Earth are ___.",
-    "category": "Wild Animals",
-    "grade": 7,
-    "difficulty": 2
+    question: "The teacher gave the assignment papers directly to ___ .",
+    options: ["us", "we", "our", "ours"],
+    answer: "us",
+    category: "Object Pronouns",
+    grade: 7
   },
   {
-    "question": "Which flightless bird lives in icy Antarctica and is a fast swimmer?",
-    "category": "Wild Animals",
-    "grade": 7,
-    "difficulty": 1
+    question: "The children made these origami birds all by ___ .",
+    options: ["themselves", "theirselves", "themself", "theirs"],
+    answer: "themselves",
+    category: "Reflexive Pronouns",
+    grade: 7
   },
+
+  // --- Prepositions & Conjunctions ---
   {
-    "question": "Which Asian big cat has orange fur with distinctive black stripes?",
-    "category": "Wild Animals",
-    "grade": 7,
-    "difficulty": 1
+    question: "The mathematics exam starts promptly ___ 9:00 AM on Monday.",
+    options: ["at", "on", "in", "by"],
+    answer: "at",
+    category: "Prepositions of Time",
+    grade: 7
   },
   {
-    "question": "What word means the natural living environment of an animal?",
-    "category": "Wild Animals",
-    "grade": 7,
-    "difficulty": 3
+    question: "Our family always goes on vacation ___ July every summer.",
+    options: ["in", "on", "at", "for"],
+    answer: "in",
+    category: "Prepositions of Time",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: Cold-blooded animals like snakes and lizards are called ___.",
-    "category": "Wild Animals",
-    "grade": 7,
-    "difficulty": 3
+    question: "The soccer championship final match will take place ___ Saturday evening.",
+    options: ["on", "in", "at", "to"],
+    answer: "on",
+    category: "Prepositions of Time",
+    grade: 7
   },
   {
-    "question": "Which African animal has a very long neck to reach high tree branches?",
-    "category": "Wild Animals",
-    "grade": 7,
-    "difficulty": 1
+    question: "The public library is located ___ the post office and the bakery.",
+    options: ["between", "among", "through", "across"],
+    answer: "between",
+    category: "Prepositions of Place",
+    grade: 7
   },
   {
-    "question": "What illegal human activity involves killing wild animals for fur or horns?",
-    "category": "Wild Animals",
-    "grade": 7,
-    "difficulty": 3
+    question: "He wore his raincoat ___ it was raining heavily outside.",
+    options: ["because", "so", "but", "although"],
+    answer: "because",
+    category: "Conjunctions of Cause",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: Giant pandas live in the bamboo forests of ___.",
-    "category": "Wild Animals",
-    "grade": 7,
-    "difficulty": 1
+    question: "She studied hard for the test, ___ she achieved top marks.",
+    options: ["so", "because", "but", "or"],
+    answer: "so",
+    category: "Conjunctions of Result",
+    grade: 7
   },
   {
-    "question": "Which large grey animal has tusks and a long flexible trunk?",
-    "category": "Wild Animals",
-    "grade": 7,
-    "difficulty": 1
+    question: "He wanted to play tennis, ___ it started to thunder and rain.",
+    options: ["but", "so", "because", "and"],
+    answer: "but",
+    category: "Conjunctions of Contrast",
+    grade: 7
   },
+
+  // --- Articles: a / an / the / zero article ---
   {
-    "question": "Fill in the blank: Eagles use their wide ___ to soar high in the sky.",
-    "category": "Wild Animals",
-    "grade": 7,
-    "difficulty": 1
+    question: "My uncle works as ___ architect in a large international firm.",
+    options: ["an", "a", "the", "—"],
+    answer: "an",
+    category: "Indefinite Articles",
+    grade: 7
   },
   {
-    "question": "What sharp curved claws on a bird of prey are used to catch food?",
-    "category": "Wild Animals",
-    "grade": 7,
-    "difficulty": 3
+    question: "We saw ___ magnificent European eagle at the wildlife sanctuary.",
+    options: ["a", "an", "the", "—"],
+    answer: "a",
+    category: "Indefinite Articles",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: Governments establish national parks to ___ endangered wildlife.",
-    "category": "Wild Animals",
-    "grade": 7,
-    "difficulty": 2
+    question: "___ sun rises in the east and sets in the west.",
+    options: ["The", "A", "An", "—"],
+    answer: "The",
+    category: "Definite Article",
+    grade: 7
   },
   {
-    "question": "Which TV programme provides daily reports on current global events?",
-    "category": "Television",
-    "grade": 7,
-    "difficulty": 1
+    question: "I usually play ___ basketball with my classmates after school.",
+    options: ["—", "the", "a", "an"],
+    answer: "—",
+    category: "Zero Article with Sports",
+    grade: 7
   },
+
+  // --- Question Words & Formation ---
   {
-    "question": "Which TV show uses drawn animation and is widely watched by kids?",
-    "category": "Television",
-    "grade": 7,
-    "difficulty": 1
+    question: "___ backpack is this on the floor? — It belongs to Chloe.",
+    options: ["Whose", "Who", "Which", "Where"],
+    answer: "Whose",
+    category: "Question Words",
+    grade: 7
   },
   {
-    "question": "What type of educational programme shows true facts about nature and history?",
-    "category": "Television",
-    "grade": 7,
-    "difficulty": 2
+    question: "___ of these two jackets do you like better, the red or the blue one?",
+    options: ["Which", "What", "Who", "Whose"],
+    answer: "Which",
+    category: "Question Words",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: In a ___ show, players answer trivia questions for prizes.",
-    "category": "Television",
-    "grade": 7,
-    "difficulty": 2
+    question: "___ long does it take to travel from London to Edinburgh by train?",
+    options: ["How", "What", "Where", "Why"],
+    answer: "How",
+    category: "Question Words",
+    grade: 7
   },
   {
-    "question": "What device do you press buttons on to change TV channels from your seat?",
-    "category": "Television",
-    "grade": 7,
-    "difficulty": 1
+    question: "Choose the CORRECT negative sentence:",
+    options: [
+      "He doesn't have any pets at home.",
+      "He doesn't has any pets at home.",
+      "He don't have any pets at home.",
+      "He not has any pets at home."
+    ],
+    answer: "He doesn't have any pets at home.",
+    category: "Negative Sentence Formation",
+    grade: 7
   },
   {
-    "question": "What idiom describes a lazy person who spends hours watching TV on the sofa?",
-    "category": "Television",
-    "grade": 7,
-    "difficulty": 2
+    question: "Choose the sentence with CORRECT subject-verb agreement:",
+    options: [
+      "Every student in the classroom has a dictionary.",
+      "Every student in the classroom have a dictionary.",
+      "Every student in the classroom having a dictionary.",
+      "Every student in the classroom are having a dictionary."
+    ],
+    answer: "Every student in the classroom has a dictionary.",
+    category: "Subject-Verb Agreement",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: I prefer comedies ___ horror movies because they make me laugh.",
-    "category": "Television",
-    "grade": 7,
-    "difficulty": 2
+    question: "Which of the following is a CORRECT short answer to 'Did they win the trophy?'",
+    options: [
+      "Yes, they did.",
+      "Yes, they won.",
+      "Yes, they do.",
+      "Yes, they have."
+    ],
+    answer: "Yes, they did.",
+    category: "Short Answers",
+    grade: 7
   },
   {
-    "question": "What is the opposite of an 'EXCITING' movie?",
-    "category": "Television",
-    "grade": 7,
-    "difficulty": 1
+    question: "Complete the sentence: 'If you heat ice, it ___ into water.'",
+    options: ["melts", "melted", "will melt", "is melting"],
+    answer: "melts",
+    category: "Zero Conditional",
+    grade: 7
   },
   {
-    "question": "What do we call short video clips during TV breaks that advertise products?",
-    "category": "Television",
-    "grade": 7,
-    "difficulty": 2
+    question: "Choose the correct spelling for the -ing form of 'SWIM':",
+    options: ["swimming", "swiming", "swimering", "swimmmimg"],
+    answer: "swimming",
+    category: "Spelling Rules",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: A ___ opera is a dramatic TV series about family conflicts.",
-    "category": "Television",
-    "grade": 7,
-    "difficulty": 3
+    question: "Choose the correct spelling for the -ing form of 'MAKE':",
+    options: ["making", "makeing", "makking", "macking"],
+    answer: "making",
+    category: "Spelling Rules",
+    grade: 7
   },
   {
-    "question": "Which adjective means providing useful knowledge and lessons?",
-    "category": "Television",
-    "grade": 7,
-    "difficulty": 3
+    question: "What is the past tense of 'CATCH'?",
+    options: ["caught", "catched", "cot", "cought"],
+    answer: "caught",
+    category: "Irregular Past",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: Please turn ___ the TV sound; the baby is sleeping.",
-    "category": "Television",
-    "grade": 7,
-    "difficulty": 2
+    question: "What is the past tense of 'TEACH'?",
+    options: ["taught", "teached", "thought", "touched"],
+    answer: "taught",
+    category: "Irregular Past",
+    grade: 7
   },
   {
-    "question": "What TV genre features invited celebrity guests chatting with a host?",
-    "category": "Television",
-    "grade": 7,
-    "difficulty": 2
+    question: "What is the past tense of 'FLY'?",
+    options: ["flew", "flied", "flowed", "flown"],
+    answer: "flew",
+    category: "Irregular Past",
+    grade: 7
   },
   {
-    "question": "Complete: I enjoyed the movie; the acting was truly ___ (wonderful).",
-    "category": "Television",
-    "grade": 7,
-    "difficulty": 1
+    question: "Fill in the blank: 'She is interested ___ learning ancient Egyptian history.'",
+    options: ["in", "at", "on", "about"],
+    answer: "in",
+    category: "Dependent Prepositions",
+    grade: 7
   },
   {
-    "question": "What paper card do you send to friends to invite them to a celebration?",
-    "category": "Celebrations",
-    "grade": 7,
-    "difficulty": 1
+    question: "Fill in the blank: 'Leo is very good ___ playing chess tournaments.'",
+    options: ["at", "in", "on", "with"],
+    answer: "at",
+    category: "Dependent Prepositions",
+    grade: 7
   },
   {
-    "question": "What special baked dessert with candles is served at a birthday party?",
-    "category": "Celebrations",
-    "grade": 7,
-    "difficulty": 1
+    question: "Fill in the blank: 'Are you afraid ___ spiders and dark places?'",
+    options: ["of", "from", "with", "about"],
+    answer: "of",
+    category: "Dependent Prepositions",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: We blew up colourful rubber ___ to decorate the party hall.",
-    "category": "Celebrations",
-    "grade": 7,
-    "difficulty": 1
+    question: "Listen! The school choir ___ a traditional song in the auditorium.",
+    options: ["is singing", "sings", "are singing", "sing"],
+    answer: "is singing",
+    category: "Present Continuous",
+    grade: 7
   },
   {
-    "question": "Which celebration takes place when students complete their school degrees?",
-    "category": "Celebrations",
-    "grade": 7,
-    "difficulty": 2
+    question: "How ___ pairs of shoes do you have in your closet?",
+    options: ["many", "much", "any", "some"],
+    answer: "many",
+    category: "Countable Quantifiers",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: Write down everyone's name on the ___ list before sending cards.",
-    "category": "Celebrations",
-    "grade": 7,
-    "difficulty": 2
+    question: "We usually have lunch ___ noon in the cafeteria.",
+    options: ["at", "in", "on", "to"],
+    answer: "at",
+    category: "Prepositions of Time",
+    grade: 7
   },
   {
-    "question": "What wrapped presents do guests bring to give to the birthday person?",
-    "category": "Celebrations",
-    "grade": 7,
-    "difficulty": 1
+    question: "Look at ___ birds flying high above the lake!",
+    options: ["those", "this", "that", "them"],
+    answer: "those",
+    category: "Demonstratives",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: We bought two ___ of orange juice for the party. (bottles / slices)",
-    "category": "Celebrations",
-    "grade": 7,
-    "difficulty": 1
+    question: "The dentist told him to brush his ___ twice every day.",
+    options: ["teeth", "tooths", "toothes", "teeths"],
+    answer: "teeth",
+    category: "Irregular Plurals",
+    grade: 7
   },
   {
-    "question": "Which quantifier is used with countable items: 'A FEW' or 'A LITTLE'?",
-    "category": "Celebrations",
-    "grade": 7,
-    "difficulty": 2
+    question: "Three little ___ were running across the kitchen floor.",
+    options: ["mice", "mouses", "mices", "mouse"],
+    answer: "mice",
+    category: "Irregular Plurals",
+    grade: 7
   },
   {
-    "question": "Which celebration on December 31st marks the beginning of a fresh calendar year?",
-    "category": "Celebrations",
-    "grade": 7,
-    "difficulty": 1
+    question: "All the ___ in the drama club performed brilliantly on stage.",
+    options: ["children", "childs", "childrens", "childes"],
+    answer: "children",
+    category: "Irregular Plurals",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: We should hang ribbons to ___ the classroom for the party.",
-    "category": "Celebrations",
-    "grade": 7,
-    "difficulty": 2
+    question: "He speaks English very ___ because he practices every afternoon.",
+    options: ["well", "good", "goodly", "best"],
+    answer: "well",
+    category: "Adverbs of Manner",
+    grade: 7
   },
   {
-    "question": "What cheerful phrase do people say to someone on their birthday: 'Happy ___'?",
-    "category": "Celebrations",
-    "grade": 7,
-    "difficulty": 1
+    question: "Drive ___ when the mountain road is covered in thick snow.",
+    options: ["carefully", "careful", "care", "more careful"],
+    answer: "carefully",
+    category: "Adverbs of Manner",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: Is there ___ apple juice left in the fridge? (any / some)",
-    "category": "Celebrations",
-    "grade": 7,
-    "difficulty": 2
+    question: "Cheetahs run very ___ across the African savanna.",
+    options: ["fast", "fastly", "faster", "fastest"],
+    answer: "fast",
+    category: "Adverbs of Manner",
+    grade: 7
   },
   {
-    "question": "What paper items are hung on walls as party decorations?",
-    "category": "Celebrations",
-    "grade": 7,
-    "difficulty": 2
+    question: "The students worked ___ to finish their science models before the deadline.",
+    options: ["hard", "hardly", "harderly", "hardful"],
+    answer: "hard",
+    category: "Adverbs of Manner",
+    grade: 7
   },
   {
-    "question": "What do guests write their kind wishes inside before giving a present?",
-    "category": "Celebrations",
-    "grade": 7,
-    "difficulty": 2
+    question: "___ you please help me carry this heavy carton of books?",
+    options: ["Could", "Must", "Should", "Shall"],
+    answer: "Could",
+    category: "Polite Requests",
+    grade: 7
   },
   {
-    "question": "Which modal verb do we use for future predictions: WILL, MUST, or CAN?",
-    "category": "Dreams & Future",
-    "grade": 7,
-    "difficulty": 1
+    question: "___ I borrow your blue fountain pen for a moment, please?",
+    options: ["May", "Must", "Should", "Would"],
+    answer: "May",
+    category: "Polite Requests",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: In the future, people might travel in ___ cars through the air.",
-    "category": "Dreams & Future",
-    "grade": 7,
-    "difficulty": 1
+    question: "The cat jumped ___ the open bedroom window into the garden.",
+    options: ["through", "between", "under", "along"],
+    answer: "through",
+    category: "Prepositions of Movement",
+    grade: 7
   },
   {
-    "question": "What is the negative short form of 'WILL' for future predictions?",
-    "category": "Dreams & Future",
-    "grade": 7,
-    "difficulty": 1
+    question: "The hikers walked ___ the peaceful forest path for two hours.",
+    options: ["along", "into", "onto", "underneath"],
+    answer: "along",
+    category: "Prepositions of Movement",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: I hope to have a successful ___ as a software engineer.",
-    "category": "Dreams & Future",
-    "grade": 7,
-    "difficulty": 2
+    question: "He drove his car ___ the bridge to reach the opposite river bank.",
+    options: ["across", "through", "into", "between"],
+    answer: "across",
+    category: "Prepositions of Movement",
+    grade: 7
   },
   {
-    "question": "Which word expresses complete certainty: 'DEFINITELY' or 'MAYBE'?",
-    "category": "Dreams & Future",
-    "grade": 7,
-    "difficulty": 2
+    question: "The submarine dove deep ___ the dark ocean waters.",
+    options: ["into", "onto", "out of", "along"],
+    answer: "into",
+    category: "Prepositions of Movement",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: In the year 2050, intelligent ___ will clean our homes.",
-    "category": "Dreams & Future",
-    "grade": 7,
-    "difficulty": 1
+    question: "What is the past tense of 'SING'?",
+    options: ["sang", "singed", "sung", "song"],
+    answer: "sang",
+    category: "Irregular Past",
+    grade: 7
   },
   {
-    "question": "What do we call a dream job that you hope to achieve in the future?",
-    "category": "Dreams & Future",
-    "grade": 7,
-    "difficulty": 2
+    question: "What is the past tense of 'DRINK'?",
+    options: ["drank", "drinked", "drunk", "dronk"],
+    answer: "drank",
+    category: "Irregular Past",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: In fifty years, tourists might take holidays on the ___ in space.",
-    "category": "Dreams & Future",
-    "grade": 7,
-    "difficulty": 2
+    question: "What is the past tense of 'SWIM'?",
+    options: ["swam", "swimmed", "swum", "swom"],
+    answer: "swam",
+    category: "Irregular Past",
+    grade: 7
   },
   {
-    "question": "Which adverb expresses a high chance: 'PROBABLY' or 'NEVER'?",
-    "category": "Dreams & Future",
-    "grade": 7,
-    "difficulty": 2
+    question: "What is the past tense of 'DRIVE'?",
+    options: ["drove", "drived", "driven", "drave"],
+    answer: "drove",
+    category: "Irregular Past",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: She plans to study abroad to learn a second foreign ___.",
-    "category": "Dreams & Future",
-    "grade": 7,
-    "difficulty": 1
+    question: "What is the past tense of 'RIDE'?",
+    options: ["rode", "rided", "ridden", "road"],
+    answer: "rode",
+    category: "Irregular Past",
+    grade: 7
   },
   {
-    "question": "What electronic touchscreen device has replaced heavy paper books in many schools?",
-    "category": "Dreams & Future",
-    "grade": 7,
-    "difficulty": 2
+    question: "What is the past tense of 'WEAR'?",
+    options: ["wore", "weared", "worn", "ware"],
+    answer: "wore",
+    category: "Irregular Past",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: I ___ (believe) our cities will become greener in the future.",
-    "category": "Dreams & Future",
-    "grade": 7,
-    "difficulty": 1
+    question: "What is the past tense of 'GROW'?",
+    options: ["grew", "growed", "grown", "growt"],
+    answer: "grew",
+    category: "Irregular Past",
+    grade: 7
   },
   {
-    "question": "What type of futuristic city might humans build under the ocean surface?",
-    "category": "Dreams & Future",
-    "grade": 7,
-    "difficulty": 3
+    question: "What is the past tense of 'THROW'?",
+    options: ["threw", "throwed", "thrown", "thraw"],
+    answer: "threw",
+    category: "Irregular Past",
+    grade: 7
   },
   {
-    "question": "Fill in the blank: Work hard and believe in yourself, and your goals will come ___.",
-    "category": "Dreams & Future",
-    "grade": 7,
-    "difficulty": 1
+    question: "What is the past tense of 'BLOW'?",
+    options: ["blew", "blowed", "blown", "blaw"],
+    answer: "blew",
+    category: "Irregular Past",
+    grade: 7
   },
   {
-    "question": "Where do people go to borrow and read books quietly for free?",
-    "category": "Public Buildings",
-    "grade": 7,
-    "difficulty": 1
+    question: "This drawing is ours, and that colorful painting is ___ .",
+    options: ["theirs", "their", "them", "they"],
+    answer: "theirs",
+    category: "Possessive Pronouns",
+    grade: 7
   },
   {
-    "question": "Where do you go to purchase medicine prescribed by a medical doctor?",
-    "category": "Public Buildings",
-    "grade": 7,
-    "difficulty": 1
+    question: "Please ___ your mobile phones during the theater performance.",
+    options: ["turn off", "turns off", "turning off", "turned off"],
+    answer: "turn off",
+    category: "Imperatives",
+    grade: 7
   },
   {
-    "question": "Where do doctors and nurses care for sick and injured patients?",
-    "category": "Public Buildings",
-    "grade": 7,
-    "difficulty": 1
+    question: "Don't ___ on the grass in the botanical garden.",
+    options: ["step", "steps", "stepping", "stepped"],
+    answer: "step",
+    category: "Negative Imperatives",
+    grade: 7
   },
   {
-    "question": "Where do you go to buy fresh bread and rolls baked every morning?",
-    "category": "Public Buildings",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "Where do you go to report a stolen bike or lost bag to police officers?",
-    "category": "Public Buildings",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "Where can visitors view famous oil paintings and art sculptures?",
-    "category": "Public Buildings",
-    "grade": 7,
-    "difficulty": 2
-  },
-  {
-    "question": "Where do you go to send a postal parcel or buy postage stamps?",
-    "category": "Public Buildings",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "Where do emergency firefighters park their trucks and wait for callouts?",
-    "category": "Public Buildings",
-    "grade": 7,
-    "difficulty": 2
-  },
-  {
-    "question": "Where do audiences go to watch newly released movies on a huge screen?",
-    "category": "Public Buildings",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "Where do you go to buy fresh meat like minced beef and chicken?",
-    "category": "Public Buildings",
-    "grade": 7,
-    "difficulty": 2
-  },
-  {
-    "question": "Where can you buy fresh local fruits and vegetables in your neighbourhood?",
-    "category": "Public Buildings",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "Where do passengers go in a city to board a commercial flight?",
-    "category": "Public Buildings",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "Where do city mayors and local council members manage municipal services?",
-    "category": "Public Buildings",
-    "grade": 7,
-    "difficulty": 3
-  },
-  {
-    "question": "Where do friends meet to drink tea, coffee, and eat snacks?",
-    "category": "Public Buildings",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "What process converts used plastic, paper, and glass into new materials?",
-    "category": "Environment",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "What clean, renewable energy is generated directly from sunlight?",
-    "category": "Environment",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "What term describes the gradual increase in the overall temperature of the Earth?",
-    "category": "Environment",
-    "grade": 7,
-    "difficulty": 2
-  },
-  {
-    "question": "Fill in the blank: Destroying forests and cutting down too many trees is called ___.",
-    "category": "Environment",
-    "grade": 7,
-    "difficulty": 3
-  },
-  {
-    "question": "What should you do to electrical lights when leaving an empty room?",
-    "category": "Environment",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "What should you turn off while brushing teeth to avoid wasting clean water?",
-    "category": "Environment",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "Fill in the blank: Always throw candy wrappers into the rubbish ___.",
-    "category": "Environment",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "What eco-friendly two-wheeled vehicle can you ride instead of driving a car?",
-    "category": "Environment",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "Fill in the blank: Factories should place ___ on smokestacks to reduce air pollution.",
-    "category": "Environment",
-    "grade": 7,
-    "difficulty": 3
-  },
-  {
-    "question": "What green plants should we plant in gardens to increase clean oxygen?",
-    "category": "Environment",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "What type of reusable bag should you use when shopping instead of plastic?",
-    "category": "Environment",
-    "grade": 7,
-    "difficulty": 2
-  },
-  {
-    "question": "Fill in the blank: We must keep plastic waste out of our seas to ___ marine life.",
-    "category": "Environment",
-    "grade": 7,
-    "difficulty": 2
-  },
-  {
-    "question": "Which renewable energy source uses large rotating blades driven by natural breezes?",
-    "category": "Environment",
-    "grade": 7,
-    "difficulty": 2
-  },
-  {
-    "question": "Fill in the blank: Do not ___ freshwater by leaving garden hoses running unattended.",
-    "category": "Environment",
-    "grade": 7,
-    "difficulty": 2
-  },
-  {
-    "question": "Which planet is famously called the 'Red Planet' in our solar system?",
-    "category": "Planets & Space",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "What is the massive blazing star at the center of our solar system?",
-    "category": "Planets & Space",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "Which planet is the largest planet in our solar system?",
-    "category": "Planets & Space",
-    "grade": 7,
-    "difficulty": 2
-  },
-  {
-    "question": "What do we call a person trained to travel and conduct experiments in space?",
-    "category": "Planets & Space",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "What optical tool do stargazers use to look at distant craters on planets?",
-    "category": "Planets & Space",
-    "grade": 7,
-    "difficulty": 2
-  },
-  {
-    "question": "Fill in the blank: The Earth takes one year to ___ completely around the Sun.",
-    "category": "Planets & Space",
-    "grade": 7,
-    "difficulty": 2
-  },
-  {
-    "question": "What natural rocky satellite orbits Earth every 27 to 29 days?",
-    "category": "Planets & Space",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "Which planet orbits closest to the Sun in our solar system?",
-    "category": "Planets & Space",
-    "grade": 7,
-    "difficulty": 2
-  },
-  {
-    "question": "Fill in the blank: Saturn is famous for its stunning visible system of ___.",
-    "category": "Planets & Space",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "What invisible natural force keeps people and objects grounded on Earth's surface?",
-    "category": "Planets & Space",
-    "grade": 7,
-    "difficulty": 2
-  },
-  {
-    "question": "What rocket vehicle is launched to carry space crews and satellites into orbit?",
-    "category": "Planets & Space",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "Fill in the blank: Jupiter is much ___ (large) in volume than planet Earth.",
-    "category": "Planets & Space",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "What term describes a massive system of billions of stars, such as the Milky Way?",
-    "category": "Planets & Space",
-    "grade": 7,
-    "difficulty": 3
-  },
-  {
-    "question": "Is Pluto officially classified today as a major planet or a dwarf planet?",
-    "category": "Planets & Space",
-    "grade": 7,
-    "difficulty": 2
-  },
-  {
-    "question": "What is the opposite of the adjective 'CHEAP'?",
-    "category": "Vocabulary",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "What is the opposite of the adjective 'NOISY'?",
-    "category": "Vocabulary",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "What is the superlative form of 'GOOD'?",
-    "category": "Grammar",
-    "grade": 7,
-    "difficulty": 2
-  },
-  {
-    "question": "What is the comparative form of 'BAD'?",
-    "category": "Grammar",
-    "grade": 7,
-    "difficulty": 2
-  },
-  {
-    "question": "Fill in the blank: Yesterday was Tuesday, so tomorrow will be ___.",
-    "category": "Time & Calendar",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "Which calendar month comes immediately after July?",
-    "category": "Time & Calendar",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "What polite phrase do English speakers say when someone sneezes: 'Bless ___'?",
-    "category": "Everyday English",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "Fill in the blank: A veterinary doctor (vet) treats and heals sick ___.",
-    "category": "Jobs & Occupations",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "What is the past simple form of the verb 'BUY'?",
-    "category": "Grammar",
-    "grade": 7,
-    "difficulty": 2
-  },
-  {
-    "question": "Fill in the blank: We ___ (watch) an exciting football match yesterday afternoon.",
-    "category": "Grammar",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "What is the comparative form of the adjective 'FAST'?",
-    "category": "Grammar",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "Fill in the blank: An elephant is ___ (heavy) than a lion.",
-    "category": "Grammar",
-    "grade": 7,
-    "difficulty": 2
-  },
-  {
-    "question": "What meal do people normally eat in the morning after waking up?",
-    "category": "Everyday English",
-    "grade": 7,
-    "difficulty": 1
-  },
-  {
-    "question": "Fill in the blank: She has two cats ___ one dog. (and / but)",
-    "category": "Grammar",
-    "grade": 7,
-    "difficulty": 1
+    question: "It is a sunny day today, ___ ?",
+    options: ["isn't it", "is it", "doesn't it", "aren't it"],
+    answer: "isn't it",
+    category: "Question Tags",
+    grade: 7
   }
 ];
 
 // ==========================================
-// 2. GRADE 8 QUESTION BANK (158 CURATED QUESTIONS)
+// 2. GRADE 8 GRAMMAR QUESTION BANK (110+ CURATED QUESTIONS)
 // ==========================================
 const GRADE_8_QUESTIONS = [
+  // --- Past Continuous & When / While Clauses ---
   {
-    "question": "Which word describes a loyal friend who is dependable and keeps promises?",
-    "category": "Friendship",
-    "grade": 8,
-    "difficulty": 1
+    question: "While Maya ___ dinner in the kitchen, the telephone rang loudly.",
+    options: ["was cooking", "cooked", "is cooking", "cooks"],
+    answer: "was cooking",
+    category: "Past Continuous",
+    grade: 8
   },
   {
-    "question": "What phrasal verb means to give support and encouragement to a friend in need?",
-    "category": "Friendship",
-    "grade": 8,
-    "difficulty": 2
+    question: "We ___ along the beach when we suddenly discovered a rare sea turtle.",
+    options: ["were walking", "walked", "are walking", "have walked"],
+    answer: "were walking",
+    category: "Past Continuous with When",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: Best friends usually share many interests in ___.",
-    "category": "Friendship",
-    "grade": 8,
-    "difficulty": 2
+    question: "What ___ you doing when the earthquake tremors began?",
+    options: ["were", "did", "was", "are"],
+    answer: "were",
+    category: "Past Continuous Questions",
+    grade: 8
   },
   {
-    "question": "What phrasal verb means to maintain a good, harmonious relationship with a classmate?",
-    "category": "Friendship",
-    "grade": 8,
-    "difficulty": 2
+    question: "While the teacher was writing on the board, the students ___ notes quietly.",
+    options: ["were taking", "took", "take", "are taking"],
+    answer: "were taking",
+    category: "Parallel Past Actions",
+    grade: 8
   },
+
+  // --- Present Perfect Tense (already, yet, just, ever, never, since, for) ---
   {
-    "question": "Fill in the blank: A reliable friend will never reveal your private ___ to others.",
-    "category": "Friendship",
-    "grade": 8,
-    "difficulty": 1
+    question: "Have you ___ visited the Natural History Museum in London?",
+    options: ["ever", "never", "yet", "already"],
+    answer: "ever",
+    category: "Present Perfect with Ever",
+    grade: 8
   },
   {
-    "question": "Which adjective describes someone who proudly thinks they are superior to others?",
-    "category": "Friendship",
-    "grade": 8,
-    "difficulty": 2
+    question: "I haven't completed my history research essay ___ .",
+    options: ["yet", "already", "just", "ever"],
+    answer: "yet",
+    category: "Present Perfect with Yet",
+    grade: 8
   },
   {
-    "question": "What polite phrase can you use to warmly accept an invitation to an event?",
-    "category": "Friendship",
-    "grade": 8,
-    "difficulty": 1
+    question: "Lucas has lived in this coastal city ___ 2018.",
+    options: ["since", "for", "in", "during"],
+    answer: "since",
+    category: "Present Perfect with Since",
+    grade: 8
   },
   {
-    "question": "What polite phrase can you use to decline an invitation when you have prior plans?",
-    "category": "Friendship",
-    "grade": 8,
-    "difficulty": 2
+    question: "They have been close friends ___ more than ten years.",
+    options: ["for", "since", "from", "during"],
+    answer: "for",
+    category: "Present Perfect with For",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: You can always ___ on me whenever you need emotional support.",
-    "category": "Friendship",
-    "grade": 8,
-    "difficulty": 1
+    question: "Be careful! The technician has ___ painted this park bench.",
+    options: ["just", "yet", "ever", "since"],
+    answer: "just",
+    category: "Present Perfect with Just",
+    grade: 8
   },
   {
-    "question": "Which adjective describes a sneaky person who deceives friends secretly?",
-    "category": "Friendship",
-    "grade": 8,
-    "difficulty": 3
+    question: "She ___ already read all seven books in the fantasy series.",
+    options: ["has", "have", "is", "did"],
+    answer: "has",
+    category: "Present Perfect Auxiliary",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: 'Would you like to come over?' — 'Sounds ___! I would love to.'",
-    "category": "Friendship",
-    "grade": 8,
-    "difficulty": 1
+    question: "How many times ___ you seen that documentary film?",
+    options: ["have", "did", "are", "do"],
+    answer: "have",
+    category: "Present Perfect Questions",
+    grade: 8
   },
   {
-    "question": "What do we call a polite reason given when you are unable to attend an event?",
-    "category": "Friendship",
-    "grade": 8,
-    "difficulty": 2
+    question: "I ___ never eaten sushi before in my entire life.",
+    options: ["have", "did", "am", "was"],
+    answer: "have",
+    category: "Present Perfect with Never",
+    grade: 8
   },
+
+  // --- Simple Past vs Present Perfect Contrast ---
   {
-    "question": "Which adjective describes someone who speaks carefully without hurting other people's feelings?",
-    "category": "Friendship",
-    "grade": 8,
-    "difficulty": 3
+    question: "Shakespeare ___ many famous plays and sonnets in the 16th century.",
+    options: ["wrote", "has written", "writes", "had written"],
+    answer: "wrote",
+    category: "Past vs Present Perfect",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: True friends always speak the ___ to one another.",
-    "category": "Friendship",
-    "grade": 8,
-    "difficulty": 1
+    question: "I ___ my house keys yesterday, and I still cannot find them.",
+    options: ["lost", "have lost", "am losing", "lose"],
+    answer: "lost",
+    category: "Simple Past Specific Time",
+    grade: 8
   },
   {
-    "question": "What is the opposite of a 'GENUINE' and honest friend?",
-    "category": "Friendship",
-    "grade": 8,
-    "difficulty": 2
+    question: "Look! Someone ___ their bicycle outside in the rain.",
+    options: ["has left", "left", "leaves", "is leaving"],
+    answer: "has left",
+    category: "Present Perfect Result",
+    grade: 8
   },
+
+  // --- Modal Verbs & Preferences (would rather, prefer, have to, need to) ---
   {
-    "question": "Which musical genre is fast, heavy, and features distorted electric guitars?",
-    "category": "Teen Life",
-    "grade": 8,
-    "difficulty": 1
+    question: "I would rather ___ at home tonight than attend the noisy concert.",
+    options: ["stay", "staying", "to stay", "stayed"],
+    answer: "stay",
+    category: "Would Rather + Bare Infinitive",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: I am very fond ___ listening to upbeat pop songs.",
-    "category": "Teen Life",
-    "grade": 8,
-    "difficulty": 2
+    question: "Sofia prefers ___ books to watching television in the evening.",
+    options: ["reading", "read", "to read", "reads"],
+    answer: "reading",
+    category: "Prefer + Gerund",
+    grade: 8
   },
   {
-    "question": "Which adjective means fashionable, modern, and popular among teenagers?",
-    "category": "Teen Life",
-    "grade": 8,
-    "difficulty": 2
+    question: "You ___ buy tickets in advance; entry to the festival is completely free.",
+    options: ["don't need to", "mustn't", "can't", "ought not"],
+    answer: "don't need to",
+    category: "Lack of Necessity",
+    grade: 8
   },
   {
-    "question": "What expression means that you dislike something so strongly you cannot tolerate it?",
-    "category": "Teen Life",
-    "grade": 8,
-    "difficulty": 3
+    question: "Students ___ wear their official school uniform during formal examinations.",
+    options: ["must", "can", "might", "could"],
+    answer: "must",
+    category: "Modals of Obligation",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: When teens go camping in the forest, they pitch a ___ for shelter.",
-    "category": "Teen Life",
-    "grade": 8,
-    "difficulty": 1
+    question: "The sky is full of dark clouds; it ___ rain within the hour.",
+    options: ["might", "must", "should", "ought"],
+    answer: "might",
+    category: "Modals of Possibility",
+    grade: 8
   },
+
+  // --- First Conditional & Future Predictions ---
   {
-    "question": "Which phrase means to be very interested in and excited about a hobby?",
-    "category": "Teen Life",
-    "grade": 8,
-    "difficulty": 2
+    question: "If it ___ tomorrow, we will cancel the outdoor hiking trip.",
+    options: ["rains", "will rain", "rained", "is raining"],
+    answer: "rains",
+    category: "First Conditional",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: My brother is keen ___ playing computer games every evening.",
-    "category": "Teen Life",
-    "grade": 8,
-    "difficulty": 2
+    question: "If you study consistently every day, you ___ pass the examination easily.",
+    options: ["will", "would", "did", "have"],
+    answer: "will",
+    category: "First Conditional",
+    grade: 8
   },
   {
-    "question": "What live musical performance do teenagers attend to hear their favourite musicians?",
-    "category": "Teen Life",
-    "grade": 8,
-    "difficulty": 1
+    question: "Unless she ___ now, she will miss the school bus.",
+    options: ["leaves", "will leave", "doesn't leave", "left"],
+    answer: "leaves",
+    category: "Conditionals with Unless",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: She prefers calm melodies because rock music is too ___ for her ears.",
-    "category": "Teen Life",
-    "grade": 8,
-    "difficulty": 2
+    question: "What will you do if you ___ first prize in the national science contest?",
+    options: ["win", "will win", "won", "wins"],
+    answer: "win",
+    category: "First Conditional Questions",
+    grade: 8
   },
+
+  // --- Relative Clauses (who, which, that, where, whose) ---
   {
-    "question": "What traditional martial art involves white uniforms, colored belts, and kicks?",
-    "category": "Teen Life",
-    "grade": 8,
-    "difficulty": 1
+    question: "The scientist ___ developed the solar battery gave a keynote speech.",
+    options: ["who", "which", "whose", "where"],
+    answer: "who",
+    category: "Relative Pronouns for People",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: Teens often communicate with classmates on social ___ apps.",
-    "category": "Teen Life",
-    "grade": 8,
-    "difficulty": 1
+    question: "This is the fascinating novel ___ won the international literature award.",
+    options: ["which", "who", "whom", "where"],
+    answer: "which",
+    category: "Relative Pronouns for Things",
+    grade: 8
   },
   {
-    "question": "Which action describes balancing and rolling on a four-wheeled wooden board?",
-    "category": "Teen Life",
-    "grade": 8,
-    "difficulty": 1
+    question: "The town ___ my grandparents were born has a rich ancient heritage.",
+    options: ["where", "which", "that", "who"],
+    answer: "where",
+    category: "Relative Adverb for Places",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: He prefers comfortable, ___ clothes like hoodies and denim jeans.",
-    "category": "Teen Life",
-    "grade": 8,
-    "difficulty": 2
+    question: "Meet Daniel, the student ___ robotic project won the gold medal.",
+    options: ["whose", "who", "which", "that"],
+    answer: "whose",
+    category: "Relative Pronouns for Possession",
+    grade: 8
   },
+
+  // --- Passive Voice Basics (Simple Present & Past Passive) ---
   {
-    "question": "What do we call a person who loves spending time in nature and walking outdoors?",
-    "category": "Teen Life",
-    "grade": 8,
-    "difficulty": 2
+    question: "Millions of smartphone devices ___ worldwide every single month.",
+    options: ["are sold", "sold", "is sold", "sell"],
+    answer: "are sold",
+    category: "Present Passive",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: How often do you work out? — I exercise ___ day.",
-    "category": "Teen Life",
-    "grade": 8,
-    "difficulty": 1
+    question: "The Eiffel Tower ___ designed and constructed by Gustave Eiffel.",
+    options: ["was", "is", "were", "has"],
+    answer: "was",
+    category: "Past Passive",
+    grade: 8
   },
   {
-    "question": "Which cooking method cooks ingredients in water heated to 100 degrees Celsius?",
-    "category": "In The Kitchen",
-    "grade": 8,
-    "difficulty": 1
+    question: "Paper ___ originally invented in ancient China thousands of years ago.",
+    options: ["was", "is", "were", "did"],
+    answer: "was",
+    category: "Past Passive",
+    grade: 8
   },
   {
-    "question": "Which cooking method uses dry heat inside an oven to make bread or pastry?",
-    "category": "In The Kitchen",
-    "grade": 8,
-    "difficulty": 1
+    question: "All classroom rules ___ by the school council at the start of the semester.",
+    options: ["are established", "established", "is established", "establish"],
+    answer: "are established",
+    category: "Present Passive",
+    grade: 8
   },
+
+  // --- Gerunds vs Infinitives ---
   {
-    "question": "What kitchen action means to cut tomatoes or cucumbers into thin slices?",
-    "category": "In The Kitchen",
-    "grade": 8,
-    "difficulty": 2
+    question: "We decided ___ our camping trip until the stormy weather cleared.",
+    options: ["to postpone", "postponing", "postpone", "postponed"],
+    answer: "to postpone",
+    category: "Verb + Infinitive",
+    grade: 8
   },
   {
-    "question": "What kitchen verb means to remove the outer skin from a potato or banana?",
-    "category": "In The Kitchen",
-    "grade": 8,
-    "difficulty": 1
+    question: "Chloe enjoys ___ acoustic guitar melodies during her free time.",
+    options: ["playing", "to play", "play", "played"],
+    answer: "playing",
+    category: "Verb + Gerund",
+    grade: 8
   },
   {
-    "question": "Which metal kitchen tool with sharp holes is used to shred cheese finely?",
-    "category": "In The Kitchen",
-    "grade": 8,
-    "difficulty": 2
+    question: "Don't forget ___ off the laboratory lights before locking the doors.",
+    options: ["to turn", "turning", "turn", "turned"],
+    answer: "to turn",
+    category: "Remember / Forget + Infinitive",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: Pour the boiled spaghetti into a colander to ___ all the water.",
-    "category": "In The Kitchen",
-    "grade": 8,
-    "difficulty": 3
+    question: "He gave up ___ sugary drinks to improve his athletic stamina.",
+    options: ["drinking", "to drink", "drink", "drank"],
+    answer: "drinking",
+    category: "Phrasal Verb + Gerund",
+    grade: 8
   },
   {
-    "question": "What distinct taste does a fresh lemon or vinegar possess?",
-    "category": "In The Kitchen",
-    "grade": 8,
-    "difficulty": 1
+    question: "We look forward to ___ our pen pals from Toronto next month.",
+    options: ["meeting", "meet", "to meet", "met"],
+    answer: "meeting",
+    category: "Look Forward To + Gerund",
+    grade: 8
   },
+
+  // --- Used to (Past Habits) ---
   {
-    "question": "Fill in the blank: Add a small pinch of ___ to enhance the savoury flavor.",
-    "category": "In The Kitchen",
-    "grade": 8,
-    "difficulty": 1
+    question: "My grandfather ___ walk five miles to school every single morning.",
+    options: ["used to", "use to", "is used to", "was used to"],
+    answer: "used to",
+    category: "Used to + Verb",
+    grade: 8
   },
   {
-    "question": "What kitchen action involves pressing and folding flour and water into dough with hands?",
-    "category": "In The Kitchen",
-    "grade": 8,
-    "difficulty": 3
+    question: "Did you ___ play the violin when you were in elementary school?",
+    options: ["use to", "used to", "uses to", "using to"],
+    answer: "use to",
+    category: "Questions with Used to",
+    grade: 8
   },
   {
-    "question": "Which utensil is used to stir soup in a deep saucepan on the stove?",
-    "category": "In The Kitchen",
-    "grade": 8,
-    "difficulty": 2
+    question: "She ___ not like spicy food, but now she loves Mexican cuisine.",
+    options: ["didn't use to", "didn't used to", "used not", "wasn't used to"],
+    answer: "didn't use to",
+    category: "Negative with Used to",
+    grade: 8
   },
+
+  // --- Question Tags & Advanced Question Formation ---
   {
-    "question": "Fill in the blank: Next, ___ the eggs vigorously in a mixing bowl with a fork.",
-    "category": "In The Kitchen",
-    "grade": 8,
-    "difficulty": 2
+    question: "You are the new exchange student from Vancouver, ___ ?",
+    options: ["aren't you", "are you", "isn't you", "don't you"],
+    answer: "aren't you",
+    category: "Question Tags",
+    grade: 8
+  },
+  {
+    question: "Kenji doesn't like waking up early on Saturdays, ___ ?",
+    options: ["does he", "doesn't he", "is he", "did he"],
+    answer: "does he",
+    category: "Question Tags",
+    grade: 8
   },
-  {
-    "question": "What do we call a written text detailing cooking instructions and required ingredients?",
-    "category": "In The Kitchen",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "Which cooking method prepares meat on metal grates directly above burning charcoal?",
-    "category": "In The Kitchen",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "Fill in the blank: Adding extra red chili peppers will make the sauce very ___.",
-    "category": "In The Kitchen",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "What kitchen action describes applying butter or jam across a slice of toast?",
-    "category": "In The Kitchen",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "What polite phone phrase means 'Please wait while I connect your call'?",
-    "category": "On The Phone",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "What phrasal verb means to connect a phone caller to another office extension?",
-    "category": "On The Phone",
-    "grade": 8,
-    "difficulty": 3
-  },
-  {
-    "question": "What phrasal verb means to disconnect a phone call when conversation finishes?",
-    "category": "On The Phone",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "Fill in the blank: I am busy in class right now. Can I call you ___ later?",
-    "category": "On The Phone",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "What do you record or write down when someone you called is unavailable?",
-    "category": "On The Phone",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "Fill in the blank: 'May I ___ to Mr. Harris, please?'",
-    "category": "On The Phone",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "What polite question do you ask to discover the identity of a phone caller?",
-    "category": "On The Phone",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "Fill in the blank: The connection is very weak. Could you speak more ___?",
-    "category": "On The Phone",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "What phone tone sounds when the person you are dialing is speaking to someone else?",
-    "category": "On The Phone",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "Fill in the blank: She sent a short text ___ to confirm the meeting time.",
-    "category": "On The Phone",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "What communication feature allows callers to see live video of each other?",
-    "category": "On The Phone",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "Fill in the blank: 'Who is ___?' — 'This is Sarah from the basketball team.'",
-    "category": "On The Phone",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "What phrase describes a colleague who is temporarily absent from their desk?",
-    "category": "On The Phone",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "Fill in the blank: I will deliver your urgent ___ to the principal right away.",
-    "category": "On The Phone",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "What sound does a smartphone produce when an incoming call arrives?",
-    "category": "On The Phone",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "What action means transferring a photo or file from your device onto a website?",
-    "category": "The Internet",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "What action means saving a document or music track from the web onto your phone?",
-    "category": "The Internet",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "What confidential security code protects your personal email account from hackers?",
-    "category": "The Internet",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "Fill in the blank: An email ___ is a file attached to an electronic message.",
-    "category": "The Internet",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "What application program (such as Chrome or Firefox) is used to browse websites?",
-    "category": "The Internet",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "Fill in the blank: Never reveal your home address or passwords to online ___.",
-    "category": "The Internet",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "What website tool (like Google) indexes the web to help you locate information?",
-    "category": "The Internet",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "Fill in the blank: Enter your username and secret code to ___ into your student portal.",
-    "category": "The Internet",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "What underlined text or button navigates the user to a different web destination?",
-    "category": "The Internet",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "Fill in the blank: A secure password should mix letters, digits, and special ___.",
-    "category": "The Internet",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "What harmful software code can infect computer operating systems and destroy data?",
-    "category": "The Internet",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "Fill in the blank: Check your router if your web ___ is running very slowly.",
-    "category": "The Internet",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "What wireless networking technology allows mobile gadgets to access the internet?",
-    "category": "The Internet",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "Fill in the blank: Always remember to ___ out when finishing work on a shared library computer.",
-    "category": "The Internet",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "Which extreme adventure involves leaping from a high crane tied to an elastic rope?",
-    "category": "Adventures",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "Which sport involves paddling an inflatable raft down fast white-water rapids?",
-    "category": "Adventures",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "What buoyant life vest must you wear around your chest in river water sports?",
-    "category": "Adventures",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "Which aerial sport involves jumping from an aircraft and deploying a parachute?",
-    "category": "Adventures",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "Fill in the blank: An adrenaline ___ is someone who thrives on extreme thrills.",
-    "category": "Adventures",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "What mountain sport requires scaling steep rock cliffs using safety ropes and harness?",
-    "category": "Adventures",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "What underwater sport uses pressurized air tanks and regulators to dive deep?",
-    "category": "Adventures",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "Fill in the blank: A protective hard ___ must be worn to prevent head trauma while caving.",
-    "category": "Adventures",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "Which adventure sport involves launching from hills with a wide fabric glider wing?",
-    "category": "Adventures",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "Fill in the blank: I prefer rafting ___ canoeing because it provides more excitement.",
-    "category": "Adventures",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "Which adjective describes sports full of severe hazards and intense excitement?",
-    "category": "Adventures",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "What neoprene water suit provides thermal insulation for deep-sea divers?",
-    "category": "Adventures",
-    "grade": 8,
-    "difficulty": 3
-  },
-  {
-    "question": "Fill in the blank: Performing extreme sports safely requires proper guidance and safety ___.",
-    "category": "Adventures",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "What flat-ended oar is held in hands to steer a kayak through river currents?",
-    "category": "Adventures",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "Which sport is considered more extreme: playing indoor badminton or paragliding?",
-    "category": "Adventures",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "Where do tourists book rooms and stay overnight when vacationing in another city?",
-    "category": "Tourism",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "What mementos do travelers purchase to remind them of destinations they explored?",
-    "category": "Tourism",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "What type of holiday booking includes room accommodation, all meals, and entertainment?",
-    "category": "Tourism",
-    "grade": 8,
-    "difficulty": 2
-  },
-  {
-    "question": "Where can vacationers inspect ancient temple ruins, sculptures, and historical relics?",
-    "category": "Tourism",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "Fill in the blank: Tourists in Cappadocia wake up early to ride in hot air ___.",
-    "category": "Tourism",
-    "grade": 8,
-    "difficulty": 1
-  },
-  {
-    "question": "What government passport document is mandatory when traveling to foreign nations?",
-    "category": "Tourism",
-    "grade": 8,
-    "difficulty": 1
+  {
+    question: "They achieved first place in the debate competition, ___ ?",
+    options: ["didn't they", "did they", "haven't they", "weren't they"],
+    answer: "didn't they",
+    category: "Question Tags",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: We reserved a cozy bed & ___ for our short weekend excursion.",
-    "category": "Tourism",
-    "grade": 8,
-    "difficulty": 2
+    question: "You haven't finished the chemistry project yet, ___ ?",
+    options: ["have you", "haven't you", "did you", "do you"],
+    answer: "have you",
+    category: "Question Tags",
+    grade: 8
   },
+
+  // --- Connectors & Conjunctions (although, however, in spite of, therefore) ---
   {
-    "question": "What term describes the structural design and style of ancient historic buildings?",
-    "category": "Tourism",
-    "grade": 8,
-    "difficulty": 3
+    question: "___ it was freezing cold outside, the runners completed the marathon.",
+    options: ["Although", "Because", "Therefore", "So"],
+    answer: "Although",
+    category: "Conjunctions of Concession",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: Ephesus is a world-renowned ___ archaeological city in Turkey.",
-    "category": "Tourism",
-    "grade": 8,
-    "difficulty": 2
+    question: "He trained hard for six months; ___ , he won the gold medal comfortably.",
+    options: ["therefore", "although", "but", "however"],
+    answer: "therefore",
+    category: "Conjunctions of Result",
+    grade: 8
   },
   {
-    "question": "What professional person leads guided tours and explains history to sightseers?",
-    "category": "Tourism",
-    "grade": 8,
-    "difficulty": 1
+    question: "The project was difficult. ___ , our team managed to deliver it on schedule.",
+    options: ["However", "Although", "Because", "So"],
+    answer: "However",
+    category: "Transitions of Contrast",
+    grade: 8
   },
+
+  // --- Error Identification & Complex Structures ---
   {
-    "question": "Fill in the blank: We booked a seaside resort because we love relaxing on the sandy ___.",
-    "category": "Tourism",
-    "grade": 8,
-    "difficulty": 1
+    question: "Identify the INCORRECT sentence:",
+    options: [
+      "She has arrived two hours ago.",
+      "She arrived two hours ago.",
+      "She has just arrived.",
+      "She is arriving now."
+    ],
+    answer: "She has arrived two hours ago.",
+    category: "Tense Error Identification",
+    grade: 8
   },
   {
-    "question": "What term describes authentic food recipes prepared in a specific region for centuries?",
-    "category": "Tourism",
-    "grade": 8,
-    "difficulty": 2
+    question: "Identify the CORRECT sentence:",
+    options: [
+      "If I find your notebook, I will give it to you.",
+      "If I will find your notebook, I give it to you.",
+      "If I find your notebook, I gave it to you.",
+      "If I would find your notebook, I will give it."
+    ],
+    answer: "If I find your notebook, I will give it to you.",
+    category: "Conditional Accuracy",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: Passengers must present their boarding ___ before entering the flight.",
-    "category": "Tourism",
-    "grade": 8,
-    "difficulty": 2
+    question: "Choose the correct sentence with 'TOO' and 'ENOUGH':",
+    options: [
+      "The suitcase was too heavy for him to carry alone.",
+      "The suitcase was enough heavy for him to carry alone.",
+      "The suitcase was too much heavy for him to carry.",
+      "The suitcase was heavy too for him to carry."
+    ],
+    answer: "The suitcase was too heavy for him to carry alone.",
+    category: "Too vs Enough",
+    grade: 8
   },
   {
-    "question": "Which adjective means possessing centuries of significant history (e.g. ancient castles)?",
-    "category": "Tourism",
-    "grade": 8,
-    "difficulty": 2
+    question: "He is not old ___ to obtain a driver's license in this state.",
+    options: ["enough", "too", "so", "as"],
+    answer: "enough",
+    category: "Too vs Enough",
+    grade: 8
   },
   {
-    "question": "Which household chore involves cleaning carpet fibers with an electric vacuum?",
-    "category": "Chores",
-    "grade": 8,
-    "difficulty": 1
+    question: "Choose the correct passive transformation: 'The chef prepared a gourmet meal.'",
+    options: [
+      "A gourmet meal was prepared by the chef.",
+      "A gourmet meal is prepared by the chef.",
+      "A gourmet meal has prepared by the chef.",
+      "A gourmet meal was being prepare by the chef."
+    ],
+    answer: "A gourmet meal was prepared by the chef.",
+    category: "Passive Voice Transformation",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: Remember to take ___ the rubbish bag before it begins to smell.",
-    "category": "Chores",
-    "grade": 8,
-    "difficulty": 1
+    question: "What is the past participle (V3) form of 'FORGET'?",
+    options: ["forgotten", "forgot", "forgetted", "forgat"],
+    answer: "forgotten",
+    category: "Irregular Past Participles",
+    grade: 8
   },
   {
-    "question": "What kitchen appliance automatically cleans dirty crockery, glassware, and cutlery?",
-    "category": "Chores",
-    "grade": 8,
-    "difficulty": 1
+    question: "What is the past participle (V3) form of 'CHOOSE'?",
+    options: ["chosen", "chose", "choosed", "chozen"],
+    answer: "chosen",
+    category: "Irregular Past Participles",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: It is your task to ___ the table with plates and napkins for lunch.",
-    "category": "Chores",
-    "grade": 8,
-    "difficulty": 1
+    question: "What is the past participle (V3) form of 'FREEZE'?",
+    options: ["frozen", "froze", "freezed", "frozed"],
+    answer: "frozen",
+    category: "Irregular Past Participles",
+    grade: 8
   },
   {
-    "question": "Which chore uses a hot electric appliance to remove wrinkles from washed clothes?",
-    "category": "Chores",
-    "grade": 8,
-    "difficulty": 2
+    question: "What is the past participle (V3) form of 'HIDE'?",
+    options: ["hidden", "hid", "hided", "hiding"],
+    answer: "hidden",
+    category: "Irregular Past Participles",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: In the morning, I always ___ my bed after getting dressed.",
-    "category": "Chores",
-    "grade": 8,
-    "difficulty": 1
+    question: "She ___ playing the violin for three hours without taking a break.",
+    options: ["has been", "is", "was", "had"],
+    answer: "has been",
+    category: "Present Perfect Continuous",
+    grade: 8
   },
   {
-    "question": "What chore involves wiping dust particles off wooden furniture with a duster?",
-    "category": "Chores",
-    "grade": 8,
-    "difficulty": 2
+    question: "How long ___ you been studying Spanish at the language academy?",
+    options: ["have", "did", "are", "were"],
+    answer: "have",
+    category: "Present Perfect Continuous Questions",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: Family members should divide domestic ___ fairly among themselves.",
-    "category": "Chores",
-    "grade": 8,
-    "difficulty": 2
+    question: "By the time the firefighter squad arrived, the neighbors ___ already extinguished the fire.",
+    options: ["had", "have", "were", "did"],
+    answer: "had",
+    category: "Past Perfect",
+    grade: 8
   },
   {
-    "question": "What task involves supplying water to potted plants so their leaves do not dry out?",
-    "category": "Chores",
-    "grade": 8,
-    "difficulty": 1
+    question: "After we ___ our homework, we went out to ride bicycles in the park.",
+    options: ["had finished", "finish", "have finished", "are finishing"],
+    answer: "had finished",
+    category: "Past Perfect with After",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: I need to do the ___ because all my shirts and socks are dirty.",
-    "category": "Chores",
-    "grade": 8,
-    "difficulty": 2
+    question: "If I won a million dollars, I ___ travel all around the world.",
+    options: ["would", "will", "can", "shall"],
+    answer: "would",
+    category: "Second Conditional",
+    grade: 8
   },
   {
-    "question": "Which modal verb indicates strict obligation or mandatory house rules: MUST or MAY?",
-    "category": "Chores",
-    "grade": 8,
-    "difficulty": 1
+    question: "If she had more free time, she ___ learn how to play the cello.",
+    options: ["would", "will", "can", "must"],
+    answer: "would",
+    category: "Second Conditional",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: It is my brother's ___ to take the dog for a walk every evening.",
-    "category": "Chores",
-    "grade": 8,
-    "difficulty": 2
+    question: "If I were in your position, I ___ accept the internship offer immediately.",
+    options: ["would", "will", "should to", "am"],
+    answer: "would",
+    category: "Second Conditional Advice",
+    grade: 8
   },
   {
-    "question": "What long-handled brush is used to sweep dust and crumbs off the floor?",
-    "category": "Chores",
-    "grade": 8,
-    "difficulty": 2
+    question: "Could you tell me where the nearest subway entrance ___ ?",
+    options: ["is", "is it", "it is located", "did it be"],
+    answer: "is",
+    category: "Indirect Questions",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: Keep your study desk organized and ___ after finishing homework.",
-    "category": "Chores",
-    "grade": 8,
-    "difficulty": 1
+    question: "Do you know what time the next train to Oxford ___ ?",
+    options: ["departs", "does depart", "is departing it", "departed it"],
+    answer: "departs",
+    category: "Indirect Questions",
+    grade: 8
   },
   {
-    "question": "What chore involves washing pots, bowls, and cutlery in the kitchen sink?",
-    "category": "Chores",
-    "grade": 8,
-    "difficulty": 1
+    question: "Tariq told me that he ___ moving to Melbourne next summer.",
+    options: ["was", "is", "are", "has"],
+    answer: "was",
+    category: "Reported Speech",
+    grade: 8
   },
   {
-    "question": "Who conducts empirical experiments in a laboratory to discover new knowledge?",
-    "category": "Science",
-    "grade": 8,
-    "difficulty": 1
+    question: "The science teacher said that the Earth ___ around the sun.",
+    options: ["revolves", "revolved", "is revolving", "has revolved"],
+    answer: "revolves",
+    category: "Reported Speech Universal Truths",
+    grade: 8
   },
   {
-    "question": "What optical device uses high-power lenses to magnify microscopic microorganisms?",
-    "category": "Science",
-    "grade": 8,
-    "difficulty": 2
+    question: "That mysterious package ___ be for Sarah; it has her full name on the label.",
+    options: ["must", "can't", "shouldn't", "needn't"],
+    answer: "must",
+    category: "Modals of Deduction",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: Alexander Fleming discovered penicillin, the first medical ___.",
-    "category": "Science",
-    "grade": 8,
-    "difficulty": 2
+    question: "He ___ be in Madrid today because I saw him in our school cafeteria ten minutes ago.",
+    options: ["can't", "must", "might", "should"],
+    answer: "can't",
+    category: "Modals of Impossibility",
+    grade: 8
   },
   {
-    "question": "What narrow cylindrical glass tube is used by scientists to mix chemical solutions?",
-    "category": "Science",
-    "grade": 8,
-    "difficulty": 2
+    question: "If you don't know the definition of the word, ___ in the online dictionary.",
+    options: ["look it up", "look up it", "look it into", "look after it"],
+    answer: "look it up",
+    category: "Separable Phrasal Verbs",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: Researchers are carrying out an extensive clinical ___ to test the drug.",
-    "category": "Science",
-    "grade": 8,
-    "difficulty": 3
+    question: "Please ___ before you enter the carpeted living room.",
+    options: ["take off your shoes", "take your shoes off", "take off them", "take off you shoes"],
+    answer: "take off your shoes",
+    category: "Phrasal Verbs with Objects",
+    grade: 8
   },
   {
-    "question": "What medical injection helps human immune systems resist infectious viral diseases?",
-    "category": "Science",
-    "grade": 8,
-    "difficulty": 2
+    question: "___ Leo and Kenji achieved top honors in the mathematics olympiad.",
+    options: ["Both", "Neither", "Either", "Every"],
+    answer: "Both",
+    category: "Both / Neither / Either",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: The spiral molecule containing the hereditary genetic code is ___.",
-    "category": "Science",
-    "grade": 8,
-    "difficulty": 3
+    question: "___ of the two keys unlocked the old wooden chest.",
+    options: ["Neither", "Both", "Every", "All"],
+    answer: "Neither",
+    category: "Both / Neither / Either",
+    grade: 8
   },
   {
-    "question": "What specialized room in a research centre is equipped for scientific investigation?",
-    "category": "Science",
-    "grade": 8,
-    "difficulty": 1
+    question: "I really love listening to classical symphonies. — ___ do I.",
+    options: ["So", "Neither", "Nor", "Also"],
+    answer: "So",
+    category: "So / Neither Agreement",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: Sir Isaac Newton established the universal law of ___.",
-    "category": "Science",
-    "grade": 8,
-    "difficulty": 2
+    question: "Elena didn't watch the football match last night. — ___ did Omar.",
+    options: ["Neither", "So", "Either", "Too"],
+    answer: "Neither",
+    category: "So / Neither Agreement",
+    grade: 8
   },
   {
-    "question": "Which verb means finding something that already existed in nature but was unknown?",
-    "category": "Science",
-    "grade": 8,
-    "difficulty": 2
+    question: "The new community sports complex ___ next month by the city mayor.",
+    options: ["will be opened", "will open", "is opening", "was opened"],
+    answer: "will be opened",
+    category: "Future Passive",
+    grade: 8
   },
   {
-    "question": "Which verb means designing and creating a new machine that never existed before?",
-    "category": "Science",
-    "grade": 8,
-    "difficulty": 2
+    question: "English ___ by millions of people across the globe as a second language.",
+    options: ["is spoken", "speaks", "are spoken", "is speaking"],
+    answer: "is spoken",
+    category: "Present Passive",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: Major scientific ___ have transformed medicine and daily technology.",
-    "category": "Science",
-    "grade": 8,
-    "difficulty": 2
+    question: "Penicillin ___ discovered accidentally by Alexander Fleming in 1928.",
+    options: ["was", "is", "has", "were"],
+    answer: "was",
+    category: "Past Passive",
+    grade: 8
   },
   {
-    "question": "What electrical technology pioneered by Nikola Tesla powers modern power grids?",
-    "category": "Science",
-    "grade": 8,
-    "difficulty": 3
+    question: "Dr. Evans, ___ lives next door to us, is a renowned heart surgeon.",
+    options: ["who", "which", "whom", "whose"],
+    answer: "who",
+    category: "Non-defining Relative Clauses",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: Scientists record detailed data and observation ___ in their journals.",
-    "category": "Science",
-    "grade": 8,
-    "difficulty": 1
+    question: "The Amazon Rainforest, ___ covers millions of square kilometers, produces vital oxygen.",
+    options: ["which", "that", "where", "who"],
+    answer: "which",
+    category: "Non-defining Relative Clauses",
+    grade: 8
   },
   {
-    "question": "What natural event causes sudden and violent shaking of the Earth's crust?",
-    "category": "Natural Forces",
-    "grade": 8,
-    "difficulty": 1
+    question: "I wish I ___ more time to practice playing the piano every day.",
+    options: ["had", "have", "am having", "will have"],
+    answer: "had",
+    category: "Wish Clauses Present",
+    grade: 8
   },
   {
-    "question": "What disaster occurs when torrential rain causes rivers to submerge city streets?",
-    "category": "Natural Forces",
-    "grade": 8,
-    "difficulty": 1
+    question: "She wishes she ___ speak fluent French and German.",
+    options: ["could", "can", "will", "is able"],
+    answer: "could",
+    category: "Wish Clauses Ability",
+    grade: 8
   },
   {
-    "question": "What prolonged weather emergency occurs when an area receives no rain for months?",
-    "category": "Natural Forces",
-    "grade": 8,
-    "difficulty": 2
+    question: "We had better leave right now, ___ we will get caught in the rush-hour traffic.",
+    options: ["otherwise", "therefore", "because", "although"],
+    answer: "otherwise",
+    category: "Condition Connectors",
+    grade: 8
   },
   {
-    "question": "What mountain disaster happens when a huge volume of snow collapses down slopes?",
-    "category": "Natural Forces",
-    "grade": 8,
-    "difficulty": 2
+    question: "He wore safety goggles in order ___ protect his eyes from chemical splashes.",
+    options: ["to", "for", "that", "so"],
+    answer: "to",
+    category: "Infinitive of Purpose",
+    grade: 8
   },
   {
-    "question": "What colossal ocean wave is triggered by an undersea seismic earthquake?",
-    "category": "Natural Forces",
-    "grade": 8,
-    "difficulty": 2
+    question: "She took an umbrella ___ case it started raining on her way home.",
+    options: ["in", "on", "at", "for"],
+    answer: "in",
+    category: "Clauses with In Case",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: A violent spinning funnel cloud of destructive wind is a ___.",
-    "category": "Natural Forces",
-    "grade": 8,
-    "difficulty": 2
+    question: "In spite of ___ exhausted after the long hike, they set up the tents cheerfully.",
+    options: ["being", "to be", "be", "been"],
+    answer: "being",
+    category: "In Spite Of + Gerund",
+    grade: 8
   },
   {
-    "question": "What emergency disaster kit containing basic supplies should every family keep ready?",
-    "category": "Natural Forces",
-    "grade": 8,
-    "difficulty": 2
+    question: "Despite the heavy ___, the airplane landed safely on the runway.",
+    options: ["rain", "rainy", "raining", "rained"],
+    answer: "rain",
+    category: "Despite + Noun Phrase",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: Molten volcanic rock erupting onto the Earth's surface is called ___.",
-    "category": "Natural Forces",
-    "grade": 8,
-    "difficulty": 2
+    question: "Choose the correct sentence:",
+    options: [
+      "Neither the teacher nor the students were in the cafeteria.",
+      "Neither the teacher nor the students was in the cafeteria.",
+      "Neither the teacher or the students was in the cafeteria.",
+      "Neither the teacher nor the students are being in the cafeteria."
+    ],
+    answer: "Neither the teacher nor the students were in the cafeteria.",
+    category: "Neither...Nor Agreement",
+    grade: 8
   },
   {
-    "question": "What scale measurement indicates the total energy magnitude of an earthquake?",
-    "category": "Natural Forces",
-    "grade": 8,
-    "difficulty": 3
+    question: "Choose the correct sentence with 'USED TO':",
+    options: [
+      "Did you use to have long hair when you were ten?",
+      "Did you used to have long hair when you were ten?",
+      "Did you use to had long hair when you were ten?",
+      "Were you used to have long hair when you were ten?"
+    ],
+    answer: "Did you use to have long hair when you were ten?",
+    category: "Used to Interrogative Accuracy",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: Planting trees on barren hills helps prevent soil ___ and landslides.",
-    "category": "Natural Forces",
-    "grade": 8,
-    "difficulty": 3
+    question: "What is the past participle (V3) form of 'DRAW'?",
+    options: ["drawn", "drew", "drawed", "drawned"],
+    answer: "drawn",
+    category: "Irregular Past Participles",
+    grade: 8
   },
   {
-    "question": "What specialized emergency squad works to locate survivors trapped under rubble?",
-    "category": "Natural Forces",
-    "grade": 8,
-    "difficulty": 2
+    question: "What is the past participle (V3) form of 'RISE'?",
+    options: ["risen", "rose", "rised", "rozen"],
+    answer: "risen",
+    category: "Irregular Past Participles",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: Authorities urge citizens to take safety ___ before severe storms hit.",
-    "category": "Natural Forces",
-    "grade": 8,
-    "difficulty": 2
+    question: "What is the past participle (V3) form of 'SHAKE'?",
+    options: ["shaken", "shook", "shaked", "shoken"],
+    answer: "shaken",
+    category: "Irregular Past Participles",
+    grade: 8
   },
   {
-    "question": "Which disaster occurs when extreme heat ignites unmanageable fires in forests?",
-    "category": "Natural Forces",
-    "grade": 8,
-    "difficulty": 1
+    question: "What is the past participle (V3) form of 'BITE'?",
+    options: ["bitten", "bit", "bited", "bot"],
+    answer: "bitten",
+    category: "Irregular Past Participles",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: Strong earthquakes can cause catastrophic structural ___ to buildings.",
-    "category": "Natural Forces",
-    "grade": 8,
-    "difficulty": 2
+    question: "What is the past participle (V3) form of 'FORGIVE'?",
+    options: ["forgiven", "forgave", "forgived", "forgivenen"],
+    answer: "forgiven",
+    category: "Irregular Past Participles",
+    grade: 8
   },
   {
-    "question": "Which modal verb is best for giving friendly advice: SHOULD, WOULD, or MUST?",
-    "category": "Grammar",
-    "grade": 8,
-    "difficulty": 1
+    question: "What is the past participle (V3) form of 'TEAR'?",
+    options: ["torn", "tore", "teared", "tared"],
+    answer: "torn",
+    category: "Irregular Past Participles",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: Students ___ talk or use phones during an exam. (mustn't / should)",
-    "category": "Grammar",
-    "grade": 8,
-    "difficulty": 1
+    question: "What is the past participle (V3) form of 'WEAR'?",
+    options: ["worn", "wore", "weared", "woren"],
+    answer: "worn",
+    category: "Irregular Past Participles",
+    grade: 8
   },
   {
-    "question": "What is the past simple form of the irregular verb 'EAT'?",
-    "category": "Grammar",
-    "grade": 8,
-    "difficulty": 1
+    question: "What is the past participle (V3) form of 'SINK'?",
+    options: ["sunk", "sank", "sinked", "sonk"],
+    answer: "sunk",
+    category: "Irregular Past Participles",
+    grade: 8
   },
   {
-    "question": "What is the past simple form of the irregular verb 'SEE'?",
-    "category": "Grammar",
-    "grade": 8,
-    "difficulty": 1
+    question: "What is the past participle (V3) form of 'SHINE'?",
+    options: ["shone", "shined", "shoned", "shinen"],
+    answer: "shone",
+    category: "Irregular Past Participles",
+    grade: 8
   },
   {
-    "question": "What is the past simple form of the irregular verb 'BRING'?",
-    "category": "Grammar",
-    "grade": 8,
-    "difficulty": 2
+    question: "What is the past participle (V3) form of 'STEAL'?",
+    options: ["stolen", "stole", "stealed", "stollen"],
+    answer: "stolen",
+    category: "Irregular Past Participles",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: If you do not prepare for the test, you might ___ it. (fail / win)",
-    "category": "Everyday English",
-    "grade": 8,
-    "difficulty": 1
+    question: "What is the past participle (V3) form of 'WAKE'?",
+    options: ["woken", "woke", "waked", "wook"],
+    answer: "woken",
+    category: "Irregular Past Participles",
+    grade: 8
   },
   {
-    "question": "Which conjunction introduces a reason: BECAUSE, SO, or BUT?",
-    "category": "Grammar",
-    "grade": 8,
-    "difficulty": 1
+    question: "What is the past participle (V3) form of 'BLOW'?",
+    options: ["blown", "blew", "blowed", "blowen"],
+    answer: "blown",
+    category: "Irregular Past Participles",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: I felt exhausted, ___ I went to bed early. (so / although)",
-    "category": "Grammar",
-    "grade": 8,
-    "difficulty": 2
+    question: "What is the past participle (V3) form of 'FLY'?",
+    options: ["flown", "flew", "flied", "flowen"],
+    answer: "flown",
+    category: "Irregular Past Participles",
+    grade: 8
   },
   {
-    "question": "What do you say when you bump into someone by accident: 'Excuse ___'?",
-    "category": "Everyday English",
-    "grade": 8,
-    "difficulty": 1
+    question: "What is the past participle (V3) form of 'BECOME'?",
+    options: ["become", "became", "becomed", "becoming"],
+    answer: "become",
+    category: "Irregular Past Participles",
+    grade: 8
   },
   {
-    "question": "What is the opposite of the adjective 'BORING'?",
-    "category": "Vocabulary",
-    "grade": 8,
-    "difficulty": 1
+    question: "What is the past participle (V3) form of 'BEGIN'?",
+    options: ["begun", "began", "beginned", "begon"],
+    answer: "begun",
+    category: "Irregular Past Participles",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: She has lived in this city ___ five years. (for / since)",
-    "category": "Grammar",
-    "grade": 8,
-    "difficulty": 2
+    question: "What is the past participle (V3) form of 'BRING'?",
+    options: ["brought", "brang", "bringed", "bought"],
+    answer: "brought",
+    category: "Irregular Past Participles",
+    grade: 8
   },
   {
-    "question": "Fill in the blank: He hasn't finished his homework ___ . (already / yet)",
-    "category": "Grammar",
-    "grade": 8,
-    "difficulty": 2
+    question: "What is the past participle (V3) form of 'BUILD'?",
+    options: ["built", "builded", "builden", "bult"],
+    answer: "built",
+    category: "Irregular Past Participles",
+    grade: 8
   }
 ];
 
-// Combined Question Master Pool (315 Unique Questions)
+// Combine all questions for 'All Grades' option (220+ total questions)
 const KEEP_OR_PASS_QUESTIONS = [...GRADE_7_QUESTIONS, ...GRADE_8_QUESTIONS];
 
-// Balanced Mystery Rewards (Positive Gains & Negative Risks - Zero Empty/Blank Boxes)
+// ==========================================
+// 3. HIDDEN RANDOM POINT REWARDS
+// ==========================================
 const MYSTERY_REWARDS = [
-  // Positive Outcomes (~63%)
-  { points: 100, type: "gain", icon: "⭐", badge: "GAIN", text: "+100 POINTS" },
-  { points: 200, type: "gain", icon: "🌟", badge: "GAIN", text: "+200 POINTS" },
-  { points: 300, type: "gain", icon: "💎", badge: "REWARD", text: "+300 POINTS" },
-  { points: 500, type: "gain", icon: "🎁", badge: "BIG GAIN", text: "+500 POINTS" },
-  { points: 750, type: "gain", icon: "🏆", badge: "MEGA REWARD", text: "+750 POINTS" },
-  { points: 1000, type: "gain", icon: "👑", badge: "JACKPOT", text: "+1000 POINTS" },
-  { points: 200, type: "gain", icon: "💰", badge: "GAIN", text: "+200 POINTS" },
-  { points: 500, type: "gain", icon: "🔥", badge: "BIG GAIN", text: "+500 POINTS" },
-  { points: 100, type: "gain", icon: "✨", badge: "GAIN", text: "+100 POINTS" },
-  { points: 300, type: "gain", icon: "🍀", badge: "REWARD", text: "+300 POINTS" },
-
-  // Negative Outcomes (~37%)
-  { points: -100, type: "loss", icon: "⚠️", badge: "RISK", text: "-100 POINTS" },
-  { points: -200, type: "loss", icon: "💣", badge: "RISK", text: "-200 POINTS" },
-  { points: -300, type: "loss", icon: "⚡", badge: "LOSS", text: "-300 POINTS" },
-  { points: -500, type: "loss", icon: "💥", badge: "BIG LOSS", text: "-500 POINTS" },
-  { points: -750, type: "loss", icon: "☠️", badge: "HEAVY LOSS", text: "-750 POINTS" },
-  { points: -1000, type: "loss", icon: "🚨", badge: "CRITICAL RISK", text: "-1000 POINTS" }
+  { points: 10,  icon: "⭐", badge: "POINT GAIN",   text: "+10 POINTS" },
+  { points: 20,  icon: "🌟", badge: "POINT GAIN",   text: "+20 POINTS" },
+  { points: 30,  icon: "💎", badge: "SUPER REWARD", text: "+30 POINTS" },
+  { points: 40,  icon: "🔥", badge: "HOT BONUS",    text: "+40 POINTS" },
+  { points: 50,  icon: "🎁", badge: "BIG BONUS",    text: "+50 POINTS" },
+  { points: 100, icon: "🏆", badge: "MEGA PRIZE",   text: "+100 POINTS" },
+  { points: 20,  icon: "💰", badge: "POINT GAIN",   text: "+20 POINTS" },
+  { points: 30,  icon: "✨", badge: "SUPER REWARD", text: "+30 POINTS" },
+  { points: 50,  icon: "🍀", badge: "LUCKY GAIN",   text: "+50 POINTS" },
+  { points: 200, icon: "👑", badge: "JACKPOT",      text: "+200 POINTS" }
 ];
 
 // ==========================================
-// 3. PERSISTENT QUESTION DECK SYSTEM
+// 4. PERSISTENT QUESTION DECK & SESSION NON-REPETITION
 // ==========================================
 function shuffle(arr) {
   const a = [...arr];
@@ -1949,33 +1623,50 @@ class QuestionDeck {
   constructor(initialPool) {
     this.masterPool = [...initialPool];
     this.availableDeck = [];
-    this.usedQuestions = [];
-    this.cycleCount = 0;
+    this.usedInSession = new Set();
     this.initDeck();
   }
 
   initDeck() {
     this.availableDeck = shuffle([...this.masterPool]);
-    this.cycleCount++;
-    console.log(`[Keep or Pass] Deck cycle #${this.cycleCount} initialized with ${this.availableDeck.length} shuffled questions.`);
   }
 
   setPool(newPool) {
     this.masterPool = [...newPool];
     this.availableDeck = [];
-    this.usedQuestions = [];
-    this.cycleCount = 0;
+    this.usedInSession.clear();
+    this.initDeck();
+  }
+
+  resetSession() {
+    this.usedInSession.clear();
     this.initDeck();
   }
 
   draw() {
-    if (this.availableDeck.length === 0) {
-      console.log(`[Keep or Pass] Question deck exhausted! Reshuffling all ${this.masterPool.length} questions for Cycle #${this.cycleCount + 1}.`);
-      this.initDeck();
+    // Filter available pool to ensure NO duplicates in the current session
+    let validPool = this.masterPool.filter(q => !this.usedInSession.has(q.question));
+
+    if (validPool.length === 0) {
+      // If entire pool was exhausted during an extremely long game, reset session set
+      this.usedInSession.clear();
+      validPool = [...this.masterPool];
     }
-    const q = this.availableDeck.shift();
-    this.usedQuestions.push(q);
-    return q;
+
+    // Pick a random question from unused pool
+    const randomIndex = Math.floor(Math.random() * validPool.length);
+    const chosenRaw = validPool[randomIndex];
+    this.usedInSession.add(chosenRaw.question);
+
+    // Deep clone and randomize option order (anti-predictability)
+    const shuffledOptions = shuffle([...chosenRaw.options]);
+    const correctOptionIndex = shuffledOptions.indexOf(chosenRaw.answer);
+
+    return {
+      ...chosenRaw,
+      shuffledOptions,
+      correctOptionIndex
+    };
   }
 
   drawBatch(count) {
@@ -1984,15 +1675,6 @@ class QuestionDeck {
       batch.push(this.draw());
     }
     return batch;
-  }
-
-  getStats() {
-    return {
-      masterTotal: this.masterPool.length,
-      remainingInDeck: this.availableDeck.length,
-      usedInCycle: this.usedQuestions.length,
-      currentCycle: this.cycleCount
-    };
   }
 }
 
@@ -2006,26 +1688,9 @@ function getQuestionsForGrade(grade) {
   return KEEP_OR_PASS_QUESTIONS;
 }
 
-// Programmatic Question Bank Verification
-function verifyQuestionBank() {
-  const g7 = GRADE_7_QUESTIONS.length;
-  const g8 = GRADE_8_QUESTIONS.length;
-  const total = KEEP_OR_PASS_QUESTIONS.length;
-  const uniqueSet = new Set(KEEP_OR_PASS_QUESTIONS.map(q => q.question.trim().toLowerCase()));
-  const uniqueTotal = uniqueSet.size;
-
-  console.log(`%c[Keep or Pass Question Bank Verified]`, "color: #10b981; font-weight: bold; font-size: 1.1em;");
-  console.log(`📘 Grade 7 Questions : ${g7}`);
-  console.log(`📗 Grade 8 Questions : ${g8}`);
-  console.log(`📚 Total Questions   : ${total}`);
-  console.log(`✨ Unique Questions  : ${uniqueTotal}`);
-
-  if (uniqueTotal !== total) {
-    console.warn(`[Keep or Pass] Warning: Found ${total - uniqueTotal} duplicate question(s)!`);
-  }
-}
-
-// Procedural Sound Effects
+// ==========================================
+// 5. PROCEDURAL SOUND EFFECTS
+// ==========================================
 class SoundFX {
   constructor() {
     this.ctx = null;
@@ -2088,6 +1753,9 @@ class SoundFX {
 
 const sfx = new SoundFX();
 
+// ==========================================
+// 6. GAME STATE & DOM CONTROLLERS
+// ==========================================
 let gameState = {
   numTeams: 2,
   totalRounds: 12,
@@ -2095,54 +1763,59 @@ let gameState = {
   activeTeamIdx: 0,
   teams: [],
   questions: [],
-  pendingReward: null
+  pendingReward: null,
+  answered: false
 };
 
-// Elements
-const setupScreen = document.getElementById("setupScreen");
-const questionScreen = document.getElementById("questionScreen");
-const decisionScreen = document.getElementById("decisionScreen");
-const revealScreen = document.getElementById("revealScreen");
-const podiumScreen = document.getElementById("podiumScreen");
+// DOM Elements (Initialized in browser)
+let setupScreen, questionScreen, decisionScreen, revealScreen, podiumScreen;
+let scoreboardBar, decisionScoreboard, activeTeamTurnEl, questionProgressEl, questionCategoryEl, questionTextEl, optionsGridEl;
+let decisionTeamTitle, choiceButtonsGroup, passTargetSelection, passTeamsGrid;
+let revealCard, revealBadge, revealActionTag, revealTargetTeam, revealIcon, revealPointsText, revealDescText;
 
-const scoreboardBar = document.getElementById("scoreboardBar");
-const decisionScoreboard = document.getElementById("decisionScoreboard");
-const activeTeamTurnEl = document.getElementById("activeTeamTurn");
-const questionProgressEl = document.getElementById("questionProgress");
-const questionCategoryEl = document.getElementById("questionCategory");
-const questionTextEl = document.getElementById("questionText");
+function initDomElements() {
+  if (typeof document === "undefined") return;
 
-const decisionTeamTitle = document.getElementById("decisionTeamTitle");
-const revealCard = document.getElementById("revealCard");
-const revealBadge = document.getElementById("revealBadge");
-const revealActionTag = document.getElementById("revealActionTag");
-const revealTargetTeam = document.getElementById("revealTargetTeam");
-const revealIcon = document.getElementById("revealIcon");
-const revealPointsText = document.getElementById("revealPointsText");
-const revealDescText = document.getElementById("revealDescText");
+  setupScreen = document.getElementById("setupScreen");
+  questionScreen = document.getElementById("questionScreen");
+  decisionScreen = document.getElementById("decisionScreen");
+  revealScreen = document.getElementById("revealScreen");
+  podiumScreen = document.getElementById("podiumScreen");
 
-let consecutiveLossCount = 0;
+  scoreboardBar = document.getElementById("scoreboardBar");
+  decisionScoreboard = document.getElementById("decisionScoreboard");
+  activeTeamTurnEl = document.getElementById("activeTeamTurn");
+  questionProgressEl = document.getElementById("questionProgress");
+  questionCategoryEl = document.getElementById("questionCategory");
+  questionTextEl = document.getElementById("questionText");
+  optionsGridEl = document.getElementById("optionsGrid");
 
-function getRandomReward() {
-  let pool = MYSTERY_REWARDS;
-  // If we already had 2 negative outcomes in a row, guarantee a positive reward to avoid long negative streaks
-  if (consecutiveLossCount >= 2) {
-    pool = MYSTERY_REWARDS.filter(r => r.type === "gain");
-  }
-  const reward = pool[Math.floor(Math.random() * pool.length)];
-  if (reward.type === "loss") {
-    consecutiveLossCount++;
-  } else {
-    consecutiveLossCount = 0;
-  }
-  return reward;
+  decisionTeamTitle = document.getElementById("decisionTeamTitle");
+  choiceButtonsGroup = document.getElementById("choiceButtonsGroup");
+  passTargetSelection = document.getElementById("passTargetSelection");
+  passTeamsGrid = document.getElementById("passTeamsGrid");
+
+  revealCard = document.getElementById("revealCard");
+  revealBadge = document.getElementById("revealBadge");
+  revealActionTag = document.getElementById("revealActionTag");
+  revealTargetTeam = document.getElementById("revealTargetTeam");
+  revealIcon = document.getElementById("revealIcon");
+  revealPointsText = document.getElementById("revealPointsText");
+  revealDescText = document.getElementById("revealDescText");
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  verifyQuestionBank();
-  setupPills();
-  initEvents();
-});
+function getRandomReward() {
+  const reward = MYSTERY_REWARDS[Math.floor(Math.random() * MYSTERY_REWARDS.length)];
+  return { ...reward };
+}
+
+if (typeof document !== "undefined") {
+  document.addEventListener("DOMContentLoaded", () => {
+    initDomElements();
+    setupPills();
+    initEvents();
+  });
+}
 
 function setupPills() {
   document.querySelectorAll(".option-pills").forEach(group => {
@@ -2156,16 +1829,19 @@ function setupPills() {
 }
 
 function initEvents() {
-  document.getElementById("btnSoundToggle").addEventListener("click", (e) => {
-    sfx.muted = !sfx.muted;
-    e.currentTarget.textContent = sfx.muted ? "🔇" : "🔊";
-  });
+  const btnSound = document.getElementById("btnSoundToggle");
+  if (btnSound) {
+    btnSound.addEventListener("click", (e) => {
+      sfx.muted = !sfx.muted;
+      e.currentTarget.textContent = sfx.muted ? "🔇" : "🔊";
+    });
+  }
 
   document.getElementById("btnStartGame").addEventListener("click", startMatch);
-  document.getElementById("btnAnswerCorrect").addEventListener("click", onAnswerCorrect);
-  document.getElementById("btnAnswerWrong").addEventListener("click", onAnswerWrong);
-  document.getElementById("btnChoiceKeep").addEventListener("click", () => handleDecision("keep"));
-  document.getElementById("btnChoicePass").addEventListener("click", () => handleDecision("pass"));
+  document.getElementById("btnAnswerCorrect").addEventListener("click", () => onAnswerJudge(true));
+  document.getElementById("btnAnswerWrong").addEventListener("click", () => onAnswerJudge(false));
+  document.getElementById("btnChoiceKeep").addEventListener("click", handleKeepChoice);
+  document.getElementById("btnChoicePass").addEventListener("click", handlePassChoice);
   document.getElementById("btnNextQuestion").addEventListener("click", nextQuestion);
   document.getElementById("btnPlayAgain").addEventListener("click", resetMatch);
 }
@@ -2182,17 +1858,20 @@ function startMatch() {
   if (currentGrade !== selectedGrade || globalDeck.masterPool.length !== activePool.length) {
     currentGrade = selectedGrade;
     globalDeck.setPool(activePool);
+  } else {
+    // Reset session tracking when starting a new match
+    globalDeck.resetSession();
   }
 
   gameState.numTeams = teamCount;
   gameState.totalRounds = roundCount;
   gameState.currentQuestionIdx = 0;
   gameState.activeTeamIdx = 0;
-  consecutiveLossCount = 0;
 
+  const defaultNames = ["Team 1", "Team 2", "Team 3", "Team 4"];
   gameState.teams = [];
-  for (let i = 1; i <= teamCount; i++) {
-    gameState.teams.push({ name: `Team ${i}`, score: 0 });
+  for (let i = 0; i < teamCount; i++) {
+    gameState.teams.push({ name: defaultNames[i] || `Team ${i + 1}`, score: 0 });
   }
 
   // Draw non-repeating questions sequentially from the global deck
@@ -2204,16 +1883,18 @@ function startMatch() {
 }
 
 function renderScoreboard(container) {
+  if (!container) return;
   container.innerHTML = "";
   gameState.teams.forEach((t, idx) => {
     const chip = document.createElement("div");
     chip.className = `score-chip ${idx === gameState.activeTeamIdx ? "active-team" : ""}`;
-    chip.innerHTML = `<span class="team-name">${t.name}</span><span class="team-pts">${t.score}</span>`;
+    chip.innerHTML = `<span class="team-name">${t.name}</span><span class="team-pts">${t.score} pts</span>`;
     container.appendChild(chip);
   });
 }
 
 function showQuestionScreen() {
+  gameState.answered = false;
   questionScreen.classList.remove("hidden");
   decisionScreen.classList.add("hidden");
   revealScreen.classList.add("hidden");
@@ -2223,25 +1904,90 @@ function showQuestionScreen() {
   const curQ = gameState.questions[gameState.currentQuestionIdx];
   activeTeamTurnEl.textContent = `${gameState.teams[gameState.activeTeamIdx].name}'s Turn`;
   questionProgressEl.textContent = `Question ${gameState.currentQuestionIdx + 1} / ${gameState.totalRounds}`;
-  questionCategoryEl.textContent = curQ.category || "Vocabulary & Grammar";
+  questionCategoryEl.textContent = curQ.category || "English Grammar";
   questionTextEl.textContent = curQ.question;
+
+  // Render multiple-choice options with randomized ordering
+  if (optionsGridEl) {
+    optionsGridEl.innerHTML = "";
+    const letters = ["A", "B", "C", "D"];
+
+    curQ.shuffledOptions.forEach((optionText, idx) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "option-card-btn";
+      btn.innerHTML = `
+        <span class="option-letter">${letters[idx]}</span>
+        <span class="option-text">${optionText}</span>
+      `;
+
+      btn.addEventListener("click", () => {
+        if (gameState.answered) return;
+        handleOptionSelected(idx, btn, curQ);
+      });
+
+      optionsGridEl.appendChild(btn);
+    });
+  }
+}
+
+function handleOptionSelected(selectedIndex, clickedBtn, questionObj) {
+  gameState.answered = true;
+  const isCorrect = selectedIndex === questionObj.correctOptionIndex;
+
+  const allBtns = optionsGridEl.querySelectorAll(".option-card-btn");
+  allBtns.forEach((b, i) => {
+    b.disabled = true;
+    if (i === questionObj.correctOptionIndex) {
+      b.classList.add("is-revealed-correct");
+    }
+  });
+
+  if (isCorrect) {
+    clickedBtn.classList.add("is-correct");
+    sfx.playChime();
+    setTimeout(() => {
+      onAnswerCorrect();
+    }, 900);
+  } else {
+    clickedBtn.classList.add("is-wrong");
+    sfx.playBoom();
+    setTimeout(() => {
+      onAnswerWrong();
+    }, 1200);
+  }
+}
+
+function onAnswerJudge(isCorrect) {
+  if (gameState.answered) return;
+  gameState.answered = true;
+
+  if (isCorrect) {
+    sfx.playChime();
+    onAnswerCorrect();
+  } else {
+    sfx.playBoom();
+    onAnswerWrong();
+  }
 }
 
 function onAnswerCorrect() {
-  sfx.playChime();
-  // Pick random reward from valid point pool (positive & negative balanced, no empty boxes)
+  // Generate random hidden point reward
   gameState.pendingReward = getRandomReward();
 
   questionScreen.classList.add("hidden");
   decisionScreen.classList.remove("hidden");
+
+  // Reset choice buttons & pass target section
+  if (choiceButtonsGroup) choiceButtonsGroup.classList.remove("hidden");
+  if (passTargetSelection) passTargetSelection.classList.add("hidden");
 
   renderScoreboard(decisionScoreboard);
   decisionTeamTitle.textContent = `${gameState.teams[gameState.activeTeamIdx].name}, what will you do?`;
 }
 
 function onAnswerWrong() {
-  sfx.playBoom();
-  // Pass turn directly to next question/team
+  // Wrong answer: Reward = 0, no score change, move directly to next team turn
   advanceTurn();
   if (gameState.currentQuestionIdx >= gameState.totalRounds) {
     showPodium();
@@ -2250,47 +1996,89 @@ function onAnswerWrong() {
   }
 }
 
-function handleDecision(choice) {
+// KEEP: The current team keeps the entire reward
+function handleKeepChoice() {
+  const currentTeam = gameState.teams[gameState.activeTeamIdx];
+  const rew = gameState.pendingReward;
+
+  // Add entire reward to current team
+  currentTeam.score += rew.points;
+
+  showRevealScreen({
+    actionTag: `${currentTeam.name} KEPT THE REWARD!`,
+    targetTeamName: currentTeam.name,
+    descText: `Awesome decision! +${rew.points} points kept by ${currentTeam.name}.`,
+    isGain: true
+  });
+}
+
+// PASS: Display other teams to pass to
+function handlePassChoice() {
+  if (!choiceButtonsGroup || !passTargetSelection || !passTeamsGrid) return;
+
+  choiceButtonsGroup.classList.add("hidden");
+  passTargetSelection.classList.remove("hidden");
+
+  // Populate OTHER teams only (current team is NOT selectable)
+  passTeamsGrid.innerHTML = "";
+
+  gameState.teams.forEach((team, idx) => {
+    if (idx === gameState.activeTeamIdx) return; // Skip current active team
+
+    const teamBtn = document.createElement("button");
+    teamBtn.type = "button";
+    teamBtn.className = "btn-pass-team";
+    teamBtn.innerHTML = `
+      <span>${team.name}</span>
+      <span class="team-score-preview">${team.score} pts</span>
+    `;
+
+    teamBtn.addEventListener("click", () => {
+      executePassToTeam(idx);
+    });
+
+    passTeamsGrid.appendChild(teamBtn);
+  });
+}
+
+// Execute the full transfer of the reward to the chosen opponent team
+function executePassToTeam(targetTeamIdx) {
+  const activeTeam = gameState.teams[gameState.activeTeamIdx];
+  const recipientTeam = gameState.teams[targetTeamIdx];
+  const rew = gameState.pendingReward;
+
+  // Transfer the ENTIRE reward to the recipient team
+  recipientTeam.score += rew.points;
+
+  showRevealScreen({
+    actionTag: `PASSED TO ${recipientTeam.name.toUpperCase()}!`,
+    targetTeamName: recipientTeam.name,
+    descText: `${activeTeam.name} passed the box! +${rew.points} points awarded to ${recipientTeam.name}.`,
+    isGain: true
+  });
+}
+
+function showRevealScreen({ actionTag, targetTeamName, descText, isGain }) {
   decisionScreen.classList.add("hidden");
   revealScreen.classList.remove("hidden");
 
-  let targetTeamIdx;
-  if (choice === "keep") {
-    targetTeamIdx = gameState.activeTeamIdx;
-    revealActionTag.textContent = `${gameState.teams[targetTeamIdx].name} KEPT THE BOX!`;
-    revealTargetTeam.textContent = `${gameState.teams[targetTeamIdx].name} receives:`;
-  } else {
-    // Pass to next opponent team
-    targetTeamIdx = (gameState.activeTeamIdx + 1) % gameState.numTeams;
-    revealActionTag.textContent = `PASSED TO ${gameState.teams[targetTeamIdx].name.toUpperCase()}!`;
-    revealTargetTeam.textContent = `${gameState.teams[targetTeamIdx].name} must take:`;
-  }
+  revealActionTag.textContent = actionTag;
+  revealTargetTeam.textContent = `${targetTeamName} receives:`;
 
   const rew = gameState.pendingReward;
 
-  // Restart card animations smoothly
+  // Trigger smooth card pop animation
   revealCard.classList.remove("is-gain", "is-loss");
-  void revealCard.offsetWidth; // trigger reflow
+  void revealCard.offsetWidth; // Reflow
+  revealCard.classList.add(isGain ? "is-gain" : "is-loss");
 
-  revealIcon.textContent = rew.icon;
-  revealPointsText.textContent = rew.text;
+  revealIcon.textContent = rew.icon || "⭐";
+  revealPointsText.textContent = rew.text || `+${rew.points} POINTS`;
+  revealBadge.className = "reveal-badge gain-badge";
+  revealBadge.textContent = rew.badge || "GAIN";
+  revealDescText.textContent = descText;
 
-  if (rew.type === "gain") {
-    revealCard.classList.add("is-gain");
-    revealBadge.className = "reveal-badge gain-badge";
-    revealBadge.textContent = rew.badge || "GAIN";
-    sfx.playFanfare();
-    revealDescText.textContent = `Awesome! +${rew.points} points awarded to ${gameState.teams[targetTeamIdx].name}.`;
-  } else {
-    revealCard.classList.add("is-loss");
-    revealBadge.className = "reveal-badge loss-badge";
-    revealBadge.textContent = rew.badge || "RISK";
-    sfx.playBoom();
-    revealDescText.textContent = `Uh oh! ${gameState.teams[targetTeamIdx].name} loses ${Math.abs(rew.points)} points!`;
-  }
-
-  // Update target team score (floor at 0)
-  gameState.teams[targetTeamIdx].score = Math.max(0, gameState.teams[targetTeamIdx].score + rew.points);
+  sfx.playFanfare();
 }
 
 function nextQuestion() {
@@ -2310,10 +2098,12 @@ function advanceTurn() {
 function showPodium() {
   revealScreen.classList.add("hidden");
   questionScreen.classList.add("hidden");
+  decisionScreen.classList.add("hidden");
   podiumScreen.classList.remove("hidden");
 
   sfx.playFanfare();
   const podiumEl = document.getElementById("finalPodium");
+  if (!podiumEl) return;
   podiumEl.innerHTML = "";
 
   const sorted = [...gameState.teams].sort((a, b) => b.score - a.score);
@@ -2333,4 +2123,14 @@ function showPodium() {
 function resetMatch() {
   podiumScreen.classList.add("hidden");
   setupScreen.classList.remove("hidden");
+}
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    GRADE_7_QUESTIONS,
+    GRADE_8_QUESTIONS,
+    KEEP_OR_PASS_QUESTIONS,
+    MYSTERY_REWARDS,
+    QuestionDeck
+  };
 }

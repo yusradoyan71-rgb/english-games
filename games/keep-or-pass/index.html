@@ -85,8 +85,11 @@
 
       <!-- Question Card -->
       <div class="question-card">
-        <div class="question-badge" id="questionCategory">Vocabulary &amp; Grammar</div>
-        <h2 class="question-text" id="questionText">What do you wear on your feet?</h2>
+        <div class="question-badge" id="questionCategory">English Grammar</div>
+        <h2 class="question-text" id="questionText">Loading grammar question...</h2>
+        <div class="options-grid" id="optionsGrid">
+          <!-- Dynamic A, B, C, D multiple choice option buttons -->
+        </div>
       </div>
 
       <div class="judge-actions">
@@ -115,17 +118,26 @@
         </div>
       </div>
 
-      <div class="choice-buttons">
+      <div class="choice-buttons" id="choiceButtonsGroup">
         <button type="button" class="btn-choice btn-keep" id="btnChoiceKeep">
           <span class="choice-icon">🤲</span>
-          <span class="choice-title">KEEP IT</span>
-          <span class="choice-desc">Take whatever is inside</span>
+          <span class="choice-title">KEEP</span>
+          <span class="choice-desc">Keep the reward for your team</span>
         </button>
         <button type="button" class="btn-choice btn-pass" id="btnChoicePass">
           <span class="choice-icon">👉</span>
-          <span class="choice-title">PASS IT</span>
-          <span class="choice-desc">Give it to the other team!</span>
+          <span class="choice-title">PASS</span>
+          <span class="choice-desc">Pass the reward to another team</span>
         </button>
+      </div>
+
+      <!-- Pass-to-opponent team selector -->
+      <div class="pass-target-selection hidden" id="passTargetSelection">
+        <h3 class="pass-target-title">PASS TO WHICH TEAM?</h3>
+        <p class="pass-target-sub">Select the team that will receive the entire reward:</p>
+        <div class="pass-teams-grid" id="passTeamsGrid">
+          <!-- Dynamic opponent team buttons injected here -->
+        </div>
       </div>
     </section>
 
