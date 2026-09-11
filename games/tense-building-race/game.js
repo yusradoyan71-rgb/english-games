@@ -1,11 +1,12 @@
 /**
- * TENSE BUILDING RACE - Core Game Engine
- * Strictly adhering to:
- * - Simple Present, Present Continuous, Simple Past
- * - Single Global Game Timer (5, 10, 15, 20 mins)
- * - Strict Team Turn Rotation
- * - Vertical Skyscraper Climbing Mechanic
- * - Smartboard & Classroom Optimized Controls
+ * TENSE BUILDING RACE - Enhanced Core Game Engine
+ * Features:
+ * - 510+ Calibrated Question Bank strictly for Simple Present, Present Continuous, and Simple Past
+ * - Absolute Zero Question Repetition within a match
+ * - Independent Answer & Distractor Randomization with Anti-Streak Pattern Protection
+ * - Dramatic Crane-Drop Floor Construction Animation
+ * - Occasional Unstable Wobble Landing with Suspenseful Sound Effects
+ * - Continuous Single Global Timer (5, 10, 15, 20 mins)
  */
 
 (function () {
@@ -24,7 +25,8 @@
     ["Class 7A", "Class 7B", "Class 8A", "Class 8B"],
     ["Storm", "Blaze", "Thunder", "Vortex"],
     ["Dragons", "Phoenixes", "Wolves", "Bears"],
-    ["Grammar Ninjas", "Tense Masters", "Verb Voyagers", "Clause Champs"]
+    ["Grammar Ninjas", "Tense Masters", "Verb Voyagers", "Clause Champs"],
+    ["Lightning", "Titans", "Comets", "Knights"]
   ];
 
   let funNameIdx = 0;
@@ -46,10 +48,13 @@
     timerEndTime: null,
 
     // Question Engine
-    questionPool: [],
+    availablePool: [],
+    usedQuestions: new Set(),
     currentQuestion: null,
     shuffledOptions: [],
+    recentCorrectPositions: [], // Track last 3 correct positions to prevent streaks
     answeredInTurn: false,
+    isAnimatingFloor: false,
 
     // Pause & Control
     isPaused: false,
@@ -110,7 +115,6 @@
   // =========================================================================
 
   function initSetup() {
-    // Grade Selection
     dom.gradeButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         dom.gradeButtons.forEach(b => b.classList.remove('active'));
@@ -120,7 +124,6 @@
       });
     });
 
-    // Difficulty Selection
     dom.diffButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         dom.diffButtons.forEach(b => b.classList.remove('active'));
@@ -130,7 +133,6 @@
       });
     });
 
-    // Team Count Selection
     dom.teamCountButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         dom.teamCountButtons.forEach(b => b.classList.remove('active'));
@@ -141,7 +143,6 @@
       });
     });
 
-    // Duration Selection
     dom.durationButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         dom.durationButtons.forEach(b => b.classList.remove('active'));
@@ -151,7 +152,6 @@
       });
     });
 
-    // Autofill names button
     dom.btnAutofill.addEventListener('click', () => {
       funNameIdx = (funNameIdx + 1) % FUN_TEAM_NAMES.length;
       const names = FUN_TEAM_NAMES[funNameIdx];
@@ -162,10 +162,7 @@
       soundCtrl.playClick();
     });
 
-    // Start Game
     dom.btnStartRace.addEventListener('click', startGame);
-
-    // Initial render of team input fields
     renderTeamInputs();
   }
 
@@ -209,15 +206,16 @@
       });
     }
 
-    // Set Timer
+    // Timer setup
     state.timerTotalSeconds = state.durationMinutes * 60;
     state.timerRemainingSeconds = state.timerTotalSeconds;
     state.isGameOver = false;
     state.isPaused = false;
     state.activeTeamIdx = 0;
+    state.recentCorrectPositions = [];
 
-    // Build Question Pool
-    initQuestionPool();
+    // Initialize Question Pool with Zero-Repetition Manager
+    initFreshQuestionPool();
 
     // Render Tower Buildings
     renderTowers();
@@ -228,24 +226,30 @@
     dom.victoryModal.classList.add('hidden');
     dom.pauseModal.classList.add('hidden');
 
-    // Start Global Timer
+    // Start Global Countdown Timer
     startGlobalTimer();
 
     // Present First Question
     loadNextQuestion();
   }
 
-  function initQuestionPool() {
+  function initFreshQuestionPool() {
+    state.usedQuestions.clear();
     const gradeBank = window.GAME_QUESTIONS[state.grade];
-    let list = (gradeBank && gradeBank[state.difficulty]) ? [...gradeBank[state.difficulty]] : [];
+    let sourceList = (gradeBank && gradeBank[state.difficulty]) ? gradeBank[state.difficulty] : [];
 
-    // Fallback if needed
-    if (list.length === 0) {
-      list = [...window.GAME_QUESTIONS.grade7.easy];
+    if (sourceList.length === 0) {
+      sourceList = window.GAME_QUESTIONS.grade7.easy;
     }
 
-    // Shuffle pool
-    state.questionPool = shuffleArray([...list]);
+    // Attach unique identifier to each question object
+    state.availablePool = sourceList.map((q, idx) => ({
+      ...q,
+      _uid: `${state.grade}_${state.difficulty}_${idx}_${q.question.substring(0, 15)}`
+    }));
+
+    // Perform Fisher-Yates shuffle
+    state.availablePool = shuffleArray(state.availablePool);
   }
 
   function shuffleArray(arr) {
@@ -258,10 +262,10 @@
   }
 
   // =========================================================================
-  // TOWER & BUILDING RENDERING
+  // TOWER & DYNAMIC SKYSCRAPER RENDERING
   // =========================================================================
 
-  const MAX_DISPLAY_FLOORS = 25;
+  const MAX_DISPLAY_FLOORS = 30;
 
   function renderTowers() {
     dom.buildingsTrack.innerHTML = '';
@@ -271,11 +275,10 @@
       tower.className = `team-tower team-${idx + 1} ${idx === state.activeTeamIdx ? 'active-turn' : ''}`;
       tower.id = `tower_${idx}`;
 
-      // Floors HTML
       let floorsHtml = '';
       for (let f = 0; f <= MAX_DISPLAY_FLOORS; f++) {
         floorsHtml += `
-          <div class="floor-cell ${f === 0 ? 'reached' : ''}" data-floor="${f}">
+          <div class="floor-cell ${f === 0 ? 'reached' : ''}" id="floorCell_${idx}_${f}" data-floor="${f}">
             <span class="floor-cell-num">F${f}</span>
             <div class="floor-windows">
               <div class="floor-window"></div>
@@ -317,50 +320,86 @@
     });
   }
 
-  function updateElevatorPosition(teamIdx, newFloor, isClimb) {
+  // =========================================================================
+  // DRAMATIC FLOOR-BUILDING & UNSTABLE WOBBLE ANIMATION
+  // =========================================================================
+
+  function triggerFloorConstruction(teamIdx, newFloor, callback) {
+    state.isAnimatingFloor = true;
+    const tower = document.getElementById(`tower_${teamIdx}`);
+    const targetCell = document.getElementById(`floorCell_${teamIdx}_${newFloor}`);
     const shaft = document.getElementById(`towerShaft_${teamIdx}`);
     const elevator = document.getElementById(`elevator_${teamIdx}`);
     const elevatorTag = document.getElementById(`elevatorTag_${teamIdx}`);
     const floorVal = document.getElementById(`towerFloorVal_${teamIdx}`);
     const scroller = document.getElementById(`towerScroller_${teamIdx}`);
-    const tower = document.getElementById(`tower_${teamIdx}`);
 
-    if (!elevator || !shaft) return;
-
-    floorVal.textContent = newFloor;
-    elevatorTag.textContent = `F${newFloor}`;
-
-    // Mark floors as reached
-    const floorCells = tower.querySelectorAll('.floor-cell');
-    floorCells.forEach(cell => {
-      const fNum = parseInt(cell.getAttribute('data-floor'), 10);
-      if (fNum <= newFloor) {
-        cell.classList.add('reached');
-      }
-    });
-
-    // Compute floor cell height
-    const floorHeight = 48; // matches CSS --floor-height
-    const shaftHeight = shaft.clientHeight;
-    const targetBottom = newFloor * floorHeight;
-
-    // If target floor goes higher than shaft, scroll the floors container
-    const maxVisibleBottom = shaftHeight - 55;
-    if (targetBottom > maxVisibleBottom) {
-      const scrollOffset = targetBottom - maxVisibleBottom;
-      scroller.style.transform = `translateY(${scrollOffset}px)`;
-      elevator.style.bottom = `${maxVisibleBottom}px`;
-    } else {
-      scroller.style.transform = `translateY(0px)`;
-      elevator.style.bottom = `${targetBottom}px`;
+    if (!tower || !targetCell) {
+      if (callback) callback();
+      return;
     }
 
-    if (isClimb) {
-      soundCtrl.playElevatorClimb();
-      showTowerToast(teamIdx, "+1 FLOOR! 🚀", "toast-up");
-    } else {
-      soundCtrl.playIncorrect();
-      showTowerToast(teamIdx, "STAY ON FLOOR 🛑", "toast-stay");
+    // Step 1: Drop from sky
+    soundCtrl.playFloorDrop();
+    targetCell.classList.add('floor-dropping');
+    showTowerToast(teamIdx, "+1 FLOOR! 🏗️", "toast-up");
+
+    // Randomize whether this floor experiences an unstable landing (~28% chance)
+    const isUnstable = Math.random() < 0.28 && newFloor > 1;
+
+    setTimeout(() => {
+      // Step 2: Land on building with impact shake
+      tower.classList.add('impact-shake');
+      targetCell.classList.remove('floor-dropping');
+      targetCell.classList.add('reached');
+
+      setTimeout(() => tower.classList.remove('impact-shake'), 350);
+
+      if (isUnstable) {
+        // Unstable crooked wobble landing
+        const wobbleDir = Math.random() < 0.5 ? 'floor-land-wobble-left' : 'floor-land-wobble-right';
+        targetCell.classList.add(wobbleDir);
+        soundCtrl.playFloorWobbleCreak();
+
+        setTimeout(() => {
+          soundCtrl.playFloorStabilize();
+          targetCell.classList.remove(wobbleDir);
+          soundCtrl.playFloorLock();
+          finishClimb();
+        }, 650);
+      } else {
+        // Normal firm landing
+        targetCell.classList.add('floor-land-normal');
+        soundCtrl.playFloorLock();
+        setTimeout(() => {
+          targetCell.classList.remove('floor-land-normal');
+          finishClimb();
+        }, 300);
+      }
+    }, 380);
+
+    function finishClimb() {
+      // Update floor counters
+      floorVal.textContent = newFloor;
+      elevatorTag.textContent = `F${newFloor}`;
+
+      // Move elevator
+      const floorUnitHeight = 42; // matches CSS --floor-unit-height
+      const shaftHeight = shaft.clientHeight;
+      const targetBottom = newFloor * floorUnitHeight;
+      const maxVisibleBottom = shaftHeight - 50;
+
+      if (targetBottom > maxVisibleBottom) {
+        const scrollOffset = targetBottom - maxVisibleBottom;
+        scroller.style.transform = `translateY(${scrollOffset}px)`;
+        elevator.style.bottom = `${maxVisibleBottom}px`;
+      } else {
+        scroller.style.transform = `translateY(0px)`;
+        elevator.style.bottom = `${targetBottom}px`;
+      }
+
+      state.isAnimatingFloor = false;
+      if (callback) callback();
     }
   }
 
@@ -389,12 +428,13 @@
     });
 
     const activeTeam = state.teams[state.activeTeamIdx];
-    dom.activeTeamName.innerHTML = `${activeTeam.avatar} ${escapeHtml(activeTeam.name)}`;
+    if (activeTeam) {
+      dom.activeTeamName.innerHTML = `${activeTeam.avatar} ${escapeHtml(activeTeam.name)}`;
+    }
   }
 
   // =========================================================================
   // GLOBAL TIMER MECHANIC
-  // Continuous countdown throughout the game; never resets after questions
   // =========================================================================
 
   function startGlobalTimer() {
@@ -440,7 +480,7 @@
   }
 
   // =========================================================================
-  // QUESTION FLOW & ANSWER RANDOMIZATION
+  // QUESTION ENGINE & ANTI-STREAK OPTION RANDOMIZATION
   // =========================================================================
 
   function loadNextQuestion() {
@@ -449,36 +489,58 @@
     state.answeredInTurn = false;
     updateActiveTowerHighlight();
 
-    // Check pool
-    if (state.questionPool.length === 0) {
-      initQuestionPool();
+    // Pull next non-repeated question
+    if (state.availablePool.length === 0) {
+      // If an entire 500-question pool was completely exhausted, reload fresh pool
+      initFreshQuestionPool();
     }
 
-    state.currentQuestion = state.questionPool.pop();
+    state.currentQuestion = state.availablePool.pop();
+    state.usedQuestions.add(state.currentQuestion._uid);
+
     const q = state.currentQuestion;
 
-    // Render Question Type Badge
+    // Question Type Display Badge
     const typeNames = {
-      'tense-choice': '🎯 Tense Selection',
-      'complete-sentence': '✍️ Complete the Sentence',
+      'verb-choice': '🎯 Choose the Verb',
+      'sentence-choice': '📝 Correct Sentence',
+      'complete-sentence': '✍️ Complete Sentence',
       'find-mistake': '🔍 Find the Mistake',
       'correct-incorrect': '⚖️ Correct or Incorrect',
-      'context': '📖 Context Question'
+      'context': '📖 Context Question',
+      'grammar-structure': '🧩 Grammar Structure'
     };
 
     dom.qTypeBadge.textContent = typeNames[q.type] || 'Grammar Challenge';
-    dom.qTenseHint.textContent = `Target: ${q.tense || 'Simple Present / Past / Continuous'}`;
+    dom.qTenseHint.textContent = `Tense: ${q.tense || 'Simple Present / Past / Continuous'}`;
     dom.qPromptText.textContent = q.question;
 
-    // Randomize Option Positions (Uniform distribution for A, B, C, D)
+    // Independent Answer Option Randomization with Anti-Streak Protection
     const originalOptions = q.options.map((opt, i) => ({
       text: opt,
       isCorrect: i === q.correct
     }));
 
-    state.shuffledOptions = shuffleArray(originalOptions);
+    let randomized = shuffleArray(originalOptions);
+    let correctPos = randomized.findIndex(o => o.isCorrect);
 
-    // Render Options
+    // Anti-Streak Check: If last 2 answers were at same position, shift to prevent 3-in-a-row
+    const recent = state.recentCorrectPositions;
+    if (recent.length >= 2 && recent[recent.length - 1] === correctPos && recent[recent.length - 2] === correctPos) {
+      // Shift options by 1
+      const item = randomized.pop();
+      randomized.unshift(item);
+      correctPos = randomized.findIndex(o => o.isCorrect);
+    }
+
+    state.recentCorrectPositions.push(correctPos);
+    if (state.recentCorrectPositions.length > 6) {
+      state.recentCorrectPositions.shift();
+    }
+
+    state.shuffledOptions = randomized;
+
+    // Render Options Buttons
     const letters = ['A', 'B', 'C', 'D'];
     dom.optionsGrid.innerHTML = '';
 
@@ -497,14 +559,14 @@
   }
 
   function handleOptionSelect(selectedIdx, btnElement) {
-    if (state.answeredInTurn || state.isGameOver || state.isPaused) return;
+    if (state.answeredInTurn || state.isGameOver || state.isPaused || state.isAnimatingFloor) return;
     state.answeredInTurn = true;
 
     const chosen = state.shuffledOptions[selectedIdx];
     const isCorrect = chosen.isCorrect;
     const activeTeam = state.teams[state.activeTeamIdx];
 
-    // Disable all option buttons
+    // Highlight options
     const allButtons = dom.optionsGrid.querySelectorAll('.btn-option-choice');
     allButtons.forEach((b, i) => {
       b.disabled = true;
@@ -518,20 +580,27 @@
       activeTeam.correct += 1;
       activeTeam.floor += 1;
       soundCtrl.playCorrect();
-      updateElevatorPosition(state.activeTeamIdx, activeTeam.floor, true);
+
+      // Trigger crane drop construction animation
+      triggerFloorConstruction(state.activeTeamIdx, activeTeam.floor, () => {
+        setTimeout(() => {
+          if (state.isGameOver) return;
+          state.activeTeamIdx = (state.activeTeamIdx + 1) % state.teams.length;
+          loadNextQuestion();
+        }, 400);
+      });
     } else {
       btnElement.classList.add('wrong-ans');
       activeTeam.incorrect += 1;
-      updateElevatorPosition(state.activeTeamIdx, activeTeam.floor, false);
-    }
+      soundCtrl.playSoftError();
+      showTowerToast(state.activeTeamIdx, "STAY ON FLOOR 🛑", "toast-stay");
 
-    // Short delay so students see feedback without losing race time
-    setTimeout(() => {
-      if (state.isGameOver) return;
-      // Advance to next team
-      state.activeTeamIdx = (state.activeTeamIdx + 1) % state.teams.length;
-      loadNextQuestion();
-    }, 1100);
+      setTimeout(() => {
+        if (state.isGameOver) return;
+        state.activeTeamIdx = (state.activeTeamIdx + 1) % state.teams.length;
+        loadNextQuestion();
+      }, 950);
+    }
   }
 
   // =========================================================================
@@ -542,20 +611,15 @@
     state.isGameOver = true;
     clearInterval(state.timerInterval);
 
-    // Stop accepting questions & freeze UI
     const allButtons = dom.optionsGrid.querySelectorAll('.btn-option-choice');
     allButtons.forEach(b => b.disabled = true);
 
     soundCtrl.playVictory();
     launchConfetti();
 
-    // Calculate Rank Order:
-    // 1st criteria: Highest Floor
-    // 2nd criteria (tie-breaker): Total Correct Answers
+    // 1st: Highest Floor, 2nd: Total Correct Answers (Tie-breaker)
     const rankedTeams = [...state.teams].sort((a, b) => {
-      if (b.floor !== a.floor) {
-        return b.floor - a.floor;
-      }
+      if (b.floor !== a.floor) return b.floor - a.floor;
       return b.correct - a.correct;
     });
 
@@ -574,7 +638,7 @@
       dom.winnerFloor.textContent = `Floor ${winner.floor}`;
     }
 
-    // Render Standings Table
+    // Render Standings
     dom.standingsBody.innerHTML = '';
     rankedTeams.forEach((t, i) => {
       const totalAnswers = t.correct + t.incorrect;
@@ -593,7 +657,6 @@
       dom.standingsBody.appendChild(row);
     });
 
-    // Show victory modal
     dom.victoryModal.classList.remove('hidden');
   }
 
@@ -602,17 +665,14 @@
   // =========================================================================
 
   function initControls() {
-    // Sound Toggle
     dom.btnSound.addEventListener('click', () => {
       const muted = soundCtrl.toggleMute();
       dom.soundIcon.textContent = muted ? '🔇' : '🔊';
     });
 
-    // Pause / Resume
     dom.btnPause.addEventListener('click', togglePause);
     dom.btnResume.addEventListener('click', togglePause);
 
-    // Fullscreen
     dom.btnFullscreen.addEventListener('click', () => {
       if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen().catch(() => {});
@@ -621,21 +681,18 @@
       }
     });
 
-    // End Game early
     dom.btnEndGame.addEventListener('click', () => {
       if (confirm("End the race right now and view final scores?")) {
         triggerGameOver();
       }
     });
 
-    // Skip question (Teacher utility)
     dom.btnSkip.addEventListener('click', () => {
-      if (!state.isGameOver && !state.isPaused && !state.answeredInTurn) {
+      if (!state.isGameOver && !state.isPaused && !state.answeredInTurn && !state.isAnimatingFloor) {
         loadNextQuestion();
       }
     });
 
-    // Play Again
     dom.btnPlayAgain.addEventListener('click', () => {
       stopConfetti();
       dom.victoryModal.classList.add('hidden');
@@ -643,11 +700,9 @@
       dom.setupScreen.classList.remove('hidden');
     });
 
-    // Keyboard Shortcuts
     window.addEventListener('keydown', (e) => {
       if (state.isGameOver) return;
 
-      // Number keys 1-4 or A-D for answering
       const key = e.key.toUpperCase();
       let optionIndex = -1;
 
@@ -656,14 +711,13 @@
       else if (key === '3' || key === 'C') optionIndex = 2;
       else if (key === '4' || key === 'D') optionIndex = 3;
 
-      if (optionIndex >= 0 && !dom.arenaScreen.classList.contains('hidden') && !state.isPaused) {
+      if (optionIndex >= 0 && !dom.arenaScreen.classList.contains('hidden') && !state.isPaused && !state.isAnimatingFloor) {
         const buttons = dom.optionsGrid.querySelectorAll('.btn-option-choice');
         if (buttons[optionIndex] && !buttons[optionIndex].disabled) {
           handleOptionSelect(optionIndex, buttons[optionIndex]);
         }
       }
 
-      // Space or P -> Pause
       if (e.code === 'Space' || key === 'P') {
         if (!dom.arenaScreen.classList.contains('hidden')) {
           e.preventDefault();
@@ -671,13 +725,11 @@
         }
       }
 
-      // M -> Mute
       if (key === 'M') {
         const muted = soundCtrl.toggleMute();
         dom.soundIcon.textContent = muted ? '🔇' : '🔊';
       }
 
-      // F -> Fullscreen
       if (key === 'F') {
         if (!document.fullscreenElement) {
           document.documentElement.requestFullscreen().catch(() => {});
@@ -694,7 +746,6 @@
     state.isPaused = !state.isPaused;
     if (state.isPaused) {
       dom.pauseModal.classList.remove('hidden');
-      // Store exact remaining ms
       if (state.timerEndTime) {
         state.pausedRemainingMs = state.timerEndTime - Date.now();
       }
@@ -771,7 +822,6 @@
     }
   }
 
-  // Safe HTML escape helper
   function escapeHtml(str) {
     if (!str) return '';
     return str
@@ -782,7 +832,6 @@
       .replace(/'/g, "&#039;");
   }
 
-  // On DOM Ready
   document.addEventListener('DOMContentLoaded', () => {
     cacheDom();
     initSetup();
