@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🏗️ Tense Building Race — Classroom English Grammar Game</title>
+  <meta name="description" content="A high-energy classroom English grammar competition for 7th and 8th graders. Race up the skyscraper by mastering Simple Present, Present Continuous, and Simple Past tenses!">
+
+  <!-- Google Fonts: Fredoka & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ambient City Backdrop -->
+  <div class="city-backdrop" aria-hidden="true">
+    <div class="sky-stars"></div>
+    <div class="clouds-layer"></div>
+  </div>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+
+  <!-- App Wrapper -->
+  <div class="app-container" id="app">
+
+    <!-- ================================================================= -->
+    <!-- SCREEN 1: SETUP SCREEN -->
+    <!-- ================================================================= -->
+    <section class="screen" id="setupScreen">
+      <div class="setup-screen-wrapper">
+
+        <header class="setup-header">
+          <div class="badge-classroom">🎓 7th &amp; 8th Grade English Grammar Competition</div>
+          <h1 class="main-title">
+            <span class="race-icon">🏗️</span>
+            <span>TENSE BUILDING RACE</span>
+            <span class="race-icon">🚀</span>
+          </h1>
+          <p class="setup-subtitle">Climb the skyscraper floor by floor with your grammar skills!</p>
+        </header>
+
+        <div class="setup-card">
+          
+          <div class="setup-grid">
+            <!-- Step 1: Grade Selection -->
+            <div class="setup-block">
+              <div class="block-title">
+                <span class="step-badge">1</span>
+                <span>Select Grade</span>
+              </div>
+              <div class="option-row">
+                <button type="button" class="btn-option active" data-grade="grade7">7th Grade</button>
+                <button type="button" class="btn-option" data-grade="grade8">8th Grade</button>
+              </div>
+            </div>
+
+            <!-- Step 2: Difficulty Selection -->
+            <div class="setup-block">
+              <div class="block-title">
+                <span class="step-badge">2</span>
+                <span>Difficulty</span>
+              </div>
+              <div class="option-row">
+                <button type="button" class="btn-option active" data-diff="easy">Easy</button>
+                <button type="button" class="btn-option" data-diff="medium">Medium</button>
+                <button type="button" class="btn-option" data-diff="hard">Hard</button>
+              </div>
+            </div>
+
+            <!-- Step 3: Team Count Selection -->
+            <div class="setup-block">
+              <div class="block-title">
+                <span class="step-badge">3</span>
+                <span>Number of Teams</span>
+              </div>
+              <div class="option-row">
+                <button type="button" class="btn-option" data-teams="2">2 Teams</button>
+                <button type="button" class="btn-option active" data-teams="3">3 Teams</button>
+                <button type="button" class="btn-option" data-teams="4">4 Teams</button>
+              </div>
+            </div>
+
+            <!-- Step 4: Total Game Duration Selection -->
+            <div class="setup-block">
+              <div class="block-title">
+                <span class="step-badge">4</span>
+                <span>Total Game Duration</span>
+              </div>
+              <div class="option-row">
+                <button type="button" class="btn-option" data-duration="5">5 Min</button>
+                <button type="button" class="btn-option active" data-duration="10">10 Min</button>
+                <button type="button" class="btn-option" data-duration="15">15 Min</button>
+                <button type="button" class="btn-option" data-duration="20">20 Min</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 5: Team Names & Customization -->
+          <div class="teams-setup-area">
+            <div class="teams-header-bar">
+              <div class="block-title">
+                <span class="step-badge">5</span>
+                <span>Team Roster &amp; Names</span>
+              </div>
+              <button type="button" class="btn-autofill" id="btnAutofill">✨ Quick Name Presets</button>
+            </div>
+            <div class="team-inputs-grid" id="teamInputsGrid">
+              <!-- Dynamically populated team name input cards -->
+            </div>
+          </div>
+
+          <!-- Launch Button -->
+          <div class="setup-actions">
+            <button type="button" class="btn-start-race" id="btnStartRace">
+              <span>🚀</span>
+              <span>START RACE!</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- SCREEN 2: MAIN RACE ARENA -->
+    <!-- ================================================================= -->
+    <section class="screen arena-screen hidden" id="arenaScreen">
+
+      <!-- Arena Top Bar -->
+      <header class="arena-header">
+        <div class="header-left">
+          <a href="../../index.html" class="btn-nav-hub" title="Back to Games Hub">
+            <span>←</span>
+            <span>Hub</span>
+          </a>
+          <div class="arena-title-badge">
+            <span>🏗️</span>
+            <span class="title-text">Tense Race</span>
+            <span class="tag">7th &amp; 8th Grade</span>
+          </div>
+        </div>
+
+        <div class="header-center">
+          <!-- Global Game Countdown Timer -->
+          <div class="global-timer-widget" id="timerWidget" title="Total Game Time Remaining">
+            <span class="timer-label">⏱️ Time Left</span>
+            <span class="timer-display" id="timerDisplay">10:00</span>
+          </div>
+
+          <!-- Active Team Turn Banner -->
+          <div class="active-team-banner" id="activeTeamBadge">
+            <span class="turn-tag">Current Turn:</span>
+            <span class="turn-name" id="activeTeamName">🐯 Tigers</span>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <button type="button" class="ctrl-btn" id="btnSound" title="Toggle Sound (M)">
+            <span id="soundIcon">🔊</span>
+          </button>
+          <button type="button" class="ctrl-btn" id="btnSkip" title="Skip Question (S)">
+            <span>⏭️ Skip</span>
+          </button>
+          <button type="button" class="ctrl-btn" id="btnPause" title="Pause Game (Space / P)">
+            <span>⏸️ Pause</span>
+          </button>
+          <button type="button" class="ctrl-btn" id="btnFullscreen" title="Toggle Fullscreen (F)">
+            <span>⛶</span>
+          </button>
+          <button type="button" class="ctrl-btn btn-danger" id="btnEndGame" title="End Game Early">
+            <span>🛑 End</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Visual Section: Skyscraper Buildings Track -->
+      <main class="race-arena-main">
+        <div class="buildings-track-container" id="buildingsTrack">
+          <!-- Dynamically populated team towers -->
+        </div>
+        <div class="ground-platform"></div>
+      </main>
+
+      <!-- Bottom Section: Question & Answer Choices Dock -->
+      <footer class="question-dock" id="questionDock">
+        <div class="question-header-row">
+          <div class="q-type-badge" id="qTypeBadge">🎯 Tense Selection</div>
+          <div class="q-tense-hint" id="qTenseHint">Simple Present / Present Continuous / Simple Past</div>
+        </div>
+
+        <div class="q-prompt-box">
+          <div class="q-prompt-text" id="qPromptText">
+            Loading grammar question...
+          </div>
+        </div>
+
+        <div class="options-grid" id="optionsGrid">
+          <!-- Dynamically generated option buttons A, B, C, (D) -->
+        </div>
+      </footer>
+
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- MODAL: VICTORY & RESULTS SCREEN -->
+    <!-- ================================================================= -->
+    <div class="modal-backdrop hidden" id="victoryModal">
+      <div class="modal-content">
+        <div class="victory-badge">🏆</div>
+        <h2 class="victory-title">RACE FINISHED!</h2>
+
+        <div class="winner-highlight-card">
+          <div class="winner-team-name">
+            <span id="winnerAvatar">🐯</span>
+            <span id="winnerName">Tigers</span>
+          </div>
+          <div class="winner-floor-tag" id="winnerFloor">Floor 14</div>
+        </div>
+
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Team</th>
+              <th>Floor Climbed</th>
+              <th>Correct</th>
+              <th>Incorrect</th>
+              <th>Accuracy</th>
+            </tr>
+          </thead>
+          <tbody id="standingsBody">
+            <!-- Standings rows -->
+          </tbody>
+        </table>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-play-again" id="btnPlayAgain">🔄 Play Again</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- MODAL: PAUSE OVERLAY -->
+    <!-- ================================================================= -->
+    <div class="modal-backdrop hidden" id="pauseModal">
+      <div class="modal-content" style="max-width: 450px;">
+        <div style="font-size: 3rem;">⏸️</div>
+        <h2 style="font-family: var(--font-display); font-size: 2rem; color: #ffffff;">GAME PAUSED</h2>
+        <p style="color: var(--text-muted); font-size: 1.1rem;">Take your time! The global timer is frozen.</p>
+        <div class="modal-actions">
+          <button type="button" class="btn-play-again" id="btnResume">▶️ Resume Race</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="questions.js"></script>
+  <script src="audio.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
