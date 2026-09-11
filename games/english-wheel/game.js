@@ -251,6 +251,9 @@ class EnglishWheelGame {
     if (window.soundEngine) window.soundEngine.playBtnClick();
     this.saveCurrentSetupNames();
 
+    // Reset session used expressions so each game starts fresh with full variety
+    this.expressionManager.resetSession();
+
     this.teams = [];
     for (let i = 0; i < this.teamCount; i++) {
       const teamNum = i + 1;
