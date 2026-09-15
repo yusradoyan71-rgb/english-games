@@ -84,17 +84,17 @@
               </div>
             </div>
 
-            <!-- Step 4: Total Game Duration Selection -->
+            <!-- Step 4: Time Per Team Duration Selection -->
             <div class="setup-block">
               <div class="block-title">
                 <span class="step-badge">4</span>
-                <span>Total Game Duration</span>
+                <span>Time Per Team</span>
               </div>
               <div class="option-row">
-                <button type="button" class="btn-option" data-duration="5">5 Min</button>
-                <button type="button" class="btn-option active" data-duration="10">10 Min</button>
-                <button type="button" class="btn-option" data-duration="15">15 Min</button>
-                <button type="button" class="btn-option" data-duration="20">20 Min</button>
+                <button type="button" class="btn-option" data-duration="5">5 min per team</button>
+                <button type="button" class="btn-option active" data-duration="10">10 min per team</button>
+                <button type="button" class="btn-option" data-duration="15">15 min per team</button>
+                <button type="button" class="btn-option" data-duration="20">20 min per team</button>
               </div>
             </div>
           </div>
@@ -146,9 +146,9 @@
         </div>
 
         <div class="header-center">
-          <!-- Global Game Countdown Timer -->
-          <div class="global-timer-widget" id="timerWidget" title="Total Game Time Remaining">
-            <span class="timer-label">⏱️ Time Left</span>
+          <!-- Active Team Countdown Timer -->
+          <div class="global-timer-widget" id="timerWidget" title="Active Team Time Remaining">
+            <span class="timer-label" id="timerLabel">⏱️ TEAM 1 TIME</span>
             <span class="timer-display" id="timerDisplay">10:00</span>
           </div>
 
@@ -251,7 +251,7 @@
       <div class="modal-content" style="max-width: 450px;">
         <div style="font-size: 3rem;">⏸️</div>
         <h2 style="font-family: var(--font-display); font-size: 2rem; color: #ffffff;">GAME PAUSED</h2>
-        <p style="color: var(--text-muted); font-size: 1.1rem;">Take your time! The global timer is frozen.</p>
+        <p style="color: var(--text-muted); font-size: 1.1rem;">Take your time! The team timer is frozen.</p>
         <div class="modal-actions">
           <button type="button" class="btn-play-again" id="btnResume">▶️ Resume Race</button>
         </div>

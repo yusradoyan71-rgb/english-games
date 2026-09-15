@@ -462,27 +462,52 @@ body {
 
 .global-timer-widget {
   background: rgba(15, 23, 42, 0.9);
-  border: 2px solid #ef4444;
+  border: 2px solid #38bdf8;
   border-radius: 12px;
   padding: 0.25rem 1.1rem;
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  box-shadow: 0 0 15px rgba(239, 68, 68, 0.25);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
   transition: all 0.3s ease;
 }
 
 .global-timer-widget.warning {
-  border-color: #ff0055;
+  border-color: #f59e0b;
+  box-shadow: 0 0 18px rgba(245, 158, 11, 0.4);
   animation: pulseWarning 1s infinite alternate;
+}
+
+.global-timer-widget.critical {
+  border-color: #ef4444;
+  box-shadow: 0 0 22px rgba(239, 68, 68, 0.6);
+  animation: pulseWarning 0.5s infinite alternate;
+}
+
+.global-timer-widget.time-up {
+  border-color: #64748b;
+  box-shadow: none;
+  opacity: 0.75;
 }
 
 .timer-label {
   font-size: 0.8rem;
   font-weight: 800;
-  color: #fca5a5;
+  color: #93c5fd;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+}
+
+.global-timer-widget.warning .timer-label {
+  color: #fde047;
+}
+
+.global-timer-widget.critical .timer-label {
+  color: #fca5a5;
+}
+
+.global-timer-widget.time-up .timer-label {
+  color: #94a3b8;
 }
 
 .timer-display {
@@ -659,6 +684,61 @@ body {
 .team-tower.team-3 .tower-team-badge { background: linear-gradient(135deg, #059669, #10b981); border: 2px solid var(--team-3); }
 .team-tower.team-4 .tower-team-badge { background: linear-gradient(135deg, #d97706, #f59e0b); border: 2px solid var(--team-4); }
 
+.tower-stats-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+  flex-wrap: nowrap;
+}
+
+.tower-timer-pill {
+  font-family: 'Fredoka', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #94a3b8;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 6px;
+  padding: 0.15rem 0.45rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.tower-timer-pill.active-timer {
+  color: #ffffff;
+  background: rgba(14, 165, 233, 0.2);
+  border-color: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}
+
+.team-tower.team-1 .tower-timer-pill.active-timer { color: #38bdf8; border-color: var(--team-1); box-shadow: 0 0 10px var(--team-1-glow); }
+.team-tower.team-2 .tower-timer-pill.active-timer { color: #f43f5e; border-color: var(--team-2); box-shadow: 0 0 10px var(--team-2-glow); }
+.team-tower.team-3 .tower-timer-pill.active-timer { color: #10b981; border-color: var(--team-3); box-shadow: 0 0 10px var(--team-3-glow); }
+.team-tower.team-4 .tower-timer-pill.active-timer { color: #f59e0b; border-color: var(--team-4); box-shadow: 0 0 10px var(--team-4-glow); }
+
+.tower-timer-pill.warning {
+  color: #f59e0b !important;
+  border-color: #f59e0b !important;
+  animation: pulseWarning 1s infinite alternate;
+}
+
+.tower-timer-pill.critical {
+  color: #ef4444 !important;
+  border-color: #ef4444 !important;
+  animation: pulseWarning 0.5s infinite alternate;
+}
+
+.tower-timer-pill.time-up {
+  color: #64748b !important;
+  border-color: rgba(100, 116, 139, 0.4) !important;
+  background: rgba(15, 23, 42, 0.6) !important;
+  opacity: 0.65;
+}
+
 .tower-current-floor {
   font-size: 0.85rem;
   font-weight: 800;
@@ -667,7 +747,6 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 6px;
   padding: 0.15rem 0.5rem;
-  margin-top: 0.2rem;
   display: flex;
   align-items: center;
   gap: 0.25rem;

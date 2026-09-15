@@ -6,7 +6,7 @@
  * - Independent Answer & Distractor Randomization with Anti-Streak Pattern Protection
  * - Dramatic Crane-Drop Floor Construction Animation
  * - Occasional Unstable Wobble Landing with Suspenseful Sound Effects
- * - Continuous Single Global Timer (5, 10, 15, 20 mins)
+ * - Independent Per-Team Countdown Timer System (5, 10, 15, 20 mins per team)
  */
 
 (function () {
@@ -40,12 +40,12 @@
     teams: [],
     activeTeamIdx: 0,
 
-    // Timer
-    timerRemainingSeconds: 600,
-    timerTotalSeconds: 600,
+    // Per-Team Timer Engine
     timerInterval: null,
-    timerRunning: false,
-    timerEndTime: null,
+    isTimerRunning: false,
+    activeTurnStartMs: null,
+    activeTurnStartRemainingSec: null,
+    lastTickedSecond: null,
 
     // Question Engine
     availablePool: [],
@@ -81,6 +81,7 @@
 
     // Arena elements
     dom.timerDisplay = document.getElementById('timerDisplay');
+    dom.timerLabel = document.getElementById('timerLabel');
     dom.timerWidget = document.getElementById('timerWidget');
     dom.activeTeamBadge = document.getElementById('activeTeamBadge');
     dom.activeTeamName = document.getElementById('activeTeamName');
@@ -191,7 +192,8 @@
     soundCtrl.init();
     soundCtrl.playGameStart();
 
-    // Collect team configuration
+    // Collect team configuration with independent per-team timers
+    const initialSeconds = state.durationMinutes * 60;
     state.teams = [];
     for (let i = 0; i < state.teamCount; i++) {
       const input = document.getElementById(`teamInput_${i}`);
@@ -202,17 +204,20 @@
         avatar: TEAM_PRESETS[i].avatar,
         floor: 0,
         correct: 0,
-        incorrect: 0
+        incorrect: 0,
+        remainingSeconds: initialSeconds,
+        totalSeconds: initialSeconds,
+        isFinished: false
       });
     }
 
-    // Timer setup
-    state.timerTotalSeconds = state.durationMinutes * 60;
-    state.timerRemainingSeconds = state.timerTotalSeconds;
     state.isGameOver = false;
     state.isPaused = false;
     state.activeTeamIdx = 0;
     state.recentCorrectPositions = [];
+    state.answeredInTurn = false;
+    state.isAnimatingFloor = false;
+    state.lastTickedSecond = null;
 
     // Initialize Question Pool with Zero-Repetition Manager
     initFreshQuestionPool();
@@ -226,10 +231,7 @@
     dom.victoryModal.classList.add('hidden');
     dom.pauseModal.classList.add('hidden');
 
-    // Start Global Countdown Timer
-    startGlobalTimer();
-
-    // Present First Question
+    // Present First Question (which activates the first team's timer)
     loadNextQuestion();
   }
 
@@ -294,9 +296,15 @@
             <span>${team.avatar}</span>
             <span class="tower-team-text">${escapeHtml(team.name)}</span>
           </div>
-          <div class="tower-current-floor">
-            <span>FLOOR</span>
-            <span class="floor-val" id="towerFloorVal_${idx}">0</span>
+          <div class="tower-stats-row">
+            <div class="tower-timer-pill ${idx === state.activeTeamIdx ? 'active-timer' : ''}" id="towerTimerPill_${idx}">
+              <span class="tower-timer-icon">⏱️</span>
+              <span class="tower-timer-val" id="towerTimerVal_${idx}">${formatTimerSec(team.remainingSeconds)}</span>
+            </div>
+            <div class="tower-current-floor">
+              <span>FLOOR</span>
+              <span class="floor-val" id="towerFloorVal_${idx}">0</span>
+            </div>
           </div>
         </div>
 
@@ -434,48 +442,180 @@
   }
 
   // =========================================================================
-  // GLOBAL TIMER MECHANIC
+  // INDEPENDENT PER-TEAM TIMER MECHANIC
   // =========================================================================
 
-  function startGlobalTimer() {
-    if (state.timerInterval) clearInterval(state.timerInterval);
-    state.timerRunning = true;
-    state.timerEndTime = Date.now() + (state.timerRemainingSeconds * 1000);
+  function formatTimerSec(totalSec) {
+    const ceilSec = Math.max(0, Math.ceil(totalSec));
+    const m = Math.floor(ceilSec / 60);
+    const s = ceilSec % 60;
+    return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  }
 
-    updateTimerDisplay();
+  function updateAllTimersDisplay() {
+    const activeTeam = state.teams[state.activeTeamIdx];
+    if (activeTeam && dom.timerDisplay) {
+      dom.timerDisplay.textContent = formatTimerSec(activeTeam.remainingSeconds);
+      if (dom.timerLabel) {
+        dom.timerLabel.textContent = `⏱️ ${activeTeam.name.toUpperCase()} TIME`;
+      }
+
+      dom.timerWidget.classList.remove('warning', 'critical', 'time-up');
+      if (activeTeam.remainingSeconds <= 0) {
+        dom.timerWidget.classList.add('time-up');
+      } else if (activeTeam.remainingSeconds <= 30) {
+        dom.timerWidget.classList.add('critical');
+      } else if (activeTeam.remainingSeconds <= 60) {
+        dom.timerWidget.classList.add('warning');
+      }
+    }
+
+    state.teams.forEach((t, idx) => {
+      const pill = document.getElementById(`towerTimerPill_${idx}`);
+      const val = document.getElementById(`towerTimerVal_${idx}`);
+      if (pill && val) {
+        val.textContent = formatTimerSec(t.remainingSeconds);
+        pill.className = 'tower-timer-pill';
+        if (idx === state.activeTeamIdx && t.remainingSeconds > 0) {
+          pill.classList.add('active-timer');
+        }
+        if (t.remainingSeconds <= 0) {
+          pill.classList.add('time-up');
+        } else if (t.remainingSeconds <= 30) {
+          pill.classList.add('critical');
+        } else if (t.remainingSeconds <= 60) {
+          pill.classList.add('warning');
+        }
+      }
+    });
+  }
+
+  function startActiveTeamTimer() {
+    stopActiveTeamTimer(false);
+
+    if (state.isGameOver || state.isPaused) return;
+
+    const activeTeam = state.teams[state.activeTeamIdx];
+    if (!activeTeam || activeTeam.remainingSeconds <= 0 || activeTeam.isFinished) {
+      handleActiveTeamTimeOut();
+      return;
+    }
+
+    state.activeTurnStartMs = Date.now();
+    state.activeTurnStartRemainingSec = activeTeam.remainingSeconds;
+    state.isTimerRunning = true;
+    state.lastTickedSecond = Math.ceil(activeTeam.remainingSeconds);
+
+    updateAllTimersDisplay();
 
     state.timerInterval = setInterval(() => {
-      if (state.isPaused || state.isGameOver) return;
+      if (state.isPaused || state.isGameOver || !state.isTimerRunning) return;
 
-      const now = Date.now();
-      const remainingMs = Math.max(0, state.timerEndTime - now);
-      state.timerRemainingSeconds = Math.ceil(remainingMs / 1000);
+      const elapsedSec = (Date.now() - state.activeTurnStartMs) / 1000;
+      const currentRemaining = Math.max(0, state.activeTurnStartRemainingSec - elapsedSec);
+      activeTeam.remainingSeconds = currentRemaining;
 
-      updateTimerDisplay();
+      updateAllTimersDisplay();
 
-      // Tick sound in final 30 seconds
-      if (state.timerRemainingSeconds <= 30 && state.timerRemainingSeconds > 0) {
+      // Tick sound in final 30 seconds for active team
+      const secCeil = Math.ceil(currentRemaining);
+      if (secCeil <= 30 && secCeil > 0 && secCeil !== state.lastTickedSecond) {
+        state.lastTickedSecond = secCeil;
         soundCtrl.playTick();
       }
 
-      if (state.timerRemainingSeconds <= 0) {
-        clearInterval(state.timerInterval);
-        state.timerRunning = false;
-        triggerGameOver();
+      if (currentRemaining <= 0) {
+        activeTeam.remainingSeconds = 0;
+        activeTeam.isFinished = true;
+        stopActiveTeamTimer(false);
+        updateAllTimersDisplay();
+        handleActiveTeamTimeOut();
       }
-    }, 500);
+    }, 200);
   }
 
-  function updateTimerDisplay() {
-    const m = Math.floor(state.timerRemainingSeconds / 60);
-    const s = state.timerRemainingSeconds % 60;
-    const formatted = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
-    dom.timerDisplay.textContent = formatted;
+  function stopActiveTeamTimer(updateDisplay = true) {
+    if (state.timerInterval) {
+      clearInterval(state.timerInterval);
+      state.timerInterval = null;
+    }
 
-    if (state.timerRemainingSeconds <= 60) {
-      dom.timerWidget.classList.add('warning');
+    if (state.isTimerRunning && state.activeTurnStartMs !== null) {
+      const activeTeam = state.teams[state.activeTeamIdx];
+      if (activeTeam) {
+        const elapsedSec = (Date.now() - state.activeTurnStartMs) / 1000;
+        activeTeam.remainingSeconds = Math.max(0, state.activeTurnStartRemainingSec - elapsedSec);
+        if (activeTeam.remainingSeconds <= 0) {
+          activeTeam.remainingSeconds = 0;
+          activeTeam.isFinished = true;
+        }
+      }
+    }
+
+    state.isTimerRunning = false;
+    state.activeTurnStartMs = null;
+    state.activeTurnStartRemainingSec = null;
+
+    if (updateDisplay) {
+      updateAllTimersDisplay();
+    }
+  }
+
+  function advanceToNextTeam() {
+    if (state.isGameOver) return;
+
+    // Check if all teams have finished or run out of time
+    const anyRemaining = state.teams.some(t => t.remainingSeconds > 0 && !t.isFinished);
+    if (!anyRemaining) {
+      triggerGameOver();
+      return;
+    }
+
+    // Find next team with remaining time
+    let nextIdx = -1;
+    for (let offset = 1; offset <= state.teams.length; offset++) {
+      const candidate = (state.activeTeamIdx + offset) % state.teams.length;
+      if (state.teams[candidate].remainingSeconds > 0 && !state.teams[candidate].isFinished) {
+        nextIdx = candidate;
+        break;
+      }
+    }
+
+    if (nextIdx === -1) {
+      triggerGameOver();
+      return;
+    }
+
+    state.activeTeamIdx = nextIdx;
+    loadNextQuestion();
+  }
+
+  function handleActiveTeamTimeOut() {
+    const timedOutTeam = state.teams[state.activeTeamIdx];
+    if (timedOutTeam) {
+      timedOutTeam.remainingSeconds = 0;
+      timedOutTeam.isFinished = true;
+    }
+
+    // Show TIME'S UP toast
+    showTowerToast(state.activeTeamIdx, "TIME'S UP! ⌛", "toast-stay");
+    soundCtrl.playSoftError();
+
+    // Disable choices
+    const allButtons = dom.optionsGrid.querySelectorAll('.btn-option-choice');
+    allButtons.forEach(b => b.disabled = true);
+
+    // Check if any other team still has time
+    const anyRemaining = state.teams.some(t => t.remainingSeconds > 0 && !t.isFinished);
+    if (!anyRemaining) {
+      setTimeout(() => {
+        triggerGameOver();
+      }, 1200);
     } else {
-      dom.timerWidget.classList.remove('warning');
+      setTimeout(() => {
+        if (state.isGameOver) return;
+        advanceToNextTeam();
+      }, 1500);
     }
   }
 
@@ -485,6 +625,13 @@
 
   function loadNextQuestion() {
     if (state.isGameOver) return;
+
+    // Verify active team has time left
+    const activeTeam = state.teams[state.activeTeamIdx];
+    if (!activeTeam || activeTeam.remainingSeconds <= 0 || activeTeam.isFinished) {
+      advanceToNextTeam();
+      return;
+    }
 
     state.answeredInTurn = false;
     updateActiveTowerHighlight();
@@ -556,11 +703,17 @@
       btn.addEventListener('click', () => handleOptionSelect(idx, btn));
       dom.optionsGrid.appendChild(btn);
     });
+
+    // Start / Resume active team's timer for this turn
+    startActiveTeamTimer();
   }
 
   function handleOptionSelect(selectedIdx, btnElement) {
     if (state.answeredInTurn || state.isGameOver || state.isPaused || state.isAnimatingFloor) return;
     state.answeredInTurn = true;
+
+    // Immediately stop / freeze the active team's timer upon answer
+    stopActiveTeamTimer();
 
     const chosen = state.shuffledOptions[selectedIdx];
     const isCorrect = chosen.isCorrect;
@@ -585,8 +738,7 @@
       triggerFloorConstruction(state.activeTeamIdx, activeTeam.floor, () => {
         setTimeout(() => {
           if (state.isGameOver) return;
-          state.activeTeamIdx = (state.activeTeamIdx + 1) % state.teams.length;
-          loadNextQuestion();
+          advanceToNextTeam();
         }, 400);
       });
     } else {
@@ -597,8 +749,7 @@
 
       setTimeout(() => {
         if (state.isGameOver) return;
-        state.activeTeamIdx = (state.activeTeamIdx + 1) % state.teams.length;
-        loadNextQuestion();
+        advanceToNextTeam();
       }, 950);
     }
   }
@@ -609,7 +760,7 @@
 
   function triggerGameOver() {
     state.isGameOver = true;
-    clearInterval(state.timerInterval);
+    stopActiveTeamTimer();
 
     const allButtons = dom.optionsGrid.querySelectorAll('.btn-option-choice');
     allButtons.forEach(b => b.disabled = true);
@@ -689,7 +840,8 @@
 
     dom.btnSkip.addEventListener('click', () => {
       if (!state.isGameOver && !state.isPaused && !state.answeredInTurn && !state.isAnimatingFloor) {
-        loadNextQuestion();
+        stopActiveTeamTimer();
+        advanceToNextTeam();
       }
     });
 
@@ -711,7 +863,7 @@
       else if (key === '3' || key === 'C') optionIndex = 2;
       else if (key === '4' || key === 'D') optionIndex = 3;
 
-      if (optionIndex >= 0 && !dom.arenaScreen.classList.contains('hidden') && !state.isPaused && !state.isAnimatingFloor) {
+      if (optionIndex >= 0 && !dom.arenaScreen.classList.contains('hidden') && !state.isPaused && !state.isAnimatingFloor && !state.answeredInTurn) {
         const buttons = dom.optionsGrid.querySelectorAll('.btn-option-choice');
         if (buttons[optionIndex] && !buttons[optionIndex].disabled) {
           handleOptionSelect(optionIndex, buttons[optionIndex]);
@@ -746,13 +898,11 @@
     state.isPaused = !state.isPaused;
     if (state.isPaused) {
       dom.pauseModal.classList.remove('hidden');
-      if (state.timerEndTime) {
-        state.pausedRemainingMs = state.timerEndTime - Date.now();
-      }
+      stopActiveTeamTimer();
     } else {
       dom.pauseModal.classList.add('hidden');
-      if (state.pausedRemainingMs) {
-        state.timerEndTime = Date.now() + state.pausedRemainingMs;
+      if (!state.answeredInTurn && !state.isAnimatingFloor) {
+        startActiveTeamTimer();
       }
     }
   }
