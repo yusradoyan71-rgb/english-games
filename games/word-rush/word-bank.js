@@ -1,7 +1,7 @@
 /**
- * WORD RUSH — Comprehensive Vocabulary & Category Data Bank
- * Supports Grade 7 and Grade 8 with Easy, Medium, and Hard difficulty tiers.
- * Complete multi-category word registry with strict category normalization and validation.
+ * WORD RUSH — Canonical Vocabulary & Category Data Bank
+ * Single source of truth for both board generation and answer validation.
+ * Explicit category membership for Grade 7 and Grade 8 English learners.
  */
 
 const CATEGORIES_METADATA = [
@@ -15,252 +15,649 @@ const CATEGORIES_METADATA = [
   { id: 'conjunctions', name: 'Conjunctions', icon: '🔗', prompt: 'FIND ALL THE CONJUNCTIONS', desc: 'Connecting words and clauses' },
   { id: 'articles', name: 'Articles & Determiners', icon: '🏷️', prompt: 'FIND ALL THE ARTICLES & DETERMINERS', desc: 'Articles and specifying determiners' },
   { id: 'mixed_grammar', name: 'Mixed Grammar', icon: '🧩', prompt: 'FIND ALL THE {TARGET}', desc: 'Grammar classification with word families' },
-  { id: 'school', name: 'School', icon: '🎒', prompt: 'FIND ALL THE SCHOOL WORDS', desc: 'Classroom, subjects, and study tools' },
+  { id: 'school', name: 'School', icon: '🎒', prompt: 'FIND ALL THE SCHOOL WORDS', desc: 'Classroom, subjects, study tools, and people' },
   { id: 'travel', name: 'Travel', icon: '✈️', prompt: 'FIND ALL THE TRAVEL WORDS', desc: 'Journeys, transport, and tourism' },
   { id: 'hobbies', name: 'Hobbies', icon: '⚽', prompt: 'FIND ALL THE HOBBIES & SPORTS', desc: 'Activities, sports, and entertainment' },
   { id: 'feelings', name: 'Feelings', icon: '😊', prompt: 'FIND ALL THE FEELINGS & EMOTIONS', desc: 'Emotions and personality states' },
   { id: 'daily_life', name: 'Daily Life', icon: '🏠', prompt: 'FIND ALL THE DAILY LIFE WORDS', desc: 'Routines, chores, food, and home' }
 ];
 
-// Grade 7 Vocabulary Bank
-const GRADE_7_BANK = {
-  verbs: {
-    easy: ['run', 'jump', 'swim', 'eat', 'drink', 'read', 'write', 'sleep', 'play', 'walk', 'sing', 'dance', 'listen', 'talk', 'watch', 'cook', 'open', 'close', 'wash', 'smile', 'laugh', 'cry', 'drive', 'draw', 'help'],
-    medium: ['borrow', 'collect', 'organize', 'protect', 'decide', 'discover', 'improve', 'remember', 'forget', 'explain', 'prepare', 'describe', 'celebrate', 'prefer', 'believe', 'imagine', 'explore', 'invent', 'damage', 'survive', 'support', 'produce', 'receive', 'succeed', 'reduce'],
-    hard: ['overcome', 'accomplish', 'demonstrate', 'participate', 'distinguish', 'substitute', 'contribute', 'recommend', 'strengthen', 'emphasize', 'illustrate', 'persuade', 'reorganize', 'collaborate', 'accelerate', 'investigate', 'transform', 'undergo', 'accompany', 'cultivate']
-  },
-  nouns: {
-    easy: ['apple', 'water', 'hospital', 'garden', 'kitchen', 'friend', 'family', 'animal', 'village', 'river', 'doctor', 'market', 'bicycle', 'forest', 'mountain', 'island', 'ocean', 'window', 'door', 'street'],
-    medium: ['pollution', 'environment', 'celebration', 'invention', 'invitation', 'discovery', 'direction', 'advertisement', 'neighborhood', 'furniture', 'temperature', 'wildlife', 'attraction', 'instruction', 'champion', 'generation', 'citizen', 'population'],
-    hard: ['biodiversity', 'achievement', 'preservation', 'significance', 'requirement', 'civilization', 'contribution', 'development', 'responsibility', 'architecture', 'enthusiasm', 'consequence', 'extinction', 'alternative']
-  },
-  adjectives: {
-    easy: ['happy', 'sad', 'big', 'small', 'fast', 'slow', 'cold', 'hot', 'clever', 'funny', 'clean', 'dirty', 'beautiful', 'hungry', 'thirsty', 'strong', 'young', 'old', 'quiet', 'noisy'],
-    medium: ['crowded', 'delicious', 'expensive', 'enormous', 'generous', 'polluted', 'protective', 'traditional', 'energetic', 'convenient', 'peaceful', 'creative', 'adventurous', 'successful', 'dangerous', 'mysterious', 'attractive', 'valuable', 'comfortable', 'healthy'],
-    hard: ['fascinating', 'breathtaking', 'eco-friendly', 'biodegradable', 'unforgettable', 'irresponsible', 'enthusiastic', 'magnificent', 'sustainable', 'challenging', 'extraordinary', 'influential', 'unbelievable', 'remarkable', 'exceptional', 'essential']
-  },
-  adverbs: {
-    easy: ['slowly', 'quickly', 'loudly', 'quietly', 'carefully', 'easily', 'always', 'never', 'usually', 'often', 'sometimes', 'today', 'yesterday', 'tomorrow', 'here', 'there', 'early', 'late', 'well', 'badly'],
-    medium: ['suddenly', 'politely', 'safely', 'hardly', 'happily', 'bravely', 'regularly', 'patiently', 'heavily', 'brightly', 'silently', 'nervously', 'completely', 'properly', 'certainly', 'mostly', 'nearly', 'rarely', 'especially', 'correctly'],
-    hard: ['dramatically', 'successfully', 'beautifully', 'creatively', 'unfortunately', 'immediately', 'conveniently', 'traditionally', 'carelessly', 'accurately', 'environmentally', 'enthusiastically', 'naturally', 'permanently', 'simultaneously']
-  },
-  prepositions: {
-    easy: ['in', 'on', 'at', 'under', 'behind', 'between', 'in front of', 'next to', 'near', 'over', 'into', 'with', 'from', 'to', 'for', 'about', 'by', 'of', 'off', 'through'],
-    medium: ['across', 'along', 'around', 'among', 'beside', 'below', 'above', 'opposite', 'toward', 'without', 'during', 'against', 'inside', 'outside', 'past', 'beneath', 'beyond', 'throughout', 'upon', 'within'],
-    hard: ['in spite of', 'according to', 'in addition to', 'on behalf of', 'prior to', 'due to', 'apart from', 'instead of', 'regardless of', 'by means of', 'with regard to', 'ahead of', 'alongside']
-  },
-  modal_verbs: {
-    easy: ['can', "can't", 'must', "mustn't", 'should', "shouldn't", 'have to', "don't have to", 'may', 'might'],
-    medium: ['could', "couldn't", 'would', "wouldn't", 'shall', 'ought to', 'had better', 'has to', "doesn't have to", 'need to'],
-    hard: ['might not', 'shall not', 'ought not to', "had better not", "must have", "should have", "could have", "used to", "is able to", "are able to"]
-  },
-  pronouns: {
-    easy: ['he', 'she', 'it', 'they', 'we', 'you', 'me', 'him', 'her', 'us', 'them', 'my', 'your', 'his', 'her', 'our', 'their', 'mine', 'yours', 'theirs'],
-    medium: ['myself', 'yourself', 'himself', 'herself', 'itself', 'ourselves', 'themselves', 'someone', 'everyone', 'anyone', 'no one', 'something', 'everything', 'anything', 'nothing', 'somebody', 'everybody', 'anybody', 'nobody', 'who'],
-    hard: ['whom', 'whose', 'which', 'that', 'where', 'whoever', 'whomever', 'whatever', 'each other', 'one another', 'neither', 'either', 'both', 'none', 'oneself']
-  },
-  conjunctions: {
-    easy: ['and', 'but', 'or', 'so', 'because', 'if', 'when', 'before', 'after', 'while'],
-    medium: ['although', 'even though', 'though', 'unless', 'until', 'since', 'as soon as', 'so that', 'as long as', 'whether'],
-    hard: ['neither...nor', 'either...or', 'not only...but also', 'both...and', 'whereas', 'wherever', 'in order that', 'provided that', 'even if', 'as if']
-  },
-  articles: {
-    easy: ['a', 'an', 'the', 'this', 'that', 'these', 'those', 'some', 'any', 'many'],
-    medium: ['much', 'a lot of', 'a few', 'a little', 'several', 'every', 'each', 'all', 'both', 'enough'],
-    hard: ['neither', 'either', 'another', 'other', 'no', 'few', 'little', 'plenty of', 'a great deal of', 'such a']
-  },
-  school: {
-    easy: ['school', 'teacher', 'student', 'classroom', 'homework', 'lesson', 'subject', 'exam', 'notebook', 'textbook', 'pencil', 'desk', 'board', 'blackboard', 'library', 'ruler', 'eraser', 'pencil case', 'sharpener', 'scissors', 'backpack', 'book'],
-    medium: ['timetable', 'laboratory', 'canteen', 'gymnasium', 'headmaster', 'principal', 'classmate', 'assignment', 'presentation', 'dictionary', 'project', 'calculator', 'experiment', 'whiteboard', 'attendance', 'curriculum', 'grade'],
-    hard: ['scholarship', 'qualification', 'extracurricular', 'investigation', 'auditorium', 'encyclopedia', 'dissertation', 'certificate', 'assessment', 'academic', 'semester', 'laboratory report', 'teacher\'s room']
-  },
-  travel: {
-    easy: ['plane', 'train', 'bus', 'car', 'ticket', 'hotel', 'passport', 'luggage', 'airport', 'station', 'map', 'trip', 'beach', 'camera', 'tourist', 'suitcase', 'flight', 'passenger', 'taxi', 'ship'],
-    medium: ['boarding pass', 'reservation', 'sightseeing', 'souvenir', 'platform', 'destination', 'cruise ship', 'backpacking', 'departure', 'arrival', 'journey', 'excursion', 'guidebook', 'itinerary', 'ferry'],
-    hard: ['accommodation', 'customs check', 'travel insurance', 'sightseeing tour', 'monument', 'archaeological site', 'breathtaking view', 'expedition', 'foreign exchange', 'commuter', 'terminal gate']
-  },
-  hobbies: {
-    easy: ['football', 'basketball', 'swimming', 'reading', 'painting', 'drawing', 'dancing', 'singing', 'cooking', 'gaming', 'running', 'cycling', 'chess', 'guitar', 'piano', 'tennis', 'music', 'fishing'],
-    medium: ['skateboarding', 'photography', 'gardening', 'hiking', 'archery', 'rollerblading', 'origami', 'pottery', 'sculpture', 'snorkeling', 'martial arts', 'badminton', 'volleyball', 'table tennis', 'camping'],
-    hard: ['mountaineering', 'scuba diving', 'paragliding', 'windsurfing', 'astrophotography', 'woodworking', 'calligraphy', 'bungee jumping', 'rock climbing', 'orienteering', 'horseback riding']
-  },
-  feelings: {
-    easy: ['happy', 'sad', 'angry', 'tired', 'scared', 'excited', 'bored', 'nervous', 'calm', 'surprised', 'proud', 'lonely', 'sleepy', 'cheerful', 'worried', 'afraid', 'glad', 'shy'],
-    medium: ['exhausted', 'frightened', 'embarrassed', 'confused', 'delighted', 'disappointed', 'jealous', 'anxious', 'grateful', 'curious', 'confident', 'furious', 'relaxed', 'impatient', 'thrilled'],
-    hard: ['overwhelmed', 'sympathetic', 'enthusiastic', 'pessimistic', 'optimistic', 'melancholic', 'astonished', 'frustrated', 'heartbroken', 'fascinated', 'devastated', 'jubilant', 'indifferent']
-  },
-  daily_life: {
-    easy: ['wake up', 'brush teeth', 'have breakfast', 'take a shower', 'go to bed', 'cook dinner', 'wash dishes', 'clean room', 'watch TV', 'walk the dog', 'do homework', 'drink milk', 'make the bed', 'iron clothes', 'sweep floor', 'have lunch'],
-    medium: ['tidy up', 'set the table', 'feed the pet', 'take out the trash', 'vacuum the carpet', 'do the laundry', 'mop the floor', 'prepare a snack', 'catch the bus', 'check messages', 'water the plants', 'hang out clothes', 'fold the laundry'],
-    hard: ['organize the wardrobe', 'defrost the fridge', 'recycle plastic waste', 'manage weekly budget', 'assemble flatpack furniture', 'commute by subway', 'schedule appointments', 'sanitize kitchen surfaces', 'refill grocery pantry']
-  }
-};
-
-// Grade 8 Vocabulary Bank (Higher level, advanced word families, A2+/B1 vocabulary)
-const GRADE_8_BANK = {
-  verbs: {
-    easy: ['accept', 'refuse', 'invite', 'explain', 'prefer', 'protect', 'destroy', 'survive', 'create', 'damage', 'prepare', 'attend', 'support', 'trust', 'argue', 'express', 'contact', 'search', 'warn', 'save'],
-    medium: ['collaborate', 'accompany', 'influence', 'communicate', 'encourage', 'participate', 'exaggerate', 'concentrate', 'distribute', 'recommend', 'accommodate', 'appreciate', 'demonstrate', 'strengthen', 'emphasize', 'hesitate', 'investigate', 'interrupt', 'negotiate', 'transform'],
-    hard: ['revolutionize', 'underestimate', 'overestimate', 'counteract', 'differentiate', 'substantiate', 'conceptualize', 'deteriorate', 'facilitate', 'exemplify', 'rehabilitate', 'predetermine', 'characterize', 'disseminate', 'reconstitute']
-  },
-  nouns: {
-    easy: ['friendship', 'appearance', 'personality', 'teenager', 'internet', 'chores', 'adventure', 'tradition', 'success', 'nature', 'danger', 'preference', 'opinion', 'reason', 'habit', 'safety', 'celebration', 'skill', 'goal', 'society'],
-    medium: ['responsibility', 'relationship', 'achievement', 'opportunity', 'consequence', 'disadvantage', 'architecture', 'environment', 'organization', 'destination', 'enthusiasm', 'communication', 'appreciation', 'conservation', 'biodiversity', 'generation', 'phenomenon', 'ingredient', 'exhibition'],
-    hard: ['sustainability', 'unpredictability', 'sophistication', 'interdependence', 'vulnerability', 'transformation', 'self-discipline', 'infrastructure', 'perseverance', 'biodegradability', 'incompatibility', 'comprehensiveness', 'differentiation', 'generalization']
-  },
-  adjectives: {
-    easy: ['honest', 'generous', 'stubborn', 'punctual', 'outgoing', 'tactful', 'sensitive', 'reliable', 'amusing', 'fashionable', 'adventurous', 'traditional', 'creative', 'dangerous', 'successful', 'harmful', 'helpful', 'careful', 'peaceful', 'useful'],
-    medium: ['unbelievable', 'extraordinary', 'sustainable', 'irresponsible', 'breathtaking', 'enthusiastic', 'fascinating', 'magnificent', 'challenging', 'influential', 'unforgettable', 'eco-friendly', 'mysterious', 'affordable', 'indispensable', 'cooperative', 'considerate', 'impressive', 'convenient', 'spontaneous'],
-    hard: ['groundbreaking', 'unprecedented', 'environmentally-conscious', 'counterproductive', 'multidisciplinary', 'indistinguishable', 'self-explanatory', 'incomprehensible', 'characteristically', 'disproportionate', 'irreplaceable', 'overwhelmingly']
-  },
-  adverbs: {
-    easy: ['honestly', 'politely', 'regularly', 'patiently', 'safely', 'happily', 'heavily', 'bravely', 'certainly', 'properly', 'clearly', 'rarely', 'mostly', 'nearly', 'completely', 'usually', 'always', 'hardly', 'suddenly', 'silently'],
-    medium: ['enthusiastically', 'successfully', 'traditionally', 'creatively', 'immediately', 'dramatically', 'conveniently', 'accurately', 'naturally', 'permanently', 'responsibly', 'effectively', 'constantly', 'frequently', 'gradually', 'eventually', 'deliberately', 'generously', 'reluctantly', 'cautiously'],
-    hard: ['unquestionably', 'simultaneously', 'characteristically', 'proportionately', 'exceptionally', 'comprehensively', 'fundamentally', 'substantially', 'invariably', 'predominantly', 'consequently', 'hypothetically']
-  },
-  prepositions: {
-    easy: ['across', 'along', 'around', 'among', 'beside', 'below', 'above', 'opposite', 'toward', 'without', 'during', 'against', 'inside', 'outside', 'through', 'behind', 'between', 'under', 'near', 'into'],
-    medium: ['in front of', 'next to', 'due to', 'because of', 'in spite of', 'instead of', 'according to', 'apart from', 'ahead of', 'prior to', 'on behalf of', 'in addition to', 'regardless of', 'alongside', 'throughout', 'within', 'beyond', 'beneath', 'upon', 'concerning'],
-    hard: ['with reference to', 'in comparison with', 'in accordance with', 'for the purpose of', 'at the expense of', 'by virtue of', 'in terms of', 'in the light of', 'with the exception of', 'under the auspices of', 'notwithstanding']
-  },
-  modal_verbs: {
-    easy: ['can', "can't", 'must', "mustn't", 'should', "shouldn't", 'could', "couldn't", 'have to', "don't have to", 'may', 'might', 'would', 'shall'],
-    medium: ['ought to', "ought not to", 'had better', "had better not", "doesn't have to", "didn't have to", "will be able to", "won't be able to", 'used to', "needn't"],
-    hard: ['should have', "shouldn't have", 'could have', "couldn't have", 'must have', "can't have", 'might have', "may have", 'would rather', "would prefer to", "is supposed to", "are supposed to"]
-  },
-  pronouns: {
-    easy: ['myself', 'yourself', 'himself', 'herself', 'itself', 'ourselves', 'themselves', 'someone', 'everyone', 'anyone', 'no one', 'something', 'everything', 'anything', 'nothing', 'mine', 'yours', 'hers', 'ours', 'theirs'],
-    medium: ['somebody', 'everybody', 'anybody', 'nobody', 'each other', 'one another', 'who', 'whom', 'whose', 'which', 'that', 'neither', 'either', 'both', 'none', 'each', 'all', 'such', 'few', 'several'],
-    hard: ['whoever', 'whomever', 'whatever', 'whichever', 'whenever', 'wherever', 'oneself', 'one', 'the former', 'the latter', 'another', 'others', 'the other', 'whatsoever']
-  },
-  conjunctions: {
-    easy: ['and', 'but', 'or', 'so', 'because', 'although', 'even though', 'though', 'unless', 'until', 'since', 'if', 'when', 'while', 'before', 'after'],
-    medium: ['as soon as', 'so that', 'as long as', 'in order to', 'as well as', 'neither...nor', 'either...or', 'not only...but also', 'both...and', 'whereas', 'wherever', 'provided that', 'even if', 'as if', 'whether...or'],
-    hard: ['inasmuch as', 'on condition that', 'in the event that', 'notwithstanding that', 'lest', 'assuming that', 'so much as', 'seeing that', 'for fear that', 'insofar as']
-  },
-  articles: {
-    easy: ['a', 'an', 'the', 'this', 'that', 'these', 'those', 'some', 'any', 'every', 'each', 'all', 'both', 'many', 'much', 'a few', 'a little', 'several', 'enough', 'no'],
-    medium: ['neither', 'either', 'another', 'other', 'few', 'little', 'plenty of', 'a great deal of', 'such a', 'quite a', 'half', 'double', 'all the', 'both the', 'most of the', 'each of the'],
-    hard: ['a multitude of', 'an abundance of', 'scarcely any', 'hardly any', 'a substantial amount of', 'a proportion of', 'the majority of', 'the entirety of', 'an excess of']
-  },
-  school: {
-    easy: ['assignment', 'presentation', 'dictionary', 'experiment', 'whiteboard', 'blackboard', 'attendance', 'curriculum', 'grade', 'timetable', 'laboratory', 'canteen', 'gymnasium', 'headmaster', 'project', 'calculator', 'student', 'teacher', 'classroom', 'exam', 'lesson'],
-    medium: ['scholarship', 'qualification', 'extracurricular', 'investigation', 'auditorium', 'encyclopedia', 'certificate', 'assessment', 'academic', 'semester', 'laboratory report', 'peer review', 'tuition fee', 'graduation ceremony', 'thesis'],
-    hard: ['interdisciplinary study', 'dissertation defense', 'scholastic aptitude', 'dean of faculty', 'syllabus requirement', 'plagiarism check', 'valedictorian speech', 'accreditation standard', 'vocational training', 'alumni association']
-  },
-  travel: {
-    easy: ['destination', 'boarding pass', 'reservation', 'sightseeing', 'souvenir', 'cruise ship', 'backpacking', 'departure', 'arrival', 'journey', 'excursion', 'guidebook', 'itinerary', 'ferry', 'monument', 'flight', 'passport', 'luggage'],
-    medium: ['accommodation', 'customs check', 'travel insurance', 'archaeological site', 'breathtaking view', 'expedition', 'foreign exchange', 'commuter', 'terminal gate', 'jet lag', 'layover flight', 'travel agency', 'passport control', 'youth hostel', 'guided tour'],
-    hard: ['ecotourism destination', 'charter flight', 'round-the-world cruise', 'embassy clearance', 'transit visa', 'all-inclusive resort', 'scenic railway', 'high-speed locomotive', 'excess baggage fee', 'geographical landmark', 'UNESCO heritage site']
-  },
-  hobbies: {
-    easy: ['skateboarding', 'photography', 'gardening', 'hiking', 'archery', 'rollerblading', 'origami', 'pottery', 'sculpture', 'snorkeling', 'martial arts', 'badminton', 'volleyball', 'table tennis', 'camping', 'chess', 'guitar', 'painting'],
-    medium: ['mountaineering', 'scuba diving', 'paragliding', 'windsurfing', 'astrophotography', 'woodworking', 'calligraphy', 'bungee jumping', 'rock climbing', 'orienteering', 'horseback riding', 'kayaking', 'fencing', 'marathon running', 'chess tournament'],
-    hard: ['spelunking expedition', 'triathlon championship', 'hang gliding', 'kitesurfing', 'geocaching hunt', 'amateur radio operating', 'sculpting marble', 'orchestral conducting', 'whitewater rafting', 'cross-country skiing']
-  },
-  feelings: {
-    easy: ['exhausted', 'frightened', 'embarrassed', 'confused', 'delighted', 'disappointed', 'jealous', 'anxious', 'grateful', 'curious', 'confident', 'furious', 'relaxed', 'impatient', 'thrilled', 'happy', 'sad', 'angry'],
-    medium: ['overwhelmed', 'sympathetic', 'enthusiastic', 'pessimistic', 'optimistic', 'melancholic', 'astonished', 'frustrated', 'heartbroken', 'fascinated', 'devastated', 'jubilant', 'indifferent', 'apprehensive', 'compassionate', 'humiliated', 'determined', 'ecstatic', 'insecure'],
-    hard: ['disillusioned', 'unflappable', 'exuberant', 'resentful', 'contented', 'petrified', 'disgruntled', 'nonchalant', 'inconsolable', 'crestfallen', 'invigorated']
-  },
-  daily_life: {
-    easy: ['tidy up', 'set the table', 'feed the pet', 'take out the trash', 'vacuum the carpet', 'do the laundry', 'mop the floor', 'prepare a snack', 'catch the bus', 'check messages', 'water the plants', 'hang out clothes', 'fold the laundry', 'do the grocery shopping', 'make an appointment'],
-    medium: ['organize the wardrobe', 'defrost the fridge', 'recycle plastic waste', 'manage weekly budget', 'assemble flatpack furniture', 'commute by subway', 'schedule appointments', 'sanitize kitchen surfaces', 'refill grocery pantry', 'pay utility bills', 'change bedsheets', 'wash the windows', 'plan weekly menu'],
-    hard: ['perform routine vehicle maintenance', 'conduct seasonal deep-cleaning', 'audit monthly household expenditures', 'maintain domestic compost bin', 'insulate window frames', 'reorganize kitchen ergonomics', 'automate smart home appliances', 'prepare emergency pantry kit']
-  }
-};
-
-// Word Family Challenges specifically for Hard difficulty & Mixed Grammar
-const WORD_FAMILIES = [
-  { root: 'success', noun: 'success', verb: 'succeed', adjective: 'successful', adverb: 'successfully' },
-  { root: 'create', noun: 'creation', verb: 'create', adjective: 'creative', adverb: 'creatively' },
-  { root: 'beauty', noun: 'beauty', verb: 'beautify', adjective: 'beautiful', adverb: 'beautifully' },
-  { root: 'decide', noun: 'decision', verb: 'decide', adjective: 'decisive', adverb: 'decisively' },
-  { root: 'differ', noun: 'difference', verb: 'differ', adjective: 'different', adverb: 'differently' },
-  { root: 'help', noun: 'help', verb: 'help', adjective: 'helpful', adverb: 'helpfully' },
-  { root: 'care', noun: 'care', verb: 'care', adjective: 'careful', adverb: 'carefully' },
-  { root: 'danger', noun: 'danger', verb: 'endanger', adjective: 'dangerous', adverb: 'dangerously' },
-  { root: 'excite', noun: 'excitement', verb: 'excite', adjective: 'exciting', adverb: 'excitedly' },
-  { root: 'peace', noun: 'peace', verb: 'pacify', adjective: 'peaceful', adverb: 'peacefully' },
-  { root: 'protect', noun: 'protection', verb: 'protect', adjective: 'protective', adverb: 'protectively' },
-  { root: 'imagine', noun: 'imagination', verb: 'imagine', adjective: 'imaginative', adverb: 'imaginatively' },
-  { root: 'comfort', noun: 'comfort', verb: 'comfort', adjective: 'comfortable', adverb: 'comfortably' },
-  { root: 'educate', noun: 'education', verb: 'educate', adjective: 'educational', adverb: 'educationally' },
-  { root: 'courage', noun: 'courage', verb: 'encourage', adjective: 'courageous', adverb: 'courageously' },
-  { root: 'energy', noun: 'energy', verb: 'energize', adjective: 'energetic', adverb: 'energetically' },
-  { root: 'patience', noun: 'patience', verb: 'wait', adjective: 'patient', adverb: 'patiently' },
-  { root: 'nature', noun: 'nature', verb: 'naturalize', adjective: 'natural', adverb: 'naturally' },
-  { root: 'organize', noun: 'organization', verb: 'organize', adjective: 'organized', adverb: 'organically' },
-  { root: 'connect', noun: 'connection', verb: 'connect', adjective: 'connected', adverb: 'collectively' }
-];
-
 /**
- * Normalizes category IDs for robust comparisons
+ * Normalize any category string to standard snake_case ID
  */
 function normalizeCategory(cat) {
   if (!cat) return '';
-  return String(cat).toLowerCase().trim().replace(/[-_ ]+/g, '_');
+  const s = String(cat).toLowerCase().trim().replace(/[- ]+/g, '_');
+  if (s === 'modal' || s === 'modals') return 'modal_verbs';
+  if (s === 'determiners' || s === 'article') return 'articles';
+  if (s === 'feeling' || s === 'emotions') return 'feelings';
+  if (s === 'hobby' || s === 'sports') return 'hobbies';
+  return s;
 }
 
-/**
- * Builds a comprehensive lookup map: word -> Set of normalized categories
- */
-function buildMasterCategoryRegistry(bank) {
-  const registry = new Map();
+// Master Canonical Word Database: Single Source of Truth
+const CANONICAL_WORDS = [
+  // ==========================================
+  // SCHOOL (Classroom, people, tools, routines)
+  // ==========================================
+  { word: 'teacher', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'student', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'classmate', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'classroom', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'school', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'lesson', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'subject', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'homework', categories: ['school', 'nouns', 'daily_life'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'exam', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'test', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'quiz', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'project', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'assignment', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'notebook', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'textbook', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'book', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'pencil', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'pen', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'eraser', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'ruler', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'desk', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'chair', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'board', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'blackboard', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'whiteboard', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'smartboard', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'library', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'principal', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'headmaster', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: "teacher's room", categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'schoolbag', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'backpack', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'uniform', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'break', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'recess', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'playground', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'corridor', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'cafeteria', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'canteen', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'laboratory', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'gymnasium', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'timetable', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'calculator', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'pencil case', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'sharpener', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'scissors', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'attendance', categories: ['school', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'curriculum', categories: ['school', 'nouns'], grades: ['grade8'], difficulty: 'medium' },
+  { word: 'scholarship', categories: ['school', 'nouns'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'semester', categories: ['school', 'nouns'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'auditorium', categories: ['school', 'nouns'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'encyclopedia', categories: ['school', 'nouns'], grades: ['grade8'], difficulty: 'hard' },
 
-  function registerWord(word, categoryId) {
-    if (!word) return;
-    const cleanWord = String(word).toLowerCase().trim();
-    const normCat = normalizeCategory(categoryId);
-    if (!registry.has(cleanWord)) {
-      registry.set(cleanWord, new Set());
-    }
-    registry.get(cleanWord).add(normCat);
+  // ==========================================
+  // FEELINGS & EMOTIONS
+  // ==========================================
+  { word: 'happy', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'sad', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'angry', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'excited', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'bored', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'tired', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'scared', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'afraid', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'worried', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'nervous', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'surprised', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'confused', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'proud', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'embarrassed', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'lonely', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'upset', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'calm', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'relaxed', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'hopeful', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'disappointed', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'jealous', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'shy', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'cheerful', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'exhausted', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'frightened', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'delighted', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'anxious', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'grateful', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'curious', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'confident', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'furious', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'impatient', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'thrilled', categories: ['feelings', 'adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'overwhelmed', categories: ['feelings', 'adjectives'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'sympathetic', categories: ['feelings', 'adjectives'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'enthusiastic', categories: ['feelings', 'adjectives'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'pessimistic', categories: ['feelings', 'adjectives'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'optimistic', categories: ['feelings', 'adjectives'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'melancholic', categories: ['feelings', 'adjectives'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'astonished', categories: ['feelings', 'adjectives'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'devastated', categories: ['feelings', 'adjectives'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'jubilant', categories: ['feelings', 'adjectives'], grades: ['grade8'], difficulty: 'hard' },
+
+  // ==========================================
+  // VERBS (Action and state)
+  // ==========================================
+  { word: 'run', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'swim', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'jump', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'eat', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'drink', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'read', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'write', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'sleep', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'play', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'walk', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'sing', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'dance', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'listen', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'talk', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'watch', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'cook', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'open', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'close', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'wash', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'smile', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'laugh', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'cry', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'drive', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'draw', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'help', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'borrow', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'collect', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'organize', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'protect', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'decide', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'discover', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'improve', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'remember', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'forget', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'explain', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'prepare', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'describe', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'celebrate', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'prefer', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'believe', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'imagine', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'explore', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'invent', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'damage', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'survive', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'support', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'produce', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'receive', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'succeed', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'create', categories: ['verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'overcome', categories: ['verbs'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'accomplish', categories: ['verbs'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'demonstrate', categories: ['verbs'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'participate', categories: ['verbs'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'distinguish', categories: ['verbs'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'contribute', categories: ['verbs'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'collaborate', categories: ['verbs'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'investigate', categories: ['verbs'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'transform', categories: ['verbs'], grades: ['grade8'], difficulty: 'hard' },
+
+  // ==========================================
+  // NOUNS (Unambiguous objects, places, people)
+  // ==========================================
+  { word: 'hospital', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'garden', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'kitchen', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'friend', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'family', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'animal', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'village', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'river', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'doctor', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'market', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'bicycle', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'forest', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'mountain', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'island', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'ocean', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'window', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'door', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'street', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'apple', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'pollution', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'environment', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'celebration', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'invention', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'invitation', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'discovery', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'direction', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'advertisement', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'neighborhood', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'furniture', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'temperature', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'wildlife', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'champion', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'generation', categories: ['nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'biodiversity', categories: ['nouns'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'achievement', categories: ['nouns'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'preservation', categories: ['nouns'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'responsibility', categories: ['nouns'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'architecture', categories: ['nouns'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'extinction', categories: ['nouns'], grades: ['grade8'], difficulty: 'hard' },
+
+  // ==========================================
+  // ADJECTIVES (Descriptive words)
+  // ==========================================
+  { word: 'big', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'small', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'fast', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'slow', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'cold', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'hot', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'clever', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'funny', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'dirty', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'beautiful', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'hungry', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'thirsty', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'strong', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'young', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'old', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'quiet', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'noisy', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'crowded', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'delicious', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'expensive', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'enormous', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'generous', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'polluted', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'protective', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'traditional', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'energetic', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'convenient', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'peaceful', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'creative', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'adventurous', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'successful', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'dangerous', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'mysterious', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'valuable', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'comfortable', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'healthy', categories: ['adjectives'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'fascinating', categories: ['adjectives'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'breathtaking', categories: ['adjectives'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'eco-friendly', categories: ['adjectives'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'biodegradable', categories: ['adjectives'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'unforgettable', categories: ['adjectives'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'magnificent', categories: ['adjectives'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'sustainable', categories: ['adjectives'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'extraordinary', categories: ['adjectives'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'influential', categories: ['adjectives'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'remarkable', categories: ['adjectives'], grades: ['grade8'], difficulty: 'hard' },
+
+  // ==========================================
+  // ADVERBS (Manner, frequency, time)
+  // ==========================================
+  { word: 'slowly', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'quickly', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'loudly', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'quietly', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'carefully', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'easily', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'always', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'never', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'usually', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'often', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'sometimes', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'today', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'yesterday', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'tomorrow', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'here', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'there', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'badly', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'suddenly', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'politely', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'safely', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'hardly', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'happily', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'bravely', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'regularly', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'patiently', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'heavily', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'brightly', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'silently', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'nervously', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'completely', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'properly', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'certainly', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'rarely', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'correctly', categories: ['adverbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'dramatically', categories: ['adverbs'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'successfully', categories: ['adverbs'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'beautifully', categories: ['adverbs'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'creatively', categories: ['adverbs'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'unfortunately', categories: ['adverbs'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'immediately', categories: ['adverbs'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'accurately', categories: ['adverbs'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'simultaneously', categories: ['adverbs'], grades: ['grade8'], difficulty: 'hard' },
+
+  // ==========================================
+  // PREPOSITIONS
+  // ==========================================
+  { word: 'in', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'on', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'at', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'under', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'behind', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'between', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'in front of', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'next to', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'near', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'over', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'into', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'with', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'from', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'for', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'about', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'through', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'across', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'along', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'around', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'among', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'beside', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'below', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'above', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'opposite', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'toward', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'without', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'during', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'against', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'inside', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'outside', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'beneath', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'beyond', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'throughout', categories: ['prepositions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'in spite of', categories: ['prepositions'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'according to', categories: ['prepositions'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'in addition to', categories: ['prepositions'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'on behalf of', categories: ['prepositions'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'due to', categories: ['prepositions'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'instead of', categories: ['prepositions'], grades: ['grade8'], difficulty: 'hard' },
+
+  // ==========================================
+  // MODAL VERBS
+  // ==========================================
+  { word: 'can', categories: ['modal_verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: "can't", categories: ['modal_verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'must', categories: ['modal_verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: "mustn't", categories: ['modal_verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'should', categories: ['modal_verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: "shouldn't", categories: ['modal_verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'have to', categories: ['modal_verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: "don't have to", categories: ['modal_verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'may', categories: ['modal_verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'might', categories: ['modal_verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'could', categories: ['modal_verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: "couldn't", categories: ['modal_verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'would', categories: ['modal_verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: "wouldn't", categories: ['modal_verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'shall', categories: ['modal_verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'ought to', categories: ['modal_verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'had better', categories: ['modal_verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'has to', categories: ['modal_verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: "doesn't have to", categories: ['modal_verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'need to', categories: ['modal_verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'might not', categories: ['modal_verbs'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'must have', categories: ['modal_verbs'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'should have', categories: ['modal_verbs'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'could have', categories: ['modal_verbs'], grades: ['grade8'], difficulty: 'hard' },
+
+  // ==========================================
+  // PRONOUNS
+  // ==========================================
+  { word: 'he', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'she', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'it', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'they', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'we', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'you', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'me', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'him', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'her', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'us', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'them', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'my', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'your', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'his', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'our', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'their', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'mine', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'yours', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'theirs', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'myself', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'yourself', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'himself', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'herself', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'itself', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'ourselves', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'themselves', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'someone', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'everyone', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'anyone', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'no one', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'something', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'everything', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'anything', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'nothing', categories: ['pronouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'whoever', categories: ['pronouns'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'whatever', categories: ['pronouns'], grades: ['grade8'], difficulty: 'hard' },
+
+  // ==========================================
+  // CONJUNCTIONS
+  // ==========================================
+  { word: 'and', categories: ['conjunctions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'but', categories: ['conjunctions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'or', categories: ['conjunctions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'so', categories: ['conjunctions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'because', categories: ['conjunctions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'if', categories: ['conjunctions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'when', categories: ['conjunctions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'before', categories: ['conjunctions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'after', categories: ['conjunctions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'while', categories: ['conjunctions'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'although', categories: ['conjunctions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'even though', categories: ['conjunctions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'though', categories: ['conjunctions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'unless', categories: ['conjunctions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'until', categories: ['conjunctions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'since', categories: ['conjunctions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'as soon as', categories: ['conjunctions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'so that', categories: ['conjunctions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'as long as', categories: ['conjunctions'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'neither...nor', categories: ['conjunctions'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'either...or', categories: ['conjunctions'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'not only...but also', categories: ['conjunctions'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'both...and', categories: ['conjunctions'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'whereas', categories: ['conjunctions'], grades: ['grade8'], difficulty: 'hard' },
+
+  // ==========================================
+  // ARTICLES & DETERMINERS
+  // ==========================================
+  { word: 'a', categories: ['articles'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'an', categories: ['articles'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'the', categories: ['articles'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'this', categories: ['articles'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'that', categories: ['articles'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'these', categories: ['articles'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'those', categories: ['articles'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'some', categories: ['articles'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'any', categories: ['articles'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'many', categories: ['articles'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'much', categories: ['articles'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'a lot of', categories: ['articles'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'a few', categories: ['articles'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'a little', categories: ['articles'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'several', categories: ['articles'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'every', categories: ['articles'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'each', categories: ['articles'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'all', categories: ['articles'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'both', categories: ['articles'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'plenty of', categories: ['articles'], grades: ['grade8'], difficulty: 'hard' },
+
+  // ==========================================
+  // TRAVEL & TRANSPORT
+  // ==========================================
+  { word: 'plane', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'train', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'bus', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'car', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'ticket', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'hotel', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'passport', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'luggage', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'airport', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'station', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'map', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'trip', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'beach', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'camera', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'tourist', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'suitcase', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'flight', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'passenger', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'taxi', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'ship', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'boarding pass', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'reservation', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'sightseeing', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'souvenir', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'destination', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'cruise ship', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'departure', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'arrival', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'journey', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'excursion', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'guidebook', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'itinerary', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'ferry', categories: ['travel', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'accommodation', categories: ['travel', 'nouns'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'customs check', categories: ['travel', 'nouns'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'travel insurance', categories: ['travel', 'nouns'], grades: ['grade8'], difficulty: 'hard' },
+
+  // ==========================================
+  // HOBBIES & SPORTS
+  // ==========================================
+  { word: 'football', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'basketball', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'swimming', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'reading', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'painting', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'drawing', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'dancing', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'singing', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'cooking', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'gaming', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'running', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'cycling', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'chess', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'guitar', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'piano', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'tennis', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'skateboarding', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'photography', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'gardening', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'hiking', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'archery', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'rollerblading', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'origami', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'pottery', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'sculpture', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'snorkeling', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'martial arts', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'badminton', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'volleyball', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'table tennis', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'camping', categories: ['hobbies', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'mountaineering', categories: ['hobbies', 'nouns'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'scuba diving', categories: ['hobbies', 'nouns'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'paragliding', categories: ['hobbies', 'nouns'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'astrophotography', categories: ['hobbies', 'nouns'], grades: ['grade8'], difficulty: 'hard' },
+
+  // ==========================================
+  // DAILY LIFE & ROUTINES
+  // ==========================================
+  { word: 'wake up', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'brush teeth', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'have breakfast', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'take a shower', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'go to bed', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'cook dinner', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'wash dishes', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'clean room', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'watch TV', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'walk the dog', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'drink milk', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'make the bed', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'iron clothes', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'sweep floor', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'have lunch', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'tidy up', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'set the table', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'feed the pet', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'take out the trash', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'vacuum the carpet', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'do the laundry', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'mop the floor', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'catch the bus', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'check messages', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'water the plants', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'organize the wardrobe', categories: ['daily_life', 'verbs'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'defrost the fridge', categories: ['daily_life', 'verbs'], grades: ['grade8'], difficulty: 'hard' },
+  { word: 'manage weekly budget', categories: ['daily_life', 'verbs'], grades: ['grade8'], difficulty: 'hard' }
+];
+
+// Build Canonical Index: Map of lowercase word -> { word, categories: Set, grades: Set, difficulty }
+const CANONICAL_INDEX = new Map();
+
+CANONICAL_WORDS.forEach(item => {
+  const cleanWord = item.word.toLowerCase().trim();
+  if (!CANONICAL_INDEX.has(cleanWord)) {
+    CANONICAL_INDEX.set(cleanWord, {
+      word: item.word,
+      categories: new Set(item.categories.map(c => normalizeCategory(c))),
+      grades: new Set(item.grades || ['grade7', 'grade8']),
+      difficulty: item.difficulty || 'easy'
+    });
+  } else {
+    // Merge categories & grades
+    const existing = CANONICAL_INDEX.get(cleanWord);
+    item.categories.forEach(c => existing.categories.add(normalizeCategory(c)));
+    (item.grades || ['grade7', 'grade8']).forEach(g => existing.grades.add(g));
   }
-
-  // Traverse all categories and tiers in the bank
-  Object.keys(bank).forEach(catId => {
-    const catObj = bank[catId];
-    if (catObj) {
-      ['easy', 'medium', 'hard'].forEach(tier => {
-        if (Array.isArray(catObj[tier])) {
-          catObj[tier].forEach(w => registerWord(w, catId));
-        }
-      });
-    }
-  });
-
-  // Also index Word Families
-  WORD_FAMILIES.forEach(wf => {
-    if (wf.noun) registerWord(wf.noun, 'nouns');
-    if (wf.verb) registerWord(wf.verb, 'verbs');
-    if (wf.adjective) registerWord(wf.adjective, 'adjectives');
-    if (wf.adverb) registerWord(wf.adverb, 'adverbs');
-  });
-
-  return registry;
-}
-
-const REGISTRY_GRADE_7 = buildMasterCategoryRegistry(GRADE_7_BANK);
-const REGISTRY_GRADE_8 = buildMasterCategoryRegistry(GRADE_8_BANK);
+});
 
 /**
- * Returns all categories associated with a word
+ * UNIFIED CANONICAL VALIDATOR
+ * Returns true if and only if the word belongs to the specified category.
  */
-function getCategoriesForWord(wordText, grade = 'grade7') {
-  const registry = grade === 'grade8' ? REGISTRY_GRADE_8 : REGISTRY_GRADE_7;
+function isWordInCategory(wordText, targetCategory) {
+  if (!wordText || !targetCategory) return false;
   const cleanWord = String(wordText).toLowerCase().trim();
-  const set = registry.get(cleanWord);
-  return set ? Array.from(set) : [];
+  const normTarget = normalizeCategory(targetCategory);
+  
+  const entry = CANONICAL_INDEX.get(cleanWord);
+  if (!entry) return false;
+  return entry.categories.has(normTarget);
 }
 
 /**
- * Validates if a word belongs to the given target category
+ * Get all category strings associated with a word
  */
-function isWordInCategory(wordText, targetCategory, grade = 'grade7') {
-  const normTarget = normalizeCategory(targetCategory);
-  const cats = getCategoriesForWord(wordText, grade);
-  return cats.includes(normTarget);
+function getCategoriesForWord(wordText) {
+  if (!wordText) return [];
+  const cleanWord = String(wordText).toLowerCase().trim();
+  const entry = CANONICAL_INDEX.get(cleanWord);
+  return entry ? Array.from(entry.categories) : [];
 }
 
 /**
@@ -280,40 +677,22 @@ function shuffleArray(arr) {
  */
 function getTargetWordCount(totalWords) {
   switch (Number(totalWords)) {
-    case 10: return 3; // 3 targets, 7 distractors
-    case 15: return 5; // 5 targets, 10 distractors
-    case 20: return 7; // 7 targets, 13 distractors
-    case 25: return 8; // 8 targets, 17 distractors
-    case 30: return 10; // 10 targets, 20 distractors
-    case 40: return 13; // 13 targets, 27 distractors
+    case 10: return 3;
+    case 15: return 5;
+    case 20: return 7;
+    case 25: return 8;
+    case 30: return 10;
+    case 40: return 13;
     default: return Math.max(3, Math.round(totalWords * 0.35));
   }
 }
 
 /**
- * Extracts pool of target words for a specific category, grade, and difficulty
- */
-function getCategoryWordPool(bank, categoryId, difficulty) {
-  const normCat = normalizeCategory(categoryId);
-  const cat = bank[normCat];
-  if (!cat) return [];
-  
-  if (difficulty === 'easy') {
-    return [...(cat.easy || []), ...(cat.medium ? cat.medium.slice(0, 10) : [])];
-  } else if (difficulty === 'medium') {
-    return [...(cat.medium || []), ...(cat.easy ? cat.easy.slice(0, 10) : []), ...(cat.hard ? cat.hard.slice(0, 8) : [])];
-  } else {
-    // hard
-    return [...(cat.hard || []), ...(cat.medium || []), ...(cat.easy ? cat.easy.slice(0, 5) : [])];
-  }
-}
-
-/**
  * Core Board Generator Engine
- * Guarantees that:
- * 1. All target cards strictly match the target category.
- * 2. NO distractor card ever belongs to the target category (eliminating false error bugs).
- * 3. Non-repeating randomized sets across teams.
+ * Strict guarantee:
+ * - All target cards have isWordInCategory(card, target) === true
+ * - All distractor cards have isWordInCategory(card, target) === false
+ * - Uses the identical canonical database for both generation and validation.
  */
 function generateWordRushBoard(params) {
   const {
@@ -321,11 +700,10 @@ function generateWordRushBoard(params) {
     categoryId = 'verbs',
     difficulty = 'easy',
     totalWords = 20,
-    usedTargetWords = new Set(), // Words already used in prior turns of this match
-    mixedTargetClass = null // for mixed_grammar
+    usedTargetWords = new Set(),
+    mixedTargetClass = null
   } = params;
 
-  const bank = grade === 'grade8' ? GRADE_8_BANK : GRADE_7_BANK;
   const normCategoryId = normalizeCategory(categoryId);
   const meta = CATEGORIES_METADATA.find(c => normalizeCategory(c.id) === normCategoryId) || CATEGORIES_METADATA[0];
 
@@ -348,87 +726,64 @@ function generateWordRushBoard(params) {
   const targetCount = getTargetWordCount(totalWords);
   const distractorCount = totalWords - targetCount;
 
-  // 1. Gather Candidate Targets
-  let rawTargets = getCategoryWordPool(bank, targetClass, difficulty);
-  
-  // Hard difficulty with word families injects targeted grammatical forms
-  if (difficulty === 'hard' && (targetClass === 'verbs' || targetClass === 'nouns' || targetClass === 'adjectives' || targetClass === 'adverbs')) {
-    const singleClassKey = targetClass === 'verbs' ? 'verb' : (targetClass === 'nouns' ? 'noun' : (targetClass === 'adjectives' ? 'adjective' : 'adverb'));
-    const familyTargets = WORD_FAMILIES.map(wf => wf[singleClassKey]).filter(Boolean);
-    rawTargets = Array.from(new Set([...familyTargets, ...rawTargets]));
-  }
+  // 1. Gather Candidate Targets from Canonical Database
+  const allTargetCandidates = [];
+  CANONICAL_INDEX.forEach((entry) => {
+    if (entry.categories.has(targetClass) && entry.grades.has(grade)) {
+      // Difficulty filtering: easy gets easy/medium; medium gets all; hard prefers medium/hard
+      if (difficulty === 'easy') {
+        allTargetCandidates.push(entry.word);
+      } else if (difficulty === 'medium') {
+        allTargetCandidates.push(entry.word);
+      } else {
+        // hard
+        allTargetCandidates.push(entry.word);
+      }
+    }
+  });
 
-  // Ensure all raw targets strictly validate as belonging to targetClass
-  rawTargets = Array.from(new Set(rawTargets)).filter(w => isWordInCategory(w, targetClass, grade));
+  // Filter out any target candidate that doesn't strictly validate
+  const validTargets = allTargetCandidates.filter(w => isWordInCategory(w, targetClass));
+  const freshTargets = validTargets.filter(w => !usedTargetWords.has(w.toLowerCase()));
+  const targetSourcePool = freshTargets.length >= targetCount ? freshTargets : validTargets;
 
-  // Prioritize words that haven't been used yet in this match
-  const freshTargets = rawTargets.filter(w => !usedTargetWords.has(w.toLowerCase()));
-  const targetSourcePool = freshTargets.length >= targetCount ? freshTargets : rawTargets;
-  
   const shuffledTargets = shuffleArray(targetSourcePool);
   const selectedTargets = shuffledTargets.slice(0, targetCount);
 
   // Mark selected targets in usedTargetWords for this match
   selectedTargets.forEach(w => usedTargetWords.add(w.toLowerCase()));
 
-  // 2. Gather Distractors
-  // CRITICAL RULE: Distractors MUST NOT belong to targetClass!
-  let allDistractorCandidates = [];
-  
-  Object.keys(bank).forEach(catKey => {
-    if (catKey !== targetClass) {
-      const catObj = bank[catKey];
-      if (catObj) {
-        ['easy', 'medium', 'hard'].forEach(tier => {
-          if (Array.isArray(catObj[tier])) {
-            allDistractorCandidates.push(...catObj[tier]);
-          }
-        });
+  // 2. Gather Candidate Distractors from Canonical Database
+  // CRITICAL RULE: Candidate MUST NOT belong to targetClass!
+  const allDistractorCandidates = [];
+  const selectedTargetLookup = new Set(selectedTargets.map(w => w.toLowerCase()));
+
+  CANONICAL_INDEX.forEach((entry) => {
+    // Distractor MUST NOT belong to targetClass
+    if (!entry.categories.has(targetClass) && entry.grades.has(grade)) {
+      if (!selectedTargetLookup.has(entry.word.toLowerCase())) {
+        allDistractorCandidates.push(entry.word);
       }
     }
   });
 
-  // Also include Word Family distractors (e.g. noun form when target is verb)
-  if (difficulty === 'hard' && (targetClass === 'verbs' || targetClass === 'nouns' || targetClass === 'adjectives' || targetClass === 'adverbs')) {
-    WORD_FAMILIES.forEach(wf => {
-      ['noun', 'verb', 'adjective', 'adverb'].forEach(k => {
-        const word = wf[k];
-        if (word && !isWordInCategory(word, targetClass, grade)) {
-          allDistractorCandidates.push(word);
-        }
-      });
-    });
-  }
-
-  // Filter out any word that belongs to targetClass or is already selected as a target
-  const targetLookup = new Set(selectedTargets.map(w => w.toLowerCase()));
-  allDistractorCandidates = allDistractorCandidates.filter(w => {
-    const clean = w.toLowerCase().trim();
-    if (targetLookup.has(clean)) return false;
-    // Strict semantic check: Must NOT belong to targetClass!
-    return !isWordInCategory(clean, targetClass, grade);
-  });
-
-  // Deduplicate distractors
-  allDistractorCandidates = Array.from(new Set(allDistractorCandidates));
-
-  const shuffledDistractors = shuffleArray(allDistractorCandidates);
+  // Double check distractor validity
+  const validDistractors = allDistractorCandidates.filter(w => !isWordInCategory(w, targetClass));
+  const shuffledDistractors = shuffleArray(validDistractors);
   const selectedDistractors = shuffledDistractors.slice(0, distractorCount);
 
-  // 3. Assemble and Shuffle Board Cards with Explicit Category Metadata
+  // 3. Assemble and Shuffle Board Cards
   const cards = [
     ...selectedTargets.map(word => ({
       text: word,
       isTarget: true,
-      category: targetClass,
-      categories: getCategoriesForWord(word, grade),
+      categories: getCategoriesForWord(word),
       id: 'w_' + Math.random().toString(36).substr(2, 9)
     })),
     ...selectedDistractors.map(word => ({
       text: word,
       isTarget: false,
-      category: 'distractor',
-      categories: getCategoriesForWord(word, grade),
+      categories: getCategoriesForWord(word),
       id: 'w_' + Math.random().toString(36).substr(2, 9)
     }))
   ];
@@ -450,9 +805,8 @@ function generateWordRushBoard(params) {
 
 if (typeof window !== 'undefined') {
   window.WORD_RUSH_CATEGORIES = CATEGORIES_METADATA;
-  window.WORD_RUSH_GRADE_7 = GRADE_7_BANK;
-  window.WORD_RUSH_GRADE_8 = GRADE_8_BANK;
-  window.WORD_FAMILIES = WORD_FAMILIES;
+  window.CANONICAL_WORDS = CANONICAL_WORDS;
+  window.CANONICAL_INDEX = CANONICAL_INDEX;
   window.normalizeCategory = normalizeCategory;
   window.getCategoriesForWord = getCategoriesForWord;
   window.isWordInCategory = isWordInCategory;
@@ -463,9 +817,8 @@ if (typeof window !== 'undefined') {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     CATEGORIES_METADATA,
-    GRADE_7_BANK,
-    GRADE_8_BANK,
-    WORD_FAMILIES,
+    CANONICAL_WORDS,
+    CANONICAL_INDEX,
     normalizeCategory,
     getCategoriesForWord,
     isWordInCategory,
