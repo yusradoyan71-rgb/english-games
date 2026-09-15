@@ -1,6187 +1,6282 @@
 /**
- * TENSE BUILDING RACE - Comprehensive Question Bank (510+ Calibrated Questions)
- * Strictly restricted to:
- * 1. Simple Present
- * 2. Present Continuous
- * 3. Simple Past
+ * TENSE BUILDING RACE - Comprehensive Calibrated Question Bank
+ * Curated for Grade 7 & Grade 8 English Grammar Competitions
+ * Topics: Simple Present, Present Continuous, Simple Past, Modals, Prepositions, Word Order & Core Grammar
+ * Total Questions: 447 (231 Grade 7 + 216 Grade 8)
  */
 
 window.GAME_QUESTIONS = {
   "grade7": {
     "easy": [
       {
-        "type": "verb-choice",
-        "question": "We ______ to the city park yesterday afternoon.",
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "You ______ wear a helmet when riding a bicycle for safety.",
         "options": [
-          "went",
-          "go",
-          "are going"
+          "should",
+          "mustn't",
+          "can't",
+          "don't have to"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday afternoon' indicates Simple Past."
+        "hint": "Safety recommendation",
+        "explanation": "We use 'should' to recommend safe behavior."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "Students ______ run in the school corridors. It is dangerous.",
+        "options": [
+          "mustn't",
+          "can",
+          "should",
+          "don't have to"
+        ],
+        "correct": 0,
+        "hint": "School safety rule",
+        "explanation": "'Mustn't' is used for actions that are forbidden."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "Tomorrow is a national holiday, so we ______ go to school.",
+        "options": [
+          "don't have to",
+          "must",
+          "have to",
+          "shouldn't"
+        ],
+        "correct": 0,
+        "hint": "No obligation",
+        "explanation": "'Don't have to' shows that something is not necessary."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "Lucas is very strong. He ______ lift that heavy box easily.",
+        "options": [
+          "can",
+          "mustn't",
+          "shouldn't",
+          "doesn't have to"
+        ],
+        "correct": 0,
+        "hint": "Physical ability",
+        "explanation": "'Can' expresses ability."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "Your throat hurts. You ______ drink icy cold soda.",
+        "options": [
+          "shouldn't",
+          "must",
+          "can",
+          "has to"
+        ],
+        "correct": 0,
+        "hint": "Negative advice",
+        "explanation": "'Shouldn't' advises against doing something."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "______ I borrow your blue pen for a minute, please?",
+        "options": [
+          "Can",
+          "Mustn't",
+          "Shouldn't",
+          "Don't have to"
+        ],
+        "correct": 0,
+        "hint": "Polite request",
+        "explanation": "'Can' is used to make polite requests."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "In soccer, regular field players ______ touch the ball with their hands.",
+        "options": [
+          "mustn't",
+          "can",
+          "have to",
+          "should"
+        ],
+        "correct": 0,
+        "hint": "Sports rule prohibition",
+        "explanation": "Touching the ball with hands is against soccer rules for field players."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "My baby brother is only six months old; he ______ walk yet.",
+        "options": [
+          "can't",
+          "must",
+          "should",
+          "has to"
+        ],
+        "correct": 0,
+        "hint": "Present inability",
+        "explanation": "'Can't' expresses inability."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "You have an important exam tomorrow. You ______ sleep early tonight.",
+        "options": [
+          "should",
+          "mustn't",
+          "can't",
+          "doesn't have to"
+        ],
+        "correct": 0,
+        "hint": "Good advice",
+        "explanation": "'Should' gives helpful advice."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "Museum visitors ______ touch the ancient statues.",
+        "options": [
+          "mustn't",
+          "can",
+          "don't have to",
+          "should"
+        ],
+        "correct": 0,
+        "hint": "Museum rule",
+        "explanation": "Touching precious artifacts is strictly forbidden."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "Sarah has a museum pass, so she ______ pay for the entrance ticket.",
+        "options": [
+          "doesn't have to",
+          "must",
+          "has to",
+          "shouldn't"
+        ],
+        "correct": 0,
+        "hint": "No obligation (3rd person)",
+        "explanation": "'Doesn't have to' is used with she/he/it."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "Drivers ______ stop when the traffic light turns red.",
+        "options": [
+          "must",
+          "can't",
+          "shouldn't",
+          "don't have to"
+        ],
+        "correct": 0,
+        "hint": "Traffic law",
+        "explanation": "Stopping at red lights is an absolute legal requirement."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "Jack loves music. He ______ play both the piano and the violin.",
+        "options": [
+          "can",
+          "mustn't",
+          "shouldn't",
+          "have to"
+        ],
+        "correct": 0,
+        "hint": "Musical ability",
+        "explanation": "'Can' denotes learned skills and abilities."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "It's raining heavily outside. You ______ take an umbrella with you.",
+        "options": [
+          "should",
+          "mustn't",
+          "can't",
+          "don't have to"
+        ],
+        "correct": 0,
+        "hint": "Weather advice",
+        "explanation": "'Should' is appropriate for sensible advice."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "You ______ feed wild zoo animals with snacks; it can make them ill.",
+        "options": [
+          "mustn't",
+          "have to",
+          "should",
+          "can"
+        ],
+        "correct": 0,
+        "hint": "Zoo safety rule",
+        "explanation": "'Mustn't' expresses a strict rule."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "Today is Saturday! Emma ______ wake up at 6:30 a.m.",
+        "options": [
+          "doesn't have to",
+          "must",
+          "has to",
+          "shouldn't"
+        ],
+        "correct": 0,
+        "hint": "Weekend freedom",
+        "explanation": "'Doesn't have to' shows no need."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The morning assembly begins ______ 8:15 a.m.",
+        "options": [
+          "at",
+          "on",
+          "in",
+          "to"
+        ],
+        "correct": 0,
+        "hint": "Exact clock time",
+        "explanation": "Use 'at' with specific clock times."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "We always have science lab lessons ______ Tuesdays.",
+        "options": [
+          "on",
+          "at",
+          "in",
+          "from"
+        ],
+        "correct": 0,
+        "hint": "Day of the week",
+        "explanation": "Use 'on' with days of the week."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The school year ends ______ June in many countries.",
+        "options": [
+          "in",
+          "on",
+          "at",
+          "by"
+        ],
+        "correct": 0,
+        "hint": "Months",
+        "explanation": "Use 'in' with months without specific dates."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The dog is resting ______ the shade of the big tree.",
+        "options": [
+          "under",
+          "between",
+          "to",
+          "at"
+        ],
+        "correct": 0,
+        "hint": "Location beneath",
+        "explanation": "'Under' means positioned below something."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "Our house is ______ the pharmacy and the bakery.",
+        "options": [
+          "between",
+          "into",
+          "from",
+          "on"
+        ],
+        "correct": 0,
+        "hint": "Between two places",
+        "explanation": "Use 'between' for location between two reference points."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "Mia sits ______ Leo in English class; they are desk partners.",
+        "options": [
+          "next to",
+          "between",
+          "under",
+          "into"
+        ],
+        "correct": 0,
+        "hint": "Beside someone",
+        "explanation": "'Next to' means beside."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The teacher walked ______ the classroom with a stack of papers.",
+        "options": [
+          "into",
+          "under",
+          "between",
+          "on"
+        ],
+        "correct": 0,
+        "hint": "Movement inside",
+        "explanation": "'Into' expresses movement entering a space."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "I went to the cinema ______ my best friend on Saturday.",
+        "options": [
+          "with",
+          "for",
+          "at",
+          "between"
+        ],
+        "correct": 0,
+        "hint": "Accompaniment",
+        "explanation": "'With' indicates doing an activity together."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The train travels ______ London to Manchester in two hours.",
+        "options": [
+          "from",
+          "at",
+          "in",
+          "under"
+        ],
+        "correct": 0,
+        "hint": "Starting point",
+        "explanation": "'From' indicates the starting point of travel."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "Please place your notebook ______ the teacher's desk.",
+        "options": [
+          "on",
+          "at",
+          "in",
+          "to"
+        ],
+        "correct": 0,
+        "hint": "Surface position",
+        "explanation": "'On' indicates resting on a surface."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "We live ______ a quiet neighborhood near the city center.",
+        "options": [
+          "in",
+          "at",
+          "on",
+          "to"
+        ],
+        "correct": 0,
+        "hint": "Enclosed area / city area",
+        "explanation": "Use 'in' for neighborhoods and cities."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "There is a big supermarket right ______ our school across the street.",
+        "options": [
+          "opposite",
+          "under",
+          "into",
+          "at"
+        ],
+        "correct": 0,
+        "hint": "Across from",
+        "explanation": "'Opposite' means facing on the other side."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The curious cat jumped ______ the open cardboard box.",
+        "options": [
+          "into",
+          "between",
+          "under",
+          "at"
+        ],
+        "correct": 0,
+        "hint": "Direction of movement",
+        "explanation": "'Into' describes jumping inside."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "We usually have lunch ______ noon during the school break.",
+        "options": [
+          "at",
+          "in",
+          "on",
+          "to"
+        ],
+        "correct": 0,
+        "hint": "Time expression",
+        "explanation": "We say 'at noon' and 'at midnight'."
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly ordered sentence:",
+        "options": [
+          "Emma walks to school every morning.",
+          "Every morning to school walks Emma.",
+          "Walks Emma to school every morning.",
+          "Emma to school every morning walks."
+        ],
+        "correct": 0,
+        "hint": "SVO + Place + Time",
+        "explanation": "Standard English word order: Subject + Verb + Place + Time."
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly ordered sentence:",
+        "options": [
+          "Liam usually does his homework before dinner.",
+          "Liam does usually his homework before dinner.",
+          "Usually Liam his homework does before dinner.",
+          "Does Liam usually his homework before dinner."
+        ],
+        "correct": 0,
+        "hint": "Adverb before main verb",
+        "explanation": "Adverbs of frequency come before ordinary action verbs."
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correct question structure:",
+        "options": [
+          "Where did you go last weekend?",
+          "Where you did go last weekend?",
+          "Where did go you last weekend?",
+          "Where went you last weekend?"
+        ],
+        "correct": 0,
+        "hint": "Wh- + did + subject + base verb",
+        "explanation": "Past simple questions use Question word + did + Subject + base verb."
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correct negative sentence:",
+        "options": [
+          "They do not play video games on weekdays.",
+          "They play not video games on weekdays.",
+          "They not do play video games on weekdays.",
+          "Not they play video games on weekdays."
+        ],
+        "correct": 0,
+        "hint": "Subject + do not + verb",
+        "explanation": "Present simple negative: Subject + do not / don't + base verb."
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly ordered sentence:",
+        "options": [
+          "She is always friendly to new classmates.",
+          "She always is friendly to new classmates.",
+          "Always she is friendly to new classmates.",
+          "She is friendly always to new classmates."
+        ],
+        "correct": 0,
+        "hint": "Adverb after 'be'",
+        "explanation": "Adverbs of frequency come after the verb 'to be'."
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly ordered question:",
+        "options": [
+          "What time does the art class begin?",
+          "What time the art class does begin?",
+          "What time begins the art class?",
+          "Does what time the art class begin?"
+        ],
+        "correct": 0,
+        "hint": "Wh- + does + subject + base verb",
+        "explanation": "Wh- phrase + does + Subject + base verb."
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly ordered sentence:",
+        "options": [
+          "We watched a funny comedy movie last night.",
+          "We last night watched a funny comedy movie.",
+          "Watched we a funny comedy movie last night.",
+          "A funny comedy movie last night we watched."
+        ],
+        "correct": 0,
+        "hint": "Subject + Verb + Object + Time",
+        "explanation": "Time expressions usually go at the very end."
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correct question:",
+        "options": [
+          "Do you like playing basketball after school?",
+          "Like you playing basketball after school?",
+          "Do like you playing basketball after school?",
+          "You do like playing basketball after school?"
+        ],
+        "correct": 0,
+        "hint": "Do + subject + verb",
+        "explanation": "Present simple Yes/No questions start with Do/Does."
       },
       {
         "type": "complete-sentence",
-        "question": "Look! The dog ______ in the garden right now.",
-        "options": [
-          "is running",
-          "runs",
-          "ran"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look!' and 'right now' show Present Continuous."
-      },
-      {
-        "type": "verb-choice",
-        "question": "My brother ______ his teeth every single morning.",
-        "options": [
-          "brushes",
-          "is brushing",
-          "brushed"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Every single morning' shows a daily habit."
-      },
-      {
-        "type": "find-mistake",
-        "question": "She go to school by bus every morning.",
-        "options": [
-          "She",
-          "go",
-          "school",
-          "every morning"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "With 'She', use 'goes'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“They are watching a cartoon at the moment.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Correct! 'At the moment' takes Present Continuous."
-      },
-      {
-        "type": "context",
-        "question": "Tom usually walks to school, but today it is raining, so he ______ an umbrella.",
-        "options": [
-          "is carrying",
-          "carried",
-          "carries"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Temporary situation today."
-      },
-      {
-        "type": "verb-choice",
-        "question": "I ______ a delicious chocolate cake two days ago.",
-        "options": [
-          "baked",
-          "bake",
-          "am baking"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Two days ago' takes Simple Past."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Listen! The baby ______ in the bedroom.",
-        "options": [
-          "is crying",
-          "cries",
-          "cried"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Listen!' signals an action happening right now."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence is correct for daily routine?",
-        "options": [
-          "Cats like milk and fish.",
-          "Cats are liking milk and fish.",
-          "Cats liked milk and fish every day."
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "General facts take Simple Present."
-      },
-      {
-        "type": "find-mistake",
-        "question": "They watched TV at the moment in the living room.",
-        "options": [
-          "They",
-          "watched",
-          "at the moment",
-          "living room"
-        ],
-        "correct": 1,
-        "tense": "Present Continuous",
-        "explanation": "'At the moment' requires 'are watching'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“He play video games yesterday.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "Incorrect! 'Yesterday' requires 'played'."
-      },
-      {
-        "type": "context",
-        "question": "Sarah always drinks tea in the morning, but yesterday she ______ orange juice.",
-        "options": [
-          "drank",
-          "drinks",
-          "is drinking"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' shows finished past action."
-      },
-      {
-        "type": "verb-choice",
-        "question": "My father ______ his car last Sunday.",
-        "options": [
-          "washed",
-          "washes",
-          "is washing"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last Sunday' is a past marker."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Be quiet! The teacher ______ the lesson.",
-        "options": [
-          "is explaining",
-          "explains",
-          "explained"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Be quiet!' indicates an ongoing action."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Water ______ at 100 degrees Celsius.",
-        "options": [
-          "boils",
-          "is boiling",
-          "boiled"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Scientific facts use Simple Present."
-      },
-      {
-        "type": "find-mistake",
-        "question": "He is eat an apple right now.",
-        "options": [
-          "He",
-          "is",
-          "eat",
-          "right now"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "Continuous needs -ing: 'eating'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Choose the correct sentence:",
-        "options": [
-          "My grandparents live in a quiet village.",
-          "My grandparents lives in a quiet village.",
-          "My grandparents is living in a quiet village always."
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Plural subject takes base verb 'live'."
-      },
-      {
-        "type": "context",
-        "question": "Where is Mark? - He is in the kitchen; he ______ lunch.",
-        "options": [
-          "is preparing",
-          "prepares",
-          "prepared"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Action happening at this moment."
-      },
-      {
-        "type": "verb-choice",
-        "question": "We ______ our grandparents last weekend.",
-        "options": [
-          "visited",
-          "visit",
-          "are visiting"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last weekend' indicates past."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "The sun ______ in the east every day.",
-        "options": [
-          "rises",
-          "is rising",
-          "rose"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Natural fact uses Simple Present."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Yesterday, I see a beautiful rainbow in the sky.",
-        "options": [
-          "Yesterday",
-          "see",
-          "beautiful",
-          "in the sky"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "Past tense of see is 'saw'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“We are study English right now.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Present Continuous",
-        "explanation": "Incorrect! Should be 'are studying'."
-      },
-      {
-        "type": "context",
-        "question": "Jack usually wears jeans, but today he ______ a suit for the party.",
-        "options": [
-          "is wearing",
-          "wears",
-          "wore"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Temporary change today."
-      },
-      {
-        "type": "verb-choice",
-        "question": "They ______ football in the schoolyard now.",
+        "category": "tenses",
+        "question": "Look! The children ______ in the garden right now.",
         "options": [
           "are playing",
           "play",
-          "played"
+          "played",
+          "plays"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Now' signals Present Continuous."
+        "hint": "Present Continuous cue",
+        "explanation": "'Look!' and 'right now' indicate Present Continuous."
       },
       {
         "type": "complete-sentence",
-        "question": "Emma ______ her homework yesterday evening.",
+        "category": "tenses",
+        "question": "My grandfather ______ a newspaper every morning after breakfast.",
         "options": [
-          "finished",
-          "finishes",
-          "is finishing"
+          "reads",
+          "is reading",
+          "readed",
+          "reading"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday evening' indicates Simple Past."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Look! A red bird sits on our window right now.",
-        "options": [
-          "Look",
-          "sits",
-          "on our window",
-          "right now"
-        ],
-        "correct": 1,
-        "tense": "Present Continuous",
-        "explanation": "Should be 'is sitting'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence is in the Simple Past?",
-        "options": [
-          "My sister walked the dog yesterday.",
-          "My sister walks the dog every day.",
-          "My sister is walking the dog now."
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Walked' is Simple Past."
-      },
-      {
-        "type": "context",
-        "question": "David ______ computer games every evening after dinner.",
-        "options": [
-          "plays",
-          "is playing",
-          "played"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Every evening' indicates regular habit."
-      },
-      {
-        "type": "verb-choice",
-        "question": "I ______ a funny movie on TV last night.",
-        "options": [
-          "watched",
-          "watch",
-          "am watching"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last night' takes Simple Past."
+        "hint": "Daily routine",
+        "explanation": "Routine action with 3rd person singular takes '-s' ('reads')."
       },
       {
         "type": "complete-sentence",
-        "question": "Shh! Dad ______ on the sofa right now.",
-        "options": [
-          "is sleeping",
-          "sleeps",
-          "slept"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' indicates Present Continuous."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Marta ______ to music every afternoon in her room.",
-        "options": [
-          "listens",
-          "is listening",
-          "listened"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Every afternoon' expresses a routine."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Two hours ago, my uncle ______ from his trip.",
-        "options": [
-          "returned",
-          "returns",
-          "is returning"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Two hours ago' is a past marker."
-      },
-      {
-        "type": "find-mistake",
-        "question": "He don't like horror movies at all.",
-        "options": [
-          "He",
-          "don't",
-          "like",
-          "movies"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "'He' takes 'doesn't'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Look! The train arrives at the station right now.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Present Continuous",
-        "explanation": "Incorrect! Should be 'is arriving'."
-      },
-      {
-        "type": "context",
-        "question": "Sam usually rides his bicycle, but today he ______ because it is sunny.",
-        "options": [
-          "is walking",
-          "walks",
-          "walked"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Temporary activity today."
-      },
-      {
-        "type": "verb-choice",
-        "question": "We ______ an exciting basketball match last Friday.",
-        "options": [
-          "won",
-          "win",
-          "are winning"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last Friday' indicates past."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Quiet please! The students ______ their history test.",
-        "options": [
-          "are writing",
-          "write",
-          "wrote"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Quiet please!' indicates current action."
-      },
-      {
-        "type": "find-mistake",
-        "question": "She danced at the party right now with friends.",
-        "options": [
-          "She",
-          "danced",
-          "right now",
-          "with friends"
-        ],
-        "correct": 1,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' requires 'is dancing'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence is grammatically correct? (Birds fly south ever...)",
-        "options": [
-          "Birds fly south every autumn.",
-          "Birds is flying south every autumn.",
-          "Birds flied south every autumn."
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Plural subject + base verb for recurring fact."
-      },
-      {
-        "type": "context",
-        "question": "Where were you yesterday morning? - I ______ my mother at the store.",
-        "options": [
-          "helped",
-          "help",
-          "am helping"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past context."
-      },
-      {
-        "type": "verb-choice",
-        "question": "My sister ______ an apple every day after lunch.",
-        "options": [
-          "eats",
-          "is eating",
-          "ate"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Every day' indicates routine."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Look! The cat ______ up the tall tree right now.",
-        "options": [
-          "is climbing",
-          "climbs",
-          "climbed"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look!' signals current action."
-      },
-      {
-        "type": "find-mistake",
-        "question": "We went to the beach every Sunday during summer.",
-        "options": [
-          "went",
-          "beach",
-          "every Sunday",
-          "during summer"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Every Sunday' requires 'go'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“I bought a new pencil case yesterday.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Correct! Simple Past of buy."
-      },
-      {
-        "type": "context",
-        "question": "Why are you wearing sunglasses? - Because the sun ______ very brightly today.",
-        "options": [
-          "is shining",
-          "shines",
-          "shone"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Current situation."
-      },
-      {
-        "type": "verb-choice",
-        "question": "They ______ in a big house near the city park.",
-        "options": [
-          "live",
-          "are living",
-          "lived"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Permanent state."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Last weekend, we ______ pizza at the new restaurant.",
+        "category": "tenses",
+        "question": "Yesterday, we ______ pizza for dinner at an Italian restaurant.",
         "options": [
           "ate",
           "eat",
-          "are eating"
+          "are eating",
+          "eats"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last weekend' takes 'ate'."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Listen! The baby cry loudly in the crib.",
-        "options": [
-          "Listen",
-          "baby",
-          "cry",
-          "crib"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "Should be 'is crying'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence is correct?",
-        "options": [
-          "He drinks milk every morning.",
-          "He is drink milk every morning.",
-          "He drank milk every morning right now."
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Simple present 3rd person 'drinks'."
-      },
-      {
-        "type": "context",
-        "question": "Where did you go yesterday? - We ______ to the museum.",
-        "options": [
-          "went",
-          "go",
-          "are going"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past answer."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Oliver ______ his guitar for two hours yesterday.",
-        "options": [
-          "practiced",
-          "practices",
-          "is practicing"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' requires past tense."
+        "hint": "Irregular past verb",
+        "explanation": "'Yesterday' requires Simple Past of eat ('ate')."
       },
       {
         "type": "complete-sentence",
-        "question": "Look at the sky! The colorful kite ______ higher and higher.",
+        "category": "tenses",
+        "question": "Listen! The birds ______ sweetly outside the window.",
         "options": [
-          "is flying",
-          "flies",
-          "flew"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look at the sky!' indicates current movement."
-      },
-      {
-        "type": "find-mistake",
-        "question": "She don't play the violin on weekdays.",
-        "options": [
-          "She",
-          "don't",
-          "play",
-          "weekdays"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "'She' requires 'doesn't'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Did you see the full moon last night?”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Correct! 'Did + see' for past question."
-      },
-      {
-        "type": "context",
-        "question": "Where is Clara? - She ______ in the garden with her puppy right now.",
-        "options": [
-          "is playing",
-          "plays",
-          "played"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' indicates Present Continuous."
-      },
-      {
-        "type": "verb-choice",
-        "question": "My grandparents ______ tea every afternoon at 4 o'clock.",
-        "options": [
-          "drink",
-          "are drinking",
-          "drank"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Habitual action."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Two days ago, our football team ______ the championship trophy.",
-        "options": [
-          "won",
-          "wins",
-          "is winning"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Two days ago' indicates past."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Look! That boy runs across the road right now.",
-        "options": [
-          "Look",
-          "boy",
-          "runs",
-          "right now"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "Should be 'is running'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Choose the correct sentence for the present moment:",
-        "options": [
-          "We are having dinner right now.",
-          "We have dinner right now.",
-          "We had dinner right now."
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' takes Present Continuous."
-      },
-      {
-        "type": "context",
-        "question": "Why is the road wet? - Because it ______ heavily five minutes ago.",
-        "options": [
-          "rained",
-          "rains",
-          "is raining"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Five minutes ago' is past."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Cem ______ a great mystery book last night.",
-        "options": [
-          "read",
-          "reads",
-          "is reading"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last night' takes past form read."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Hurry up! The bus ______ around the corner right now.",
-        "options": [
-          "is coming",
-          "comes",
-          "came"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Hurry up!' signals current action."
-      },
-      {
-        "type": "find-mistake",
-        "question": "They goes swimming in the lake every Saturday.",
-        "options": [
-          "They",
-          "goes",
-          "swimming",
-          "every Saturday"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "Subject 'They' takes 'go'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“We visited Topkapi Palace last summer.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Correct! 'Last summer' with visited."
-      },
-      {
-        "type": "context",
-        "question": "Why is Ayse happy? - Because she ______ an A on her English test yesterday.",
-        "options": [
-          "got",
-          "gets",
-          "is getting"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' past result."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The library ______ at 8:30 AM every morning.",
-        "options": [
-          "opens",
-          "is opening",
-          "opened"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Scheduled routine."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Listen! The school bell ______ right now.",
-        "options": [
-          "is ringing",
-          "rings",
-          "rang"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Listen!' signals an ongoing sound."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Did she went to Istanbul yesterday?",
-        "options": [
-          "Did",
-          "she",
-          "went",
-          "yesterday"
-        ],
-        "correct": 2,
-        "tense": "Simple Past",
-        "explanation": "After 'Did', use base verb 'go'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence is grammatically correct? (He usually eats lunc...)",
-        "options": [
-          "He usually eats lunch at noon.",
-          "He is usually eat lunch at noon.",
-          "He ate usually lunch at noon."
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Adverb usually placed before base verb."
-      },
-      {
-        "type": "context",
-        "question": "Where is dad? - He ______ the engine of his car in the garage right now.",
-        "options": [
-          "is fixing",
-          "fixes",
-          "fixed"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Action occurring at this moment."
-      },
-      {
-        "type": "verb-choice",
-        "question": "We ______ an interesting science documentary yesterday.",
-        "options": [
-          "watched",
-          "watch",
-          "are watching"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' requires watched."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Look! Those dolphins ______ near our boat!",
-        "options": [
-          "are jumping",
-          "jump",
-          "jumped"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look!' signals live action."
-      },
-      {
-        "type": "find-mistake",
-        "question": "She don't have any homework tonight.",
-        "options": [
-          "She",
-          "don't",
-          "have",
-          "tonight"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "'She' takes 'doesn't'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Look! The magician is performing a card trick.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Correct! Ongoing performance."
-      },
-      {
-        "type": "context",
-        "question": "Why did you buy a new notebook? - Because I ______ my old one yesterday.",
-        "options": [
-          "lost",
-          "lose",
-          "am losing"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' past explanation."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Snakes ______ legs.",
-        "options": [
-          "do not have",
-          "are not having",
-          "did not had"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Biological fact."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Yesterday morning, my mother ______ fresh bread from the bakery.",
-        "options": [
-          "bought",
-          "buys",
-          "is buying"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday morning' past marker."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Listen! The singer sing a beautiful song right now.",
-        "options": [
-          "Listen",
-          "singer",
+          "are singing",
           "sing",
-          "right now"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "Should be 'is singing'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Choose the correct past sentence:",
-        "options": [
-          "We stayed at a cozy hotel last weekend.",
-          "We stay at a cozy hotel last weekend.",
-          "We are staying at a cozy hotel last weekend."
+          "sang",
+          "sings"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Stayed' is past form."
-      },
-      {
-        "type": "context",
-        "question": "What is Emily doing? - She ______ for her math quiz in her room.",
-        "options": [
-          "is studying",
-          "studies",
-          "studied"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Current activity."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The school bus always ______ at 7:45 AM.",
-        "options": [
-          "arrives",
-          "is arriving",
-          "arrived"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Regular schedule."
+        "hint": "Action in progress",
+        "explanation": "'Listen!' signals an action happening right now."
       },
       {
         "type": "complete-sentence",
-        "question": "Two days ago, I ______ my bicycle in the park.",
+        "category": "tenses",
+        "question": "Daniel didn't ______ to school yesterday because he was ill.",
+        "options": [
+          "come",
+          "came",
+          "comes",
+          "coming"
+        ],
+        "correct": 0,
+        "hint": "Base verb after didn't",
+        "explanation": "Use base form of the verb after didn't."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "The sun ______ in the east and sets in the west.",
+        "options": [
+          "rises",
+          "is rising",
+          "rose",
+          "rise"
+        ],
+        "correct": 0,
+        "hint": "Universal truth",
+        "explanation": "Universal facts use Simple Present."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "Two days ago, Noah ______ his new bicycle in the park.",
         "options": [
           "rode",
-          "ride",
-          "am riding"
+          "rides",
+          "is riding",
+          "ride"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past of ride is rode."
+        "hint": "Past time marker",
+        "explanation": "'Two days ago' requires the past tense 'rode'."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "I ______ my teeth twice every day to keep them healthy.",
+        "options": [
+          "brush",
+          "am brushing",
+          "brushed",
+          "brushes"
+        ],
+        "correct": 0,
+        "hint": "Habitual frequency",
+        "explanation": "Daily habit with subject 'I' takes base verb 'brush'."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "Where ______ you go for your summer holiday last year?",
+        "options": [
+          "did",
+          "do",
+          "does",
+          "are"
+        ],
+        "correct": 0,
+        "hint": "Past question auxiliary",
+        "explanation": "'Last year' requires auxiliary 'did'."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "Be quiet, please! The baby ______ in the bedroom.",
+        "options": [
+          "is sleeping",
+          "sleeps",
+          "slept",
+          "sleep"
+        ],
+        "correct": 0,
+        "hint": "Ongoing event",
+        "explanation": "'Be quiet!' points to an event in progress."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "We ______ our grandparents in the countryside last weekend.",
+        "options": [
+          "visited",
+          "visit",
+          "are visiting",
+          "visits"
+        ],
+        "correct": 0,
+        "hint": "Completed past event",
+        "explanation": "'Last weekend' requires Simple Past 'visited'."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "Cats usually ______ milk, but some are allergic to it.",
+        "options": [
+          "like",
+          "are liking",
+          "liked",
+          "likes"
+        ],
+        "correct": 0,
+        "hint": "General preference / Stative verb",
+        "explanation": "Plural subject 'Cats' with stative verb 'like'."
+      },
+      {
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the grammatically correct sentence:",
+        "options": [
+          "There are four apples in the fruit basket.",
+          "There is four apples in the fruit basket.",
+          "There are an apple in the fruit basket.",
+          "There is apples in the fruit basket."
+        ],
+        "correct": 0,
+        "hint": "There is / There are",
+        "explanation": "'There are' is used with plural countable nouns."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "Do you have ______ questions about the homework?",
+        "options": [
+          "any",
+          "some",
+          "much",
+          "an"
+        ],
+        "correct": 0,
+        "hint": "Any in questions",
+        "explanation": "Use 'any' with plural nouns in standard questions."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "A cheetah is ______ than a lion.",
+        "options": [
+          "faster",
+          "more fast",
+          "fastest",
+          "the faster"
+        ],
+        "correct": 0,
+        "hint": "Comparative adjective",
+        "explanation": "One-syllable adjective 'fast' becomes 'faster than'."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "This pencil belongs to Olivia. It is ______ pencil.",
+        "options": [
+          "her",
+          "hers",
+          "she",
+          "him"
+        ],
+        "correct": 0,
+        "hint": "Possessive adjective",
+        "explanation": "'Her' is the possessive adjective before a noun."
       },
       {
         "type": "find-mistake",
-        "question": "Did you ate breakfast this morning?",
+        "category": "core-grammar",
+        "question": "Find the mistake: 'My brothers is playing football in the garden.'",
         "options": [
-          "Did",
-          "you",
-          "ate",
-          "this morning"
-        ],
-        "correct": 2,
-        "tense": "Simple Past",
-        "explanation": "After 'Did', use base form 'eat'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“He is cleaning his room every Saturday.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "Incorrect! Habitual action takes 'cleans'."
-      },
-      {
-        "type": "context",
-        "question": "Look at the chef! He ______ delicious soup in the large pot right now.",
-        "options": [
-          "is stirring",
-          "stirs",
-          "stirred"
+          "is",
+          "brothers",
+          "playing",
+          "garden"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
+        "hint": "Subject-verb agreement",
+        "explanation": "'My brothers' is plural, so it requires 'are'."
+      },
+      {
+        "type": "choose-negative",
+        "category": "tenses",
+        "question": "Choose the correct negative sentence for: 'Maya lives in Madrid.'",
+        "options": [
+          "Maya doesn't live in Madrid.",
+          "Maya doesn't lives in Madrid.",
+          "Maya don't live in Madrid.",
+          "Maya not lives in Madrid."
+        ],
+        "correct": 0,
+        "hint": "Doesn't + base verb",
+        "explanation": "3rd person singular negative: doesn't + base verb."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "There isn't ______ milk left in the fridge.",
+        "options": [
+          "any",
+          "some",
+          "many",
+          "a"
+        ],
+        "correct": 0,
+        "hint": "Uncountable in negative",
+        "explanation": "Use 'any' with uncountable nouns in negative sentences."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "How ______ students are there in your English class?",
+        "options": [
+          "many",
+          "much",
+          "any",
+          "some"
+        ],
+        "correct": 0,
+        "hint": "How many vs How much",
+        "explanation": "Use 'How many' for plural countable nouns like students."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "I was tired yesterday, ______ I went to bed early.",
+        "options": [
+          "so",
+          "because",
+          "but",
+          "although"
+        ],
+        "correct": 0,
+        "hint": "Result conjunction",
+        "explanation": "'So' expresses the result of being tired."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "Tom likes tea, ______ he does not like coffee.",
+        "options": [
+          "but",
+          "and",
+          "so",
+          "because"
+        ],
+        "correct": 0,
+        "hint": "Contrast conjunction",
+        "explanation": "'But' shows contrast between two clauses."
+      },
+      {
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the correct sentence:",
+        "options": [
+          "Whose backpack is this on the chair?",
+          "Who's backpack is this on the chair?",
+          "Who backpack is this on the chair?",
+          "Whom backpack is this on the chair?"
+        ],
+        "correct": 0,
+        "hint": "Whose (possession)",
+        "explanation": "'Whose' asks about possession; 'Who's' means 'Who is'."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "He bought ______ apple and a banana at the market.",
+        "options": [
+          "an",
+          "a",
+          "the",
+          "some"
+        ],
+        "correct": 0,
+        "hint": "Indefinite article an",
+        "explanation": "Use 'an' before vowel sound words like 'apple'."
+      },
+      {
+        "type": "find-mistake",
+        "category": "tenses",
+        "question": "Find the mistake: 'Yesterday I go to the supermarket with my mom.'",
+        "options": [
+          "go",
+          "Yesterday",
+          "supermarket",
+          "with"
+        ],
+        "correct": 0,
+        "hint": "Past tense requirement",
+        "explanation": "'Yesterday' requires the past tense 'went', not 'go'."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "They ______ happy when they received the good news yesterday.",
+        "options": [
+          "were",
+          "was",
+          "are",
+          "is"
+        ],
+        "correct": 0,
+        "hint": "Past of 'be' for plural",
+        "explanation": "Subject 'They' takes 'were' in the past."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "English is ______ than mathematics for me.",
+        "options": [
+          "easier",
+          "more easy",
+          "easiest",
+          "easyer"
+        ],
+        "correct": 0,
+        "hint": "Comparative of -y adjective",
+        "explanation": "Adjectives ending in consonant + y change y to -ier ('easier')."
+      },
+      {
+        "type": "choose-question",
+        "category": "tenses",
+        "question": "Choose the correct question form:",
+        "options": [
+          "Does your sister play the violin?",
+          "Do your sister play the violin?",
+          "Does your sister plays the violin?",
+          "Is your sister play the violin?"
+        ],
+        "correct": 0,
+        "hint": "Does + subject + base verb",
+        "explanation": "Singular 3rd person Yes/No question: Does + subject + base verb."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "prepositions",
+        "question": "We stayed at home ______ the heavy thunderstorm.",
+        "options": [
+          "during",
+          "at",
+          "to",
+          "on"
+        ],
+        "correct": 0,
+        "hint": "Preposition of duration",
+        "explanation": "'During' refers to throughout the course of an event."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "modals",
+        "question": "You ______ turn off your mobile phone during the exam.",
+        "options": [
+          "must",
+          "can't",
+          "don't have to",
+          "shouldn't"
+        ],
+        "correct": 0,
+        "hint": "Exam requirement",
+        "explanation": "'Must' is used for strict rules."
+      },
+      {
+        "type": "choose-incorrect",
+        "category": "core-grammar",
+        "question": "Choose the INCORRECT sentence:",
+        "options": [
+          "She don't like chocolate ice cream.",
+          "She doesn't like chocolate ice cream.",
+          "They don't like chocolate ice cream.",
+          "We like chocolate ice cream."
+        ],
+        "correct": 0,
+        "hint": "Identify subject-verb error",
+        "explanation": "'She don't' is incorrect; it should be 'She doesn't'."
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly ordered sentence:",
+        "options": [
+          "They never arrive late for English class.",
+          "They arrive never late for English class.",
+          "Never they arrive late for English class.",
+          "They arrive late never for English class."
+        ],
+        "correct": 0,
+        "hint": "Adverb 'never' placement",
+        "explanation": "'Never' goes before main action verbs (never arrive)."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "We ______ our homework before we went out to play.",
+        "options": [
+          "finished",
+          "finish",
+          "are finishing",
+          "finishes"
+        ],
+        "correct": 0,
+        "hint": "Past sequence",
+        "explanation": "Past action matching 'went out'."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "There were ______ people at the concert hall last night.",
+        "options": [
+          "many",
+          "much",
+          "any",
+          "little"
+        ],
+        "correct": 0,
+        "hint": "Countable quantifier",
+        "explanation": "'People' is plural countable, so use 'many'."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "You ______ eat so much junk food; it is not good for you.",
+        "options": [
+          "shouldn't",
+          "must",
+          "have to",
+          "can"
+        ],
+        "correct": 0,
+        "hint": "Health advice",
+        "explanation": "'Shouldn't' expresses negative advice."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The airplane flew high ______ the fluffy clouds.",
+        "options": [
+          "above",
+          "under",
+          "between",
+          "into"
+        ],
+        "correct": 0,
+        "hint": "Position higher than",
+        "explanation": "'Above' means at a higher level than something."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "These books are not mine; they are ______.",
+        "options": [
+          "theirs",
+          "their",
+          "them",
+          "they"
+        ],
+        "correct": 0,
+        "hint": "Possessive pronoun",
+        "explanation": "'Theirs' stands alone as a possessive pronoun."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "My uncle ______ in Canada ten years ago.",
+        "options": [
+          "lived",
+          "lives",
+          "is living",
+          "live"
+        ],
+        "correct": 0,
+        "hint": "Past time marker 'ago'",
+        "explanation": "'Ten years ago' requires Simple Past."
+      },
+      {
+        "type": "choose-sentence",
+        "category": "word-order",
+        "question": "Choose the correct sentence:",
+        "options": [
+          "Can you help me with this exercise, please?",
+          "Can you me help with this exercise, please?",
+          "You can help me with this exercise, please?",
+          "Can help you me with this exercise, please?"
+        ],
+        "correct": 0,
+        "hint": "Modal question order",
+        "explanation": "Modal (Can) + Subject (you) + Base verb (help) + Object (me)."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "She speaks English ______ because she practices daily.",
+        "options": [
+          "well",
+          "good",
+          "best",
+          "goodly"
+        ],
+        "correct": 0,
+        "hint": "Adverb of manner",
+        "explanation": "'Well' is the adverb describing how she speaks."
+      },
+      {
+        "type": "find-mistake",
+        "category": "prepositions",
+        "question": "Find the mistake: 'We arrived to the airport at 6 o'clock.'",
+        "options": [
+          "to",
+          "arrived",
+          "airport",
+          "at"
+        ],
+        "correct": 0,
+        "hint": "Arrive at / in",
+        "explanation": "We say 'arrive at the airport', not 'arrive to'."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "The water in the kettle ______ right now; make the tea!",
+        "options": [
+          "is boiling",
+          "boils",
+          "boiled",
+          "boil"
+        ],
+        "correct": 0,
+        "hint": "Action in progress",
         "explanation": "'Right now' indicates Present Continuous."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "My sister is ______ than me at drawing portraits.",
+        "options": [
+          "better",
+          "gooder",
+          "more good",
+          "best"
+        ],
+        "correct": 0,
+        "hint": "Irregular comparative",
+        "explanation": "The comparative of 'good' is 'better'."
+      },
+      {
+        "type": "choose-negative",
+        "category": "modals",
+        "question": "Choose the correct negative sentence:",
+        "options": [
+          "You must not speak during the listening test.",
+          "You not must speak during the listening test.",
+          "You must speak not during the listening test.",
+          "Must not you speak during the listening test."
+        ],
+        "correct": 0,
+        "hint": "Modal negative order",
+        "explanation": "Subject + must not + base verb."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "Where ______ your parents meet for the first time?",
+        "options": [
+          "did",
+          "do",
+          "are",
+          "were"
+        ],
+        "correct": 0,
+        "hint": "Past question auxiliary",
+        "explanation": "Use 'did' with the base verb 'meet' for past questions."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "You ______ touch that broken electric socket! It is extremely dangerous.",
+        "options": [
+          "mustn't",
+          "can",
+          "don't have to",
+          "should"
+        ],
+        "correct": 0,
+        "hint": "Extreme danger prohibition",
+        "explanation": ""
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "Since we took the train, we ______ search for a parking space in the city.",
+        "options": [
+          "don't have to",
+          "must",
+          "have to",
+          "shouldn't"
+        ],
+        "correct": 0,
+        "hint": "No necessity",
+        "explanation": ""
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "He has studied French for five years, so he ______ translate this easy paragraph.",
+        "options": [
+          "can",
+          "mustn't",
+          "shouldn't",
+          "has to"
+        ],
+        "correct": 0,
+        "hint": "Language skill",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The children sat happily ______ the cozy fireplace on winter evenings.",
+        "options": [
+          "by",
+          "into",
+          "through",
+          "on"
+        ],
+        "correct": 0,
+        "hint": "Near / beside location",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "We will meet you ______ the main entrance of the shopping center.",
+        "options": [
+          "at",
+          "on",
+          "in",
+          "to"
+        ],
+        "correct": 0,
+        "hint": "Specific point location",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The little rabbit hopped quickly ______ its underground burrow.",
+        "options": [
+          "into",
+          "under",
+          "between",
+          "on"
+        ],
+        "correct": 0,
+        "hint": "Direction inward",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "She received a lovely silver necklace ______ her aunt on her graduation day.",
+        "options": [
+          "from",
+          "at",
+          "in",
+          "under"
+        ],
+        "correct": 0,
+        "hint": "Source / giver",
+        "explanation": ""
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly ordered sentence:",
+        "options": [
+          "My brother often plays chess with our grandfather.",
+          "My brother plays often chess with our grandfather.",
+          "Often my brother plays chess with our grandfather.",
+          "My brother chess plays often with our grandfather."
+        ],
+        "correct": 0,
+        "hint": "Frequency adverb position",
+        "explanation": ""
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly ordered question:",
+        "options": [
+          "Did you finish your science project yesterday?",
+          "You did finish your science project yesterday?",
+          "Did finish you your science project yesterday?",
+          "Finished you your science project yesterday?"
+        ],
+        "correct": 0,
+        "hint": "Past simple question",
+        "explanation": ""
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly ordered sentence:",
+        "options": [
+          "She is usually in the library after lunch.",
+          "She usually is in the library after lunch.",
+          "Usually she in the library is after lunch.",
+          "In the library she is usually after lunch."
+        ],
+        "correct": 0,
+        "hint": "Frequency adverb with 'be'",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "Every winter, the lake ______ and people go ice skating on it.",
+        "options": [
+          "freezes",
+          "is freezing",
+          "froze",
+          "freeze"
+        ],
+        "correct": 0,
+        "hint": "Seasonal factual routine",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "Look at the sky! The dark clouds ______ closer every minute.",
+        "options": [
+          "are moving",
+          "move",
+          "moved",
+          "moves"
+        ],
+        "correct": 0,
+        "hint": "Observable ongoing change",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "Last summer, we ______ an ancient castle on the mountain top.",
+        "options": [
+          "explored",
+          "explore",
+          "are exploring",
+          "explores"
+        ],
+        "correct": 0,
+        "hint": "Past action",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "Why ______ you ______ for your keys? Are they lost?",
+        "options": [
+          "are / looking",
+          "do / look",
+          "did / looked",
+          "is / looking"
+        ],
+        "correct": 0,
+        "hint": "Current search in progress",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "He didn't ______ the football match because his television was broken.",
+        "options": [
+          "watch",
+          "watched",
+          "watching",
+          "watches"
+        ],
+        "correct": 0,
+        "hint": "Base verb after didn't",
+        "explanation": ""
+      },
+      {
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the correct sentence:",
+        "options": [
+          "This is the oldest tree in the whole forest.",
+          "This is the most old tree in the whole forest.",
+          "This is oldest tree in the whole forest.",
+          "This is older tree in the whole forest."
+        ],
+        "correct": 0,
+        "hint": "Superlative of short adjective",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "How ______ water should a teenager drink each day?",
+        "options": [
+          "much",
+          "many",
+          "any",
+          "a few"
+        ],
+        "correct": 0,
+        "hint": "Uncountable quantifier",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "There aren't ______ chairs in this small classroom for all of us.",
+        "options": [
+          "enough",
+          "much",
+          "little",
+          "an"
+        ],
+        "correct": 0,
+        "hint": "Enough with countable plural",
+        "explanation": ""
+      },
+      {
+        "type": "choose-negative",
+        "category": "core-grammar",
+        "question": "Choose the correct negative sentence:",
+        "options": [
+          "We don't have any homework for tomorrow.",
+          "We doesn't have any homework for tomorrow.",
+          "We haven't any homework for tomorrow.",
+          "We not have any homework for tomorrow."
+        ],
+        "correct": 0,
+        "hint": "Present simple negative have",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "The red bicycle is faster, ______ the blue bicycle is much cheaper.",
+        "options": [
+          "but",
+          "so",
+          "because",
+          "and"
+        ],
+        "correct": 0,
+        "hint": "Contrast conjunction",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "My cousin is two years ______ than me.",
+        "options": [
+          "older",
+          "more old",
+          "oldest",
+          "the older"
+        ],
+        "correct": 0,
+        "hint": "Age comparative",
+        "explanation": ""
+      },
+      {
+        "type": "find-mistake",
+        "category": "core-grammar",
+        "question": "Find the mistake: 'There is many cars parked outside the stadium.'",
+        "options": [
+          "is",
+          "many",
+          "cars",
+          "outside"
+        ],
+        "correct": 0,
+        "hint": "There is vs There are plural",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "modals",
+        "question": "You ______ carry your school ID card during the field trip.",
+        "options": [
+          "must",
+          "can't",
+          "don't have to",
+          "shouldn't"
+        ],
+        "correct": 0,
+        "hint": "School rule requirement",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The painting hanging ______ the sofa is very colorful.",
+        "options": [
+          "above",
+          "into",
+          "under",
+          "between"
+        ],
+        "correct": 0,
+        "hint": "Vertical position above",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "I ______ my lost keys under the sofa ten minutes ago.",
+        "options": [
+          "found",
+          "find",
+          "am finding",
+          "finds"
+        ],
+        "correct": 0,
+        "hint": "Irregular past of find",
+        "explanation": ""
       }
     ],
     "medium": [
       {
-        "type": "find-mistake",
-        "question": "My friends doesn't like spicy food at all.",
+        "type": "context-dialogue",
+        "category": "modals",
+        "question": "Doctor: 'Your ankle is badly sprained.' -> Patient ______ play football this weekend.",
         "options": [
-          "friends",
-          "doesn't",
-          "like",
-          "spicy"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "Plural subject 'My friends' requires 'don't'."
-      },
-      {
-        "type": "grammar-structure",
-        "question": "What ______ you ______ when the bell rang?",
-        "options": [
-          "did / do",
-          "do / do",
-          "are / doing"
+          "shouldn't",
+          "has to",
+          "can",
+          "must"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past question: 'did + subject + base verb'."
+        "hint": "Medical advice context",
+        "explanation": "A sprained ankle means the patient should not play."
       },
       {
-        "type": "context",
-        "question": "Jenny normally eats salad, but right now she ______ a large pizza with friends.",
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "In a museum: 'Photography is strictly prohibited.' This means visitors ______ take pictures.",
         "options": [
-          "is eating",
-          "eats",
-          "ate"
+          "mustn't",
+          "don't have to",
+          "should",
+          "could"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' contrasts with 'normally'."
+        "hint": "Prohibition meaning",
+        "explanation": "'Prohibited' means you mustn't do it."
       },
       {
-        "type": "complete-sentence",
-        "question": "My mother ______ a new storybook for me last Saturday.",
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "The school bus is free for all students. They ______ pay any money.",
         "options": [
-          "bought",
-          "buys",
-          "is buying"
+          "don't have to",
+          "mustn't",
+          "can't",
+          "shouldn't"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last Saturday' is a completed past time."
+        "hint": "Absence of obligation",
+        "explanation": "Free service means you do not have to pay."
       },
       {
-        "type": "correct-incorrect",
-        "question": "“Did you visited the museum yesterday?”",
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "The sign says: 'Keep off the grass.' You ______ walk on the lawn.",
         "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "Incorrect! After 'did', use base form 'visit'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The children ______ their bikes in the park at present.",
-        "options": [
-          "are riding",
-          "ride",
-          "rode"
+          "mustn't",
+          "don't have to",
+          "can",
+          "should"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'At present' means right now."
+        "hint": "Notice prohibition",
+        "explanation": "Sign indicates a rule not to walk on the grass."
       },
       {
-        "type": "find-mistake",
-        "question": "He didn't went to the swimming pool last weekend.",
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The secret path leads ______ the dark forest to an old castle.",
         "options": [
-          "didn't",
-          "went",
-          "swimming pool",
-          "last weekend"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "After 'didn't', use 'go'."
-      },
-      {
-        "type": "context",
-        "question": "Where are the students? - They ______ a test in classroom 7B now.",
-        "options": [
-          "are taking",
-          "take",
-          "took"
+          "through",
+          "between",
+          "at",
+          "on"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Now' shows the test is currently taking place."
+        "hint": "Movement through 3D space",
+        "explanation": "'Through' describes movement within a 3D space like a forest."
       },
       {
-        "type": "grammar-structure",
-        "question": "How often ______ your brother clean his bedroom?",
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The pharmacy is located ______ the corner of Elm Street and Maple Avenue.",
         "options": [
-          "does",
-          "do",
-          "is"
+          "at",
+          "in",
+          "to",
+          "between"
         ],
         "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Your brother' takes 'does'."
+        "hint": "Location at a corner",
+        "explanation": "We say 'at the corner of [Street A] and [Street B]'."
       },
       {
-        "type": "sentence-choice",
-        "question": "Which sentence is grammatically correct?",
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "They waited ______ the bus stop for nearly forty minutes in the cold.",
         "options": [
-          "He knows the answer to this question.",
-          "He is knowing the answer to this question.",
-          "He know the answer to this question."
+          "at",
+          "on",
+          "into",
+          "to"
         ],
         "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Know' is stative and takes Simple Present."
+        "hint": "Specific point location",
+        "explanation": "We say 'at the bus stop'."
       },
       {
-        "type": "verb-choice",
-        "question": "Two days ago, we ______ an exciting mystery book.",
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "We are flying ______ Paris to Tokyo with a short stop in Dubai.",
         "options": [
-          "read",
-          "reads",
-          "are reading"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Two days ago' points to the past."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Listen! The birds is singing in the tall trees.",
-        "options": [
-          "Listen",
-          "birds",
-          "is singing",
-          "trees"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "Plural subject 'birds' takes 'are singing'."
-      },
-      {
-        "type": "context",
-        "question": "Why are you wearing a thick coat? - Because it ______ outside right now.",
-        "options": [
-          "is snowing",
-          "snows",
-          "snowed"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Action in progress right now."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "We ______ delicious pancakes for breakfast yesterday.",
-        "options": [
-          "ate",
-          "eat",
-          "are eating"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' requires irregular past form 'ate'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Does she goes to the library every Friday?”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "Incorrect! After 'Does', use 'go'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Look at that boy! He ______ over the high fence!",
-        "options": [
-          "is climbing",
-          "climbs",
-          "climbed"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look!' calls attention to an action in progress."
-      },
-      {
-        "type": "find-mistake",
-        "question": "We was at the science museum yesterday.",
-        "options": [
-          "We",
-          "was",
-          "museum",
-          "yesterday"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "'We' takes 'were'."
-      },
-      {
-        "type": "context",
-        "question": "My father usually drives to work, but this week he ______ the subway.",
-        "options": [
-          "is taking",
-          "takes",
-          "took"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Temporary change this week."
-      },
-      {
-        "type": "grammar-structure",
-        "question": "They ______ not come to school last Monday.",
-        "options": [
-          "did",
-          "do",
-          "are"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past negative uses 'did not'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Choose the universal truth:",
-        "options": [
-          "The Earth moves around the sun.",
-          "The Earth is moving around the sun right now.",
-          "The Earth moved around the sun yesterday."
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Universal facts take Simple Present."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“They didn't see the accident yesterday.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Correct! 'didn't + base verb'."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Are you play basketball with your friends right now?",
-        "options": [
-          "Are",
-          "you",
-          "play",
-          "right now"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "Continuous question needs 'playing'."
-      },
-      {
-        "type": "context",
-        "question": "Sam lost his keys yesterday, so he ______ through the window.",
-        "options": [
-          "climbed",
-          "climbs",
-          "is climbing"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Both actions occurred in the past."
-      },
-      {
-        "type": "grammar-structure",
-        "question": "______ your sister speak French fluently?",
-        "options": [
-          "Does",
-          "Do",
-          "Is"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Your sister' is singular -> 'Does'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Right now, the master chef ______ a special dessert.",
-        "options": [
-          "is preparing",
-          "prepares",
-          "prepared"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' indicates Present Continuous."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence expresses a correct preference?",
-        "options": [
-          "I love this ice cream flavor.",
-          "I am loving this ice cream flavor right now.",
-          "I loves this ice cream flavor."
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Love' is stative in standard grammar."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Yesterday afternoon, my brother catch three big fish.",
-        "options": [
-          "Yesterday",
-          "my brother",
-          "catch",
-          "three"
-        ],
-        "correct": 2,
-        "tense": "Simple Past",
-        "explanation": "'Catch' should be past 'caught'."
-      },
-      {
-        "type": "context",
-        "question": "Look at Alex! He ______ for his bus because he is late.",
-        "options": [
-          "is running",
-          "runs",
-          "ran"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Immediate action happening now."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "We ______ to the cinema three times last month.",
-        "options": [
-          "went",
-          "go",
-          "are going"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last month' takes Simple Past."
-      },
-      {
-        "type": "verb-choice",
-        "question": "My uncle ______ in London permanently.",
-        "options": [
-          "lives",
-          "is living",
-          "lived"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Permanent residence takes Simple Present."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Why is you looking under the teacher's desk?",
-        "options": [
-          "is",
-          "you",
-          "looking",
+          "from",
+          "at",
+          "in",
           "under"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'You' requires 'are', not 'is'."
+        "hint": "Origin point",
+        "explanation": "'From' marks the starting location of the journey."
       },
       {
-        "type": "complete-sentence",
-        "question": "The little girl ______ her toy robot two days ago.",
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "She poured the fresh orange juice ______ a tall glass.",
         "options": [
-          "broke",
-          "breaks",
-          "is breaking"
+          "into",
+          "onto",
+          "under",
+          "between"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Two days ago' takes 'broke'."
+        "hint": "Direction of liquid pouring",
+        "explanation": "'Into' describes entering an enclosed container."
       },
       {
-        "type": "correct-incorrect",
-        "question": "“She is always helping her classmates when they need support.”",
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The library is open ______ 9:00 a.m. to 7:00 p.m. every weekday.",
         "options": [
-          "Correct",
-          "Incorrect"
+          "from",
+          "at",
+          "on",
+          "in"
         ],
         "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Correct! Expresses positive character quality."
+        "hint": "Time span: from ... to",
+        "explanation": "'From [time] to [time]' indicates time range."
       },
       {
-        "type": "context",
-        "question": "Look! The police officer ______ traffic at the busy junction.",
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly structured sentence:",
         "options": [
-          "is directing",
-          "directs",
-          "directed"
+          "My parents rarely watch television on weekend mornings.",
+          "My parents watch rarely television on weekend mornings.",
+          "Rarely my parents watch television on weekend mornings.",
+          "My parents watch television rarely on weekend mornings."
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look!' signals active immediate event."
+        "hint": "Adverb 'rarely' position",
+        "explanation": "'Rarely' precedes the main verb 'watch'."
       },
       {
-        "type": "grammar-structure",
-        "question": "How much ______ that new backpack cost yesterday?",
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correct indirect question structure:",
         "options": [
-          "did",
-          "does",
-          "is"
+          "Do you know where the nearest post office is?",
+          "Do you know where is the nearest post office?",
+          "Do you know where the nearest post office does be?",
+          "Where do you know the nearest post office is?"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' requires auxiliary 'did'."
+        "hint": "Embedded question word order",
+        "explanation": "In embedded questions, normal subject-verb order is kept (where the post office is)."
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly ordered sentence with adverbs:",
+        "options": [
+          "He is never late for his violin rehearsals.",
+          "He never is late for his violin rehearsals.",
+          "Never he is late for his violin rehearsals.",
+          "He is late never for his violin rehearsals."
+        ],
+        "correct": 0,
+        "hint": "Frequency adverb after 'be'",
+        "explanation": "'Never' follows the auxiliary/be verb 'is'."
       },
       {
         "type": "find-mistake",
-        "question": "Did they played football after school yesterday?",
+        "category": "tenses",
+        "question": "Find the mistake: 'When did you saw that interesting documentary on wildlife?'",
         "options": [
-          "Did",
-          "played",
-          "football",
-          "yesterday"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "After 'Did', use base verb 'play'."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "My parents ______ in the living room right now.",
-        "options": [
-          "are sitting",
-          "sit",
-          "sat"
+          "saw",
+          "did",
+          "interesting",
+          "wildlife"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' indicates Present Continuous."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence is correct?",
-        "options": [
-          "He doesn't have any brothers or sisters.",
-          "He don't have any brothers or sisters.",
-          "He isn't have any brothers or sisters."
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'He' takes 'doesn't have'."
-      },
-      {
-        "type": "context",
-        "question": "What did you drink for breakfast this morning? - I ______ milk.",
-        "options": [
-          "drank",
-          "drink",
-          "am drinking"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'This morning' past answer."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Every afternoon, my cat ______ in front of the warm heater.",
-        "options": [
-          "sleeps",
-          "is sleeping",
-          "slept"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Every afternoon' indicates regular habit."
+        "hint": "Auxiliary did + base verb",
+        "explanation": "After 'did', use base verb 'see', not past form 'saw'."
       },
       {
         "type": "find-mistake",
-        "question": "Look! That car drive very fast down the street.",
+        "category": "core-grammar",
+        "question": "Find the mistake: 'Every student in our class have their own tablet.'",
         "options": [
-          "Look",
-          "car",
-          "drive",
-          "fast"
+          "have",
+          "student",
+          "class",
+          "their"
         ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "With 'Look!', use 'is driving'."
+        "correct": 0,
+        "hint": "Every + singular verb",
+        "explanation": "'Every student' takes a singular verb 'has', not 'have'."
       },
       {
-        "type": "grammar-structure",
-        "question": "Where ______ you find that old photograph yesterday?",
+        "type": "choose-incorrect",
+        "category": "modals",
+        "question": "Choose the INCORRECT sentence:",
         "options": [
+          "He musts wear his uniform to school.",
+          "He must wear his uniform to school.",
+          "He has to wear his uniform to school.",
+          "He should wear his uniform to school."
+        ],
+        "correct": 0,
+        "hint": "Modal verbs never take -s",
+        "explanation": "Modals like 'must' never add '-s' with 3rd person singular."
+      },
+      {
+        "type": "choose-incorrect",
+        "category": "tenses",
+        "question": "Choose the INCORRECT sentence:",
+        "options": [
+          "I am knowing the correct answer right now.",
+          "I know the correct answer right now.",
+          "I am writing the correct answer right now.",
+          "I wrote the correct answer yesterday."
+        ],
+        "correct": 0,
+        "hint": "Stative verb in continuous",
+        "explanation": "'Know' is a stative verb and is not used in the continuous form."
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "Jack usually ______ by bus, but today he ______ his bicycle because of the sunny weather.",
+        "options": [
+          "travels / is riding",
+          "is traveling / rides",
+          "traveled / rode",
+          "travel / is riding"
+        ],
+        "correct": 0,
+        "hint": "Routine vs Temporary contrast",
+        "explanation": "Routine action (Simple Present) vs today's exception (Present Continuous)."
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "Why ______ you ______ that thick winter jacket? It is 28 degrees outside!",
+        "options": [
+          "are / wearing",
+          "do / wear",
+          "did / wore",
+          "have / worn"
+        ],
+        "correct": 0,
+        "hint": "Current surprising action",
+        "explanation": "Questioning an action happening right at this moment."
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "While I ______ my homework, my little brother knocked on my bedroom door.",
+        "options": [
+          "was doing",
           "did",
-          "do",
+          "am doing",
+          "do"
+        ],
+        "correct": 0,
+        "hint": "Interrupted past action",
+        "explanation": "Past Continuous ('was doing') interrupted by a short past action."
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "Maya ______ Turkish, English, and French fluently.",
+        "options": [
+          "speaks",
+          "is speaking",
+          "spoke",
+          "speak"
+        ],
+        "correct": 0,
+        "hint": "Permanent ability/fact",
+        "explanation": "Language proficiency is a permanent fact, so use Simple Present."
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "I ______ you at the science fair yesterday. Where were you?",
+        "options": [
+          "didn't see",
+          "don't see",
+          "haven't seen",
+          "wasn't seeing"
+        ],
+        "correct": 0,
+        "hint": "Past negative",
+        "explanation": "'Yesterday' requires Simple Past negative 'didn't see'."
+      },
+      {
+        "type": "same-meaning",
+        "category": "modals",
+        "question": "'It is compulsory for students to wear gym shoes in the sports hall.' Which sentence has the SAME meaning?",
+        "options": [
+          "Students must wear gym shoes in the sports hall.",
+          "Students can wear gym shoes in the sports hall.",
+          "Students shouldn't wear gym shoes in the sports hall.",
+          "Students don't have to wear gym shoes in the sports hall."
+        ],
+        "correct": 0,
+        "hint": "Compulsory = Must",
+        "explanation": "'Compulsory' indicates an absolute obligation ('must')."
+      },
+      {
+        "type": "same-meaning",
+        "category": "modals",
+        "question": "'You are not allowed to feed the animals at the zoo.' Which sentence has the SAME meaning?",
+        "options": [
+          "You mustn't feed the animals at the zoo.",
+          "You don't have to feed the animals at the zoo.",
+          "You should feed the animals at the zoo.",
+          "You can feed the animals at the zoo."
+        ],
+        "correct": 0,
+        "hint": "Not allowed = Mustn't",
+        "explanation": "'Not allowed' equals strict prohibition ('mustn't')."
+      },
+      {
+        "type": "same-meaning",
+        "category": "modals",
+        "question": "'It isn't necessary for you to bring extra paper.' Which sentence has the SAME meaning?",
+        "options": [
+          "You don't have to bring extra paper.",
+          "You mustn't bring extra paper.",
+          "You should bring extra paper.",
+          "You can't bring extra paper."
+        ],
+        "correct": 0,
+        "hint": "Not necessary = Don't have to",
+        "explanation": "'Not necessary' indicates lack of obligation ('don't have to')."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "We only have a ______ minutes before the train departs.",
+        "options": [
+          "few",
+          "little",
+          "much",
+          "many"
+        ],
+        "correct": 0,
+        "hint": "A few with countable plural",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "There is only a ______ sugar left in the jar.",
+        "options": [
+          "little",
+          "few",
+          "many",
+          "any"
+        ],
+        "correct": 0,
+        "hint": "A little with uncountable",
+        "explanation": ""
+      },
+      {
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the grammatically correct sentence:",
+        "options": [
+          "Nobody in our group knows the answer.",
+          "Nobody in our group know the answer.",
+          "Nobody in our group are knowing the answer.",
+          "Nobody in our group don't know the answer."
+        ],
+        "correct": 0,
+        "hint": "Nobody + singular verb",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "This mystery novel is much ______ than the one we read last week.",
+        "options": [
+          "more exciting",
+          "excitinger",
+          "most exciting",
+          "as exciting"
+        ],
+        "correct": 0,
+        "hint": "Comparative with more",
+        "explanation": ""
+      },
+      {
+        "type": "choose-question",
+        "category": "core-grammar",
+        "question": "Choose the correct subject question for: 'Lucas broke the cup.'",
+        "options": [
+          "Who broke the cup?",
+          "Who did break the cup?",
+          "Who did the cup break?",
+          "Whom did break the cup?"
+        ],
+        "correct": 0,
+        "hint": "Subject question syntax",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "Neither Liam nor his friends ______ present at the meeting.",
+        "options": [
+          "were",
+          "was",
+          "is",
           "are"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' takes 'did'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“They are visiting their cousins in Izmir this weekend.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Correct! Planned present continuous activity."
-      },
-      {
-        "type": "context",
-        "question": "Can I speak to Peter? - Sorry, he ______ a shower at the moment.",
-        "options": [
-          "is taking",
-          "takes",
-          "took"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Action in progress right now."
-      },
-      {
-        "type": "verb-choice",
-        "question": "She ______ all the questions correctly on yesterday's quiz.",
-        "options": [
-          "answered",
-          "answers",
-          "is answering"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday's quiz' indicates Simple Past."
+        "hint": "Neither/nor proximity agreement",
+        "explanation": ""
       },
       {
         "type": "find-mistake",
-        "question": "He never wake up before 7:00 AM on school days.",
+        "category": "core-grammar",
+        "question": "Find the mistake: 'She is more taller than her elder sister.'",
         "options": [
-          "never",
-          "wake",
-          "before",
-          "school days"
+          "more taller",
+          "is",
+          "than",
+          "elder"
         ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "'He' requires 'wakes up'."
+        "correct": 0,
+        "hint": "Double comparative error",
+        "explanation": ""
       },
       {
         "type": "complete-sentence",
-        "question": "Look! The hot air balloon ______ slowly above the hills.",
-        "options": [
-          "is floating",
-          "floats",
-          "floated"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look!' signals present progressive."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Choose the correct past question:",
-        "options": [
-          "Did your father drive to work yesterday?",
-          "Did your father drove to work yesterday?",
-          "Does your father drove to work yesterday?"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Did + base verb drive'."
-      },
-      {
-        "type": "context",
-        "question": "Why is the baby crying? - Because she ______ her toy five minutes ago.",
-        "options": [
-          "dropped",
-          "drops",
-          "is dropping"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Five minutes ago' is past."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Our science teacher ______ exciting experiments every Tuesday.",
-        "options": [
-          "conducts",
-          "is conducting",
-          "conducted"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Every Tuesday' indicates routine."
-      },
-      {
-        "type": "grammar-structure",
-        "question": "Why ______ she not attend the sports meeting yesterday?",
-        "options": [
-          "did",
-          "does",
-          "is"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' requires 'did'."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Right now, the students takes notes in history class.",
-        "options": [
-          "Right now",
-          "students",
-          "takes",
-          "class"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' requires 'are taking'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“She is wanting a glass of water right now.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "Incorrect! 'Want' is stative; use 'She wants'."
-      },
-      {
-        "type": "context",
-        "question": "Normally John walks his dog in the morning, but today he ______ it in the afternoon.",
-        "options": [
-          "is walking",
-          "walks",
-          "walked"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Temporary change today."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The architect ______ the blueprints for the new library last week.",
-        "options": [
-          "finished",
-          "finishes",
-          "is finishing"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last week' indicates past."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Did you understood what the guide explained yesterday?",
-        "options": [
-          "Did",
-          "understood",
-          "guide",
-          "yesterday"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "After 'Did', use 'understand'."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Listen! The street musicians ______ traditional Turkish tunes.",
-        "options": [
-          "are playing",
-          "play",
-          "played"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Listen!' indicates present action."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence is grammatically correct? (Water boils at 100 d...)",
-        "options": [
-          "Water boils at 100 degrees Celsius.",
-          "Water is boil at 100 degrees Celsius.",
-          "Water boiled at 100 degrees Celsius every day."
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Scientific fact."
-      },
-      {
-        "type": "context",
-        "question": "Why were the lights off yesterday? - Because the storm ______ the power lines.",
-        "options": [
-          "damaged",
-          "damages",
-          "is damaging"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past reason."
-      },
-      {
-        "type": "grammar-structure",
-        "question": "How many languages ______ your uncle speak fluently?",
-        "options": [
-          "does",
-          "do",
-          "is"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Your uncle' takes 'does'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The archaeologists ______ ancient Roman pottery last summer.",
-        "options": [
-          "unearthed",
-          "unearth",
-          "are unearthing"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last summer' requires past tense."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Look! A big ship is sail across the harbor right now.",
-        "options": [
-          "Look",
-          "ship",
-          "is sail",
-          "right now"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "Must be 'is sailing'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Did you write all three letters yesterday afternoon?”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Correct! 'Did + write'."
-      },
-      {
-        "type": "context",
-        "question": "Where is the mechanic? - He ______ the engine of the truck at the moment.",
-        "options": [
-          "is inspecting",
-          "inspects",
-          "inspected"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'At the moment' indicates continuous."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The museum ______ thousands of tourists during the festival every year.",
-        "options": [
-          "attracts",
-          "is attracting",
-          "attracted"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Every year' indicates regular routine."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Two hours ago, the plane ______ safely on the runway.",
-        "options": [
-          "landed",
-          "lands",
-          "is landing"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Two hours ago' takes 'landed'."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Do your brother always finish his homework before dinner?",
-        "options": [
-          "Do",
-          "brother",
-          "finish",
-          "dinner"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Your brother' requires 'Does'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Choose the correct sentence:",
-        "options": [
-          "They were at the theater last night and enjoyed the play.",
-          "They was at the theater last night and enjoyed the play.",
-          "They are at the theater last night and enjoyed the play."
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Plural past 'were' and 'enjoyed'."
-      },
-      {
-        "type": "context",
-        "question": "Why is everyone looking outside? - Because a famous athlete ______ into the school yard!",
-        "options": [
-          "is walking",
-          "walks",
-          "walked"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Action occurring at the moment of speaking."
-      },
-      {
-        "type": "grammar-structure",
-        "question": "Why ______ they not join the science fair last Friday?",
-        "options": [
-          "did",
-          "do",
-          "are"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last Friday' requires 'did'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Listen! The siren ______ loudly across the valley right now.",
-        "options": [
-          "is wailing",
-          "wails",
-          "wailed"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' indicates Present Continuous."
-      },
-      {
-        "type": "find-mistake",
-        "question": "She didn't brought her dictionary to class yesterday.",
-        "options": [
-          "didn't",
-          "brought",
-          "dictionary",
-          "yesterday"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "After 'didn't', use base form 'bring'."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "The train to Ankara ______ at platform 3 every morning at 09:00.",
+        "category": "tenses",
+        "question": "The ferry to the island ______ at 9:15 every morning.",
         "options": [
           "departs",
           "is departing",
-          "departed"
+          "departed",
+          "depart"
         ],
         "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Fixed timetable."
+        "hint": "Timetable schedule in present simple",
+        "explanation": ""
       },
       {
-        "type": "correct-incorrect",
-        "question": "“Look! That clever parrot is imitating the teacher's voice.”",
+        "type": "context-dialogue",
+        "category": "tenses",
+        "question": "A: 'Where is dad?' - B: 'In the garage. He ______ the car.'",
         "options": [
-          "Correct",
-          "Incorrect"
+          "is repairing",
+          "repairs",
+          "repaired",
+          "repair"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Correct! Live action."
+        "hint": "Present continuous in dialogue",
+        "explanation": ""
       },
       {
-        "type": "context",
-        "question": "Why didn't you answer my text message? - Because I ______ soccer in the park.",
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The cat jumped ______ the kitchen counter and snatched a piece of fish.",
         "options": [
-          "played",
-          "play",
-          "am playing"
+          "onto",
+          "into",
+          "under",
+          "between"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past reason."
+        "hint": "Movement to surface",
+        "explanation": ""
       },
       {
-        "type": "verb-choice",
-        "question": "My cousins ______ in Antalya during the winter season.",
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "When my grandmother was young, she ______ walk ten miles to school.",
         "options": [
-          "live",
-          "are living",
-          "lived"
+          "could",
+          "must",
+          "should",
+          "don't have to"
         ],
         "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Permanent living state."
+        "hint": "Past general ability",
+        "explanation": ""
+      },
+      {
+        "type": "choose-sentence",
+        "category": "modals",
+        "question": "Choose the sentence giving healthy advice:",
+        "options": [
+          "You should drink plenty of water during hot summer days.",
+          "You must drink plenty of water during hot summer days.",
+          "You have to drink plenty of water during hot summer days.",
+          "You can't drink plenty of water during hot summer days."
+        ],
+        "correct": 0,
+        "hint": "Advisory modal 'should'",
+        "explanation": ""
       },
       {
         "type": "complete-sentence",
-        "question": "Look! The squirrel ______ acorns under the pine tree right now.",
+        "category": "core-grammar",
+        "question": "The headmaster asked ______ to deliver the message to class 7B.",
         "options": [
-          "is burying",
-          "buries",
-          "buried"
+          "us",
+          "we",
+          "our",
+          "ours"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look!' signals current action."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Did she met her uncle at the bus station yesterday?",
-        "options": [
-          "Did",
-          "met",
-          "station",
-          "yesterday"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "After 'Did', use 'meet'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence is in the Present Continuous?",
-        "options": [
-          "The children are swimming in the pool now.",
-          "The children swim in the pool every day.",
-          "The children swam in the pool yesterday."
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Are swimming' is Present Continuous."
-      },
-      {
-        "type": "context",
-        "question": "Why is the kitchen smelling so good? - Because grandma ______ fresh cookies right now.",
-        "options": [
-          "is baking",
-          "bakes",
-          "baked"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Current active baking."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Two weeks ago, the class ______ a science project on solar energy.",
-        "options": [
-          "completed",
-          "completes",
-          "is completing"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Two weeks ago' takes Simple Past."
-      },
-      {
-        "type": "find-mistake",
-        "question": "He is eat lunch in the cafeteria right now.",
-        "options": [
-          "He",
-          "is",
-          "eat",
-          "cafeteria"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "Must be 'eating'."
+        "hint": "Object pronoun",
+        "explanation": ""
       },
       {
         "type": "complete-sentence",
-        "question": "Our cat always ______ on the soft rug by the fireplace.",
+        "category": "prepositions",
+        "question": "She succeeded ______ winning the national swimming championship.",
         "options": [
-          "curls up",
-          "is curling up",
-          "curled up"
+          "in",
+          "at",
+          "on",
+          "to"
         ],
         "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Always' indicates regular routine."
+        "hint": "Dependent preposition succeed in",
+        "explanation": ""
       },
       {
-        "type": "correct-incorrect",
-        "question": "“Did you lock the front door before leaving yesterday?”",
+        "type": "find-mistake",
+        "category": "prepositions",
+        "question": "Find the mistake: 'We look forward to see you at the celebration.'",
         "options": [
-          "Correct",
-          "Incorrect"
+          "see",
+          "look",
+          "forward",
+          "celebration"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Correct! 'Did + lock'."
+        "hint": "Look forward to + V-ing",
+        "explanation": ""
       },
       {
-        "type": "grammar-structure",
-        "question": "How often ______ your sister practice her violin?",
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correct negative sentence:",
         "options": [
-          "does",
-          "do",
-          "is"
+          "He doesn't usually eat lunch in the cafeteria.",
+          "He usually doesn't eat lunch in the cafeteria.",
+          "Doesn't he usually eat lunch in the cafeteria.",
+          "He doesn't eat usually lunch in the cafeteria."
         ],
         "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Your sister' takes 'does'."
+        "hint": "Auxiliary + adverb + verb",
+        "explanation": ""
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "I ______ this pizza because it ______ delicious herbs.",
+        "options": [
+          "like / contains",
+          "am liking / contains",
+          "like / is containing",
+          "am liking / is containing"
+        ],
+        "correct": 0,
+        "hint": "Stative verbs in present",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "______ of the two applicants was chosen for the job.",
+        "options": [
+          "Neither",
+          "Both",
+          "All",
+          "Every"
+        ],
+        "correct": 0,
+        "hint": "Neither for two (singular)",
+        "explanation": ""
+      },
+      {
+        "type": "choose-incorrect",
+        "category": "core-grammar",
+        "question": "Choose the INCORRECT sentence:",
+        "options": [
+          "There are many luggages in the car.",
+          "There is a lot of luggage in the car.",
+          "There is some luggage in the car.",
+          "There is much luggage in the car."
+        ],
+        "correct": 0,
+        "hint": "Luggage is uncountable",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "prepositions",
+        "question": "The shopping mall is crowded ______ Saturday afternoons.",
+        "options": [
+          "on",
+          "in",
+          "at",
+          "to"
+        ],
+        "correct": 0,
+        "hint": "On + day + part of day",
+        "explanation": ""
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "We ______ hurry or we will miss the school bus!",
+        "options": [
+          "have to",
+          "can",
+          "may",
+          "don't have to"
+        ],
+        "correct": 0,
+        "hint": "Urgent external necessity",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "When the bell rang, all the students ______ up immediately.",
+        "options": [
+          "stood",
+          "stand",
+          "are standing",
+          "stands"
+        ],
+        "correct": 0,
+        "hint": "Sequential past reaction",
+        "explanation": ""
+      },
+      {
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the correct comparative sentence:",
+        "options": [
+          "Reading books is far more interesting than watching television.",
+          "Reading books is far interestinger than watching television.",
+          "Reading books is far most interesting than watching television.",
+          "Reading books is far as interesting than watching television."
+        ],
+        "correct": 0,
+        "hint": "Far more interesting comparative",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "She sat ______ her two best friends during the movie.",
+        "options": [
+          "between",
+          "among",
+          "into",
+          "under"
+        ],
+        "correct": 0,
+        "hint": "Between two people",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The brave dog ran ______ the burning building to save the kitten.",
+        "options": [
+          "into",
+          "onto",
+          "under",
+          "between"
+        ],
+        "correct": 0,
+        "hint": "Movement entering place",
+        "explanation": ""
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correct question:",
+        "options": [
+          "How often do you practice playing the guitar?",
+          "How often you do practice playing the guitar?",
+          "How often do practice you playing the guitar?",
+          "How do often you practice playing the guitar?"
+        ],
+        "correct": 0,
+        "hint": "Wh- + do + subject + verb",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "I ______ for my glasses. Have you seen them anywhere?",
+        "options": [
+          "am looking",
+          "look",
+          "looked",
+          "looks"
+        ],
+        "correct": 0,
+        "hint": "Current activity in progress",
+        "explanation": ""
+      },
+      {
+        "type": "choose-negative",
+        "category": "tenses",
+        "question": "Choose the correct negative sentence:",
+        "options": [
+          "My brother didn't understand the difficult chemistry lesson.",
+          "My brother didn't understood the difficult chemistry lesson.",
+          "My brother not understood the difficult chemistry lesson.",
+          "My brother doesn't understood the difficult chemistry lesson."
+        ],
+        "correct": 0,
+        "hint": "Didn't + base verb",
+        "explanation": ""
+      },
+      {
+        "type": "find-mistake",
+        "category": "core-grammar",
+        "question": "Find the mistake: 'Neither of the boys were ready for the test.'",
+        "options": [
+          "were",
+          "Neither",
+          "boys",
+          "ready"
+        ],
+        "correct": 0,
+        "hint": "Neither takes singular verb 'was'",
+        "explanation": ""
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "You ______ touch that saucepan; it just came off the burning stove.",
+        "options": [
+          "mustn't",
+          "don't have to",
+          "can",
+          "should"
+        ],
+        "correct": 0,
+        "hint": "Danger prohibition",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "This dessert is ______ sweet than the previous one we tasted.",
+        "options": [
+          "less",
+          "least",
+          "lesser",
+          "little"
+        ],
+        "correct": 0,
+        "hint": "Comparative of inferiority",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The helicopter hovered ______ the damaged rescue ship.",
+        "options": [
+          "over",
+          "into",
+          "under",
+          "between"
+        ],
+        "correct": 0,
+        "hint": "Position directly above",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "While they were walking in the forest, they ______ a rare deer.",
+        "options": [
+          "spotted",
+          "spot",
+          "were spotting",
+          "spots"
+        ],
+        "correct": 0,
+        "hint": "Past action interrupting background continuous",
+        "explanation": ""
+      },
+      {
+        "type": "find-mistake",
+        "category": "tenses",
+        "question": "Find the mistake: 'She is having three older brothers and one sister.'",
+        "options": [
+          "is having",
+          "three",
+          "older",
+          "sister"
+        ],
+        "correct": 0,
+        "hint": "Possession 'have' is stative",
+        "explanation": ""
+      },
+      {
+        "type": "same-meaning",
+        "category": "modals",
+        "question": "'It is forbidden to swim in this deep reservoir.' Which sentence has the same meaning?",
+        "options": [
+          "You mustn't swim in this deep reservoir.",
+          "You don't have to swim in this deep reservoir.",
+          "You should swim in this deep reservoir.",
+          "You can swim in this deep reservoir."
+        ],
+        "correct": 0,
+        "hint": "Forbidden = Mustn't",
+        "explanation": ""
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly ordered sentence:",
+        "options": [
+          "He has never been abroad before.",
+          "He never has been abroad before.",
+          "Never he has been abroad before.",
+          "He has been never abroad before."
+        ],
+        "correct": 0,
+        "hint": "Never between auxiliary and participle",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "Neither my brother nor my sister ______ eating spicy food.",
+        "options": [
+          "likes",
+          "like",
+          "are liking",
+          "have liked"
+        ],
+        "correct": 0,
+        "hint": "Singular subject agreement with neither/nor",
+        "explanation": ""
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "You ______ shout; the baby is sleeping right in the next room.",
+        "options": [
+          "mustn't",
+          "don't have to",
+          "can",
+          "should"
+        ],
+        "correct": 0,
+        "hint": "Prohibition to prevent noise",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The athlete jumped ______ the high wooden fence effortlessly.",
+        "options": [
+          "over",
+          "into",
+          "under",
+          "between"
+        ],
+        "correct": 0,
+        "hint": "Movement over obstacle",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "Look at Daniel! He ______ a heavy wooden bench all by himself.",
+        "options": [
+          "is carrying",
+          "carries",
+          "carried",
+          "carry"
+        ],
+        "correct": 0,
+        "hint": "Visual cue present continuous",
+        "explanation": ""
+      },
+      {
+        "type": "find-mistake",
+        "category": "core-grammar",
+        "question": "Find the mistake: 'Each of the players were awarded a gold medal.'",
+        "options": [
+          "were",
+          "Each",
+          "players",
+          "awarded"
+        ],
+        "correct": 0,
+        "hint": "Each takes singular verb 'was'",
+        "explanation": ""
+      },
+      {
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the correct sentence:",
+        "options": [
+          "Which bag is heavier, yours or mine?",
+          "Which bag is more heavy, yours or mine?",
+          "Which bag is most heavy, yours or mine?",
+          "Which bag is heavilier, yours or mine?"
+        ],
+        "correct": 0,
+        "hint": "Comparative of heavy (-ier)",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "modals",
+        "question": "Since it's a sunny day, we ______ stay inside all afternoon.",
+        "options": [
+          "don't have to",
+          "mustn't",
+          "should",
+          "have to"
+        ],
+        "correct": 0,
+        "hint": "Lack of obligation",
+        "explanation": ""
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correct word order:",
+        "options": [
+          "Why are you wearing sunglasses indoors?",
+          "Why you are wearing sunglasses indoors?",
+          "Why are wearing you sunglasses indoors?",
+          "Why you sunglasses are wearing indoors?"
+        ],
+        "correct": 0,
+        "hint": "Wh- + are + subject + V-ing",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The subway station is ______ the shopping center and the bank.",
+        "options": [
+          "between",
+          "into",
+          "from",
+          "on"
+        ],
+        "correct": 0,
+        "hint": "Between two landmarks",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "Two years ago, our family ______ to a peaceful village in the hills.",
+        "options": [
+          "moved",
+          "moves",
+          "is moving",
+          "move"
+        ],
+        "correct": 0,
+        "hint": "Two years ago past marker",
+        "explanation": ""
+      },
+      {
+        "type": "choose-incorrect",
+        "category": "tenses",
+        "question": "Choose the INCORRECT sentence:",
+        "options": [
+          "I am wanting to learn Spanish this year.",
+          "I want to learn Spanish this year.",
+          "I am studying Spanish this year.",
+          "I studied Spanish last year."
+        ],
+        "correct": 0,
+        "hint": "Want is a stative verb",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "There is ______ traffic on the bridge during rush hour.",
+        "options": [
+          "a lot of",
+          "many",
+          "a few",
+          "several"
+        ],
+        "correct": 0,
+        "hint": "Uncountable quantifier for traffic",
+        "explanation": ""
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "You ______ forget your passport when traveling to another country.",
+        "options": [
+          "mustn't",
+          "don't have to",
+          "can",
+          "should"
+        ],
+        "correct": 0,
+        "hint": "Crucial negative rule",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "prepositions",
+        "question": "They walked ______ the bridge to reach the historical old quarter.",
+        "options": [
+          "across",
+          "into",
+          "under",
+          "between"
+        ],
+        "correct": 0,
+        "hint": "Across a bridge",
+        "explanation": ""
       }
     ],
     "hard": [
       {
-        "type": "find-mistake",
-        "question": "Why do you crying in your room right now?",
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "While my parents ______ dinner in the kitchen, my sister and I ______ our school project in the living room.",
         "options": [
-          "Why",
-          "do",
-          "crying",
-          "right now"
-        ],
-        "correct": 1,
-        "tense": "Present Continuous",
-        "explanation": "Continuous tense needs 'are you crying'."
-      },
-      {
-        "type": "context",
-        "question": "Lucy usually writes with her right hand, but because her wrist is injured, she ______ with her left hand this week.",
-        "options": [
-          "is writing",
-          "writes",
-          "wrote"
+          "were cooking / were finishing",
+          "cooked / finished",
+          "are cooking / finish",
+          "cook / finish"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Temporary period ('this week') contrasting with habit."
+        "hint": "Parallel past continuous actions",
+        "explanation": "Two simultaneous continuous actions in the past both use Past Continuous."
       },
       {
-        "type": "verb-choice",
-        "question": "Last night at 9 PM, we ______ our project and went straight to bed.",
+        "type": "context-dialogue",
+        "category": "modals",
+        "question": "Teacher: 'Tomorrow's trip is completely optional.' -> Students ______ join the trip if they prefer to stay home.",
         "options": [
-          "finished",
-          "finish",
-          "are finishing"
+          "don't have to",
+          "mustn't",
+          "shouldn't",
+          "can't"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Completed sequential actions in the past."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“She doesn't understands the rules of the new game.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "Incorrect! After 'doesn't', use base form 'understand'."
+        "hint": "Optional activity logic",
+        "explanation": "'Optional' means there is no obligation ('don't have to')."
       },
       {
         "type": "find-mistake",
-        "question": "Did you bought all the groceries on the shopping list?",
+        "category": "core-grammar",
+        "question": "Find the mistake: 'One of my best friends are moving to Australia next month.'",
         "options": [
+          "are",
+          "best",
+          "friends",
+          "moving"
+        ],
+        "correct": 0,
+        "hint": "One of + plural noun + singular verb",
+        "explanation": "The true subject is 'One', which requires the singular verb 'is', not 'are'."
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly ordered sentence with place and time adverbials:",
+        "options": [
+          "They played wonderfully in the school auditorium yesterday afternoon.",
+          "They played yesterday afternoon wonderfully in the school auditorium.",
+          "Yesterday afternoon they wonderfully played in the school auditorium.",
+          "They in the school auditorium wonderfully played yesterday afternoon."
+        ],
+        "correct": 0,
+        "hint": "Manner + Place + Time rule",
+        "explanation": "Standard adverb order: Manner (wonderfully) + Place (in the auditorium) + Time (yesterday afternoon)."
+      },
+      {
+        "type": "same-meaning",
+        "category": "tenses",
+        "question": "'Lucas started learning Spanish three years ago and still studies it.' Which sentence has the correct meaning?",
+        "options": [
+          "Lucas has studied Spanish for three years.",
+          "Lucas studied Spanish three years ago only.",
+          "Lucas is studying Spanish three years ago.",
+          "Lucas Spanish studies since three years."
+        ],
+        "correct": 0,
+        "hint": "Action continuing to present",
+        "explanation": "An action starting in the past and continuing to now connects past to present."
+      },
+      {
+        "type": "choose-incorrect",
+        "category": "modals",
+        "question": "Choose the INCORRECT sentence regarding rules:",
+        "options": [
+          "You don't have to use your phone in the silent study area.",
+          "You mustn't use your phone in the silent study area.",
+          "You can't make phone calls in the silent study area.",
+          "You should turn off your phone in the study area."
+        ],
+        "correct": 0,
+        "hint": "Prohibition vs lack of necessity",
+        "explanation": "'Don't have to' wrongly implies you are allowed to use your phone if you want, but it's a silent area!"
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The explorers walked ______ the narrow suspension bridge suspended ______ the deep rocky canyon.",
+        "options": [
+          "across / over",
+          "into / under",
+          "through / between",
+          "along / into"
+        ],
+        "correct": 0,
+        "hint": "Across a bridge / Over a canyon",
+        "explanation": "'Across' for moving from one side to the other, 'over' for positioned above."
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "I ______ what you mean, but I ______ with your conclusion on this topic.",
+        "options": [
+          "understand / disagree",
+          "am understanding / am disagreeing",
+          "understand / am disagreeing",
+          "am understanding / disagree"
+        ],
+        "correct": 0,
+        "hint": "Stative cognition verbs",
+        "explanation": "'Understand' and 'disagree' express mental states and take Simple Present."
+      },
+      {
+        "type": "find-mistake",
+        "category": "tenses",
+        "question": "Find the mistake: 'Did she went to the dentist after her tooth started aching?'",
+        "options": [
+          "went",
           "Did",
-          "bought",
-          "groceries",
-          "list"
+          "started",
+          "aching"
         ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "After 'Did', use base verb 'buy'."
+        "correct": 0,
+        "hint": "Did + base verb error",
+        "explanation": "After auxiliary 'Did', use base verb 'go', not past form 'went'."
+      },
+      {
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the sentence with correct subject-verb agreement:",
+        "options": [
+          "Every boy and girl in the competition receives a certificate.",
+          "Every boy and girl in the competition receive a certificate.",
+          "Every boy and girl in the competition are receiving a certificate.",
+          "Every boy and girl in the competition have received certificates."
+        ],
+        "correct": 0,
+        "hint": "Every + singular verb",
+        "explanation": "Phrases introduced by 'Every' take singular verbs ('receives')."
+      },
+      {
+        "type": "context-dialogue",
+        "category": "tenses",
+        "question": "Sarah: 'Can we meet at 4:00 p.m.?' - Leo: 'Sorry, I ______ my tennis lesson at that time.'",
+        "options": [
+          "am having",
+          "will be having",
+          "have",
+          "had"
+        ],
+        "correct": 0,
+        "hint": "Fixed personal arrangement",
+        "explanation": "Present Continuous ('am having') expresses planned future arrangements."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "You ______ feed the laboratory animals without the teacher's supervision. It can be hazardous.",
+        "options": [
+          "mustn't",
+          "don't have to",
+          "could",
+          "should"
+        ],
+        "correct": 0,
+        "hint": "Hazard prevention prohibition",
+        "explanation": "'Mustn't' expresses vital safety prohibitions."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "He apologized sincerely ______ his classmates ______ arriving late to the team presentation.",
+        "options": [
+          "to / for",
+          "for / to",
+          "with / at",
+          "at / with"
+        ],
+        "correct": 0,
+        "hint": "Apologize to someone for something",
+        "explanation": "The correct collocation is 'apologize to [person] for [action]'."
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly constructed negative question:",
+        "options": [
+          "Why didn't you inform us about the schedule change yesterday?",
+          "Why you didn't inform us about the schedule change yesterday?",
+          "Why didn't inform you us about the schedule change yesterday?",
+          "Why you not informed us about the schedule change yesterday?"
+        ],
+        "correct": 0,
+        "hint": "Negative question order",
+        "explanation": "Wh- + didn't + subject + base verb + object."
       },
       {
         "type": "complete-sentence",
-        "question": "The train to Istanbul ______ at 08:30 every single weekday morning.",
+        "category": "core-grammar",
+        "question": "The price of fresh organic vegetables ______ considerably during the winter months.",
         "options": [
-          "departs",
-          "is departing",
-          "departed"
+          "rises",
+          "rise",
+          "are rising",
+          "have risen"
         ],
         "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Fixed schedule uses Simple Present."
+        "hint": "Head noun agreement",
+        "explanation": "The true subject is 'The price' (singular), so use 'rises'."
       },
       {
-        "type": "context",
-        "question": "Where did you find your lost wallet? - I ______ it under my desk yesterday.",
+        "type": "choose-incorrect",
+        "category": "prepositions",
+        "question": "Choose the INCORRECT sentence with prepositions:",
         "options": [
-          "found",
-          "find",
-          "am finding"
+          "She discussed about the project with her supervisor.",
+          "She discussed the project with her supervisor.",
+          "She talked about the project with her supervisor.",
+          "She spoke about the project with her supervisor."
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' in answer to 'did you find' requires 'found'."
+        "hint": "Transitive verb 'discuss'",
+        "explanation": "'Discuss' is a transitive verb and takes a direct object without 'about'."
       },
       {
-        "type": "correct-incorrect",
-        "question": "“Look! The helicopter is landing on the hospital roof.”",
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "Whenever it ______ heavily, the small stream behind our garden ______ into a rushing river.",
         "options": [
-          "Correct",
-          "Incorrect"
+          "rains / turns",
+          "is raining / is turning",
+          "rained / is turning",
+          "rains / turned"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Correct! 'Look!' signals an event in progress."
+        "hint": "Zero conditional / habitual truth",
+        "explanation": "Habitual condition and result both take Simple Present."
+      },
+      {
+        "type": "same-meaning",
+        "category": "core-grammar",
+        "question": "'No other runner in our school is faster than Oliver.' Which sentence has the SAME meaning?",
+        "options": [
+          "Oliver is the fastest runner in our school.",
+          "Oliver is as fast as other runners in our school.",
+          "Other runners are faster than Oliver in our school.",
+          "Oliver is slower than most runners in our school."
+        ],
+        "correct": 0,
+        "hint": "Comparative to superlative conversion",
+        "explanation": "'No one is faster than X' means 'X is the fastest'."
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "While the chemistry teacher ______ the experiment, all the students ______ down notes diligently.",
+        "options": [
+          "was demonstrating / were taking",
+          "demonstrated / took",
+          "is demonstrating / takes",
+          "demonstrates / take"
+        ],
+        "correct": 0,
+        "hint": "Simultaneous past actions",
+        "explanation": ""
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "According to library policy, borrowed encyclopedias ______ be removed from the reference room.",
+        "options": [
+          "mustn't",
+          "don't have to",
+          "can",
+          "should"
+        ],
+        "correct": 0,
+        "hint": "Strict policy prohibition",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The historic museum is located ______ the junction ______ Oxford Street and Regent Street.",
+        "options": [
+          "at / of",
+          "in / on",
+          "on / at",
+          "to / in"
+        ],
+        "correct": 0,
+        "hint": "At the junction of",
+        "explanation": ""
       },
       {
         "type": "find-mistake",
-        "question": "My father don't drink coffee after dinner.",
+        "category": "core-grammar",
+        "question": "Find the mistake: 'Neither the principal nor the teachers was aware of the scheduling clash.'",
         "options": [
-          "father",
-          "don't",
-          "drink",
-          "after"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "Singular 'father' requires 'doesn't'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Yesterday, the students ______ their essays and submitted them to the teacher.",
-        "options": [
-          "wrote",
-          "write",
-          "are writing"
+          "was",
+          "Neither",
+          "teachers",
+          "scheduling"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Completed past sequence."
+        "hint": "Neither/nor plural closer subject 'teachers' -> 'were'",
+        "explanation": ""
       },
       {
-        "type": "context",
-        "question": "Listen carefully! The principal ______ the winner of the science fair.",
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the sentence with correct word order:",
+        "options": [
+          "Hardly ever does he forget to submit his laboratory reports on time.",
+          "Hardly ever he forgets to submit his laboratory reports on time.",
+          "He forgets hardly ever to submit his laboratory reports on time.",
+          "Does he hardly ever forget to submit his laboratory reports on time."
+        ],
+        "correct": 0,
+        "hint": "Inversion with negative adverb hardly ever",
+        "explanation": ""
+      },
+      {
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the sentence with correct pronoun agreement:",
+        "options": [
+          "Each of the girls brought her own musical instrument to the rehearsal.",
+          "Each of the girls brought their own musical instrument to the rehearsal.",
+          "Each of the girls brought them own musical instrument to the rehearsal.",
+          "Each of the girls brought hers own musical instrument to the rehearsal."
+        ],
+        "correct": 0,
+        "hint": "Each takes singular possessive her",
+        "explanation": ""
+      },
+      {
+        "type": "same-meaning",
+        "category": "modals",
+        "question": "'It is mandatory to wear seatbelts in the rear seats of the car.' Which sentence has the SAME meaning?",
+        "options": [
+          "Passengers must wear seatbelts in the rear seats.",
+          "Passengers can wear seatbelts in the rear seats.",
+          "Passengers don't have to wear seatbelts in the rear seats.",
+          "Passengers shouldn't wear seatbelts in the rear seats."
+        ],
+        "correct": 0,
+        "hint": "Mandatory = Must",
+        "explanation": ""
+      },
+      {
+        "type": "find-mistake",
+        "category": "tenses",
+        "question": "Find the mistake: 'While we walked home yesterday, it suddenly was starting to rain heavily.'",
+        "options": [
+          "was starting",
+          "walked",
+          "suddenly",
+          "heavily"
+        ],
+        "correct": 0,
+        "hint": "Sudden interrupting event takes simple past 'started'",
+        "explanation": ""
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "This antique soup ______ delicious because my grandmother ______ fresh garden basil.",
+        "options": [
+          "tastes / uses",
+          "is tasting / is using",
+          "tastes / is using",
+          "is tasting / uses"
+        ],
+        "correct": 0,
+        "hint": "Sensory stative verb 'tastes'",
+        "explanation": ""
+      },
+      {
+        "type": "choose-incorrect",
+        "category": "core-grammar",
+        "question": "Choose the INCORRECT sentence:",
+        "options": [
+          "The furniture in this antique shop are very expensive.",
+          "The furniture in this antique shop is very expensive.",
+          "The chairs in this shop are very expensive.",
+          "The tables in this shop are very expensive."
+        ],
+        "correct": 0,
+        "hint": "Furniture is uncountable (takes singular verb)",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "prepositions",
+        "question": "She is extremely interested ______ marine biology and ocean conservation.",
+        "options": [
+          "in",
+          "at",
+          "on",
+          "about"
+        ],
+        "correct": 0,
+        "hint": "Interested in",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "modals",
+        "question": "You ______ carry liquids exceeding 100ml through airport security gates.",
+        "options": [
+          "mustn't",
+          "don't have to",
+          "can",
+          "should"
+        ],
+        "correct": 0,
+        "hint": "Airport security prohibition",
+        "explanation": ""
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly ordered negative sentence:",
+        "options": [
+          "Never before had she witnessed such a magnificent meteor shower.",
+          "Never before she had witnessed such a magnificent meteor shower.",
+          "She had never before such a magnificent meteor shower witnessed.",
+          "Witnessed she never before such a magnificent meteor shower."
+        ],
+        "correct": 0,
+        "hint": "Inversion after 'Never before'",
+        "explanation": ""
+      },
+      {
+        "type": "find-mistake",
+        "category": "prepositions",
+        "question": "Find the mistake: 'We reached to the summit after climbing for six arduous hours.'",
+        "options": [
+          "to",
+          "reached",
+          "summit",
+          "arduous"
+        ],
+        "correct": 0,
+        "hint": "Reach is transitive (reach the summit, not reach to)",
+        "explanation": ""
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "Listen carefully! The principal ______ the names of the scholarship winners right now.",
         "options": [
           "is announcing",
           "announces",
-          "announced"
+          "announced",
+          "announce"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Listen carefully!' indicates a live announcement right now."
+        "hint": "Present continuous listening cue",
+        "explanation": ""
       },
       {
-        "type": "grammar-structure",
-        "question": "How many books ______ you read during the holiday last month?",
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the grammatically correct sentence:",
         "options": [
-          "did",
-          "do",
-          "are"
+          "Neither the captain nor the sailors were able to steer the ship through the storm.",
+          "Neither the captain nor the sailors was able to steer the ship through the storm.",
+          "Neither the captain nor the sailors is able to steer the ship through the storm.",
+          "Neither the captain nor the sailors has been able to steer the ship through the storm."
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past question requires 'did'."
+        "hint": "Plural agreement with sailors",
+        "explanation": ""
       },
       {
-        "type": "correct-incorrect",
-        "question": "“The students are listening attentively to the guest speaker now.”",
+        "type": "context-dialogue",
+        "category": "modals",
+        "question": "A: 'Is uniform required for tomorrow's charity fun run?' - B: 'No, students ______ wear casual sports clothes.'",
         "options": [
-          "Correct",
-          "Incorrect"
+          "can",
+          "mustn't",
+          "have to",
+          "shouldn't"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Correct! Present continuous with plural subject."
+        "hint": "Permission / option",
+        "explanation": ""
       },
       {
-        "type": "find-mistake",
-        "question": "She is having three older brothers and one sister.",
+        "type": "same-meaning",
+        "category": "core-grammar",
+        "question": "'Mount Everest is higher than all other mountains on Earth.' Which sentence has the SAME meaning?",
         "options": [
-          "She",
-          "is having",
-          "three",
-          "and"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "'Have' indicating possession is stative; use 'has'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Who ______ this delicious apple pie yesterday?",
-        "options": [
-          "made",
-          "makes",
-          "is making"
+          "Mount Everest is the highest mountain on Earth.",
+          "Mount Everest is as high as other mountains on Earth.",
+          "Other mountains on Earth are higher than Mount Everest.",
+          "Mount Everest is not the highest mountain on Earth."
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Subject question in Simple Past uses the past verb directly."
-      },
-      {
-        "type": "context",
-        "question": "Normally Mr. Brown teaches English, but today he ______ history because Mrs. Green is ill.",
-        "options": [
-          "is teaching",
-          "teaches",
-          "taught"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Temporary substitution for today."
+        "hint": "Superlative equivalence",
+        "explanation": ""
       },
       {
         "type": "complete-sentence",
-        "question": "The water in the pot ______ right now, so be careful not to touch it.",
+        "category": "core-grammar",
+        "question": "The team ______ celebrating their hard-fought tournament victory in the locker room.",
         "options": [
-          "is boiling",
-          "boils",
-          "boiled"
+          "is",
+          "are",
+          "were",
+          "have"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' indicates active boiling."
+        "hint": "Team acting as single collective entity in American standard",
+        "explanation": ""
       },
       {
-        "type": "correct-incorrect",
-        "question": "“Yesterday, they didn't played tennis because of the rain.”",
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "As a rule, water ______ at 0 degrees Celsius and ______ at 100 degrees Celsius.",
         "options": [
-          "Correct",
-          "Incorrect"
+          "freezes / boils",
+          "is freezing / is boiling",
+          "froze / boiled",
+          "freeze / boil"
         ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "Incorrect! After 'didn't', use base verb 'play'."
+        "correct": 0,
+        "hint": "Scientific physical laws",
+        "explanation": ""
       },
       {
         "type": "find-mistake",
-        "question": "At the moment, our team wins the championship match.",
+        "category": "modals",
+        "question": "Find the mistake: 'You don't have to touch that live wire or you will get a severe electric shock.'",
         "options": [
-          "At the moment",
-          "our team",
-          "wins",
-          "match"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "'At the moment' requires 'is winning'."
-      },
-      {
-        "type": "grammar-structure",
-        "question": "Why ______ she look so upset yesterday morning?",
-        "options": [
-          "did",
-          "does",
-          "is"
+          "don't have to",
+          "live wire",
+          "severe",
+          "shock"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday morning' takes 'did'."
+        "hint": "Should be 'mustn't' due to deadly hazard",
+        "explanation": ""
       },
       {
-        "type": "context",
-        "question": "Look at the chef! He ______ the fresh dough into round pizzas.",
-        "options": [
-          "is shaping",
-          "shapes",
-          "shaped"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look at the chef!' focuses on action in progress."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "My grandfather ______ 10 kilometers every morning when he was young.",
-        "options": [
-          "walked",
-          "walks",
-          "is walking"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'When he was young' indicates past habit."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“The sun always rises in the east and sets in the west.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Correct! Universal fact."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Where did they went during their summer vacation last year?",
-        "options": [
-          "Where",
-          "did",
-          "went",
-          "last year"
-        ],
-        "correct": 2,
-        "tense": "Simple Past",
-        "explanation": "After 'did', use base form 'go'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The baby ______ peacefully in her crib at this very moment.",
-        "options": [
-          "is sleeping",
-          "sleeps",
-          "slept"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'At this very moment' requires Present Continuous."
-      },
-      {
-        "type": "context",
-        "question": "I can't answer the phone right now because I ______ dinner in the kitchen.",
-        "options": [
-          "am cooking",
-          "cook",
-          "cooked"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Ongoing action prevents answering."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Neither of my parents ______ coffee in the evening.",
-        "options": [
-          "drinks",
-          "drink",
-          "are drinking"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Neither of' takes singular verb 'drinks'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence is standard grammar?",
-        "options": [
-          "Do you hear that strange noise outside?",
-          "Are you hearing that strange noise outside?",
-          "Did you hearing that strange noise outside?"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Hear' is perception stative; use 'Do you hear'."
-      },
-      {
-        "type": "find-mistake",
-        "question": "She study hard for her English exam yesterday night.",
-        "options": [
-          "She",
-          "study",
-          "hard",
-          "yesterday night"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "Past tense requires 'studied'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The school bus ______ at our stop at exactly 7:45 AM every school day.",
-        "options": [
-          "arrives",
-          "is arriving",
-          "arrived"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Daily schedule."
-      },
-      {
-        "type": "context",
-        "question": "Why did you call the technician? - Because the air conditioner ______ properly yesterday.",
-        "options": [
-          "didn't work",
-          "doesn't work",
-          "isn't working"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past negative 'didn't work'."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Listen! The orchestra ______ Beethoven's Fifth Symphony.",
-        "options": [
-          "is performing",
-          "performs",
-          "performed"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Listen!' signals ongoing performance."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Do he always complete his homework before having dinner?",
-        "options": [
-          "Do",
-          "he",
-          "complete",
-          "having"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'He' requires 'Does'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“They were at the concert last night and enjoyed the music.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Correct! Simple Past compound predicate."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Look! That clever dog ______ the front door with its paws!",
-        "options": [
-          "is opening",
-          "opens",
-          "opened"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look!' indicates action occurring now."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Did she drove all the way to the airport yesterday?",
-        "options": [
-          "Did",
-          "she",
-          "drove",
-          "yesterday"
-        ],
-        "correct": 2,
-        "tense": "Simple Past",
-        "explanation": "After 'Did', use base form 'drive'."
-      },
-      {
-        "type": "context",
-        "question": "Look at the mechanic! He ______ the engine of the race car right now.",
-        "options": [
-          "is repairing",
-          "repairs",
-          "repaired"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' indicates Present Continuous."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "The museum ______ thousands of visitors during the summer holidays every year.",
-        "options": [
-          "attracts",
-          "is attracting",
-          "attracted"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Every year' indicates regular occurrence."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“She didn't understood the homework assignment yesterday.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "Incorrect! After 'didn't', use 'understand'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Two hours ago, the plane ______ safely on the runway.",
-        "options": [
-          "landed",
-          "lands",
-          "is landing"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Two hours ago' requires Simple Past."
-      },
-      {
-        "type": "grammar-structure",
-        "question": "Why ______ the detective examine the footprints so thoroughly yesterday?",
-        "options": [
-          "did",
-          "does",
-          "is"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' requires 'did'."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Look! That bird build a nest on top of our chimney.",
-        "options": [
-          "Look",
-          "bird",
-          "build",
-          "chimney"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "With 'Look!', use 'is building'."
-      },
-      {
-        "type": "context",
-        "question": "Emma usually takes notes on her tablet, but today her battery is dead, so she ______ in a notebook.",
-        "options": [
-          "is writing",
-          "writes",
-          "wrote"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Temporary activity for today."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence is grammatically correct?",
-        "options": [
-          "The sun heats the ocean every day.",
-          "The sun is heating the ocean every day.",
-          "The sun heated the ocean every day now."
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Universal natural phenomenon in Simple Present."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The scientist ______ the experiment three times yesterday to ensure accurate results.",
-        "options": [
-          "repeated",
-          "repeats",
-          "is repeating"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' indicates completed past repetition."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Do your father always drive to work or take the subway?",
-        "options": [
-          "Do",
-          "father",
-          "drive",
-          "subway"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Your father' takes 'Does'."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Listen! The ambulance siren ______ in the distance.",
-        "options": [
-          "is wailing",
-          "wails",
-          "wailed"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Listen!' signals ongoing sound."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“She is remembering her first day of school very clearly.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "Incorrect! 'Remember' is stative; use 'She remembers'."
-      },
-      {
-        "type": "context",
-        "question": "Why is the road closed? - Because construction workers ______ the bridge right now.",
-        "options": [
-          "are repairing",
-          "repair",
-          "repaired"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Current reason for road closure."
-      },
-      {
-        "type": "grammar-structure",
-        "question": "How many times ______ you visit Cappadocia before moving there last year?",
-        "options": [
-          "did",
-          "do",
-          "are"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past inquiry with 'last year'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The historic castle ______ many earthquakes over the last three hundred years.",
-        "options": [
-          "survived",
-          "survives",
-          "is surviving"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past completed historical events."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Did they bought the train tickets yesterday morning?",
-        "options": [
-          "Did",
-          "bought",
-          "tickets",
-          "yesterday"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "After 'Did', use base verb 'buy'."
-      },
-      {
-        "type": "context",
-        "question": "Look! The professor ______ the chemical formula on the board.",
-        "options": [
-          "is writing",
-          "writes",
-          "wrote"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look!' indicates Present Continuous."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "How ______ the ancient Egyptians build the massive pyramids thousands of years ago?",
-        "options": [
-          "did",
-          "do",
-          "are"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Historical past question with 'did'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“She is having two cats and a golden retriever.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "Incorrect! Possession uses Simple Present 'has'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The solar system ______ eight planets revolving around the Sun.",
-        "options": [
-          "contains",
-          "is containing",
-          "contained"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Fact expressed with Simple Present."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Every weekend, Alex and his brother goes mountain biking.",
-        "options": [
-          "Every weekend",
-          "Alex and his brother",
-          "goes",
-          "mountain biking"
-        ],
-        "correct": 2,
-        "tense": "Simple Present",
-        "explanation": "Compound plural subject takes base form 'go'."
-      },
-      {
-        "type": "context",
-        "question": "Why didn't you join the Zoom meeting yesterday? - Because my internet connection ______ down.",
-        "options": [
-          "broke",
-          "breaks",
-          "is breaking"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past reason."
-      },
-      {
-        "type": "grammar-structure",
-        "question": "Why ______ the baby cry so loudly during the night yesterday?",
-        "options": [
-          "did",
-          "does",
-          "is"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' requires 'did'."
-      },
-      {
-        "type": "sentence-choice",
+        "type": "word-order",
+        "category": "word-order",
         "question": "Choose the correct sentence:",
         "options": [
-          "Neither of the students knows the answer to the riddle.",
-          "Neither of the students know the answer to the riddle.",
-          "Neither of the students is knowing the answer."
+          "Under no circumstances should you open the emergency door while the aircraft is moving.",
+          "Under no circumstances you should open the emergency door while the aircraft is moving.",
+          "You should under no circumstances open the emergency door while is moving the aircraft.",
+          "Should you under no circumstances open the emergency door while the aircraft is moving."
         ],
         "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Neither of' takes singular verb 'knows'."
+        "hint": "Inversion with 'Under no circumstances'",
+        "explanation": ""
       },
       {
-        "type": "verb-choice",
-        "question": "Look! That bird ______ a nest on the school roof.",
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The athlete was disqualified ______ violating the anti-doping regulations.",
         "options": [
-          "is building",
-          "builds",
-          "built"
+          "for",
+          "to",
+          "with",
+          "at"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look!' signals present progressive."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Right now, the technician test the sound system before the show.",
-        "options": [
-          "Right now",
-          "technician",
-          "test",
-          "show"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' requires 'is testing'."
+        "hint": "Disqualified for [reason]",
+        "explanation": ""
       },
       {
         "type": "complete-sentence",
-        "question": "Why ______ you look so surprised when you opened the gift box yesterday?",
+        "category": "core-grammar",
+        "question": "A pair of comfortable running shoes ______ essential for long-distance training.",
         "options": [
-          "did",
-          "do",
-          "are"
+          "is",
+          "are",
+          "were",
+          "have been"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' takes past auxiliary 'did'."
+        "hint": "'A pair' is singular subject",
+        "explanation": ""
       },
       {
-        "type": "correct-incorrect",
-        "question": "“Did she spoke with the school counselor yesterday morning?”",
+        "type": "choose-incorrect",
+        "category": "tenses",
+        "question": "Choose the INCORRECT sentence:",
         "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "Incorrect! After 'Did', use base verb 'speak'."
-      },
-      {
-        "type": "context",
-        "question": "Be quiet everyone! The jury ______ the final verdict in the courtroom right now.",
-        "options": [
-          "is delivering",
-          "delivers",
-          "delivered"
+          "I am believing every word you said yesterday.",
+          "I believe every word you said yesterday.",
+          "I believed every word you said yesterday.",
+          "I can believe every word you said yesterday."
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' indicates Present Continuous."
+        "hint": "Believe is stative",
+        "explanation": ""
       },
       {
-        "type": "verb-choice",
-        "question": "The astronomer ______ a distant supernova last month.",
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "You ______ carry an umbrella today; the meteorological office forecasted zero percent chance of rain.",
         "options": [
-          "observed",
-          "observes",
-          "is observing"
+          "don't have to",
+          "mustn't",
+          "should",
+          "can't"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last month' takes Simple Past."
+        "hint": "Lack of necessity",
+        "explanation": ""
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "When the sudden alarm went off, the scientists ______ the experiment safely.",
+        "options": [
+          "stopped",
+          "were stopping",
+          "stop",
+          "are stopping"
+        ],
+        "correct": 0,
+        "hint": "Past spontaneous completion",
+        "explanation": ""
+      },
+      {
+        "type": "find-mistake",
+        "category": "core-grammar",
+        "question": "Find the mistake: 'The news broadcasted on television tonight were very shocking.'",
+        "options": [
+          "were",
+          "broadcasted",
+          "tonight",
+          "shocking"
+        ],
+        "correct": 0,
+        "hint": "News is singular uncountable (was shocking)",
+        "explanation": ""
       },
       {
         "type": "complete-sentence",
-        "question": "Listen! The volcano guide ______ the safety evacuation procedures right now.",
+        "category": "prepositions",
+        "question": "The research submarine descended deep ______ the dark oceanic trench.",
         "options": [
-          "is explaining",
-          "explains",
-          "explained"
+          "into",
+          "onto",
+          "under",
+          "between"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Listen!' indicates present action."
+        "hint": "Movement deep into depth",
+        "explanation": ""
       },
       {
-        "type": "find-mistake",
-        "question": "Do the headmaster always sign the diplomas in person?",
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the correct sentence:",
         "options": [
-          "Do",
-          "headmaster",
-          "sign",
-          "diplomas"
+          "Ten kilometers is a challenging distance for beginner runners.",
+          "Ten kilometers are a challenging distance for beginner runners.",
+          "Ten kilometers were a challenging distance for beginner runners.",
+          "Ten kilometer is a challenging distance for beginner runners."
         ],
         "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Singular 'headmaster' takes 'Does'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“She didn't understood the chemical reaction yesterday.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "Incorrect! After 'didn't', use 'understand'."
-      },
-      {
-        "type": "context",
-        "question": "Look at the veterinarian! She ______ the injured eagle's wing right now.",
-        "options": [
-          "is bandaging",
-          "bandages",
-          "bandaged"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Immediate current medical treatment."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The ancient Greeks ______ the Olympic Games every four years.",
-        "options": [
-          "celebrated",
-          "celebrate",
-          "are celebrating"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Historical past event."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence is grammatically correct? (Neither of the optio...)",
-        "options": [
-          "Neither of the options satisfies the safety requirement.",
-          "Neither of the options satisfy the safety requirement.",
-          "Neither of the options is satisfying the requirement."
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Neither of' takes singular 'satisfies'."
-      },
-      {
-        "type": "grammar-structure",
-        "question": "Why ______ the lighthouse keeper sound the foghorn yesterday?",
-        "options": [
-          "did",
-          "does",
-          "is"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' requires 'did'."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Right now, the technician test the satellite antenna.",
-        "options": [
-          "Right now",
-          "technician",
-          "test",
-          "antenna"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "Should be 'is testing'."
-      },
-      {
-        "type": "context",
-        "question": "Normally we take the bus, but today the street is flooded, so we ______ the metro.",
-        "options": [
-          "are riding",
-          "ride",
-          "rode"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Temporary change for today."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The Earth ______ on its axis once every twenty-four hours.",
-        "options": [
-          "rotates",
-          "is rotating",
-          "rotated"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Astronomical fact."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "How ______ the rescue team locate the lost climbers yesterday?",
-        "options": [
-          "did",
-          "do",
-          "are"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' requires 'did'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Did she spoke with the tournament referee yesterday afternoon?”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "Incorrect! After 'Did', use 'speak'."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Every weekend, Deniz and his brother plays basketball at the youth center.",
-        "options": [
-          "Every weekend",
-          "Deniz and his brother",
-          "plays",
-          "center"
-        ],
-        "correct": 2,
-        "tense": "Simple Present",
-        "explanation": "Compound plural subject takes 'play'."
-      },
-      {
-        "type": "context",
-        "question": "Why is the laboratory dark? - Because the scientist ______ a sensitive optical experiment right now.",
-        "options": [
-          "is conducting",
-          "conducts",
-          "conducted"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Action occurring at this exact moment."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The submarine ______ beneath the thick arctic ice sheet yesterday.",
-        "options": [
-          "navigated",
-          "navigates",
-          "is navigating"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' indicates past."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Listen! The nightingale ______ a melodic tune in the branches.",
-        "options": [
-          "is singing",
-          "sings",
-          "sang"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Listen!' signals ongoing song."
-      },
-      {
-        "type": "grammar-structure",
-        "question": "Under normal conditions, water ______ at zero degrees Celsius.",
-        "options": [
-          "freezes",
-          "is freezing",
-          "froze"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Universal science truth."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Why does they always complain about the cafeteria menu?",
-        "options": [
-          "does",
-          "they",
-          "complain",
-          "menu"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Plural 'they' takes 'do'."
-      },
-      {
-        "type": "context",
-        "question": "Where did you buy that telescope? - I ______ it at the optical shop yesterday.",
-        "options": [
-          "bought",
-          "buy",
-          "am buying"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past inquiry response."
+        "hint": "Unit of measurement taken as single distance (is)",
+        "explanation": ""
       }
     ]
   },
   "grade8": {
     "easy": [
       {
-        "type": "verb-choice",
-        "question": "The scientist ______ a fascinating new chemical reaction yesterday.",
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "You ______ show your passport when entering a foreign country.",
         "options": [
-          "discovered",
-          "discovers",
-          "is discovering"
+          "must",
+          "can't",
+          "shouldn't",
+          "don't have to"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' shows completed past discovery."
+        "hint": "Legal requirement",
+        "explanation": "Showing a passport at international borders is an absolute legal requirement ('must')."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "Students ______ bring calculators into the mental math competition.",
+        "options": [
+          "mustn't",
+          "can",
+          "should",
+          "don't have to"
+        ],
+        "correct": 0,
+        "hint": "Contest rule prohibition",
+        "explanation": "Calculators are strictly forbidden in mental math."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "It is warm and sunny today. You ______ bring a heavy winter coat.",
+        "options": [
+          "don't have to",
+          "must",
+          "have to",
+          "shouldn't"
+        ],
+        "correct": 0,
+        "hint": "No necessity",
+        "explanation": "Warm weather means a heavy coat is not necessary."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "______ you swim across the lake when you were ten years old?",
+        "options": [
+          "Could",
+          "Must",
+          "Should",
+          "Have to"
+        ],
+        "correct": 0,
+        "hint": "Past ability question",
+        "explanation": "'Could you...?' asks about general past ability."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "You look exhausted after track practice. You ______ rest and drink water.",
+        "options": [
+          "should",
+          "mustn't",
+          "can't",
+          "don't have to"
+        ],
+        "correct": 0,
+        "hint": "Sensible advice",
+        "explanation": "'Should' gives friendly, sound advice."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The international space station orbits ______ the Earth every 90 minutes.",
+        "options": [
+          "around",
+          "between",
+          "under",
+          "into"
+        ],
+        "correct": 0,
+        "hint": "Circular movement",
+        "explanation": "'Around' describes circular orbital motion."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "We stayed inside the shelter ______ the severe thunderstorm.",
+        "options": [
+          "during",
+          "at",
+          "to",
+          "on"
+        ],
+        "correct": 0,
+        "hint": "Preposition of time/duration",
+        "explanation": "'During' indicates the whole period of an event."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The hikers walked ______ the dark tunnel to reach the sunny valley.",
+        "options": [
+          "through",
+          "under",
+          "between",
+          "at"
+        ],
+        "correct": 0,
+        "hint": "Passage through an enclosure",
+        "explanation": "'Through' describes movement passing inside a 3D tunnel."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The bank is located directly ______ the post office on High Street.",
+        "options": [
+          "opposite",
+          "under",
+          "into",
+          "at"
+        ],
+        "correct": 0,
+        "hint": "Across the street",
+        "explanation": "'Opposite' indicates facing across the street."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The curious squirrel climbed ______ the tall oak tree in seconds.",
+        "options": [
+          "up",
+          "into",
+          "under",
+          "between"
+        ],
+        "correct": 0,
+        "hint": "Upward movement",
+        "explanation": "'Climbed up' expresses upward motion."
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly ordered sentence:",
+        "options": [
+          "We always eat dinner together as a family at 7:00 p.m.",
+          "We eat always dinner together as a family at 7:00 p.m.",
+          "Always we eat dinner together as a family at 7:00 p.m.",
+          "We eat dinner always together as a family at 7:00 p.m."
+        ],
+        "correct": 0,
+        "hint": "Frequency adverb before main verb",
+        "explanation": "'Always' precedes the action verb 'eat'."
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correct question format:",
+        "options": [
+          "Why did the train arrive twenty minutes late?",
+          "Why the train did arrive twenty minutes late?",
+          "Why did arrive the train twenty minutes late?",
+          "Why arrived the train twenty minutes late?"
+        ],
+        "correct": 0,
+        "hint": "Wh- + did + subject + verb",
+        "explanation": "Past question structure: Wh- word + did + Subject + base verb."
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly ordered negative sentence:",
+        "options": [
+          "She doesn't usually drink sugary sodas with her lunch.",
+          "She usually doesn't drink sugary sodas with her lunch.",
+          "Doesn't she usually drink sugary sodas with her lunch.",
+          "She doesn't drink usually sugary sodas with her lunch."
+        ],
+        "correct": 0,
+        "hint": "Standard negative with adverb",
+        "explanation": "Auxiliary + adverb + main verb structure."
       },
       {
         "type": "complete-sentence",
-        "question": "Look at those dark clouds! It ______ heavily outside.",
+        "category": "tenses",
+        "question": "Look! That bird ______ a nest on our balcony.",
         "options": [
-          "is raining",
-          "rains",
-          "rained"
+          "is building",
+          "builds",
+          "built",
+          "build"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look at those dark clouds!' refers to what is happening now."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Did she met her best friend at the cafe yesterday?",
-        "options": [
-          "Did",
-          "met",
-          "best friend",
-          "yesterday"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "With auxiliary 'Did', use base verb 'meet'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence expresses a weekly routine?",
-        "options": [
-          "Our English teacher gives us homework twice a week.",
-          "Our English teacher is giving us homework twice a week.",
-          "Our English teacher gave us homework twice a week now."
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Twice a week' indicates regular frequency."
-      },
-      {
-        "type": "context",
-        "question": "Tom usually plays basketball on Fridays, but last Friday he ______ a museum instead.",
-        "options": [
-          "visited",
-          "visits",
-          "is visiting"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last Friday' requires Simple Past."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Hurry up! The audience ______ for the show to begin.",
-        "options": [
-          "is waiting",
-          "waits",
-          "waited"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Hurry up!' indicates an action occurring right now."
-      },
-      {
-        "type": "find-mistake",
-        "question": "He don't know how to solve this math equation.",
-        "options": [
-          "He",
-          "don't",
-          "know",
-          "equation"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "Subject 'He' requires 'doesn't'."
+        "hint": "Present Continuous visual cue",
+        "explanation": "'Look!' alerts to an action in progress."
       },
       {
         "type": "complete-sentence",
-        "question": "We ______ an exciting football match on TV last night.",
+        "category": "tenses",
+        "question": "Water ______ into ice when the temperature drops below zero.",
         "options": [
-          "watched",
-          "watch",
-          "are watching"
+          "freezes",
+          "is freezing",
+          "froze",
+          "freeze"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last night' indicates Simple Past."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“The students are taking an important exam at the moment.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Correct! 'At the moment' with Present Continuous."
-      },
-      {
-        "type": "context",
-        "question": "What are you doing in the kitchen? - I ______ dinner for the family.",
-        "options": [
-          "am cooking",
-          "cook",
-          "cooked"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Answers 'What are you doing' with Present Continuous."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The museum ______ its doors at 9:00 AM every day.",
-        "options": [
-          "opens",
-          "is opening",
-          "opened"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Scheduled opening time uses Simple Present."
-      },
-      {
-        "type": "find-mistake",
-        "question": "They was very excited about the school trip last week.",
-        "options": [
-          "They",
-          "was",
-          "excited",
-          "last week"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "Plural subject 'They' takes 'were'."
+        "hint": "Scientific fact",
+        "explanation": "General physical facts use Simple Present."
       },
       {
         "type": "complete-sentence",
-        "question": "Listen! The school choir ______ a traditional song.",
-        "options": [
-          "is singing",
-          "sings",
-          "sang"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Listen!' points to an action happening right now."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Does your brother plays the guitar?”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "Incorrect! After 'Does', use base verb 'play'."
-      },
-      {
-        "type": "context",
-        "question": "Maya wasn't at school yesterday because she ______ a high fever.",
-        "options": [
-          "had",
-          "has",
-          "is having"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' / 'wasn't' sets the past context."
-      },
-      {
-        "type": "verb-choice",
-        "question": "I ______ my homework right now, so please do not disturb me.",
-        "options": [
-          "am doing",
-          "do",
-          "did"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' requires Present Continuous."
-      },
-      {
-        "type": "find-mistake",
-        "question": "She didn't wrote the email to her teacher yesterday.",
-        "options": [
-          "didn't",
-          "wrote",
-          "email",
-          "yesterday"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "After 'didn't', use base form 'write'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Choose the scientific fact:",
-        "options": [
-          "Water freezes into ice at zero degrees Celsius.",
-          "Water is freezing into ice at zero degrees Celsius.",
-          "Water frozed into ice at zero degrees Celsius."
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Scientific fact uses Simple Present."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“We visited our grandparents two days ago.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Correct! Simple past with 'two days ago'."
-      },
-      {
-        "type": "context",
-        "question": "Why is Liam running so fast? - Because he ______ to catch the school bus right now.",
-        "options": [
-          "is trying",
-          "tries",
-          "tried"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Current motivation for an action happening right now."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Last year, our class ______ a trip to Cappadocia.",
-        "options": [
-          "took",
-          "takes",
-          "is taking"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last year' takes Simple Past."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Are you understand the grammar rule explained by the teacher?",
-        "options": [
-          "Are",
-          "understand",
-          "rule",
-          "explained"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Understand' is stative; use 'Do you understand'."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "My father rarely ______ coffee late at night.",
-        "options": [
-          "drinks",
-          "is drinking",
-          "drank"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Frequency adverb 'rarely' takes Simple Present."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Look! The magician is performing a card trick.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Correct! 'Look!' indicates present continuous."
-      },
-      {
-        "type": "context",
-        "question": "Sarah didn't eat lunch earlier, so now she ______ very hungry.",
-        "options": [
-          "feels",
-          "felt",
-          "is feeling"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Stative verb 'feel' expressing current state."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The mechanic ______ our car yesterday afternoon.",
-        "options": [
-          "repaired",
-          "repairs",
-          "is repairing"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday afternoon' indicates Simple Past."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Look! The cat is chase a mouse in the garden.",
-        "options": [
-          "Look",
-          "cat",
-          "chase",
-          "garden"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "Should be 'is chasing'."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Right now, the students ______ an experiment in the science lab.",
-        "options": [
-          "are conducting",
-          "conduct",
-          "conducted"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' requires Present Continuous."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which past sentence is correct?",
-        "options": [
-          "He went to bed early last night because he was tired.",
-          "He goes to bed early last night because he was tired.",
-          "He is going to bed early last night because he was tired."
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Went' and 'was' past sequence."
-      },
-      {
-        "type": "context",
-        "question": "Listen! Somebody ______ on the front door.",
-        "options": [
-          "is knocking",
-          "knocks",
-          "knocked"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Listen!' signals an action happening right now."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The librarian ______ the quiet room rules every morning.",
-        "options": [
-          "reminds",
-          "is reminding",
-          "reminded"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Habitual rule with 'every morning'."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Yesterday, the coach ______ the team for the finals.",
-        "options": [
-          "selected",
-          "selects",
-          "is selecting"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' requires past tense 'selected'."
-      },
-      {
-        "type": "find-mistake",
-        "question": "She is walk to school every morning with her cousin.",
-        "options": [
-          "is walk",
-          "to school",
-          "every morning",
-          "cousin"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Every morning' expresses habit: 'walks'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Did you eat all the cookies yesterday?”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Correct! 'Did + base verb'."
-      },
-      {
-        "type": "context",
-        "question": "Why are you whispering? - Because the baby ______ in the next room.",
-        "options": [
-          "is sleeping",
-          "sleeps",
-          "slept"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Ongoing action requiring quiet right now."
-      },
-      {
-        "type": "verb-choice",
-        "question": "We ______ delicious lemonade at the summer fair last Saturday.",
-        "options": [
-          "drank",
-          "drink",
-          "are drinking"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last Saturday' indicates Simple Past."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Look! The plane ______ over the high mountains.",
-        "options": [
-          "is flying",
-          "flies",
-          "flew"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look!' indicates Present Continuous."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Did your friend brought the basketball yesterday?",
-        "options": [
-          "Did",
-          "friend",
-          "brought",
-          "yesterday"
-        ],
-        "correct": 2,
-        "tense": "Simple Past",
-        "explanation": "After 'Did', use base verb 'bring'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Choose the correct sentence:",
-        "options": [
-          "The sun heats the Earth every day.",
-          "The sun is heating the Earth every day.",
-          "The sun heat the Earth every day."
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Fact in Simple Present."
-      },
-      {
-        "type": "context",
-        "question": "Why didn't you answer the phone? - Because I ______ in the garden.",
-        "options": [
-          "worked",
-          "work",
-          "am working"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past event explanation."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The security guard ______ the main gates at 10 PM every night.",
-        "options": [
-          "locks",
-          "is locking",
-          "locked"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Routine closing time."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Look at the stage! The drama club ______ their final rehearsal.",
-        "options": [
-          "is holding",
-          "holds",
-          "held"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look at the stage!' marks current activity."
-      },
-      {
-        "type": "find-mistake",
-        "question": "She didn't sent the invitation cards yesterday.",
-        "options": [
-          "didn't",
-          "sent",
-          "cards",
-          "yesterday"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "After 'didn't', use base form 'send'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“They are designing a solar-powered vehicle right now.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Correct! Ongoing engineering project."
-      },
-      {
-        "type": "context",
-        "question": "Where was Berk yesterday? - He ______ his father paint the fence.",
-        "options": [
-          "helped",
-          "helps",
-          "is helping"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past response."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Spiders ______ eight legs and two main body segments.",
-        "options": [
-          "have",
-          "are having",
-          "had"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Biological fact."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Two days ago, the storm ______ several ancient trees in the forest.",
-        "options": [
-          "toppled",
-          "topples",
-          "is toppling"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Two days ago' indicates Simple Past."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Listen! The baby cry for her milk in the kitchen.",
-        "options": [
-          "Listen",
-          "baby",
-          "cry",
-          "kitchen"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "Should be 'is crying'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence is correct for daily routine?",
-        "options": [
-          "She brushes her teeth twice a day.",
-          "She is brushing her teeth twice a day.",
-          "She brushed her teeth twice a day now."
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Frequency routine in Simple Present."
-      },
-      {
-        "type": "context",
-        "question": "Why are you wearing rain boots? - Because it ______ outside right now.",
-        "options": [
-          "is pouring",
-          "pours",
-          "poured"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Immediate weather condition."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The robotics team ______ the national trophy last weekend.",
+        "category": "tenses",
+        "question": "Three days ago, Sophia ______ first prize in the national essay competition.",
         "options": [
           "won",
           "wins",
-          "is winning"
+          "is winning",
+          "win"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last weekend' indicates past."
+        "hint": "Past time marker",
+        "explanation": "'Three days ago' requires Simple Past 'won'."
       },
       {
         "type": "complete-sentence",
-        "question": "Look! That drone ______ high above the sports field.",
+        "category": "tenses",
+        "question": "Listen! The school choir ______ a beautiful traditional song.",
         "options": [
-          "is hovering",
-          "hovers",
-          "hovered"
+          "is singing",
+          "sings",
+          "sang",
+          "sing"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look!' signals live action."
+        "hint": "Audio cue Present Continuous",
+        "explanation": "'Listen!' signals an action happening right now."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "He didn't ______ the instructions carefully, so he made several errors.",
+        "options": [
+          "read",
+          "reads",
+          "reading",
+          "readed"
+        ],
+        "correct": 0,
+        "hint": "Did not + base verb",
+        "explanation": "Use base verb after didn't."
+      },
+      {
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the grammatically correct sentence:",
+        "options": [
+          "Jupiter is the largest planet in our solar system.",
+          "Jupiter is the most large planet in our solar system.",
+          "Jupiter is largest planet in our solar system.",
+          "Jupiter is larger planet in our solar system."
+        ],
+        "correct": 0,
+        "hint": "Superlative form",
+        "explanation": "One-syllable adjectives take 'the -est' (the largest)."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "There were ______ interesting exhibits at the science museum.",
+        "options": [
+          "many",
+          "much",
+          "any",
+          "little"
+        ],
+        "correct": 0,
+        "hint": "Countable quantifier",
+        "explanation": "'Exhibits' is countable plural, so use 'many'."
       },
       {
         "type": "find-mistake",
-        "question": "He don't understand the chemistry formula on the board.",
+        "category": "core-grammar",
+        "question": "Find the mistake: 'Everyone in the classroom have finished the quiz.'",
         "options": [
-          "He",
-          "don't",
+          "have",
+          "Everyone",
+          "classroom",
+          "finished"
+        ],
+        "correct": 0,
+        "hint": "Everyone + singular verb",
+        "explanation": "'Everyone' is an indefinite pronoun requiring singular verb 'has'."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "This is ______ book I have ever read; the plot was incredible!",
+        "options": [
+          "the best",
+          "the goodest",
+          "the better",
+          "most good"
+        ],
+        "correct": 0,
+        "hint": "Superlative of good",
+        "explanation": "The superlative of 'good' is 'the best'."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "We stayed inside ______ it was raining heavily outside.",
+        "options": [
+          "because",
+          "so",
+          "although",
+          "but"
+        ],
+        "correct": 0,
+        "hint": "Reason conjunction",
+        "explanation": "'Because' introduces the cause/reason."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "Drivers ______ obey traffic lights to ensure road safety.",
+        "options": [
+          "must",
+          "can't",
+          "don't have to",
+          "shouldn't"
+        ],
+        "correct": 0,
+        "hint": "Legal necessity",
+        "explanation": ""
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "You ______ touch the paintings in an art gallery.",
+        "options": [
+          "mustn't",
+          "can",
+          "don't have to",
+          "should"
+        ],
+        "correct": 0,
+        "hint": "Gallery rule prohibition",
+        "explanation": ""
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "Today is a school holiday, so students ______ set their morning alarm clocks.",
+        "options": [
+          "don't have to",
+          "must",
+          "have to",
+          "shouldn't"
+        ],
+        "correct": 0,
+        "hint": "Absence of necessity",
+        "explanation": ""
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "Leo is very agile. He ______ climb that steep rock wall with ease.",
+        "options": [
+          "can",
+          "mustn't",
+          "shouldn't",
+          "has to"
+        ],
+        "correct": 0,
+        "hint": "Physical ability",
+        "explanation": ""
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "You have a high fever. You ______ consult a doctor immediately.",
+        "options": [
+          "should",
+          "mustn't",
+          "can't",
+          "don't have to"
+        ],
+        "correct": 0,
+        "hint": "Medical advice",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The express train departs ______ 10:15 a.m. from platform 4.",
+        "options": [
+          "at",
+          "on",
+          "in",
+          "to"
+        ],
+        "correct": 0,
+        "hint": "Exact time",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The championship finals take place ______ Saturday morning.",
+        "options": [
+          "on",
+          "at",
+          "in",
+          "to"
+        ],
+        "correct": 0,
+        "hint": "On + day",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "Flowers bloom beautifully throughout the valley ______ spring.",
+        "options": [
+          "in",
+          "on",
+          "at",
+          "to"
+        ],
+        "correct": 0,
+        "hint": "Seasons preposition",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The ancient ruins lie buried deep ______ the desert sand.",
+        "options": [
+          "under",
+          "between",
+          "into",
+          "at"
+        ],
+        "correct": 0,
+        "hint": "Underneath surface",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The bakery is situated ______ the post office and the library.",
+        "options": [
+          "between",
+          "into",
+          "from",
+          "on"
+        ],
+        "correct": 0,
+        "hint": "Between two places",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "She walked ______ the conference hall with confidence.",
+        "options": [
+          "into",
+          "under",
+          "between",
+          "on"
+        ],
+        "correct": 0,
+        "hint": "Movement entering room",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "He traveled to Canada ______ his family during the winter break.",
+        "options": [
+          "with",
+          "for",
+          "at",
+          "between"
+        ],
+        "correct": 0,
+        "hint": "Accompaniment",
+        "explanation": ""
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly ordered sentence:",
+        "options": [
+          "Alex often reads historical novels in the evening.",
+          "Alex reads often historical novels in the evening.",
+          "Often Alex reads historical novels in the evening.",
+          "Alex historical novels reads often in the evening."
+        ],
+        "correct": 0,
+        "hint": "Adverb before action verb",
+        "explanation": ""
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correct past question structure:",
+        "options": [
+          "Where did you buy that fantastic jacket?",
+          "Where you did buy that fantastic jacket?",
+          "Where did buy you that fantastic jacket?",
+          "Where bought you that fantastic jacket?"
+        ],
+        "correct": 0,
+        "hint": "Wh- + did + subject + verb",
+        "explanation": ""
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correct negative sentence:",
+        "options": [
+          "We do not attend weekend classes during the vacation.",
+          "We attend not weekend classes during the vacation.",
+          "We not do attend weekend classes during the vacation.",
+          "Not we attend weekend classes during the vacation."
+        ],
+        "correct": 0,
+        "hint": "Do not + base verb",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "Look! The firefighter ______ up the ladder to rescue the puppy.",
+        "options": [
+          "is climbing",
+          "climbs",
+          "climbed",
+          "climb"
+        ],
+        "correct": 0,
+        "hint": "Visual cue present continuous",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "The earth ______ around the sun in approximately 365 days.",
+        "options": [
+          "revolves",
+          "is revolving",
+          "revolved",
+          "revolve"
+        ],
+        "correct": 0,
+        "hint": "Astronomical fact",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "Last weekend, we ______ an exciting science exhibition downtown.",
+        "options": [
+          "attended",
+          "attend",
+          "are attending",
+          "attends"
+        ],
+        "correct": 0,
+        "hint": "Completed past event",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "Listen! Someone ______ softly on the front door.",
+        "options": [
+          "is knocking",
+          "knocks",
+          "knocked",
+          "knock"
+        ],
+        "correct": 0,
+        "hint": "Audio cue present continuous",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "He didn't ______ the mathematical equation despite the teacher's explanation.",
+        "options": [
           "understand",
-          "formula"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "'He' takes 'doesn't'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Did you clean your bicycle yesterday afternoon?”",
-        "options": [
-          "Correct",
-          "Incorrect"
+          "understood",
+          "understanding",
+          "understands"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Correct! 'Did + clean'."
+        "hint": "Base verb after didn't",
+        "explanation": ""
       },
       {
-        "type": "context",
-        "question": "Where did Selin go yesterday? - She ______ to the public library to study.",
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the correct sentence:",
         "options": [
-          "went",
-          "goes",
-          "is going"
+          "The Pacific Ocean is deeper than the Atlantic Ocean.",
+          "The Pacific Ocean is more deep than the Atlantic Ocean.",
+          "The Pacific Ocean is deepest than the Atlantic Ocean.",
+          "The Pacific Ocean is as deep than the Atlantic Ocean."
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past answer."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The school cafeteria ______ healthy meals every weekday.",
-        "options": [
-          "serves",
-          "is serving",
-          "served"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Regular weekday service."
+        "hint": "Comparative of deep",
+        "explanation": ""
       },
       {
         "type": "complete-sentence",
-        "question": "Yesterday morning, the firefighters ______ the burning building safely.",
+        "category": "core-grammar",
+        "question": "How ______ sugar do you take in your morning coffee?",
         "options": [
-          "evacuated",
-          "evacuate",
-          "are evacuating"
+          "much",
+          "many",
+          "any",
+          "a few"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday morning' past marker."
+        "hint": "Uncountable sugar",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "He was exhausted after the match, ______ he took a long nap.",
+        "options": [
+          "so",
+          "because",
+          "although",
+          "but"
+        ],
+        "correct": 0,
+        "hint": "Result conjunction",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "She wanted to buy the book, ______ the bookstore was closed.",
+        "options": [
+          "but",
+          "so",
+          "and",
+          "because"
+        ],
+        "correct": 0,
+        "hint": "Contrast conjunction",
+        "explanation": ""
+      },
+      {
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the grammatically correct sentence:",
+        "options": [
+          "Neither of the options was acceptable to the committee.",
+          "Neither of the options were acceptable to the committee.",
+          "Neither of the options are acceptable to the committee.",
+          "Neither of the options have been acceptable to the committee."
+        ],
+        "correct": 0,
+        "hint": "Neither takes singular verb",
+        "explanation": ""
       },
       {
         "type": "find-mistake",
-        "question": "Listen! The band play our favorite song right now.",
+        "category": "tenses",
+        "question": "Find the mistake: 'Yesterday I see an amazing fireworks display.'",
         "options": [
-          "Listen",
-          "band",
-          "play",
-          "right now"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "Should be 'is playing'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Choose the correct past sentence:",
-        "options": [
-          "They celebrated their friend's birthday yesterday.",
-          "They celebrates their friend's birthday yesterday.",
-          "They are celebrating their friend's birthday yesterday."
+          "see",
+          "Yesterday",
+          "amazing",
+          "display"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Celebrated' is past."
-      },
-      {
-        "type": "context",
-        "question": "What is Tolga doing in the garage? - He ______ his bicycle tire.",
-        "options": [
-          "is pumping",
-          "pumps",
-          "pumped"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Current ongoing task."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The postman always ______ our mail at 11:00 AM.",
-        "options": [
-          "delivers",
-          "is delivering",
-          "delivered"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Daily mail delivery routine."
+        "hint": "Past tense saw",
+        "explanation": ""
       },
       {
         "type": "complete-sentence",
-        "question": "Two days ago, our class ______ an ancient castle ruins site.",
+        "category": "tenses",
+        "question": "They ______ in London when the historic Olympic games took place.",
+        "options": [
+          "were living",
+          "lived",
+          "are living",
+          "live"
+        ],
+        "correct": 0,
+        "hint": "Past background continuous",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "Gold is ______ than copper.",
+        "options": [
+          "more expensive",
+          "expensiver",
+          "most expensive",
+          "as expensive"
+        ],
+        "correct": 0,
+        "hint": "Long adjective comparative",
+        "explanation": ""
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "You ______ turn off your headlights during dense fog.",
+        "options": [
+          "shouldn't",
+          "must",
+          "can",
+          "has to"
+        ],
+        "correct": 0,
+        "hint": "Safety advice",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The birds flew high ______ the mountain peaks.",
+        "options": [
+          "above",
+          "into",
+          "under",
+          "between"
+        ],
+        "correct": 0,
+        "hint": "Above peaks",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "These notebooks belong to us; they are ______.",
+        "options": [
+          "ours",
+          "our",
+          "us",
+          "we"
+        ],
+        "correct": 0,
+        "hint": "Possessive pronoun",
+        "explanation": ""
+      },
+      {
+        "type": "choose-question",
+        "category": "tenses",
+        "question": "Choose the correct question:",
+        "options": [
+          "Does your brother speak German fluently?",
+          "Do your brother speak German fluently?",
+          "Does your brother speaks German fluently?",
+          "Is your brother speak German fluently?"
+        ],
+        "correct": 0,
+        "hint": "Does + subject + base verb",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "Two days ago, Emily ______ an important email to her tutor.",
+        "options": [
+          "sent",
+          "sends",
+          "is sending",
+          "send"
+        ],
+        "correct": 0,
+        "hint": "Past irregular verb sent",
+        "explanation": ""
+      },
+      {
+        "type": "find-mistake",
+        "category": "prepositions",
+        "question": "Find the mistake: 'He arrived to the train station just in time.'",
+        "options": [
+          "to",
+          "arrived",
+          "station",
+          "time"
+        ],
+        "correct": 0,
+        "hint": "Arrive at the station",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "modals",
+        "question": "You ______ eat inside the science laboratory.",
+        "options": [
+          "mustn't",
+          "don't have to",
+          "can",
+          "should"
+        ],
+        "correct": 0,
+        "hint": "Lab rule",
+        "explanation": ""
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly ordered sentence:",
+        "options": [
+          "She is always polite to her teachers and classmates.",
+          "She always is polite to her teachers and classmates.",
+          "Always she is polite to her teachers and classmates.",
+          "She is polite always to her teachers and classmates."
+        ],
+        "correct": 0,
+        "hint": "Frequency adverb after 'be'",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "There are ______ historical monuments in Rome.",
+        "options": [
+          "many",
+          "much",
+          "little",
+          "any"
+        ],
+        "correct": 0,
+        "hint": "Countable quantifier",
+        "explanation": ""
+      },
+      {
+        "type": "choose-negative",
+        "category": "tenses",
+        "question": "Choose the correct negative sentence:",
+        "options": [
+          "Daniel doesn't work at the local hospital anymore.",
+          "Daniel doesn't works at the local hospital anymore.",
+          "Daniel don't work at the local hospital anymore.",
+          "Daniel not work at the local hospital anymore."
+        ],
+        "correct": 0,
+        "hint": "Doesn't + base verb",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "Water in the pot ______ right now; please turn down the flame.",
+        "options": [
+          "is boiling",
+          "boils",
+          "boiled",
+          "boil"
+        ],
+        "correct": 0,
+        "hint": "Current ongoing action",
+        "explanation": ""
+      },
+      {
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the correct sentence:",
+        "options": [
+          "Whose backpack is left on the bench?",
+          "Who's backpack is left on the bench?",
+          "Who backpack is left on the bench?",
+          "Whom backpack is left on the bench?"
+        ],
+        "correct": 0,
+        "hint": "Whose possession",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "prepositions",
+        "question": "The curious kitten hid ______ the sofa cushions.",
+        "options": [
+          "behind",
+          "into",
+          "through",
+          "on"
+        ],
+        "correct": 0,
+        "hint": "Behind cushions",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "We ______ our cousins in Edinburgh last Christmas.",
         "options": [
           "visited",
-          "visits",
-          "is visiting"
+          "visit",
+          "are visiting",
+          "visits"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Two days ago' takes 'visited'."
+        "hint": "Last Christmas past event",
+        "explanation": ""
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "Since the entry is free today, visitors ______ buy admission tickets.",
+        "options": [
+          "don't have to",
+          "must",
+          "have to",
+          "shouldn't"
+        ],
+        "correct": 0,
+        "hint": "Absence of necessity",
+        "explanation": ""
       },
       {
         "type": "find-mistake",
-        "question": "Did she spoke with her homeroom teacher yesterday?",
+        "category": "core-grammar",
+        "question": "Find the mistake: 'My friend don't like horror movies.'",
         "options": [
-          "Did",
-          "she",
-          "spoke",
-          "yesterday"
-        ],
-        "correct": 2,
-        "tense": "Simple Past",
-        "explanation": "After 'Did', use base form 'speak'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Look! The hot air balloon is rising over the green hills.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Correct! Live sight."
-      },
-      {
-        "type": "context",
-        "question": "Why was the coach shouting with joy? - Because his team ______ the final goal yesterday.",
-        "options": [
-          "scored",
-          "scores",
-          "is scoring"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past achievement."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The museum guide ______ ancient artifacts to the tourists yesterday.",
-        "options": [
-          "showed",
-          "shows",
-          "is showing"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' takes past 'showed'."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Look at the playground! The children ______ on the swings right now.",
-        "options": [
-          "are playing",
-          "play",
-          "played"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look!' signals current play."
-      },
-      {
-        "type": "find-mistake",
-        "question": "She don't like reading science fiction novels.",
-        "options": [
-          "She",
           "don't",
-          "like",
-          "novels"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "'She' takes 'doesn't'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“We visited our cousins in Bursa two days ago.”",
-        "options": [
-          "Correct",
-          "Incorrect"
+          "friend",
+          "horror",
+          "movies"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Correct! 'Two days ago' with past visited."
+        "hint": "Singular friend takes doesn't",
+        "explanation": ""
       },
       {
-        "type": "context",
-        "question": "Why are you wearing a helmet? - Because I ______ my skateboard right now.",
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correct question:",
         "options": [
-          "am riding",
-          "ride",
-          "rode"
+          "What time does the morning train depart?",
+          "What time the morning train does depart?",
+          "What time departs the morning train?",
+          "Does what time the morning train depart?"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Ongoing activity."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The train ______ at the central station at 8:00 AM every morning.",
-        "options": [
-          "stops",
-          "is stopping",
-          "stopped"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Scheduled stop."
+        "hint": "Wh- phrase + does + subject + verb",
+        "explanation": ""
       },
       {
         "type": "complete-sentence",
-        "question": "Last Friday, our school choir ______ at the youth concert.",
+        "category": "core-grammar",
+        "question": "She plays the piano ______ than her elder sister.",
         "options": [
-          "performed",
-          "performs",
-          "is performing"
+          "better",
+          "gooder",
+          "more good",
+          "best"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last Friday' indicates past."
+        "hint": "Comparative of well/good",
+        "explanation": ""
       },
       {
-        "type": "find-mistake",
-        "question": "Did they went to the basketball match yesterday?",
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "They traveled ______ Rome to Milan by high-speed train.",
         "options": [
-          "Did",
-          "they",
-          "went",
-          "yesterday"
-        ],
-        "correct": 2,
-        "tense": "Simple Past",
-        "explanation": "After 'Did', use base verb 'go'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence is correct?",
-        "options": [
-          "He drinks green tea every morning.",
-          "He is drink green tea every morning.",
-          "He drank green tea every morning now."
+          "from",
+          "at",
+          "in",
+          "under"
         ],
         "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Routine habit in Simple Present."
-      },
-      {
-        "type": "context",
-        "question": "What is Can doing in his room? - He ______ his science homework right now.",
-        "options": [
-          "is doing",
-          "does",
-          "did"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Current activity."
-      },
-      {
-        "type": "verb-choice",
-        "question": "They ______ an interesting documentary about space yesterday evening.",
-        "options": [
-          "watched",
-          "watch",
-          "are watching"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday evening' takes watched."
+        "hint": "From ... to",
+        "explanation": ""
       },
       {
         "type": "complete-sentence",
-        "question": "Listen! The baby ______ happily in the nursery.",
+        "category": "tenses",
+        "question": "The sun ______ brightly through the morning mist today.",
         "options": [
-          "is laughing",
-          "laughs",
-          "laughed"
+          "is shining",
+          "shines",
+          "shined",
+          "shine"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Listen!' signals ongoing sound."
+        "hint": "Currently observable phenomenon",
+        "explanation": ""
       },
       {
-        "type": "find-mistake",
-        "question": "Look! A black cat cross the road right now.",
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "You ______ touch wild reptiles without protective gloves.",
         "options": [
-          "Look",
-          "black cat",
-          "cross",
-          "right now"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "Should be 'is crossing'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Did you eat all the fresh fruit yesterday?”",
-        "options": [
-          "Correct",
-          "Incorrect"
+          "mustn't",
+          "don't have to",
+          "can",
+          "should"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Correct! 'Did + eat'."
+        "hint": "Reptile safety prohibition",
+        "explanation": ""
       },
       {
-        "type": "context",
-        "question": "Why was the teacher pleased? - Because all students ______ their essays on time yesterday.",
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the correct sentence:",
         "options": [
-          "submitted",
-          "submit",
-          "are submitting"
+          "This is the tallest building in the city center.",
+          "This is the most tall building in the city center.",
+          "This is tallest building in the city center.",
+          "This is taller building in the city center."
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past action."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Lions ______ in prides across the African savanna.",
-        "options": [
-          "live",
-          "are living",
-          "lived"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "General zoological fact."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Two days ago, my older brother ______ his driver's test.",
-        "options": [
-          "passed",
-          "passes",
-          "is passing"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Two days ago' takes 'passed'."
-      },
-      {
-        "type": "find-mistake",
-        "question": "She didn't brought her umbrella yesterday.",
-        "options": [
-          "didn't",
-          "brought",
-          "umbrella",
-          "yesterday"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "After 'didn't', use base form 'bring'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence is grammatically correct? (We flew to London la...)",
-        "options": [
-          "We flew to London last winter.",
-          "We fly to London last winter.",
-          "We are flying to London last winter."
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Flew' is past of fly."
-      },
-      {
-        "type": "context",
-        "question": "Why is the chef busy? - Because he ______ fresh pasta for twenty guests right now.",
-        "options": [
-          "is rolling",
-          "rolls",
-          "rolled"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' indicates Present Continuous."
+        "hint": "Superlative of tall",
+        "explanation": ""
       }
     ],
     "medium": [
       {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "The laboratory sign says: 'Hazardous chemicals. Eye protection compulsory.' Students ______ enter without safety goggles.",
+        "options": [
+          "mustn't",
+          "don't have to",
+          "can",
+          "should"
+        ],
+        "correct": 0,
+        "hint": "Lab safety prohibition",
+        "explanation": "Compulsory eye protection means you must not enter without it."
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "The museum has free admission on Wednesdays. Visitors ______ buy tickets today.",
+        "options": [
+          "don't have to",
+          "mustn't",
+          "can't",
+          "shouldn't"
+        ],
+        "correct": 0,
+        "hint": "No obligation context",
+        "explanation": "Free admission means tickets are not necessary."
+      },
+      {
+        "type": "context-dialogue",
+        "category": "modals",
+        "question": "Teacher: 'Remember that the project deadline is next Friday.' -> Students ______ submit it by Friday at the latest.",
+        "options": [
+          "have to",
+          "don't have to",
+          "mustn't",
+          "could"
+        ],
+        "correct": 0,
+        "hint": "Formal deadline obligation",
+        "explanation": "A deadline imposes a requirement to submit on time."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The research team traveled ______ foot ______ the dense rainforest.",
+        "options": [
+          "on / through",
+          "by / into",
+          "with / across",
+          "at / under"
+        ],
+        "correct": 0,
+        "hint": "Collocation: on foot / through forest",
+        "explanation": "We say 'on foot' and 'through the forest'."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The concert will be held ______ the evening ______ July 15th.",
+        "options": [
+          "in / on",
+          "on / in",
+          "at / at",
+          "during / in"
+        ],
+        "correct": 0,
+        "hint": "Time prepositions in/on",
+        "explanation": "Use 'in the evening' and 'on [specific date]'."
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly ordered sentence with frequency and manner:",
+        "options": [
+          "Our team always practices diligently before major tournaments.",
+          "Our team practices always diligently before major tournaments.",
+          "Always our team practices diligently before major tournaments.",
+          "Our team diligently practices always before major tournaments."
+        ],
+        "correct": 0,
+        "hint": "Adverb order",
+        "explanation": "Frequency adverb (always) + verb (practices) + manner (diligently)."
+      },
+      {
         "type": "find-mistake",
-        "question": "She didn't understood the instructions given by the coach.",
+        "category": "tenses",
+        "question": "Find the mistake: 'I am not believing that unbelievable ghost story.'",
         "options": [
-          "didn't",
-          "understood",
-          "instructions",
-          "given"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "After 'didn't', use base form 'understand'."
-      },
-      {
-        "type": "context",
-        "question": "Although he usually prefers tea, this morning he ______ black coffee.",
-        "options": [
-          "is drinking",
-          "drinks",
-          "drank"
+          "am not believing",
+          "unbelievable",
+          "story",
+          "ghost"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Temporary habit this morning contrasting with usual preference."
+        "hint": "Stative verb 'believe'",
+        "explanation": "'Believe' is a stative verb and cannot be used in continuous forms; say 'I don't believe'."
       },
       {
-        "type": "grammar-structure",
-        "question": "Why ______ you ______ to the teacher when she was giving instructions?",
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "At the moment, Alex ______ for his final exams, though he usually ______ sports after school.",
         "options": [
-          "didn't / listen",
-          "don't / listen",
-          "aren't / listening"
+          "is studying / plays",
+          "studies / is playing",
+          "studied / played",
+          "is studying / is playing"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past context -> 'didn't you listen'."
+        "hint": "Temporary vs habitual contrast",
+        "explanation": "'At the moment' (continuous) contrasted with 'usually' (simple present)."
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "While the chef ______ the soup, the waiter ______ the dining tables.",
+        "options": [
+          "was preparing / was setting",
+          "prepared / set",
+          "is preparing / sets",
+          "prepare / set"
+        ],
+        "correct": 0,
+        "hint": "Parallel past continuous",
+        "explanation": "Two simultaneous continuous actions in past."
+      },
+      {
+        "type": "same-meaning",
+        "category": "modals",
+        "question": "'It is forbidden to ride electric scooters on the pedestrian walkway.' Which sentence has the SAME meaning?",
+        "options": [
+          "You mustn't ride electric scooters on the pedestrian walkway.",
+          "You don't have to ride electric scooters on the pedestrian walkway.",
+          "You should ride electric scooters on the pedestrian walkway.",
+          "You can ride electric scooters on the pedestrian walkway."
+        ],
+        "correct": 0,
+        "hint": "Forbidden = Mustn't",
+        "explanation": "'Forbidden' indicates an absolute ban ('mustn't')."
+      },
+      {
+        "type": "same-meaning",
+        "category": "core-grammar",
+        "question": "'No city in Europe is larger than London.' Which sentence has the SAME meaning?",
+        "options": [
+          "London is the largest city in Europe.",
+          "London is as large as other European cities.",
+          "Other cities in Europe are larger than London.",
+          "London is one of the smallest cities in Europe."
+        ],
+        "correct": 0,
+        "hint": "Superlative equivalence",
+        "explanation": "'No city is larger' equals 'London is the largest'."
       },
       {
         "type": "complete-sentence",
-        "question": "How often ______ your brother practice the piano every week?",
+        "category": "core-grammar",
+        "question": "Neither the teacher nor the students ______ pleased with the noisy construction outside.",
         "options": [
-          "does",
-          "do",
-          "is"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Singular subject 'your brother' takes 'does'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence is grammatically standard?",
-        "options": [
-          "Do you believe in ghost stories?",
-          "Are you believing in ghost stories?",
-          "Did you believing in ghost stories?"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Believe' is a stative verb."
-      },
-      {
-        "type": "find-mistake",
-        "question": "The children is playing in the schoolyard right now.",
-        "options": [
-          "children",
-          "is playing",
-          "schoolyard",
-          "right now"
-        ],
-        "correct": 1,
-        "tense": "Present Continuous",
-        "explanation": "Plural subject 'children' requires 'are playing'."
-      },
-      {
-        "type": "context",
-        "question": "Where were you yesterday? - I ______ my friend paint his room.",
-        "options": [
-          "helped",
-          "help",
-          "am helping"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Responding to past inquiry."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Look! The hot air balloon ______ slowly into the morning sky.",
-        "options": [
-          "is rising",
-          "rises",
-          "rose"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look!' signals an event currently happening."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Neither of my brothers ______ how to drive a manual car.",
-        "options": [
-          "knows",
-          "know",
-          "is knowing"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Neither of' takes singular verb 'knows'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“She was not at home yesterday because she went to the dentist.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Correct! Consistent past tense."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Does they attend the robotics club every Wednesday afternoon?",
-        "options": [
-          "Does",
-          "attend",
-          "robotics",
-          "every Wednesday"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Plural subject 'they' takes 'Do'."
-      },
-      {
-        "type": "context",
-        "question": "The bell is ringing! The students ______ their notebooks into their backpacks.",
-        "options": [
-          "are packing",
-          "pack",
-          "packed"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'The bell is ringing!' indicates actions happening now."
-      },
-      {
-        "type": "verb-choice",
-        "question": "My grandparents ______ in a quiet seaside town for thirty years before moving.",
-        "options": [
-          "lived",
-          "live",
-          "are living"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past completed state takes Simple Past."
-      },
-      {
-        "type": "grammar-structure",
-        "question": "Why ______ the baby crying so loudly right now?",
-        "options": [
-          "is",
-          "does",
-          "did"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Continuous question needs auxiliary 'is'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Did your father drove to Ankara last weekend?”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "Incorrect! After 'Did', use base verb 'drive'."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Look at the chef; he taste the soup to check the salt.",
-        "options": [
-          "Look at",
-          "chef",
-          "taste",
-          "to check"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "Active action in progress needs 'is tasting'."
-      },
-      {
-        "type": "context",
-        "question": "Can you help me? - Sorry, I can't right now because I ______ an important email.",
-        "options": [
-          "am typing",
-          "type",
-          "typed"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Current activity preventing assistance."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Our football team ______ the tournament trophy last Friday.",
-        "options": [
-          "won",
-          "wins",
-          "is winning"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last Friday' requires Simple Past."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "The flight to London ______ at 14:15 according to the airport schedule.",
-        "options": [
-          "departs",
-          "is departing",
-          "departed"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Timetabled schedule uses Simple Present."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Choose the correct sentence:",
-        "options": [
-          "They do not understand the new grammar concept.",
-          "They are not understanding the new grammar concept.",
-          "They does not understand the new grammar concept."
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Understand' is stative; use Simple Present."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Last summer, we swimmed in the Mediterranean Sea every single day.",
-        "options": [
-          "Last summer",
-          "swimmed",
-          "in the",
-          "every single day"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "Past of swim is 'swam'."
-      },
-      {
-        "type": "context",
-        "question": "Listen! The fire alarm ______ on the second floor!",
-        "options": [
-          "is ringing",
-          "rings",
-          "rang"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Listen!' demands immediate attention."
-      },
-      {
-        "type": "grammar-structure",
-        "question": "How ______ your sister travel to Izmir two days ago?",
-        "options": [
-          "did",
-          "does",
-          "is"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Two days ago' requires 'did'."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "She always ______ notes during the science lecture.",
-        "options": [
-          "takes",
-          "is taking",
-          "took"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Always' indicates regular habit."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Did you see the shooting star last night?”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Correct! 'Did + base verb' with 'last night'."
-      },
-      {
-        "type": "find-mistake",
-        "question": "My cousin don't speak German or Italian.",
-        "options": [
-          "cousin",
-          "don't",
-          "speak",
-          "or"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "Singular 'My cousin' takes 'doesn't'."
-      },
-      {
-        "type": "context",
-        "question": "Why is everyone looking out the window? - Because a famous actor ______ down the street!",
-        "options": [
-          "is walking",
-          "walks",
-          "walked"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Event happening at moment of looking."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The historical museum ______ by hundreds of tourists yesterday.",
-        "options": [
-          "was visited",
-          "visits",
-          "is visiting"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' passive past context."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Look! Those two monkeys ______ high up in the mango tree.",
-        "options": [
-          "are swinging",
-          "swing",
-          "swung"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look!' signals an active present scene."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“He didn't brought his textbook to class yesterday.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "Incorrect! After 'didn't', use base form 'bring'."
-      },
-      {
-        "type": "context",
-        "question": "Why was the teacher smiling? - Because all students ______ their projects on time yesterday.",
-        "options": [
-          "submitted",
-          "submit",
-          "are submitting"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past reason for past outcome."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "The science teacher ______ the laboratory rules before every experiment.",
-        "options": [
-          "explains",
-          "is explaining",
-          "explained"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Regular procedure before experiments."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Are they know the correct way to solve this riddle?",
-        "options": [
-          "Are",
-          "they",
-          "know",
-          "to solve"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Know' is stative; use 'Do they know'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Yesterday, we ate lunch in the garden and talked about our holiday.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Correct! Compound past predicate."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Look at the sky! The drone ______ high above the sports ground.",
-        "options": [
-          "is hovering",
-          "hovers",
-          "hovered"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look at the sky!' indicates present action."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Why do she always arrive late for basketball practice?",
-        "options": [
-          "do",
-          "she",
-          "arrive",
-          "practice"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Subject 'she' requires 'does'."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "They ______ an interesting documentary on TV last night.",
-        "options": [
-          "watched",
-          "watch",
-          "are watching"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last night' takes Simple Past."
-      },
-      {
-        "type": "context",
-        "question": "Listen! The sound engineer ______ the microphone levels right now.",
-        "options": [
-          "is adjusting",
-          "adjusts",
-          "adjusted"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' indicates Present Continuous."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Does your cousin live in Germany?”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Correct! Simple Present question with 'Does'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The students ______ a difficult crossword puzzle two days ago.",
-        "options": [
-          "solved",
-          "solve",
-          "are solving"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Two days ago' indicates Simple Past."
-      },
-      {
-        "type": "grammar-structure",
-        "question": "Why ______ the coach suspend yesterday's practice session?",
-        "options": [
-          "did",
-          "does",
-          "is"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday's' requires 'did'."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Look! A herd of wild horses is run across the valley right now.",
-        "options": [
-          "Look",
-          "wild horses",
-          "is run",
-          "right now"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "Must be 'is running'."
-      },
-      {
-        "type": "context",
-        "question": "Normally my parents commute by ferry, but today the sea is stormy, so they ______ the metro.",
-        "options": [
-          "are taking",
-          "take",
-          "took"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Temporary change for today."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence is correct?",
-        "options": [
-          "The sun always sets in the west.",
-          "The sun is always setting in the west right now.",
-          "The sun setted in the west yesterday."
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Universal astronomical fact."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The detective ______ three crucial clues at the crime scene yesterday.",
-        "options": [
-          "uncovered",
-          "uncovers",
-          "is uncovering"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' takes past 'uncovered'."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Do he always complete his assignments before playing video games?",
-        "options": [
-          "Do",
-          "he",
-          "complete",
-          "before"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'He' requires 'Does'."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Listen! The train horn ______ loudly near the crossing.",
-        "options": [
-          "is blaring",
-          "blares",
-          "blared"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Listen!' signals an ongoing sound."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“I am owning two mountain bikes and a skateboard.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "Incorrect! 'Own' is stative; use 'I own'."
-      },
-      {
-        "type": "context",
-        "question": "Why is the road closed? - Because city workers ______ the water pipe right now.",
-        "options": [
-          "are repairing",
-          "repair",
-          "repaired"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Action occurring at this moment."
-      },
-      {
-        "type": "grammar-structure",
-        "question": "How many foreign cities ______ your father visit during his business tour last month?",
-        "options": [
-          "did",
-          "do",
-          "are"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last month' requires 'did'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The ancient aqueduct ______ water to the city for centuries before the war.",
-        "options": [
-          "supplied",
-          "supplies",
-          "is supplying"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Historical completed past action."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Did they bought the concert tickets yesterday evening?",
-        "options": [
-          "Did",
-          "bought",
-          "tickets",
-          "yesterday"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "After 'Did', use base verb 'buy'."
-      },
-      {
-        "type": "context",
-        "question": "Look! The chemistry professor ______ the green liquid into the test tube.",
-        "options": [
-          "is pouring",
-          "pours",
-          "poured"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look!' indicates active demonstration."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "How ______ the builders construct that massive castle three hundred years ago?",
-        "options": [
-          "did",
-          "do",
-          "are"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past inquiry with 'did'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“He didn't wrote the email to the manager yesterday.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "Incorrect! After 'didn't', use 'write'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The human heart ______ blood through the circulatory system continuously.",
-        "options": [
-          "pumps",
-          "is pumping",
-          "pumped"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Biological fact."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Every morning, Burak and his cousin walks to the sports center.",
-        "options": [
-          "Every morning",
-          "Burak and his cousin",
-          "walks",
-          "sports center"
-        ],
-        "correct": 2,
-        "tense": "Simple Present",
-        "explanation": "Plural compound subject takes base verb 'walk'."
-      },
-      {
-        "type": "context",
-        "question": "Why didn't you answer my phone call yesterday? - Because my phone battery ______ dead.",
-        "options": [
+          "were",
           "was",
           "is",
-          "am being"
+          "has been"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' requires past 'was'."
+        "hint": "Proximity agreement in neither/nor",
+        "explanation": "Verb agrees with the closer subject 'the students' (plural: were)."
       },
       {
-        "type": "grammar-structure",
-        "question": "Why ______ the dog bark so loudly outside last night?",
+        "type": "choose-incorrect",
+        "category": "modals",
+        "question": "Choose the INCORRECT modal sentence:",
         "options": [
+          "She doesn't has to complete the assignment today.",
+          "She doesn't have to complete the assignment today.",
+          "She mustn't complete the assignment today.",
+          "She shouldn't complete the assignment today."
+        ],
+        "correct": 0,
+        "hint": "Doesn't have to error",
+        "explanation": "After 'doesn't', use base form 'have to', not 'has to'."
+      },
+      {
+        "type": "find-mistake",
+        "category": "core-grammar",
+        "question": "Find the mistake: 'This soup tastes deliciously with fresh herbs and garlic.'",
+        "options": [
+          "deliciously",
+          "tastes",
+          "fresh",
+          "garlic"
+        ],
+        "correct": 0,
+        "hint": "Linking verb + adjective",
+        "explanation": "Sensory linking verbs like 'taste' take adjectives ('delicious'), not adverbs ('deliciously')."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "When the power suddenly went out, everyone in the library ______ in shock.",
+        "options": [
+          "gasped",
+          "was gasping",
+          "gasps",
+          "is gasping"
+        ],
+        "correct": 0,
+        "hint": "Sudden reaction past simple",
+        "explanation": "A sudden spontaneous reaction to an event uses Simple Past."
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "While the detective ______ the crime scene, his partner ______ the security footage.",
+        "options": [
+          "was inspecting / was reviewing",
+          "inspected / reviewed",
+          "is inspecting / reviews",
+          "inspects / review"
+        ],
+        "correct": 0,
+        "hint": "Simultaneous past continuous",
+        "explanation": ""
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "According to aviation safety regulations, passengers ______ keep their seatbelts fastened during turbulence.",
+        "options": [
+          "must",
+          "can",
+          "shouldn't",
+          "don't have to"
+        ],
+        "correct": 0,
+        "hint": "Safety necessity",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The submarine navigated carefully ______ the narrow straits ______ two rocky islands.",
+        "options": [
+          "through / between",
+          "into / under",
+          "across / over",
+          "along / into"
+        ],
+        "correct": 0,
+        "hint": "Through straits between islands",
+        "explanation": ""
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly ordered sentence:",
+        "options": [
+          "Rarely does she forget her scientific calculator for physics lab.",
+          "Rarely she forgets her scientific calculator for physics lab.",
+          "She forgets rarely her scientific calculator for physics lab.",
+          "Does she rarely forget her scientific calculator for physics lab."
+        ],
+        "correct": 0,
+        "hint": "Negative adverb inversion",
+        "explanation": ""
+      },
+      {
+        "type": "find-mistake",
+        "category": "core-grammar",
+        "question": "Find the mistake: 'One of the most talented musicians have been invited to perform.'",
+        "options": [
+          "have",
+          "talented",
+          "musicians",
+          "invited"
+        ],
+        "correct": 0,
+        "hint": "One of + plural takes singular verb 'has'",
+        "explanation": ""
+      },
+      {
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the sentence with correct agreement:",
+        "options": [
+          "Every member of the debate team prepares their arguments meticulously.",
+          "Every member of the debate team prepare their arguments meticulously.",
+          "Every member of the debate team are preparing arguments meticulously.",
+          "Every member of the debate team have prepared arguments meticulously."
+        ],
+        "correct": 0,
+        "hint": "Every member takes singular prepares",
+        "explanation": ""
+      },
+      {
+        "type": "same-meaning",
+        "category": "modals",
+        "question": "'It is not necessary for you to print the presentation slides.' Which sentence has the same meaning?",
+        "options": [
+          "You don't have to print the presentation slides.",
+          "You mustn't print the presentation slides.",
+          "You shouldn't print the presentation slides.",
+          "You can't print the presentation slides."
+        ],
+        "correct": 0,
+        "hint": "Not necessary = Don't have to",
+        "explanation": ""
+      },
+      {
+        "type": "choose-incorrect",
+        "category": "tenses",
+        "question": "Choose the INCORRECT sentence:",
+        "options": [
+          "I am understanding the complex mathematical theorem now.",
+          "I understand the complex mathematical theorem now.",
+          "I am studying the complex mathematical theorem now.",
+          "I understood the theorem yesterday."
+        ],
+        "correct": 0,
+        "hint": "Understand is a stative verb",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "The quality of these handcrafted instruments ______ exceptional.",
+        "options": [
+          "is",
+          "are",
+          "were",
+          "have been"
+        ],
+        "correct": 0,
+        "hint": "The quality is the singular head noun",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The athlete was congratulated ______ breaking the national track record.",
+        "options": [
+          "on",
+          "for",
+          "with",
+          "at"
+        ],
+        "correct": 0,
+        "hint": "Congratulate on",
+        "explanation": ""
+      },
+      {
+        "type": "find-mistake",
+        "category": "prepositions",
+        "question": "Find the mistake: 'She discussed about the environmental issues in her presentation.'",
+        "options": [
+          "about",
+          "discussed",
+          "issues",
+          "presentation"
+        ],
+        "correct": 0,
+        "hint": "Discuss takes direct object without about",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "modals",
+        "question": "You ______ touch the ancient pottery in the museum exhibition.",
+        "options": [
+          "mustn't",
+          "don't have to",
+          "can",
+          "should"
+        ],
+        "correct": 0,
+        "hint": "Museum prohibition",
+        "explanation": ""
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "Although he usually ______ coffee in the morning, today he ______ herbal tea.",
+        "options": [
+          "drinks / is having",
+          "is drinking / has",
+          "drank / had",
+          "drink / has"
+        ],
+        "correct": 0,
+        "hint": "Routine vs today's exception",
+        "explanation": ""
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly structured sentence:",
+        "options": [
+          "They have already completed all their science laboratory experiments.",
+          "They already have completed all their science laboratory experiments.",
+          "Already they have completed all their science laboratory experiments.",
+          "They have completed already all their science laboratory experiments."
+        ],
+        "correct": 0,
+        "hint": "Already between auxiliary and participle",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "Neither of the two candidates ______ suitable for the research position.",
+        "options": [
+          "is",
+          "are",
+          "were",
+          "have been"
+        ],
+        "correct": 0,
+        "hint": "Neither takes singular verb is",
+        "explanation": ""
+      },
+      {
+        "type": "same-meaning",
+        "category": "core-grammar",
+        "question": "'No river in the continent is longer than the Nile.' Which sentence has the same meaning?",
+        "options": [
+          "The Nile is the longest river in the continent.",
+          "The Nile is as long as other rivers.",
+          "Other rivers are longer than the Nile.",
+          "The Nile is not the longest river."
+        ],
+        "correct": 0,
+        "hint": "Superlative equivalence",
+        "explanation": ""
+      },
+      {
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the grammatically correct sentence:",
+        "options": [
+          "This scientific research paper is far more detailed than that one.",
+          "This scientific research paper is far detailed than that one.",
+          "This scientific research paper is far detailer than that one.",
+          "This scientific research paper is far most detailed than that one."
+        ],
+        "correct": 0,
+        "hint": "Far more detailed",
+        "explanation": ""
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "When we were camping in the mountains last year, we ______ see thousands of bright stars.",
+        "options": [
+          "could",
+          "must",
+          "should",
+          "have to"
+        ],
+        "correct": 0,
+        "hint": "Past ability to see",
+        "explanation": ""
+      },
+      {
+        "type": "find-mistake",
+        "category": "tenses",
+        "question": "Find the mistake: 'When did they arrived at the international conference hall?'",
+        "options": [
+          "arrived",
           "did",
-          "does",
-          "is"
+          "international",
+          "conference"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last night' requires 'did'."
+        "hint": "Did + base verb arrive",
+        "explanation": ""
       },
       {
-        "type": "sentence-choice",
-        "question": "Which sentence is grammatically correct? (Neither of the boys ...)",
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The spacecraft entered ______ the outer atmosphere at high velocity.",
         "options": [
-          "Neither of the boys knows the combination to the locker.",
-          "Neither of the boys know the combination to the locker.",
-          "Neither of the boys is knowing the combination."
+          "into",
+          "onto",
+          "under",
+          "between"
         ],
         "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Neither of' takes singular 'knows'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Look! The falcon ______ down toward the river.",
-        "options": [
-          "is diving",
-          "dives",
-          "dived"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look!' indicates active scene."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Right now, the sound engineer adjust the audio levels before the concert.",
-        "options": [
-          "Right now",
-          "engineer",
-          "adjust",
-          "concert"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' requires 'is adjusting'."
+        "hint": "Enter into atmosphere",
+        "explanation": ""
       },
       {
         "type": "complete-sentence",
-        "question": "Why ______ you look so shocked when you opened the letter yesterday?",
+        "category": "core-grammar",
+        "question": "A large amount of money ______ spent on modernizing the science laboratory.",
         "options": [
-          "did",
-          "do",
-          "are"
+          "was",
+          "were",
+          "are",
+          "have been"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' requires 'did'."
+        "hint": "Amount of money takes singular was",
+        "explanation": ""
       },
       {
-        "type": "correct-incorrect",
-        "question": "“Did she spoke with the school principal yesterday morning?”",
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "Listen! The conductor ______ the orchestra in a dramatic symphony.",
         "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "Incorrect! After 'Did', use base verb 'speak'."
-      },
-      {
-        "type": "context",
-        "question": "Be quiet! The judges ______ the final competition scores right now.",
-        "options": [
-          "are tallying",
-          "tally",
-          "tallied"
+          "is leading",
+          "leads",
+          "led",
+          "lead"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' indicates Present Continuous."
+        "hint": "Present continuous listening cue",
+        "explanation": ""
       },
       {
-        "type": "verb-choice",
-        "question": "The detective ______ the mysterious footprints outside the manor yesterday.",
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correct negative question:",
         "options": [
-          "followed",
-          "follows",
-          "is following"
+          "Why haven't you submitted your assignment on the portal yet?",
+          "Why you haven't submitted your assignment on the portal yet?",
+          "Why haven't submitted you your assignment on the portal yet?",
+          "Why you not have submitted your assignment on the portal yet?"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' takes past 'followed'."
+        "hint": "Wh- + haven't + subject + participle",
+        "explanation": ""
+      },
+      {
+        "type": "choose-incorrect",
+        "category": "modals",
+        "question": "Choose the INCORRECT sentence:",
+        "options": [
+          "You mustn't to park your car in front of the emergency exit.",
+          "You mustn't park your car in front of the emergency exit.",
+          "You shouldn't park your car in front of the emergency exit.",
+          "You cannot park your car in front of the emergency exit."
+        ],
+        "correct": 0,
+        "hint": "Modal verbs take bare infinitive without to",
+        "explanation": ""
       },
       {
         "type": "complete-sentence",
-        "question": "Look! The helicopter ______ searchlights over the dark bay.",
+        "category": "prepositions",
+        "question": "The committee succeeded ______ establishing new safety protocols.",
         "options": [
-          "is shining",
-          "shines",
-          "shone"
+          "in",
+          "at",
+          "on",
+          "to"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look!' signals live action."
+        "hint": "Succeed in + V-ing",
+        "explanation": ""
       },
       {
         "type": "find-mistake",
-        "question": "Does the students understand the laboratory safety protocol?",
+        "category": "core-grammar",
+        "question": "Find the mistake: 'The scissors on the teacher's desk is very sharp.'",
         "options": [
-          "Does",
-          "students",
-          "understand",
-          "protocol"
+          "is",
+          "scissors",
+          "teacher's",
+          "sharp"
         ],
         "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Plural 'students' requires 'Do'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Did you speak with the guidance counselor yesterday morning?”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Correct! 'Did + speak'."
-      },
-      {
-        "type": "context",
-        "question": "Why is the street blocked? - Because city workers ______ a deep trench right now.",
-        "options": [
-          "are digging",
-          "dig",
-          "dug"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Action occurring at this moment."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The international flight ______ in Frankfurt at 06:45 every weekday.",
-        "options": [
-          "lands",
-          "is landing",
-          "landed"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Scheduled arrival."
+        "hint": "Scissors is plural (are)",
+        "explanation": ""
       },
       {
         "type": "complete-sentence",
-        "question": "Two days ago, the young inventor ______ a prototype of his solar robot.",
+        "category": "tenses",
+        "question": "While the storm raged outside, the family ______ around the warm fireplace.",
         "options": [
-          "built",
-          "builds",
-          "is building"
+          "gathered",
+          "was gathering",
+          "gathers",
+          "is gathering"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Two days ago' takes 'built'."
+        "hint": "Past simple narrative action",
+        "explanation": ""
       },
       {
-        "type": "find-mistake",
-        "question": "Listen! The street performers is juggling flaming torches right now.",
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "Since the conference is livestreamed online, you ______ travel to the capital city.",
         "options": [
-          "Listen",
-          "performers",
-          "is juggling",
-          "right now"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "Plural subject takes 'are juggling'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence is grammatically correct? (He does not understa...)",
-        "options": [
-          "He does not understand the difficult equation.",
-          "He is not understanding the difficult equation.",
-          "He do not understand the difficult equation."
+          "don't have to",
+          "mustn't",
+          "should",
+          "can't"
         ],
         "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Understand' is stative."
+        "hint": "No need to travel",
+        "explanation": ""
       },
       {
-        "type": "context",
-        "question": "Where were you yesterday afternoon? - I ______ my friend assemble his computer.",
+        "type": "same-meaning",
+        "category": "modals",
+        "question": "'It is prohibited to operate drones near the airport runway.' Which sentence has the same meaning?",
         "options": [
-          "helped",
-          "help",
-          "am helping"
+          "You mustn't operate drones near the airport runway.",
+          "You don't have to operate drones near the airport runway.",
+          "You should operate drones near the airport runway.",
+          "You can operate drones near the airport runway."
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past inquiry response."
+        "hint": "Prohibited = Mustn't",
+        "explanation": ""
       },
       {
-        "type": "verb-choice",
-        "question": "The school bell always ______ at the exact end of each period.",
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly ordered sentence:",
         "options": [
-          "chimes",
-          "is chiming",
-          "chimed"
+          "Under no circumstances should sensitive data be shared publicly.",
+          "Under no circumstances sensitive data should be shared publicly.",
+          "Sensitive data should under no circumstances be shared publicly.",
+          "Should sensitive data under no circumstances be shared publicly."
         ],
         "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Regular school habit."
+        "hint": "Inversion with negative introductory phrase",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "She apologized ______ her supervisor ______ the misunderstanding.",
+        "options": [
+          "to / for",
+          "for / to",
+          "with / at",
+          "at / with"
+        ],
+        "correct": 0,
+        "hint": "Apologize to someone for something",
+        "explanation": ""
       },
       {
         "type": "complete-sentence",
-        "question": "Look at the artist! She ______ a vibrant portrait on the canvas right now.",
+        "category": "core-grammar",
+        "question": "The number of endangered species ______ increasing rapidly.",
         "options": [
-          "is painting",
-          "paints",
-          "painted"
+          "is",
+          "are",
+          "were",
+          "have been"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' indicates Present Continuous."
+        "hint": "'The number of' takes singular verb is",
+        "explanation": ""
+      },
+      {
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the correct sentence:",
+        "options": [
+          "Neither the manager nor his assistants were available for comments.",
+          "Neither the manager nor his assistants was available for comments.",
+          "Neither the manager nor his assistants is available for comments.",
+          "Neither the manager nor his assistants has been available for comments."
+        ],
+        "correct": 0,
+        "hint": "Plural agreement with assistants",
+        "explanation": ""
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "Whenever the temperature ______ below freezing, the fountain ______ into ice.",
+        "options": [
+          "drops / turns",
+          "is dropping / is turning",
+          "dropped / turned",
+          "drop / turn"
+        ],
+        "correct": 0,
+        "hint": "Zero conditional factual present",
+        "explanation": ""
       },
       {
         "type": "find-mistake",
-        "question": "Did they bought the camping tent yesterday afternoon?",
+        "category": "tenses",
+        "question": "Find the mistake: 'I am remembering all the irregular past verbs perfectly now.'",
         "options": [
-          "Did",
-          "bought",
-          "tent",
-          "yesterday"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "After 'Did', use 'buy'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Look! The hot air balloon is drifting gracefully across the valley.”",
-        "options": [
-          "Correct",
-          "Incorrect"
+          "am remembering",
+          "irregular",
+          "perfectly",
+          "verbs"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Correct! Ongoing sight."
+        "hint": "Remember is stative",
+        "explanation": ""
       },
       {
-        "type": "context",
-        "question": "Why was the runner celebrating? - Because she ______ the national record yesterday.",
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "You ______ disclose confidential exam questions before the official test date.",
         "options": [
-          "broke",
-          "breaks",
-          "is breaking"
+          "mustn't",
+          "don't have to",
+          "can",
+          "should"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past achievement."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The human lungs ______ oxygen into the bloodstream continuously.",
-        "options": [
-          "absorb",
-          "are absorbing",
-          "absorbed"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Biological fact."
+        "hint": "Confidentiality prohibition",
+        "explanation": ""
       },
       {
         "type": "complete-sentence",
-        "question": "Last week, our robotics team ______ our first autonomous drone.",
+        "category": "prepositions",
+        "question": "The expedition sailed ______ the stormy Atlantic Ocean for three weeks.",
         "options": [
-          "tested",
-          "tests",
-          "is testing"
+          "across",
+          "into",
+          "under",
+          "between"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Last week' indicates past."
+        "hint": "Sail across ocean",
+        "explanation": ""
+      },
+      {
+        "type": "choose-incorrect",
+        "category": "core-grammar",
+        "question": "Choose the INCORRECT sentence:",
+        "options": [
+          "She gave me several useful advices for my essay.",
+          "She gave me several useful pieces of advice for my essay.",
+          "She gave me some useful advice for my essay.",
+          "She gave me helpful advice for my essay."
+        ],
+        "correct": 0,
+        "hint": "Advice is uncountable (pieces of advice)",
+        "explanation": ""
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correct sentence:",
+        "options": [
+          "Hardly had the bell rung when the students entered the examination hall.",
+          "Hardly the bell had rung when the students entered the examination hall.",
+          "The bell hardly had rung when the students entered the examination hall.",
+          "Had hardly the bell rung when the students entered the examination hall."
+        ],
+        "correct": 0,
+        "hint": "Hardly had + subject + participle",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "While the orchestra was tuning their instruments, the audience ______ quietly in their seats.",
+        "options": [
+          "sat",
+          "was sitting",
+          "sits",
+          "is sitting"
+        ],
+        "correct": 0,
+        "hint": "Completed past posture action",
+        "explanation": ""
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "You ______ check the tire pressure before embarking on a long highway trip.",
+        "options": [
+          "should",
+          "mustn't",
+          "can't",
+          "don't have to"
+        ],
+        "correct": 0,
+        "hint": "Road trip recommendation",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The ancient castle stands majestically ______ the top ______ the steep rocky hill.",
+        "options": [
+          "at / of",
+          "on / in",
+          "in / on",
+          "to / at"
+        ],
+        "correct": 0,
+        "hint": "At the top of",
+        "explanation": ""
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correct question:",
+        "options": [
+          "How long did it take you to complete the robotics project?",
+          "How long it did take you to complete the robotics project?",
+          "How long took it you to complete the robotics project?",
+          "How long did take it you to complete the robotics project?"
+        ],
+        "correct": 0,
+        "hint": "How long did it take",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "Although the challenge was difficult, ______ succeeded through teamwork.",
+        "options": [
+          "they",
+          "but they",
+          "so they",
+          "and they"
+        ],
+        "correct": 0,
+        "hint": "Although clause without but",
+        "explanation": ""
       },
       {
         "type": "find-mistake",
-        "question": "Why do she always forget her locker combination?",
+        "category": "modals",
+        "question": "Find the mistake: 'He has to went to the dentist for his annual checkup.'",
         "options": [
-          "do",
-          "she",
-          "forget",
-          "combination"
+          "went",
+          "has",
+          "dentist",
+          "checkup"
         ],
         "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'She' requires 'does'."
+        "hint": "Has to + base verb go",
+        "explanation": ""
       },
       {
-        "type": "sentence-choice",
-        "question": "Choose the correct past sentence:",
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "This perfume ______ like blooming jasmine flowers in summer.",
         "options": [
-          "We explored the ancient underground city yesterday.",
-          "We explore the ancient underground city yesterday.",
-          "We are exploring the ancient underground city yesterday."
+          "smells",
+          "is smelling",
+          "smelled",
+          "smell"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Explored' is past."
+        "hint": "Stative sensory verb smells",
+        "explanation": ""
       },
       {
-        "type": "context",
-        "question": "What is the mechanic doing in the pit? - He ______ the race car's tires right now.",
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the correct comparative sentence:",
         "options": [
-          "is changing",
-          "changes",
-          "changed"
+          "Solar energy is becoming increasingly more affordable worldwide.",
+          "Solar energy is becoming increasingly affordabler worldwide.",
+          "Solar energy is becoming increasingly most affordable worldwide.",
+          "Solar energy is becoming increasingly as affordable worldwide."
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Active pit stop."
+        "hint": "More affordable",
+        "explanation": ""
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "Competitors ______ consult any reference books during the closed-book test.",
+        "options": [
+          "mustn't",
+          "don't have to",
+          "can",
+          "should"
+        ],
+        "correct": 0,
+        "hint": "Exam closed-book rule",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The hikers strolled peacefully ______ the winding river bank at sunset.",
+        "options": [
+          "along",
+          "into",
+          "under",
+          "between"
+        ],
+        "correct": 0,
+        "hint": "Along river bank",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "tenses",
+        "question": "Look! That robotic rover ______ autonomous obstacle avoidance right now.",
+        "options": [
+          "is demonstrating",
+          "demonstrates",
+          "demonstrated",
+          "demonstrate"
+        ],
+        "correct": 0,
+        "hint": "Present continuous demonstration",
+        "explanation": ""
       }
     ],
     "hard": [
       {
-        "type": "find-mistake",
-        "question": "Why does you think she didn't come to school yesterday?",
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "Professor Higgins ______ at Oxford University for forty years before he finally retired last summer.",
         "options": [
-          "does",
-          "you",
-          "think",
-          "didn't come"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Subject 'you' requires 'do', not 'does'."
-      },
-      {
-        "type": "context",
-        "question": "Professor Higgins usually lectures on classical literature, but this semester he ______ a course on modern poetry.",
-        "options": [
-          "is teaching",
+          "taught",
           "teaches",
-          "taught"
+          "is teaching",
+          "has taught"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Temporary period ('this semester') contrasting with habit."
+        "hint": "Completed past career",
+        "explanation": "The entire career finished before last summer's retirement (Simple Past)."
       },
       {
-        "type": "verb-choice",
-        "question": "When the earthquake struck yesterday, all the alarms ______ immediately.",
+        "type": "context-dialogue",
+        "category": "modals",
+        "question": "Flight Attendant: 'Ladies and gentlemen, we are preparing for landing. Electronic devices ______ be switched to airplane mode.'",
         "options": [
-          "went off",
-          "go off",
-          "are going off"
+          "must",
+          "can",
+          "shouldn't",
+          "don't have to"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Completed sequence of past events."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence correctly uses the active continuous?",
-        "options": [
-          "The chef is tasting the sauce right now to check the seasoning.",
-          "The chef tastes the sauce right now to check the seasoning.",
-          "The chef tasted the sauce right now to check the seasoning."
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Taste' as an active sampling action uses continuous."
+        "hint": "Aviation safety regulation",
+        "explanation": "Aviation safety mandates are absolute requirements ('must')."
       },
       {
         "type": "find-mistake",
-        "question": "At present, the architects is designing a new sports stadium.",
+        "category": "core-grammar",
+        "question": "Find the mistake: 'A large number of students has registered for the advanced physics course.'",
         "options": [
-          "At present",
-          "architects",
-          "is designing",
-          "stadium"
+          "has",
+          "number",
+          "students",
+          "registered"
         ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "Plural subject 'architects' requires 'are designing'."
+        "correct": 0,
+        "hint": "A number of + plural verb",
+        "explanation": "'A large number of students' takes a plural verb ('have registered')."
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the sentence with the most natural and grammatically accurate word order:",
+        "options": [
+          "The talented violinist played the complex concerto flawlessly at the concert hall last evening.",
+          "The talented violinist played flawlessly the complex concerto at the concert hall last evening.",
+          "The talented violinist at the concert hall played the complex concerto flawlessly last evening.",
+          "Last evening the talented violinist played flawlessly at the concert hall the complex concerto."
+        ],
+        "correct": 0,
+        "hint": "Verb + Object + Manner + Place + Time",
+        "explanation": "Standard order: Verb + Direct Object + Manner + Place + Time."
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The new wildlife protection law will come ______ effect ______ the beginning of next month.",
+        "options": [
+          "into / at",
+          "in / on",
+          "to / in",
+          "onto / by"
+        ],
+        "correct": 0,
+        "hint": "Idiom: come into effect",
+        "explanation": "'Come into effect' is the fixed idiom; 'at the beginning of' is the time marker."
+      },
+      {
+        "type": "choose-incorrect",
+        "category": "core-grammar",
+        "question": "Choose the INCORRECT sentence regarding countable/uncountable nouns:",
+        "options": [
+          "The police has caught the notorious diamond thief.",
+          "The police have caught the notorious diamond thief.",
+          "The detectives have caught the thief.",
+          "The officer has caught the thief."
+        ],
+        "correct": 0,
+        "hint": "Collective noun 'police'",
+        "explanation": "'The police' is a plural collective noun and takes a plural verb ('have caught')."
+      },
+      {
+        "type": "same-meaning",
+        "category": "modals",
+        "question": "'It is advisable for travelers to check their visa requirements well before departure.' Which sentence has the SAME meaning?",
+        "options": [
+          "Travelers should check their visa requirements well before departure.",
+          "Travelers must not check their visa requirements well before departure.",
+          "Travelers can't check their visa requirements well before departure.",
+          "Travelers don't have to check their visa requirements well before departure."
+        ],
+        "correct": 0,
+        "hint": "Advisable = Should",
+        "explanation": "'Advisable' indicates a recommendation ('should')."
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "This antique clock ______ to my great-grandmother and still ______ the exact time perfectly.",
+        "options": [
+          "belonged / keeps",
+          "was belonging / is keeping",
+          "belongs / is keeping",
+          "belonged / kept"
+        ],
+        "correct": 0,
+        "hint": "Stative origin & present state",
+        "explanation": "'Belonged' (historical owner) + 'keeps' (current habitual accuracy)."
+      },
+      {
+        "type": "find-mistake",
+        "category": "prepositions",
+        "question": "Find the mistake: 'She congratulated him for his remarkable victory in the competition.'",
+        "options": [
+          "for",
+          "congratulated",
+          "remarkable",
+          "victory"
+        ],
+        "correct": 0,
+        "hint": "Congratulate on",
+        "explanation": "The correct preposition is 'congratulate [someone] on [something]', not 'for'."
+      },
+      {
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the sentence with flawless subject-verb agreement:",
+        "options": [
+          "The committee presents its annual research findings every October.",
+          "The committee present their annual research findings every October.",
+          "The committee are presenting its findings every October.",
+          "The committee have presented its findings every October."
+        ],
+        "correct": 0,
+        "hint": "Collective entity as single body",
+        "explanation": "Acting as a single unit with singular possessive pronoun 'its', it takes singular 'presents'."
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "While the lead scientist ______ the chemical sample, the laser measurement device ______ a rare fluctuation.",
+        "options": [
+          "was analyzing / detected",
+          "analyzed / detected",
+          "is analyzing / detects",
+          "analyzes / detected"
+        ],
+        "correct": 0,
+        "hint": "Past continuous background + sudden past detection",
+        "explanation": ""
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "Under international maritime conventions, all passenger vessels ______ carry sufficient lifeboats for all souls on board.",
+        "options": [
+          "must",
+          "can",
+          "shouldn't",
+          "don't have to"
+        ],
+        "correct": 0,
+        "hint": "Maritime legal mandate",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The archaeological expedition unearthed artifacts dating ______ the Bronze Age buried deep ______ the fertile delta.",
+        "options": [
+          "from / beneath",
+          "to / under",
+          "at / into",
+          "with / between"
+        ],
+        "correct": 0,
+        "hint": "Dating from / beneath delta",
+        "explanation": ""
+      },
+      {
+        "type": "find-mistake",
+        "category": "core-grammar",
+        "question": "Find the mistake: 'Neither the CEO nor the board members was willing to accept the hostile takeover bid.'",
+        "options": [
+          "was",
+          "Neither",
+          "members",
+          "takeover"
+        ],
+        "correct": 0,
+        "hint": "Board members is plural -> were",
+        "explanation": ""
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correct sentence with fronted adverbial:",
+        "options": [
+          "Seldom have I witnessed such extraordinary dedication to academic excellence.",
+          "Seldom I have witnessed such extraordinary dedication to academic excellence.",
+          "I have seldom witnessed such extraordinary dedication to academic excellence.",
+          "Have I seldom witnessed such extraordinary dedication to academic excellence."
+        ],
+        "correct": 0,
+        "hint": "Inversion with Seldom have I witnessed",
+        "explanation": ""
+      },
+      {
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the sentence with correct indefinite pronoun agreement:",
+        "options": [
+          "Everybody who attended the international symposium was given a delegate badge.",
+          "Everybody who attended the international symposium were given a delegate badge.",
+          "Everybody who attended the international symposium are given a delegate badge.",
+          "Everybody who attended the international symposium have been given a badge."
+        ],
+        "correct": 0,
+        "hint": "Everybody takes singular verb was given",
+        "explanation": ""
+      },
+      {
+        "type": "same-meaning",
+        "category": "modals",
+        "question": "'It is strictly prohibited to duplicate proprietary software code without authorization.' Which sentence has the SAME meaning?",
+        "options": [
+          "You mustn't duplicate proprietary software code without authorization.",
+          "You don't have to duplicate proprietary software code without authorization.",
+          "You should duplicate proprietary software code without authorization.",
+          "You can duplicate proprietary software code without authorization."
+        ],
+        "correct": 0,
+        "hint": "Strictly prohibited = Mustn't",
+        "explanation": ""
+      },
+      {
+        "type": "find-mistake",
+        "category": "tenses",
+        "question": "Find the mistake: 'While the team conducted the field survey, heavy rain suddenly was pouring down.'",
+        "options": [
+          "was pouring",
+          "conducted",
+          "suddenly",
+          "heavy"
+        ],
+        "correct": 0,
+        "hint": "Sudden event takes simple past 'poured'",
+        "explanation": ""
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "This ancient mathematical formula ______ fascinating properties and ______ valid across all geometry.",
+        "options": [
+          "possesses / remains",
+          "is possessing / is remaining",
+          "possesses / is remaining",
+          "is possessing / remains"
+        ],
+        "correct": 0,
+        "hint": "Double stative verb in present",
+        "explanation": ""
+      },
+      {
+        "type": "choose-incorrect",
+        "category": "core-grammar",
+        "question": "Choose the INCORRECT sentence:",
+        "options": [
+          "The criteria for selecting the scholarship recipient was extremely rigorous.",
+          "The criteria for selecting the scholarship recipient were extremely rigorous.",
+          "The criterion for selecting the scholarship recipient was extremely rigorous.",
+          "The standards for selecting the scholarship recipient were rigorous."
+        ],
+        "correct": 0,
+        "hint": "Criteria is plural (criterion is singular)",
+        "explanation": ""
       },
       {
         "type": "complete-sentence",
-        "question": "Neither the captain nor the players ______ happy with the referee's decision yesterday.",
+        "category": "prepositions",
+        "question": "The diplomat was accused ______ leaking confidential summit transcripts to the international press.",
+        "options": [
+          "of",
+          "for",
+          "with",
+          "at"
+        ],
+        "correct": 0,
+        "hint": "Accused of + V-ing",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "modals",
+        "question": "You ______ disclose confidential patient medical records under the health privacy act.",
+        "options": [
+          "mustn't",
+          "don't have to",
+          "can",
+          "should"
+        ],
+        "correct": 0,
+        "hint": "Health privacy prohibition",
+        "explanation": ""
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the sentence with correct adverbial inversion:",
+        "options": [
+          "Little did they realize that their breakthrough discovery would revolutionize modern physics.",
+          "Little they realized that their breakthrough discovery would revolutionize modern physics.",
+          "They realized little that their breakthrough discovery would revolutionize modern physics.",
+          "Did they realize little that their breakthrough discovery would revolutionize modern physics."
+        ],
+        "correct": 0,
+        "hint": "Little did they realize inversion",
+        "explanation": ""
+      },
+      {
+        "type": "find-mistake",
+        "category": "prepositions",
+        "question": "Find the mistake: 'He insisted to pay for the celebratory dinner himself.'",
+        "options": [
+          "to pay",
+          "insisted",
+          "celebratory",
+          "himself"
+        ],
+        "correct": 0,
+        "hint": "Insist on paying, not insist to pay",
+        "explanation": ""
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "Listen carefully! The lead astronomer ______ the coordinates of the newly discovered comet right now.",
+        "options": [
+          "is transmitting",
+          "transmits",
+          "transmitted",
+          "transmit"
+        ],
+        "correct": 0,
+        "hint": "Present continuous listening cue",
+        "explanation": ""
+      },
+      {
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the grammatically correct sentence:",
+        "options": [
+          "Neither the captain nor the crew members were able to navigate through the dense fog.",
+          "Neither the captain nor the crew members was able to navigate through the dense fog.",
+          "Neither the captain nor the crew members is able to navigate through the dense fog.",
+          "Neither the captain nor the crew members has been able to navigate."
+        ],
+        "correct": 0,
+        "hint": "Plural agreement with crew members",
+        "explanation": ""
+      },
+      {
+        "type": "context-dialogue",
+        "category": "modals",
+        "question": "A: 'Is registration mandatory for the optional robotics workshop?' - B: 'No, participants ______ simply attend on the day.'",
+        "options": [
+          "can",
+          "mustn't",
+          "have to",
+          "shouldn't"
+        ],
+        "correct": 0,
+        "hint": "Permission / option",
+        "explanation": ""
+      },
+      {
+        "type": "same-meaning",
+        "category": "core-grammar",
+        "question": "'No telescope on Earth is more powerful than the new orbital observatory.' Which sentence has the SAME meaning?",
+        "options": [
+          "The new orbital observatory is the most powerful telescope on Earth.",
+          "The new orbital observatory is as powerful as Earth telescopes.",
+          "Other telescopes on Earth are more powerful than the observatory.",
+          "The observatory is not the most powerful telescope."
+        ],
+        "correct": 0,
+        "hint": "Superlative equivalence",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "The jury ______ unanimous in delivering its landmark verdict today.",
+        "options": [
+          "was",
+          "were",
+          "are",
+          "have been"
+        ],
+        "correct": 0,
+        "hint": "Jury as single collective unit (its verdict) -> was",
+        "explanation": ""
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "As a fundamental chemical principle, hydrogen ______ with oxygen to produce water.",
+        "options": [
+          "combines",
+          "is combining",
+          "combined",
+          "combine"
+        ],
+        "correct": 0,
+        "hint": "Universal chemical law simple present",
+        "explanation": ""
+      },
+      {
+        "type": "find-mistake",
+        "category": "modals",
+        "question": "Find the mistake: 'You don't have to enter the radioactive chamber without full hazmat gear.'",
+        "options": [
+          "don't have to",
+          "radioactive",
+          "hazmat",
+          "chamber"
+        ],
+        "correct": 0,
+        "hint": "Should be mustn't due to mortal hazard",
+        "explanation": ""
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correct sentence:",
+        "options": [
+          "Not only did the team win the championship, but they also broke the tournament scoring record.",
+          "Not only the team won the championship, but they also broke the scoring record.",
+          "The team not only won the championship, but did they also break the scoring record.",
+          "Won the team not only the championship, but they also broke the scoring record."
+        ],
+        "correct": 0,
+        "hint": "Not only did they win inversion",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The athlete was banned ______ competing for two years after failing a routine drug test.",
+        "options": [
+          "from",
+          "to",
+          "with",
+          "at"
+        ],
+        "correct": 0,
+        "hint": "Banned from + V-ing",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "A series of rigorous laboratory tests ______ conducted before the vaccine was approved.",
+        "options": [
+          "was",
+          "were",
+          "are",
+          "have been"
+        ],
+        "correct": 0,
+        "hint": "'A series' is singular subject -> was conducted",
+        "explanation": ""
+      },
+      {
+        "type": "choose-incorrect",
+        "category": "tenses",
+        "question": "Choose the INCORRECT sentence:",
+        "options": [
+          "I am knowing the complete periodic table by heart.",
+          "I know the complete periodic table by heart.",
+          "I learned the complete periodic table by heart.",
+          "I can recite the periodic table by heart."
+        ],
+        "correct": 0,
+        "hint": "Know is a stative verb",
+        "explanation": ""
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "Since all course materials are provided digitally, students ______ purchase printed textbooks.",
+        "options": [
+          "don't have to",
+          "mustn't",
+          "should",
+          "can't"
+        ],
+        "correct": 0,
+        "hint": "No obligation to buy",
+        "explanation": ""
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "When the seismic sensors triggered the early earthquake warning, the high-speed trains ______ automatically.",
+        "options": [
+          "stopped",
+          "were stopping",
+          "stop",
+          "are stopping"
+        ],
+        "correct": 0,
+        "hint": "Automated instantaneous past reaction",
+        "explanation": ""
+      },
+      {
+        "type": "find-mistake",
+        "category": "core-grammar",
+        "question": "Find the mistake: 'The statistics compiled in the national census was highly informative.'",
+        "options": [
+          "was",
+          "statistics",
+          "compiled",
+          "informative"
+        ],
+        "correct": 0,
+        "hint": "Statistics (data) takes plural verb were",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "prepositions",
+        "question": "The research probe plunged deep ______ the turbulent Jovian atmosphere.",
+        "options": [
+          "into",
+          "onto",
+          "under",
+          "between"
+        ],
+        "correct": 0,
+        "hint": "Plunge into atmosphere",
+        "explanation": ""
+      },
+      {
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the correct sentence:",
+        "options": [
+          "Fifty kilograms is the maximum allowable luggage weight for international flights.",
+          "Fifty kilograms are the maximum allowable luggage weight for international flights.",
+          "Fifty kilograms were the maximum allowable luggage weight for international flights.",
+          "Fifty kilogram is the maximum allowable luggage weight."
+        ],
+        "correct": 0,
+        "hint": "Weight taken as single entity -> is",
+        "explanation": ""
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "While the volcanologists ______ data near the crater, the volcano ______ a sudden plume of smoke.",
+        "options": [
+          "were collecting / emitted",
+          "collected / emitted",
+          "are collecting / emits",
+          "collect / emitted"
+        ],
+        "correct": 0,
+        "hint": "Past continuous + sudden simple past",
+        "explanation": ""
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "Visitors ______ touch the delicate coral reef formations while scuba diving in the marine reserve.",
+        "options": [
+          "mustn't",
+          "don't have to",
+          "can",
+          "should"
+        ],
+        "correct": 0,
+        "hint": "Marine reserve prohibition",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The new satellite was launched ______ orbit ______ dawn yesterday.",
+        "options": [
+          "into / at",
+          "in / on",
+          "to / in",
+          "onto / by"
+        ],
+        "correct": 0,
+        "hint": "Into orbit at dawn",
+        "explanation": ""
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly structured sentence:",
+        "options": [
+          "Only after completing the safety briefing were the students allowed into the chemistry laboratory.",
+          "Only after completing the safety briefing the students were allowed into the chemistry laboratory.",
+          "The students only after completing the safety briefing were allowed into the chemistry laboratory.",
+          "Were the students allowed only after completing the safety briefing into the chemistry laboratory."
+        ],
+        "correct": 0,
+        "hint": "Inversion with 'Only after...'",
+        "explanation": ""
+      },
+      {
+        "type": "find-mistake",
+        "category": "core-grammar",
+        "question": "Find the mistake: 'Every teacher and student were invited to the anniversary gala.'",
+        "options": [
+          "were",
+          "Every",
+          "student",
+          "anniversary"
+        ],
+        "correct": 0,
+        "hint": "'Every' takes singular verb was",
+        "explanation": ""
+      },
+      {
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the grammatically correct sentence:",
+        "options": [
+          "Neither the research scientist nor her assistants have published their final paper yet.",
+          "Neither the research scientist nor her assistants has published their final paper yet.",
+          "Neither the research scientist nor her assistants is publishing their final paper yet.",
+          "Neither the research scientist nor her assistants was publishing their final paper yet."
+        ],
+        "correct": 0,
+        "hint": "Plural agreement with assistants",
+        "explanation": ""
+      },
+      {
+        "type": "same-meaning",
+        "category": "modals",
+        "question": "'It is unnecessary for you to submit a physical copy if you upload it digitally.' Which sentence has the same meaning?",
+        "options": [
+          "You don't have to submit a physical copy.",
+          "You mustn't submit a physical copy.",
+          "You shouldn't submit a physical copy.",
+          "You can't submit a physical copy."
+        ],
+        "correct": 0,
+        "hint": "Unnecessary = Don't have to",
+        "explanation": ""
+      },
+      {
+        "type": "choose-incorrect",
+        "category": "tenses",
+        "question": "Choose the INCORRECT sentence:",
+        "options": [
+          "I am wanting to become an aerospace engineer after university.",
+          "I want to become an aerospace engineer after university.",
+          "I am studying to become an aerospace engineer.",
+          "I decided to become an aerospace engineer."
+        ],
+        "correct": 0,
+        "hint": "Want is a stative verb",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "The speed of light in a vacuum ______ approximately 300,000 kilometers per second.",
+        "options": [
+          "is",
+          "are",
+          "were",
+          "have been"
+        ],
+        "correct": 0,
+        "hint": "Speed is singular head noun",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "He was praised ______ his outstanding contribution to the robotics club.",
+        "options": [
+          "for",
+          "to",
+          "with",
+          "at"
+        ],
+        "correct": 0,
+        "hint": "Praised for contribution",
+        "explanation": ""
+      },
+      {
+        "type": "find-mistake",
+        "category": "prepositions",
+        "question": "Find the mistake: 'She entered into the meeting room without knocking.'",
+        "options": [
+          "into",
+          "entered",
+          "meeting",
+          "knocking"
+        ],
+        "correct": 0,
+        "hint": "Enter is transitive without into when referring to physical rooms",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "modals",
+        "question": "You ______ leave children unattended near the swimming pool.",
+        "options": [
+          "mustn't",
+          "don't have to",
+          "can",
+          "should"
+        ],
+        "correct": 0,
+        "hint": "Pool safety prohibition",
+        "explanation": ""
+      },
+      {
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "Although he usually ______ breakfast at home, this morning he ______ a bagel on the train.",
+        "options": [
+          "eats / ate",
+          "is eating / eats",
+          "ate / had eaten",
+          "eat / ate"
+        ],
+        "correct": 0,
+        "hint": "Habitual present contrasted with past action",
+        "explanation": ""
+      },
+      {
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correct sentence:",
+        "options": [
+          "Scarcely had the plane taken off when severe turbulence began.",
+          "Scarcely the plane had taken off when severe turbulence began.",
+          "The plane scarcely had taken off when severe turbulence began.",
+          "Had scarcely the plane taken off when severe turbulence began."
+        ],
+        "correct": 0,
+        "hint": "Scarcely had + subject + participle",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "Neither the laptop nor the tablet ______ charged properly overnight.",
+        "options": [
+          "was",
+          "were",
+          "are",
+          "have been"
+        ],
+        "correct": 0,
+        "hint": "Singular agreement with tablet",
+        "explanation": ""
+      },
+      {
+        "type": "same-meaning",
+        "category": "core-grammar",
+        "question": "'No telescope in the world is as sensitive as the new radio array.' Which sentence has the same meaning?",
+        "options": [
+          "The new radio array is the most sensitive telescope in the world.",
+          "The new radio array is less sensitive than other telescopes.",
+          "Other telescopes are more sensitive than the new array.",
+          "The new array is not very sensitive."
+        ],
+        "correct": 0,
+        "hint": "Superlative equivalence",
+        "explanation": ""
+      },
+      {
+        "type": "choose-sentence",
+        "category": "core-grammar",
+        "question": "Choose the sentence with correct subject-verb agreement:",
+        "options": [
+          "Physics is my favorite subject this semester.",
+          "Physics are my favorite subject this semester.",
+          "Physics were my favorite subject this semester.",
+          "Physics have been my favorite subject this semester."
+        ],
+        "correct": 0,
+        "hint": "Physics is singular academic subject",
+        "explanation": ""
+      },
+      {
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "You ______ wear formal attire; smart casual is perfectly acceptable for the reception.",
+        "options": [
+          "don't have to",
+          "mustn't",
+          "should",
+          "can't"
+        ],
+        "correct": 0,
+        "hint": "Absence of formal dress requirement",
+        "explanation": ""
+      },
+      {
+        "type": "find-mistake",
+        "category": "tenses",
+        "question": "Find the mistake: 'Did you went to the science museum during the holiday?'",
+        "options": [
+          "went",
+          "Did",
+          "museum",
+          "holiday"
+        ],
+        "correct": 0,
+        "hint": "Did + base verb go",
+        "explanation": ""
+      },
+      {
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The deep ocean trench extends ______ thousands of kilometers along the seabed.",
+        "options": [
+          "for",
+          "at",
+          "in",
+          "to"
+        ],
+        "correct": 0,
+        "hint": "Distance preposition for",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "The jury ______ divided in their individual opinions regarding the case.",
         "options": [
           "were",
           "was",
-          "are"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "In 'neither... nor...', agrees with closer plural subject 'players' in past -> 'were'."
-      },
-      {
-        "type": "context",
-        "question": "Look at the thermometer! The temperature ______ rapidly because the sun is rising.",
-        "options": [
-          "is climbing",
-          "climbs",
-          "climbed"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Dynamic process happening right now."
-      },
-      {
-        "type": "grammar-structure",
-        "question": "Why ______ the detective examine the crime scene so carefully yesterday?",
-        "options": [
-          "did",
-          "does",
-          "is"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' requires Simple Past auxiliary 'did'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Do she know where the principal's office is located?”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "Incorrect! Subject 'she' requires auxiliary 'Does'."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Last night, the explorer find a hidden cave behind the waterfall.",
-        "options": [
-          "Last night",
-          "explorer",
-          "find",
-          "cave"
-        ],
-        "correct": 2,
-        "tense": "Simple Past",
-        "explanation": "Past tense requires irregular form 'found'."
-      },
-      {
-        "type": "context",
-        "question": "Normally my parents work from the office, but today they ______ from home due to snowfall.",
-        "options": [
-          "are working",
-          "work",
-          "worked"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Temporary one-day change requires Present Continuous."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "The train ______ at platform 4 every morning at 07:15 sharp.",
-        "options": [
-          "arrives",
-          "is arriving",
-          "arrived"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Timetabled regular schedule takes Simple Present."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Did they understood why the teacher canceled the field trip?”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "Incorrect! After 'Did', use base verb 'understand'."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Look! A massive ship is sail into the international harbor.",
-        "options": [
-          "Look",
-          "massive ship",
-          "is sail",
-          "harbor"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "Must be 'is sailing'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Who ______ the secret code to open the security vault yesterday?",
-        "options": [
-          "discovered",
-          "discovers",
-          "is discovering"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Subject question in past tense uses the past verb directly."
-      },
-      {
-        "type": "context",
-        "question": "Be quiet everyone! The jury ______ the final verdict in the courtroom.",
-        "options": [
-          "is delivering",
-          "delivers",
-          "delivered"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Be quiet everyone!' indicates a live event taking place right now."
-      },
-      {
-        "type": "grammar-structure",
-        "question": "How many times ______ you visit Istanbul before moving there last year?",
-        "options": [
-          "did",
-          "do",
-          "are"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past inquiry requires auxiliary 'did'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence is standard grammar?",
-        "options": [
-          "I remember my first day at middle school very clearly.",
-          "I am remembering my first day at middle school very clearly.",
-          "I remembers my first day at middle school very clearly."
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Remember' is stative; use 'I remember'."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Every weekend, Alex and his brother goes mountain biking in the hills.",
-        "options": [
-          "Every weekend",
-          "Alex and his brother",
-          "goes",
-          "hills"
-        ],
-        "correct": 2,
-        "tense": "Simple Present",
-        "explanation": "Compound subject 'Alex and his brother' is plural and takes base verb 'go'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The scientist ______ the experiment three times yesterday to ensure accurate results.",
-        "options": [
-          "repeated",
-          "repeats",
-          "is repeating"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' shows completed past repetition."
-      },
-      {
-        "type": "context",
-        "question": "Why is the road closed? - Because construction workers ______ the bridge right now.",
-        "options": [
-          "are repairing",
-          "repair",
-          "repaired"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Current reason for road closure."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Neither of the two students ______ the correct answer to the riddle.",
-        "options": [
-          "knows",
-          "know",
-          "are knowing"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Neither of' takes singular verb 'knows'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“The museum exhibited ancient Roman coins during the special exhibition last month.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Correct! Simple past sentence with 'last month'."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Did she spoke with the school counselor yesterday morning?",
-        "options": [
-          "Did",
-          "she",
-          "spoke",
-          "yesterday morning"
-        ],
-        "correct": 2,
-        "tense": "Simple Past",
-        "explanation": "After 'Did', use base verb 'speak'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Look at the stage! The dancers ______ a traditional folk routine.",
-        "options": [
-          "are performing",
-          "perform",
-          "performed"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look at the stage!' marks an action currently underway."
-      },
-      {
-        "type": "context",
-        "question": "Emma usually takes notes on her tablet, but today her battery is dead, so she ______ in a notebook.",
-        "options": [
-          "is writing",
-          "writes",
-          "wrote"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Temporary activity for today due to a dead battery."
-      },
-      {
-        "type": "grammar-structure",
-        "question": "Why ______ you look so surprised when you opened the gift box yesterday?",
-        "options": [
-          "did",
-          "do",
-          "are"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' takes past auxiliary 'did'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Choose the correct scientific sentence:",
-        "options": [
-          "Water boils at 100°C under normal atmospheric pressure.",
-          "Water is boiling at 100°C under normal atmospheric pressure.",
-          "Water boiled at 100°C under normal atmospheric pressure always."
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Scientific fact expressed in Simple Present."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Right now, the technician test the sound system before the concert.",
-        "options": [
-          "Right now",
-          "technician",
-          "test",
-          "concert"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' requires 'is testing'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The historic castle ______ many earthquakes over the last three hundred years.",
-        "options": [
-          "survived",
-          "survives",
-          "is surviving"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past completed historical events."
-      },
-      {
-        "type": "context",
-        "question": "Why didn't you join the Zoom meeting yesterday? - Because my internet connection ______ down.",
-        "options": [
-          "broke",
-          "breaks",
-          "is breaking"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past reason for missing a meeting yesterday."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Listen! The siren ______ loudly across the valley.",
-        "options": [
-          "is wailing",
-          "wails",
-          "wailed"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Listen!' requires Present Continuous."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Do your father always drives to work or take the train?",
-        "options": [
-          "Do",
-          "drives",
-          "take",
-          "train"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Your father' takes 'Does', and verb should be 'drive'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Did she write all three essays yesterday afternoon?”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Correct! 'Did + base verb' with 'yesterday afternoon'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Look! That bird ______ a nest on the school roof.",
-        "options": [
-          "is building",
-          "builds",
-          "built"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look!' signals present progressive."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Did they bought the train tickets yesterday morning?",
-        "options": [
-          "Did",
-          "bought",
-          "tickets",
-          "yesterday"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "After 'Did', use base verb 'buy'."
-      },
-      {
-        "type": "context",
-        "question": "Look! The professor ______ the chemical formula on the board.",
-        "options": [
-          "is writing",
-          "writes",
-          "wrote"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Look!' indicates Present Continuous."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "How ______ the ancient Egyptians build the massive pyramids thousands of years ago?",
-        "options": [
-          "did",
-          "do",
-          "are"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Historical past question with 'did'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“She is having two cats and a golden retriever.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "Incorrect! Possession uses Simple Present 'has'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The solar system ______ eight planets revolving around the Sun.",
-        "options": [
-          "contains",
-          "is containing",
-          "contained"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Fact expressed with Simple Present."
-      },
-      {
-        "type": "grammar-structure",
-        "question": "Under what conditions ______ water freeze into solid ice?",
-        "options": [
-          "does",
           "is",
-          "did"
+          "has been"
         ],
         "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Universal condition in Simple Present."
+        "hint": "Divided members take plural were",
+        "explanation": ""
       },
       {
-        "type": "find-mistake",
-        "question": "Look! The submarine is dive below the polar ice sheet.",
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "Look! The satellite ______ high above the horizon right now.",
         "options": [
-          "Look",
-          "submarine",
-          "is dive",
-          "polar ice"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "Must be 'is diving'."
-      },
-      {
-        "type": "context",
-        "question": "Normally the doctor examines patients at the clinic, but today she ______ emergency surgery at the hospital.",
-        "options": [
-          "is performing",
-          "performs",
-          "performed"
+          "is passing",
+          "passes",
+          "passed",
+          "pass"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Temporary specialty surgery for today."
+        "hint": "Visual cue present continuous",
+        "explanation": ""
       },
       {
-        "type": "sentence-choice",
-        "question": "Which sentence is grammatically correct?",
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correct negative question:",
         "options": [
-          "Neither of the candidates meets the strict criteria.",
-          "Neither of the candidates meet the strict criteria.",
-          "Neither of the candidates is meeting the criteria."
+          "Why haven't they responded to our urgent inquiry yet?",
+          "Why they haven't responded to our urgent inquiry yet?",
+          "Why haven't responded they to our urgent inquiry yet?",
+          "Why not have they responded to our inquiry yet?"
         ],
         "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Neither of' takes singular 'meets'."
+        "hint": "Wh- + haven't + subject + verb",
+        "explanation": ""
       },
       {
-        "type": "verb-choice",
-        "question": "The astronomers ______ an undiscovered asteroid passing close to Mars yesterday.",
+        "type": "choose-incorrect",
+        "category": "modals",
+        "question": "Choose the INCORRECT sentence:",
         "options": [
-          "detected",
-          "detect",
-          "are detecting"
+          "You mustn't to share your password with anyone.",
+          "You mustn't share your password with anyone.",
+          "You shouldn't share your password with anyone.",
+          "You cannot share your password with anyone."
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' requires Simple Past."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Do the governor always deliver the opening speech at the ceremony?",
-        "options": [
-          "Do",
-          "governor",
-          "deliver",
-          "ceremony"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Singular 'governor' takes 'Does'."
+        "hint": "Mustn't without to",
+        "explanation": ""
       },
       {
         "type": "complete-sentence",
-        "question": "Listen! The volcano ______ molten lava down the steep slope.",
+        "category": "prepositions",
+        "question": "The diplomat succeeded ______ negotiating a peaceful resolution.",
         "options": [
-          "is spewing",
-          "spews",
-          "spewed"
+          "in",
+          "at",
+          "on",
+          "to"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Listen!' signals active ongoing eruption."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“She is recognizing the handwriting on the ancient scroll immediately.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Present",
-        "explanation": "Incorrect! 'Recognize' is stative; use 'She recognizes'."
-      },
-      {
-        "type": "context",
-        "question": "Why were the laboratory doors locked yesterday? - Because toxic fumes ______ the ventilation system.",
-        "options": [
-          "contaminated",
-          "contaminate",
-          "are contaminating"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past reason for locked doors."
-      },
-      {
-        "type": "grammar-structure",
-        "question": "How many centuries ago ______ the Roman Empire conquer the region?",
-        "options": [
-          "did",
-          "do",
-          "are"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Historical question requiring 'did'."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The ancient library of Alexandria ______ thousands of priceless manuscripts before it was destroyed.",
-        "options": [
-          "housed",
-          "houses",
-          "is housing"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Historical past state."
+        "hint": "Succeed in + V-ing",
+        "explanation": ""
       },
       {
         "type": "find-mistake",
-        "question": "Did the engineers understood the complex schematic diagram yesterday?",
+        "category": "core-grammar",
+        "question": "Find the mistake: 'The news on the front page are very alarming today.'",
         "options": [
-          "Did",
-          "engineers",
-          "understood",
-          "yesterday"
-        ],
-        "correct": 2,
-        "tense": "Simple Past",
-        "explanation": "After 'Did', use base form 'understand'."
-      },
-      {
-        "type": "context",
-        "question": "Look through the telescope! The comet ______ directly across the northern constellation right now.",
-        "options": [
-          "is traveling",
-          "travels",
-          "traveled"
+          "are",
+          "news",
+          "front",
+          "alarming"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' indicates active celestial motion."
+        "hint": "News is singular (is)",
+        "explanation": ""
       },
       {
         "type": "complete-sentence",
-        "question": "How ______ ancient navigators determine latitude before modern GPS was invented?",
+        "category": "tenses",
+        "question": "While the meteorologist was tracking the storm, the barometer ______ rapidly.",
         "options": [
-          "did",
-          "do",
-          "are"
+          "dropped",
+          "was dropping",
+          "drops",
+          "is dropping"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past inquiry requiring 'did'."
+        "hint": "Past spontaneous drop",
+        "explanation": ""
       },
       {
-        "type": "correct-incorrect",
-        "question": "“Did the archaeologists unearth the golden crown yesterday afternoon?”",
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "You ______ take pictures inside the high-security research facility.",
         "options": [
-          "Correct",
-          "Incorrect"
+          "mustn't",
+          "don't have to",
+          "can",
+          "should"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Correct! 'Did + unearth'."
+        "hint": "Security prohibition",
+        "explanation": ""
       },
       {
-        "type": "verb-choice",
-        "question": "Light ______ through the vacuum of space at approximately 300,000 km per second.",
+        "type": "same-meaning",
+        "category": "modals",
+        "question": "'It is mandatory to wear a life jacket on the white-water rafting excursion.' Which sentence has the same meaning?",
         "options": [
-          "travels",
-          "is traveling",
-          "traveled"
+          "You must wear a life jacket on the white-water rafting excursion.",
+          "You can wear a life jacket on the white-water rafting excursion.",
+          "You shouldn't wear a life jacket on the white-water rafting excursion.",
+          "You don't have to wear a life jacket on the rafting excursion."
         ],
         "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Universal physics constant."
+        "hint": "Mandatory = Must",
+        "explanation": ""
       },
       {
-        "type": "find-mistake",
-        "question": "Every semester, the biology teacher and her assistants organizes field trips.",
+        "type": "word-order",
+        "category": "word-order",
+        "question": "Choose the correctly ordered sentence:",
         "options": [
-          "Every semester",
-          "teacher and her assistants",
-          "organizes",
-          "field trips"
-        ],
-        "correct": 2,
-        "tense": "Simple Present",
-        "explanation": "Plural compound subject takes base form 'organize'."
-      },
-      {
-        "type": "context",
-        "question": "Why didn't the plane land on schedule yesterday? - Because dense fog ______ visibility on the runway.",
-        "options": [
-          "reduced",
-          "reduces",
-          "is reducing"
+          "Never did we expect such an overwhelming response to our community project.",
+          "Never we did expect such an overwhelming response to our community project.",
+          "We did never expect such an overwhelming response to our community project.",
+          "Did never we expect such an overwhelming response to our community project."
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past meteorological cause."
+        "hint": "Never did we expect inversion",
+        "explanation": ""
       },
       {
-        "type": "grammar-structure",
-        "question": "Why ______ the seismic sensors trigger the emergency warning yesterday?",
+        "type": "preposition-choice",
+        "category": "prepositions",
+        "question": "The athlete was banned ______ competing for two years.",
         "options": [
-          "did",
-          "does",
-          "is"
+          "from",
+          "to",
+          "with",
+          "at"
         ],
         "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' requires 'did'."
+        "hint": "Banned from",
+        "explanation": ""
       },
       {
-        "type": "sentence-choice",
+        "type": "complete-sentence",
+        "category": "core-grammar",
+        "question": "A cluster of bright stars ______ visible in the northern sky tonight.",
+        "options": [
+          "is",
+          "are",
+          "were",
+          "have been"
+        ],
+        "correct": 0,
+        "hint": "A cluster is singular subject",
+        "explanation": ""
+      },
+      {
+        "type": "choose-sentence",
+        "category": "core-grammar",
         "question": "Choose the correct sentence:",
         "options": [
-          "The chef is tasting the sauce right now to ensure proper seasoning.",
-          "The chef tastes the sauce right now to ensure proper seasoning.",
-          "The chef tasted the sauce right now to ensure proper seasoning."
+          "Neither the coach nor the team members were satisfied with the referee's call.",
+          "Neither the coach nor the team members was satisfied with the referee's call.",
+          "Neither the coach nor the team members is satisfied with the referee's call.",
+          "Neither the coach nor the team members has been satisfied."
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Active sampling uses Present Continuous."
+        "hint": "Plural agreement with members",
+        "explanation": ""
       },
       {
-        "type": "verb-choice",
-        "question": "Look at the radar! The hurricane ______ rapidly toward the coastline right now.",
-        "options": [
-          "is moving",
-          "moves",
-          "moved"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' signals active movement."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Right now, the technician calibrate the laser equipment in the dark room.",
-        "options": [
-          "Right now",
-          "technician",
-          "calibrate",
-          "equipment"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' requires 'is calibrating'."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Why ______ you look so perplexed when the test results were distributed yesterday?",
-        "options": [
-          "did",
-          "do",
-          "are"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' takes past auxiliary 'did'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Did she spoke with the international ambassadors yesterday morning?”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 1,
-        "tense": "Simple Past",
-        "explanation": "Incorrect! After 'Did', use 'speak'."
-      },
-      {
-        "type": "context",
-        "question": "Be quiet! The international delegates ______ the final peace treaty right now.",
-        "options": [
-          "are signing",
-          "sign",
-          "signed"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' indicates Present Continuous."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The seismologists ______ a minor tectonic tremor early yesterday morning.",
-        "options": [
-          "recorded",
-          "record",
-          "are recording"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday morning' takes past 'recorded'."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Look through the binoculars! The rare falcon ______ atop the rocky cliff right now.",
-        "options": [
-          "is perching",
-          "perches",
-          "perched"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' indicates active observation."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Do the chief engineer always inspect the dam before winter?",
-        "options": [
-          "Do",
-          "chief engineer",
-          "inspect",
-          "winter"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Singular subject takes 'Does'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“Did the archaeologists unearth the bronze artifacts yesterday?”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Correct! 'Did + unearth'."
-      },
-      {
-        "type": "context",
-        "question": "Why were the laboratory vents closed yesterday? - Because volatile chemicals ______ an unusual reaction.",
-        "options": [
-          "caused",
-          "cause",
-          "are causing"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past chemical cause."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The Earth's magnetic field ______ our atmosphere from solar radiation continuously.",
-        "options": [
-          "shields",
-          "is shielding",
-          "shielded"
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Universal physics fact."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "How ______ ancient architects design the dome of the Pantheon without modern steel?",
-        "options": [
-          "did",
-          "do",
-          "are"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Historical inquiry requiring 'did'."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Right now, the astronomer calibrate the high-power mirror of the telescope.",
-        "options": [
-          "Right now",
-          "astronomer",
-          "calibrate",
-          "telescope"
-        ],
-        "correct": 2,
-        "tense": "Present Continuous",
-        "explanation": "Should be 'is calibrating'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence is grammatically correct? (She recognizes the m...)",
-        "options": [
-          "She recognizes the melody from an ancient folk song.",
-          "She is recognizing the melody from an ancient folk song.",
-          "She recognize the melody from an ancient folk song."
-        ],
-        "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Recognize' is stative."
-      },
-      {
-        "type": "context",
-        "question": "Normally the professor lectures on modern physics, but this semester he ______ quantum optics.",
-        "options": [
-          "is teaching",
-          "teaches",
-          "taught"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Temporary specialty course this semester."
-      },
-      {
-        "type": "verb-choice",
-        "question": "The ancient Roman navy ______ hundreds of galleys during the Mediterranean wars.",
-        "options": [
-          "commanded",
-          "commands",
-          "is commanding"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Historical past state."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Listen! The volcano alarm ______ across the entire perimeter right now.",
-        "options": [
-          "is echoing",
-          "echoes",
-          "echoed"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Listen!' signals live siren."
-      },
-      {
-        "type": "find-mistake",
-        "question": "Did the delegates understood the terms of the treaty yesterday?",
-        "options": [
-          "Did",
-          "delegates",
-          "understood",
-          "yesterday"
-        ],
-        "correct": 2,
-        "tense": "Simple Past",
-        "explanation": "After 'Did', use base form 'understand'."
-      },
-      {
-        "type": "correct-incorrect",
-        "question": "“The chef is tasting the secret broth right now to adjust the spices.”",
-        "options": [
-          "Correct",
-          "Incorrect"
-        ],
-        "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "Correct! Active sampling uses continuous."
-      },
-      {
-        "type": "context",
-        "question": "Why didn't the expedition proceed yesterday? - Because a fierce blizzard ______ visibility to zero.",
-        "options": [
-          "reduced",
-          "reduces",
-          "is reducing"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "Past reason."
-      },
-      {
-        "type": "verb-choice",
-        "question": "Sound ______ much faster through dense steel than through air.",
+        "type": "tense-choice",
+        "category": "tenses",
+        "question": "As a universal physical law, sound ______ faster in water than in air.",
         "options": [
           "travels",
           "is traveling",
-          "traveled"
+          "traveled",
+          "travel"
         ],
         "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "Scientific physics constant."
-      },
-      {
-        "type": "complete-sentence",
-        "question": "Why ______ you look so astonished when the announcement was broadcast yesterday?",
-        "options": [
-          "did",
-          "do",
-          "are"
-        ],
-        "correct": 0,
-        "tense": "Simple Past",
-        "explanation": "'Yesterday' requires 'did'."
+        "hint": "Universal law present simple",
+        "explanation": ""
       },
       {
         "type": "find-mistake",
-        "question": "Every semester, the lead researcher and her team organizes public lectures.",
+        "category": "tenses",
+        "question": "Find the mistake: 'She is understanding the lesson clearly now.'",
         "options": [
-          "Every semester",
-          "researcher and her team",
-          "organizes",
-          "lectures"
-        ],
-        "correct": 2,
-        "tense": "Simple Present",
-        "explanation": "Compound plural subject takes 'organize'."
-      },
-      {
-        "type": "sentence-choice",
-        "question": "Which sentence is grammatically correct? (Neither of the bluep...)",
-        "options": [
-          "Neither of the blueprints meets the strict seismic criteria.",
-          "Neither of the blueprints meet the strict seismic criteria.",
-          "Neither of the blueprints is meeting the criteria."
+          "is understanding",
+          "lesson",
+          "clearly",
+          "now"
         ],
         "correct": 0,
-        "tense": "Simple Present",
-        "explanation": "'Neither of' takes singular 'meets'."
+        "hint": "Understand is stative (understands)",
+        "explanation": ""
       },
       {
-        "type": "context",
-        "question": "Be quiet! The international jury ______ the final debate scores right now.",
+        "type": "modal-choice",
+        "category": "modals",
+        "question": "Since the digital library is available 24/7, students ______ visit the campus library in person.",
         "options": [
-          "is tabulating",
-          "tabulates",
-          "tabulated"
+          "don't have to",
+          "mustn't",
+          "should",
+          "can't"
         ],
         "correct": 0,
-        "tense": "Present Continuous",
-        "explanation": "'Right now' indicates active jury tabulation."
+        "hint": "No obligation",
+        "explanation": ""
+      },
+      {
+        "type": "complete-sentence",
+        "category": "prepositions",
+        "question": "The ancient submarine dove ______ the dark abyssal waters.",
+        "options": [
+          "into",
+          "onto",
+          "under",
+          "between"
+        ],
+        "correct": 0,
+        "hint": "Dove into waters",
+        "explanation": ""
+      },
+      {
+        "type": "choose-incorrect",
+        "category": "core-grammar",
+        "question": "Choose the INCORRECT sentence:",
+        "options": [
+          "The police is investigating the recent burglary.",
+          "The police are investigating the recent burglary.",
+          "The officers are investigating the burglary.",
+          "The detective is investigating the burglary."
+        ],
+        "correct": 0,
+        "hint": "Police is plural in standard English (are)",
+        "explanation": ""
       }
     ]
   }

@@ -47,9 +47,11 @@
     activeTurnStartRemainingSec: null,
     lastTickedSecond: null,
 
-    // Question Engine
-    availablePool: [],
+    // Question Engine with Anti-Clustering & Category Diversity
+    masterQuestionList: [],
     usedQuestions: new Set(),
+    recentCategories: [],
+    recentTypes: [],
     currentQuestion: null,
     shuffledOptions: [],
     recentCorrectPositions: [], // Track last 3 correct positions to prevent streaks
@@ -237,21 +239,54 @@
 
   function initFreshQuestionPool() {
     state.usedQuestions.clear();
-    const gradeBank = window.GAME_QUESTIONS[state.grade];
+    state.recentCategories = [];
+    state.recentTypes = [];
+
+    const gradeBank = window.GAME_QUESTIONS ? window.GAME_QUESTIONS[state.grade] : null;
     let sourceList = (gradeBank && gradeBank[state.difficulty]) ? gradeBank[state.difficulty] : [];
 
-    if (sourceList.length === 0) {
-      sourceList = window.GAME_QUESTIONS.grade7.easy;
+    if (!sourceList || sourceList.length === 0) {
+      sourceList = (window.GAME_QUESTIONS && window.GAME_QUESTIONS.grade7) ? window.GAME_QUESTIONS.grade7.easy : [];
     }
 
-    // Attach unique identifier to each question object
-    state.availablePool = sourceList.map((q, idx) => ({
+    // Attach unique identifier and standardized fields
+    state.masterQuestionList = sourceList.map((q, idx) => ({
       ...q,
-      _uid: `${state.grade}_${state.difficulty}_${idx}_${q.question.substring(0, 15)}`
+      _uid: `${state.grade}_${state.difficulty}_${idx}_${(q.category || 'cat')}_${(q.question || '').substring(0, 15)}`
     }));
+  }
 
-    // Perform Fisher-Yates shuffle
-    state.availablePool = shuffleArray(state.availablePool);
+  function selectNextDiversifiedQuestion() {
+    if (!state.masterQuestionList || state.masterQuestionList.length === 0) {
+      initFreshQuestionPool();
+    }
+
+    let available = state.masterQuestionList.filter(q => !state.usedQuestions.has(q._uid));
+    if (available.length === 0) {
+      state.usedQuestions.clear();
+      available = [...state.masterQuestionList];
+    }
+
+    const lastCategory = state.recentCategories.length > 0 ? state.recentCategories[state.recentCategories.length - 1] : null;
+    const lastTwoCategories = state.recentCategories.slice(-2);
+    const lastType = state.recentTypes.length > 0 ? state.recentTypes[state.recentTypes.length - 1] : null;
+
+    // Tier 1: Category not in last 2 and question type different from last question
+    let tier1 = available.filter(q => !lastTwoCategories.includes(q.category) && q.type !== lastType);
+    // Tier 2: Category different from immediate last category
+    let tier2 = available.filter(q => q.category !== lastCategory);
+
+    let candidatePool = tier1.length > 0 ? tier1 : (tier2.length > 0 ? tier2 : available);
+    const chosenIdx = Math.floor(Math.random() * candidatePool.length);
+    const chosen = candidatePool[chosenIdx];
+
+    state.usedQuestions.add(chosen._uid);
+    state.recentCategories.push(chosen.category || 'tenses');
+    if (state.recentCategories.length > 8) state.recentCategories.shift();
+    state.recentTypes.push(chosen.type || 'complete-sentence');
+    if (state.recentTypes.length > 8) state.recentTypes.shift();
+
+    return chosen;
   }
 
   function shuffleArray(arr) {
@@ -636,30 +671,30 @@
     state.answeredInTurn = false;
     updateActiveTowerHighlight();
 
-    // Pull next non-repeated question
-    if (state.availablePool.length === 0) {
-      // If an entire 500-question pool was completely exhausted, reload fresh pool
-      initFreshQuestionPool();
-    }
-
-    state.currentQuestion = state.availablePool.pop();
-    state.usedQuestions.add(state.currentQuestion._uid);
-
+    // Pull next diversified non-repeated question
+    state.currentQuestion = selectNextDiversifiedQuestion();
     const q = state.currentQuestion;
 
     // Question Type Display Badge
     const typeNames = {
-      'verb-choice': '🎯 Choose the Verb',
-      'sentence-choice': '📝 Correct Sentence',
-      'complete-sentence': '✍️ Complete Sentence',
-      'find-mistake': '🔍 Find the Mistake',
-      'correct-incorrect': '⚖️ Correct or Incorrect',
-      'context': '📖 Context Question',
-      'grammar-structure': '🧩 Grammar Structure'
+      'modal-choice': '⚡ Modal Verbs',
+      'preposition-choice': '📍 Prepositions',
+      'word-order': '🔤 Sentence Word Order',
+      'tense-choice': '⏳ Tense & Verb Form',
+      'complete-sentence': '✍️ Complete the Sentence',
+      'find-mistake': '🔍 Spot the Error',
+      'choose-sentence': '📝 Correct Sentence',
+      'choose-incorrect': '❌ Find the Incorrect Sentence',
+      'choose-negative': '🚫 Negative Form',
+      'choose-question': '❓ Question Formation',
+      'same-meaning': '🔄 Same Meaning',
+      'context-dialogue': '💬 Context & Dialogue',
+      'core-grammar': '👥 Grammar & Agreement',
+      'verb-choice': '🎯 Verb Selection'
     };
 
     dom.qTypeBadge.textContent = typeNames[q.type] || 'Grammar Challenge';
-    dom.qTenseHint.textContent = `Tense: ${q.tense || 'Simple Present / Past / Continuous'}`;
+    dom.qTenseHint.textContent = q.hint || (q.category ? `Topic: ${q.category.toUpperCase()}` : 'English Grammar Challenge');
     dom.qPromptText.textContent = q.question;
 
     // Independent Answer Option Randomization with Anti-Streak Protection
