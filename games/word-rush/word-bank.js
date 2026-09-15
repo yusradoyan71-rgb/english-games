@@ -1,7 +1,7 @@
 /**
  * WORD RUSH — Comprehensive Vocabulary & Category Data Bank
  * Supports Grade 7 and Grade 8 with Easy, Medium, and Hard difficulty tiers.
- * Extensible category architecture with word-family challenges and smart board generator.
+ * Complete multi-category word registry with strict category normalization and validation.
  */
 
 const CATEGORIES_METADATA = [
@@ -30,9 +30,9 @@ const GRADE_7_BANK = {
     hard: ['overcome', 'accomplish', 'demonstrate', 'participate', 'distinguish', 'substitute', 'contribute', 'recommend', 'strengthen', 'emphasize', 'illustrate', 'persuade', 'reorganize', 'collaborate', 'accelerate', 'investigate', 'transform', 'undergo', 'accompany', 'cultivate']
   },
   nouns: {
-    easy: ['school', 'teacher', 'student', 'book', 'pencil', 'computer', 'apple', 'water', 'hospital', 'library', 'garden', 'kitchen', 'friend', 'family', 'animal', 'village', 'river', 'doctor', 'market', 'bicycle'],
-    medium: ['pollution', 'environment', 'celebration', 'invention', 'invitation', 'discovery', 'direction', 'advertisement', 'neighborhood', 'experiment', 'furniture', 'instrument', 'temperature', 'wildlife', 'attraction', 'instruction', 'transportation', 'champion', 'competition', 'generation'],
-    hard: ['biodiversity', 'achievement', 'preservation', 'significance', 'requirement', 'civilization', 'contribution', 'development', 'responsibility', 'architecture', 'destination', 'opportunity', 'enthusiasm', 'consequence', 'extinction', 'alternative', 'collaboration']
+    easy: ['apple', 'water', 'hospital', 'garden', 'kitchen', 'friend', 'family', 'animal', 'village', 'river', 'doctor', 'market', 'bicycle', 'forest', 'mountain', 'island', 'ocean', 'window', 'door', 'street'],
+    medium: ['pollution', 'environment', 'celebration', 'invention', 'invitation', 'discovery', 'direction', 'advertisement', 'neighborhood', 'furniture', 'temperature', 'wildlife', 'attraction', 'instruction', 'champion', 'generation', 'citizen', 'population'],
+    hard: ['biodiversity', 'achievement', 'preservation', 'significance', 'requirement', 'civilization', 'contribution', 'development', 'responsibility', 'architecture', 'enthusiasm', 'consequence', 'extinction', 'alternative']
   },
   adjectives: {
     easy: ['happy', 'sad', 'big', 'small', 'fast', 'slow', 'cold', 'hot', 'clever', 'funny', 'clean', 'dirty', 'beautiful', 'hungry', 'thirsty', 'strong', 'young', 'old', 'quiet', 'noisy'],
@@ -42,12 +42,12 @@ const GRADE_7_BANK = {
   adverbs: {
     easy: ['slowly', 'quickly', 'loudly', 'quietly', 'carefully', 'easily', 'always', 'never', 'usually', 'often', 'sometimes', 'today', 'yesterday', 'tomorrow', 'here', 'there', 'early', 'late', 'well', 'badly'],
     medium: ['suddenly', 'politely', 'safely', 'hardly', 'happily', 'bravely', 'regularly', 'patiently', 'heavily', 'brightly', 'silently', 'nervously', 'completely', 'properly', 'certainly', 'mostly', 'nearly', 'rarely', 'especially', 'correctly'],
-    hard: ['dramatically', 'successfully', 'beautifully', 'creatively', 'unfortuntely', 'immediately', 'conveniently', 'traditionally', 'carelessly', 'accurately', 'environmentally', 'enthusiastically', 'naturally', 'permanently', 'simultaneously']
+    hard: ['dramatically', 'successfully', 'beautifully', 'creatively', 'unfortunately', 'immediately', 'conveniently', 'traditionally', 'carelessly', 'accurately', 'environmentally', 'enthusiastically', 'naturally', 'permanently', 'simultaneously']
   },
   prepositions: {
     easy: ['in', 'on', 'at', 'under', 'behind', 'between', 'in front of', 'next to', 'near', 'over', 'into', 'with', 'from', 'to', 'for', 'about', 'by', 'of', 'off', 'through'],
     medium: ['across', 'along', 'around', 'among', 'beside', 'below', 'above', 'opposite', 'toward', 'without', 'during', 'against', 'inside', 'outside', 'past', 'beneath', 'beyond', 'throughout', 'upon', 'within'],
-    hard: ['in spite of', 'according to', 'in addition to', 'on behalf of', 'prior to', 'in front of', 'due to', 'apart from', 'instead of', 'regardless of', 'by means of', 'with regard to', 'ahead of', 'alongside']
+    hard: ['in spite of', 'according to', 'in addition to', 'on behalf of', 'prior to', 'due to', 'apart from', 'instead of', 'regardless of', 'by means of', 'with regard to', 'ahead of', 'alongside']
   },
   modal_verbs: {
     easy: ['can', "can't", 'must', "mustn't", 'should', "shouldn't", 'have to', "don't have to", 'may', 'might'],
@@ -70,27 +70,27 @@ const GRADE_7_BANK = {
     hard: ['neither', 'either', 'another', 'other', 'no', 'few', 'little', 'plenty of', 'a great deal of', 'such a']
   },
   school: {
-    easy: ['desk', 'blackboard', 'ruler', 'eraser', 'notebook', 'pencil case', 'sharpener', 'scissors', 'backpack', 'homework', 'classroom', 'lesson', 'exam', 'teacher', 'student'],
-    medium: ['timetable', 'laboratory', 'canteen', 'gymnasium', 'headmaster', 'assignment', 'presentation', 'dictionary', 'project', 'calculator', 'experiment', 'whiteboard', 'attendance', 'curriculum', 'grade'],
-    hard: ['scholarship', 'qualification', 'extracurricular', 'investigation', 'auditorium', 'encyclopedia', 'dissertation', 'certificate', 'assessment', 'academic', 'semester', 'laboratory report']
+    easy: ['school', 'teacher', 'student', 'classroom', 'homework', 'lesson', 'subject', 'exam', 'notebook', 'textbook', 'pencil', 'desk', 'board', 'blackboard', 'library', 'ruler', 'eraser', 'pencil case', 'sharpener', 'scissors', 'backpack', 'book'],
+    medium: ['timetable', 'laboratory', 'canteen', 'gymnasium', 'headmaster', 'principal', 'classmate', 'assignment', 'presentation', 'dictionary', 'project', 'calculator', 'experiment', 'whiteboard', 'attendance', 'curriculum', 'grade'],
+    hard: ['scholarship', 'qualification', 'extracurricular', 'investigation', 'auditorium', 'encyclopedia', 'dissertation', 'certificate', 'assessment', 'academic', 'semester', 'laboratory report', 'teacher\'s room']
   },
   travel: {
-    easy: ['plane', 'train', 'bus', 'car', 'ticket', 'hotel', 'passport', 'luggage', 'airport', 'station', 'map', 'trip', 'beach', 'camera', 'tourist'],
+    easy: ['plane', 'train', 'bus', 'car', 'ticket', 'hotel', 'passport', 'luggage', 'airport', 'station', 'map', 'trip', 'beach', 'camera', 'tourist', 'suitcase', 'flight', 'passenger', 'taxi', 'ship'],
     medium: ['boarding pass', 'reservation', 'sightseeing', 'souvenir', 'platform', 'destination', 'cruise ship', 'backpacking', 'departure', 'arrival', 'journey', 'excursion', 'guidebook', 'itinerary', 'ferry'],
     hard: ['accommodation', 'customs check', 'travel insurance', 'sightseeing tour', 'monument', 'archaeological site', 'breathtaking view', 'expedition', 'foreign exchange', 'commuter', 'terminal gate']
   },
   hobbies: {
-    easy: ['football', 'basketball', 'swimming', 'reading', 'painting', 'drawing', 'dancing', 'singing', 'cooking', 'gaming', 'running', 'cycling', 'chess', 'guitar', 'piano'],
+    easy: ['football', 'basketball', 'swimming', 'reading', 'painting', 'drawing', 'dancing', 'singing', 'cooking', 'gaming', 'running', 'cycling', 'chess', 'guitar', 'piano', 'tennis', 'music', 'fishing'],
     medium: ['skateboarding', 'photography', 'gardening', 'hiking', 'archery', 'rollerblading', 'origami', 'pottery', 'sculpture', 'snorkeling', 'martial arts', 'badminton', 'volleyball', 'table tennis', 'camping'],
     hard: ['mountaineering', 'scuba diving', 'paragliding', 'windsurfing', 'astrophotography', 'woodworking', 'calligraphy', 'bungee jumping', 'rock climbing', 'orienteering', 'horseback riding']
   },
   feelings: {
-    easy: ['happy', 'sad', 'angry', 'tired', 'scared', 'excited', 'bored', 'nervous', 'calm', 'surprised', 'proud', 'lonely', 'sleepy', 'cheerful', 'worried'],
+    easy: ['happy', 'sad', 'angry', 'tired', 'scared', 'excited', 'bored', 'nervous', 'calm', 'surprised', 'proud', 'lonely', 'sleepy', 'cheerful', 'worried', 'afraid', 'glad', 'shy'],
     medium: ['exhausted', 'frightened', 'embarrassed', 'confused', 'delighted', 'disappointed', 'jealous', 'anxious', 'grateful', 'curious', 'confident', 'furious', 'relaxed', 'impatient', 'thrilled'],
     hard: ['overwhelmed', 'sympathetic', 'enthusiastic', 'pessimistic', 'optimistic', 'melancholic', 'astonished', 'frustrated', 'heartbroken', 'fascinated', 'devastated', 'jubilant', 'indifferent']
   },
   daily_life: {
-    easy: ['wake up', 'brush teeth', 'have breakfast', 'take a shower', 'go to bed', 'cook dinner', 'wash dishes', 'clean room', 'watch TV', 'walk the dog', 'do homework', 'drink milk', 'make the bed', 'iron clothes', 'sweep floor'],
+    easy: ['wake up', 'brush teeth', 'have breakfast', 'take a shower', 'go to bed', 'cook dinner', 'wash dishes', 'clean room', 'watch TV', 'walk the dog', 'do homework', 'drink milk', 'make the bed', 'iron clothes', 'sweep floor', 'have lunch'],
     medium: ['tidy up', 'set the table', 'feed the pet', 'take out the trash', 'vacuum the carpet', 'do the laundry', 'mop the floor', 'prepare a snack', 'catch the bus', 'check messages', 'water the plants', 'hang out clothes', 'fold the laundry'],
     hard: ['organize the wardrobe', 'defrost the fridge', 'recycle plastic waste', 'manage weekly budget', 'assemble flatpack furniture', 'commute by subway', 'schedule appointments', 'sanitize kitchen surfaces', 'refill grocery pantry']
   }
@@ -104,8 +104,8 @@ const GRADE_8_BANK = {
     hard: ['revolutionize', 'underestimate', 'overestimate', 'counteract', 'differentiate', 'substantiate', 'conceptualize', 'deteriorate', 'facilitate', 'exemplify', 'rehabilitate', 'predetermine', 'characterize', 'disseminate', 'reconstitute']
   },
   nouns: {
-    easy: ['invitation', 'friendship', 'appearance', 'personality', 'teenager', 'internet', 'chores', 'adventure', 'tradition', 'success', 'nature', 'danger', 'preference', 'opinion', 'reason', 'habit', 'safety', 'celebration', 'skill', 'goal'],
-    medium: ['responsibility', 'relationship', 'achievement', 'opportunity', 'consequence', 'disadvantage', 'architecture', 'environment', 'organization', 'destination', 'enthusiasm', 'communication', 'appreciation', 'conservation', 'biodiversity', 'generation', 'phenomenon', 'ingredient', 'attraction', 'exhibition'],
+    easy: ['friendship', 'appearance', 'personality', 'teenager', 'internet', 'chores', 'adventure', 'tradition', 'success', 'nature', 'danger', 'preference', 'opinion', 'reason', 'habit', 'safety', 'celebration', 'skill', 'goal', 'society'],
+    medium: ['responsibility', 'relationship', 'achievement', 'opportunity', 'consequence', 'disadvantage', 'architecture', 'environment', 'organization', 'destination', 'enthusiasm', 'communication', 'appreciation', 'conservation', 'biodiversity', 'generation', 'phenomenon', 'ingredient', 'exhibition'],
     hard: ['sustainability', 'unpredictability', 'sophistication', 'interdependence', 'vulnerability', 'transformation', 'self-discipline', 'infrastructure', 'perseverance', 'biodegradability', 'incompatibility', 'comprehensiveness', 'differentiation', 'generalization']
   },
   adjectives: {
@@ -144,28 +144,28 @@ const GRADE_8_BANK = {
     hard: ['a multitude of', 'an abundance of', 'scarcely any', 'hardly any', 'a substantial amount of', 'a proportion of', 'the majority of', 'the entirety of', 'an excess of']
   },
   school: {
-    easy: ['assignment', 'presentation', 'dictionary', 'experiment', 'whiteboard', 'attendance', 'curriculum', 'grade', 'timetable', 'laboratory', 'canteen', 'gymnasium', 'headmaster', 'project', 'calculator'],
+    easy: ['assignment', 'presentation', 'dictionary', 'experiment', 'whiteboard', 'blackboard', 'attendance', 'curriculum', 'grade', 'timetable', 'laboratory', 'canteen', 'gymnasium', 'headmaster', 'project', 'calculator', 'student', 'teacher', 'classroom', 'exam', 'lesson'],
     medium: ['scholarship', 'qualification', 'extracurricular', 'investigation', 'auditorium', 'encyclopedia', 'certificate', 'assessment', 'academic', 'semester', 'laboratory report', 'peer review', 'tuition fee', 'graduation ceremony', 'thesis'],
     hard: ['interdisciplinary study', 'dissertation defense', 'scholastic aptitude', 'dean of faculty', 'syllabus requirement', 'plagiarism check', 'valedictorian speech', 'accreditation standard', 'vocational training', 'alumni association']
   },
   travel: {
-    easy: ['destination', 'boarding pass', 'reservation', 'sightseeing', 'souvenir', 'cruise ship', 'backpacking', 'departure', 'arrival', 'journey', 'excursion', 'guidebook', 'itinerary', 'ferry', 'monument'],
+    easy: ['destination', 'boarding pass', 'reservation', 'sightseeing', 'souvenir', 'cruise ship', 'backpacking', 'departure', 'arrival', 'journey', 'excursion', 'guidebook', 'itinerary', 'ferry', 'monument', 'flight', 'passport', 'luggage'],
     medium: ['accommodation', 'customs check', 'travel insurance', 'archaeological site', 'breathtaking view', 'expedition', 'foreign exchange', 'commuter', 'terminal gate', 'jet lag', 'layover flight', 'travel agency', 'passport control', 'youth hostel', 'guided tour'],
     hard: ['ecotourism destination', 'charter flight', 'round-the-world cruise', 'embassy clearance', 'transit visa', 'all-inclusive resort', 'scenic railway', 'high-speed locomotive', 'excess baggage fee', 'geographical landmark', 'UNESCO heritage site']
   },
   hobbies: {
-    easy: ['skateboarding', 'photography', 'gardening', 'hiking', 'archery', 'rollerblading', 'origami', 'pottery', 'sculpture', 'snorkeling', 'martial arts', 'badminton', 'volleyball', 'table tennis', 'camping'],
+    easy: ['skateboarding', 'photography', 'gardening', 'hiking', 'archery', 'rollerblading', 'origami', 'pottery', 'sculpture', 'snorkeling', 'martial arts', 'badminton', 'volleyball', 'table tennis', 'camping', 'chess', 'guitar', 'painting'],
     medium: ['mountaineering', 'scuba diving', 'paragliding', 'windsurfing', 'astrophotography', 'woodworking', 'calligraphy', 'bungee jumping', 'rock climbing', 'orienteering', 'horseback riding', 'kayaking', 'fencing', 'marathon running', 'chess tournament'],
     hard: ['spelunking expedition', 'triathlon championship', 'hang gliding', 'kitesurfing', 'geocaching hunt', 'amateur radio operating', 'sculpting marble', 'orchestral conducting', 'whitewater rafting', 'cross-country skiing']
   },
   feelings: {
-    easy: ['exhausted', 'frightened', 'embarrassed', 'confused', 'delighted', 'disappointed', 'jealous', 'anxious', 'grateful', 'curious', 'confident', 'furious', 'relaxed', 'impatient', 'thrilled'],
-    medium: ['overwhelmed', 'sympathetic', 'enthusiastic', 'pessimistic', 'optimistic', 'melancholic', 'astonished', 'frustrated', 'heartbroken', 'fascinated', 'devastated', 'jubilant', 'indifferent', 'apprehensive', 'compassionate', 'humiliated', 'astonished', 'determined', 'ecstatic', 'insecure'],
-    hard: ['disillusioned', 'unflappable', 'apprehensive', 'exuberant', 'resentful', 'contented', 'petrified', 'disgruntled', 'nonchalant', 'inconsolable', 'crestfallen', 'invigorated']
+    easy: ['exhausted', 'frightened', 'embarrassed', 'confused', 'delighted', 'disappointed', 'jealous', 'anxious', 'grateful', 'curious', 'confident', 'furious', 'relaxed', 'impatient', 'thrilled', 'happy', 'sad', 'angry'],
+    medium: ['overwhelmed', 'sympathetic', 'enthusiastic', 'pessimistic', 'optimistic', 'melancholic', 'astonished', 'frustrated', 'heartbroken', 'fascinated', 'devastated', 'jubilant', 'indifferent', 'apprehensive', 'compassionate', 'humiliated', 'determined', 'ecstatic', 'insecure'],
+    hard: ['disillusioned', 'unflappable', 'exuberant', 'resentful', 'contented', 'petrified', 'disgruntled', 'nonchalant', 'inconsolable', 'crestfallen', 'invigorated']
   },
   daily_life: {
     easy: ['tidy up', 'set the table', 'feed the pet', 'take out the trash', 'vacuum the carpet', 'do the laundry', 'mop the floor', 'prepare a snack', 'catch the bus', 'check messages', 'water the plants', 'hang out clothes', 'fold the laundry', 'do the grocery shopping', 'make an appointment'],
-    medium: ['organize the wardrobe', 'defrost the fridge', 'recycle plastic waste', 'manage weekly budget', 'assemble flatpack furniture', 'commute by subway', 'schedule appointments', 'sanitize kitchen surfaces', 'refill grocery pantry', 'pay utility bills', 'change bedsheets', 'wash the windows', 'plan weekly menu', 'water the houseplants'],
+    medium: ['organize the wardrobe', 'defrost the fridge', 'recycle plastic waste', 'manage weekly budget', 'assemble flatpack furniture', 'commute by subway', 'schedule appointments', 'sanitize kitchen surfaces', 'refill grocery pantry', 'pay utility bills', 'change bedsheets', 'wash the windows', 'plan weekly menu'],
     hard: ['perform routine vehicle maintenance', 'conduct seasonal deep-cleaning', 'audit monthly household expenditures', 'maintain domestic compost bin', 'insulate window frames', 'reorganize kitchen ergonomics', 'automate smart home appliances', 'prepare emergency pantry kit']
   }
 };
@@ -195,6 +195,75 @@ const WORD_FAMILIES = [
 ];
 
 /**
+ * Normalizes category IDs for robust comparisons
+ */
+function normalizeCategory(cat) {
+  if (!cat) return '';
+  return String(cat).toLowerCase().trim().replace(/[-_ ]+/g, '_');
+}
+
+/**
+ * Builds a comprehensive lookup map: word -> Set of normalized categories
+ */
+function buildMasterCategoryRegistry(bank) {
+  const registry = new Map();
+
+  function registerWord(word, categoryId) {
+    if (!word) return;
+    const cleanWord = String(word).toLowerCase().trim();
+    const normCat = normalizeCategory(categoryId);
+    if (!registry.has(cleanWord)) {
+      registry.set(cleanWord, new Set());
+    }
+    registry.get(cleanWord).add(normCat);
+  }
+
+  // Traverse all categories and tiers in the bank
+  Object.keys(bank).forEach(catId => {
+    const catObj = bank[catId];
+    if (catObj) {
+      ['easy', 'medium', 'hard'].forEach(tier => {
+        if (Array.isArray(catObj[tier])) {
+          catObj[tier].forEach(w => registerWord(w, catId));
+        }
+      });
+    }
+  });
+
+  // Also index Word Families
+  WORD_FAMILIES.forEach(wf => {
+    if (wf.noun) registerWord(wf.noun, 'nouns');
+    if (wf.verb) registerWord(wf.verb, 'verbs');
+    if (wf.adjective) registerWord(wf.adjective, 'adjectives');
+    if (wf.adverb) registerWord(wf.adverb, 'adverbs');
+  });
+
+  return registry;
+}
+
+const REGISTRY_GRADE_7 = buildMasterCategoryRegistry(GRADE_7_BANK);
+const REGISTRY_GRADE_8 = buildMasterCategoryRegistry(GRADE_8_BANK);
+
+/**
+ * Returns all categories associated with a word
+ */
+function getCategoriesForWord(wordText, grade = 'grade7') {
+  const registry = grade === 'grade8' ? REGISTRY_GRADE_8 : REGISTRY_GRADE_7;
+  const cleanWord = String(wordText).toLowerCase().trim();
+  const set = registry.get(cleanWord);
+  return set ? Array.from(set) : [];
+}
+
+/**
+ * Validates if a word belongs to the given target category
+ */
+function isWordInCategory(wordText, targetCategory, grade = 'grade7') {
+  const normTarget = normalizeCategory(targetCategory);
+  const cats = getCategoriesForWord(wordText, grade);
+  return cats.includes(normTarget);
+}
+
+/**
  * Helper to shuffle array using Fisher-Yates
  */
 function shuffleArray(arr) {
@@ -222,50 +291,29 @@ function getTargetWordCount(totalWords) {
 }
 
 /**
- * Extracts pool of words for a specific category, grade, and difficulty
+ * Extracts pool of target words for a specific category, grade, and difficulty
  */
 function getCategoryWordPool(bank, categoryId, difficulty) {
-  const cat = bank[categoryId];
+  const normCat = normalizeCategory(categoryId);
+  const cat = bank[normCat];
   if (!cat) return [];
   
   if (difficulty === 'easy') {
-    return [...cat.easy, ...(cat.medium ? cat.medium.slice(0, 10) : [])];
+    return [...(cat.easy || []), ...(cat.medium ? cat.medium.slice(0, 10) : [])];
   } else if (difficulty === 'medium') {
-    return [...cat.medium, ...(cat.easy ? cat.easy.slice(0, 10) : []), ...(cat.hard ? cat.hard.slice(0, 8) : [])];
+    return [...(cat.medium || []), ...(cat.easy ? cat.easy.slice(0, 10) : []), ...(cat.hard ? cat.hard.slice(0, 8) : [])];
   } else {
     // hard
-    return [...(cat.hard || []), ...(cat.medium || [])];
+    return [...(cat.hard || []), ...(cat.medium || []), ...(cat.easy ? cat.easy.slice(0, 5) : [])];
   }
 }
 
 /**
- * Extracts distractors from other categories
- */
-function getDistractorPool(bank, excludeCategoryId, difficulty) {
-  const distractors = [];
-  const allCategoryKeys = Object.keys(bank).filter(k => k !== excludeCategoryId);
-  
-  allCategoryKeys.forEach(catKey => {
-    const cat = bank[catKey];
-    if (cat) {
-      if (difficulty === 'easy' && cat.easy) {
-        distractors.push(...cat.easy);
-      } else if (difficulty === 'medium' && cat.medium) {
-        distractors.push(...cat.medium);
-      } else if (difficulty === 'hard' && cat.hard) {
-        distractors.push(...cat.hard, ...(cat.medium || []));
-      } else if (cat.easy) {
-        distractors.push(...cat.easy);
-      }
-    }
-  });
-  return distractors;
-}
-
-/**
  * Core Board Generator Engine
- * Guarantees equivalent challenge, non-repeating sets across teams in the same match,
- * randomized positions, and strictly fair gameplay.
+ * Guarantees that:
+ * 1. All target cards strictly match the target category.
+ * 2. NO distractor card ever belongs to the target category (eliminating false error bugs).
+ * 3. Non-repeating randomized sets across teams.
  */
 function generateWordRushBoard(params) {
   const {
@@ -278,13 +326,14 @@ function generateWordRushBoard(params) {
   } = params;
 
   const bank = grade === 'grade8' ? GRADE_8_BANK : GRADE_7_BANK;
-  const meta = CATEGORIES_METADATA.find(c => c.id === categoryId) || CATEGORIES_METADATA[0];
+  const normCategoryId = normalizeCategory(categoryId);
+  const meta = CATEGORIES_METADATA.find(c => normalizeCategory(c.id) === normCategoryId) || CATEGORIES_METADATA[0];
 
-  let targetClass = categoryId;
+  let targetClass = normCategoryId;
   let bannerPrompt = meta.prompt;
 
   // Handle Mixed Grammar special mode
-  if (categoryId === 'mixed_grammar') {
+  if (normCategoryId === 'mixed_grammar') {
     const grammaticalClasses = ['verbs', 'nouns', 'adjectives', 'adverbs'];
     targetClass = mixedTargetClass || grammaticalClasses[Math.floor(Math.random() * grammaticalClasses.length)];
     const classNames = {
@@ -309,8 +358,8 @@ function generateWordRushBoard(params) {
     rawTargets = Array.from(new Set([...familyTargets, ...rawTargets]));
   }
 
-  // Remove duplicates & ensure lowercase unique strings
-  rawTargets = Array.from(new Set(rawTargets));
+  // Ensure all raw targets strictly validate as belonging to targetClass
+  rawTargets = Array.from(new Set(rawTargets)).filter(w => isWordInCategory(w, targetClass, grade));
 
   // Prioritize words that haven't been used yet in this match
   const freshTargets = rawTargets.filter(w => !usedTargetWords.has(w.toLowerCase()));
@@ -323,50 +372,63 @@ function generateWordRushBoard(params) {
   selectedTargets.forEach(w => usedTargetWords.add(w.toLowerCase()));
 
   // 2. Gather Distractors
-  let distractorPool = [];
+  // CRITICAL RULE: Distractors MUST NOT belong to targetClass!
+  let allDistractorCandidates = [];
   
+  Object.keys(bank).forEach(catKey => {
+    if (catKey !== targetClass) {
+      const catObj = bank[catKey];
+      if (catObj) {
+        ['easy', 'medium', 'hard'].forEach(tier => {
+          if (Array.isArray(catObj[tier])) {
+            allDistractorCandidates.push(...catObj[tier]);
+          }
+        });
+      }
+    }
+  });
+
+  // Also include Word Family distractors (e.g. noun form when target is verb)
   if (difficulty === 'hard' && (targetClass === 'verbs' || targetClass === 'nouns' || targetClass === 'adjectives' || targetClass === 'adverbs')) {
-    // Inject word-family trap distractors (e.g. if target is verbs, inject nouns/adjectives/adverbs from the same families)
-    const targetSet = new Set(selectedTargets.map(t => t.toLowerCase()));
     WORD_FAMILIES.forEach(wf => {
       ['noun', 'verb', 'adjective', 'adverb'].forEach(k => {
         const word = wf[k];
-        if (word && !targetSet.has(word.toLowerCase())) {
-          // Check if this word is actually not in the target class
-          const isTargetForm = (targetClass === 'verbs' && k === 'verb') ||
-                               (targetClass === 'nouns' && k === 'noun') ||
-                               (targetClass === 'adjectives' && k === 'adjective') ||
-                               (targetClass === 'adverbs' && k === 'adverb');
-          if (!isTargetForm) {
-            distractorPool.push(word);
-          }
+        if (word && !isWordInCategory(word, targetClass, grade)) {
+          allDistractorCandidates.push(word);
         }
       });
     });
   }
 
-  // Add general distractors
-  const generalDistractors = getDistractorPool(bank, targetClass, difficulty);
-  distractorPool.push(...generalDistractors);
-  
-  // Filter out any word that accidentally matches a target word
+  // Filter out any word that belongs to targetClass or is already selected as a target
   const targetLookup = new Set(selectedTargets.map(w => w.toLowerCase()));
-  distractorPool = distractorPool.filter(w => !targetLookup.has(w.toLowerCase()));
-  distractorPool = Array.from(new Set(distractorPool)); // unique
+  allDistractorCandidates = allDistractorCandidates.filter(w => {
+    const clean = w.toLowerCase().trim();
+    if (targetLookup.has(clean)) return false;
+    // Strict semantic check: Must NOT belong to targetClass!
+    return !isWordInCategory(clean, targetClass, grade);
+  });
 
-  const shuffledDistractors = shuffleArray(distractorPool);
+  // Deduplicate distractors
+  allDistractorCandidates = Array.from(new Set(allDistractorCandidates));
+
+  const shuffledDistractors = shuffleArray(allDistractorCandidates);
   const selectedDistractors = shuffledDistractors.slice(0, distractorCount);
 
-  // 3. Assemble and Shuffle Board Cards
+  // 3. Assemble and Shuffle Board Cards with Explicit Category Metadata
   const cards = [
     ...selectedTargets.map(word => ({
       text: word,
       isTarget: true,
+      category: targetClass,
+      categories: getCategoriesForWord(word, grade),
       id: 'w_' + Math.random().toString(36).substr(2, 9)
     })),
     ...selectedDistractors.map(word => ({
       text: word,
       isTarget: false,
+      category: 'distractor',
+      categories: getCategoriesForWord(word, grade),
       id: 'w_' + Math.random().toString(36).substr(2, 9)
     }))
   ];
@@ -375,7 +437,7 @@ function generateWordRushBoard(params) {
 
   return {
     grade,
-    categoryId,
+    categoryId: normCategoryId,
     targetClass,
     difficulty,
     totalWords: finalBoard.length,
@@ -391,6 +453,9 @@ if (typeof window !== 'undefined') {
   window.WORD_RUSH_GRADE_7 = GRADE_7_BANK;
   window.WORD_RUSH_GRADE_8 = GRADE_8_BANK;
   window.WORD_FAMILIES = WORD_FAMILIES;
+  window.normalizeCategory = normalizeCategory;
+  window.getCategoriesForWord = getCategoriesForWord;
+  window.isWordInCategory = isWordInCategory;
   window.generateWordRushBoard = generateWordRushBoard;
   window.getTargetWordCount = getTargetWordCount;
 }
@@ -401,6 +466,9 @@ if (typeof module !== 'undefined' && module.exports) {
     GRADE_7_BANK,
     GRADE_8_BANK,
     WORD_FAMILIES,
+    normalizeCategory,
+    getCategoriesForWord,
+    isWordInCategory,
     generateWordRushBoard,
     getTargetWordCount
   };

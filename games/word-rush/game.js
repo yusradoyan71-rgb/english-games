@@ -475,7 +475,10 @@
       if (!this.timer.isRunning) return;
       if (btnElement.classList.contains('found')) return;
 
-      if (cardObj.isTarget) {
+      const targetCategory = this.match.currentBoardData ? this.match.currentBoardData.targetClass : this.settings.categoryId;
+      const isValidTarget = cardObj.isTarget || (typeof window.isWordInCategory === 'function' && window.isWordInCategory(cardObj.text, targetCategory, this.settings.grade));
+
+      if (isValidTarget) {
         // CORRECT SELECTION
         btnElement.classList.add('found');
         this.sound.playCorrect();
