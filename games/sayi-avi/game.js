@@ -3,541 +3,6 @@
  * Self-contained, zero external dependency, projector-ready.
  */
 
-// Math Engine
-class MathEngine {
-  static evaluate(expr) {
-    if (!expr || typeof expr !== 'string') {
-      return { value: null, isValid: false, isInteger: false };
-    }
-
-    let clean = expr
-      .replace(/×/g, '*')
-      .replace(/x/g, '*')
-      .replace(/X/g, '*')
-      .replace(/−/g, '-')
-      .replace(/–/g, '-')
-      .replace(/÷/g, '/')
-      .replace(/:/g, '/')
-      .replace(/\s+/g, '');
-
-    if (!/^[0-9+\-*/()]+$/.test(clean)) {
-      return { value: null, isValid: false, isInteger: false };
-    }
-
-    try {
-      const tokens = this.tokenize(clean);
-      if (!tokens) return { value: null, isValid: false, isInteger: false };
-      
-      const rpn = this.shuntingYard(tokens);
-      if (!rpn) return { value: null, isValid: false, isInteger: false };
-
-      const result = this.evalRPN(rpn);
-      if (result === null || !Number.isFinite(result)) {
-        return { value: null, isValid: false, isInteger: false };
-      }
-
-      const isInteger = Number.isInteger(result);
-      return { value: result, isValid: true, isInteger };
-    } catch (e) {
-      return { value: null, isValid: false, isInteger: false };
-    }
-  }
-
-  static tokenize(str) {
-    const tokens = [];
-    let i = 0;
-    while (i < str.length) {
-      const char = str[i];
-      if ('+-*/()'.includes(char)) {
-        tokens.push(char);
-        i++;
-      } else if (/[0-9]/.test(char)) {
-        let numStr = '';
-        while (i < str.length && /[0-9]/.test(str[i])) {
-          numStr += str[i];
-          i++;
-        }
-        tokens.push(Number(numStr));
-      } else {
-        return null;
-      }
-    }
-    return tokens;
-  }
-
-  static shuntingYard(tokens) {
-    const output = [];
-    const ops = [];
-    const precedence = { '+': 1, '-': 1, '*': 2, '/': 2 };
-
-    for (let token of tokens) {
-      if (typeof token === 'number') {
-        output.push(token);
-      } else if ('+-*/'.includes(token)) {
-        while (
-          ops.length > 0 &&
-          ops[ops.length - 1] !== '(' &&
-          precedence[ops[ops.length - 1]] >= precedence[token]
-        ) {
-          output.push(ops.pop());
-        }
-        ops.push(token);
-      } else if (token === '(') {
-        ops.push(token);
-      } else if (token === ')') {
-        while (ops.length > 0 && ops[ops.length - 1] !== '(') {
-          output.push(ops.pop());
-        }
-        if (ops.length === 0) return null;
-        ops.pop();
-      }
-    }
-
-    while (ops.length > 0) {
-      const op = ops.pop();
-      if (op === '(' || op === ')') return null;
-      output.push(op);
-    }
-
-    return output;
-  }
-
-  static evalRPN(rpn) {
-    const stack = [];
-    for (let token of rpn) {
-      if (typeof token === 'number') {
-        stack.push(token);
-      } else {
-        if (stack.length < 2) return null;
-        const b = stack.pop();
-        const a = stack.pop();
-        let res;
-        switch (token) {
-          case '+': res = a + b; break;
-          case '-': res = a - b; break;
-          case '*': res = a * b; break;
-          case '/':
-            if (b === 0) return null;
-            res = a / b;
-            break;
-          default: return null;
-        }
-        stack.push(res);
-      }
-    }
-    return stack.length === 1 ? stack[0] : null;
-  }
-
-  static randInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
-  static randChoice(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
-  }
-
-  static formatDisplay(expr) {
-    return expr
-      .replace(/\*/g, ' × ')
-      .replace(/\//g, ' ÷ ')
-      .replace(/\+/g, ' + ')
-      .replace(/-/g, ' − ')
-      .replace(/\s+/g, ' ')
-      .replace(/\(\s+/g, '(')
-      .replace(/\s+\)/g, ')')
-      .trim();
-  }
-
-  static pickTarget(difficulty) {
-    switch (difficulty) {
-      case 'kolay': {
-        const easyTargets = [
-          12, 16, 18, 20, 24, 25, 28, 30, 32, 36, 40, 42, 45, 48, 50,
-          54, 56, 60, 64, 70, 72, 75, 80, 84, 90, 96, 100
-        ];
-        return this.randChoice(easyTargets);
-      }
-      case 'orta': {
-        const mediumTargets = [
-          48, 60, 72, 80, 90, 96, 100, 120, 125, 140, 144, 150, 160, 175, 180,
-          200, 210, 220, 240, 250, 280, 300, 320, 350, 360, 400, 420, 450, 480, 500
-        ];
-        return this.randChoice(mediumTargets);
-      }
-      case 'zor': {
-        const hardTargets = [
-          48, 64, 72, 84, 96, 100, 120, 144, 150, 168, 180, 200, 216, 240, 250,
-          288, 300, 324, 360, 400, 450, 480, 500, 540, 600, 640, 720, 750, 800, 900, 1000
-        ];
-        return this.randChoice(hardTargets);
-      }
-      default:
-        return 48;
-    }
-  }
-
-  static generateCorrectExpressions(target, difficulty, count = 5) {
-    const expressions = new Set();
-    const results = [];
-
-    const addIfValid = (rawExpr) => {
-      const evalRes = this.evaluate(rawExpr);
-      if (evalRes.isValid && evalRes.isInteger && evalRes.value === target) {
-        const display = this.formatDisplay(rawExpr);
-        if (!expressions.has(display)) {
-          expressions.add(display);
-          results.push({
-            expression: display,
-            raw: rawExpr,
-            value: target,
-            isCorrect: true
-          });
-          return true;
-        }
-      }
-      return false;
-    };
-
-    let attempts = 0;
-    while (results.length < count && attempts < 300) {
-      attempts++;
-
-      // 1. Addition
-      if (target > 1) {
-        let a = this.randInt(1, target - 1);
-        let b = target - a;
-        addIfValid(`${a}+${b}`);
-      }
-
-      // 2. Subtraction
-      {
-        let b = this.randInt(1, difficulty === 'kolay' ? 60 : 200);
-        let a = target + b;
-        addIfValid(`${a}-${b}`);
-      }
-
-      // 3. Multiplication
-      {
-        const factors = [];
-        for (let i = 2; i <= Math.sqrt(target); i++) {
-          if (target % i === 0) {
-            factors.push([i, target / i]);
-          }
-        }
-        if (factors.length > 0) {
-          const pair = this.randChoice(factors);
-          if (Math.random() < 0.5) {
-            addIfValid(`${pair[0]}*${pair[1]}`);
-          } else {
-            addIfValid(`${pair[1]}*${pair[0]}`);
-          }
-        }
-      }
-
-      // 4. Division
-      {
-        let b = this.randInt(2, difficulty === 'kolay' ? 5 : (difficulty === 'orta' ? 8 : 12));
-        let a = target * b;
-        addIfValid(`${a}/${b}`);
-      }
-
-      // 5. Multi-step expressions
-      if (difficulty === 'orta' || difficulty === 'zor') {
-        let c = this.randInt(1, Math.min(target - 1, 60));
-        let rem = target - c;
-        for (let i = 2; i <= 20; i++) {
-          if (rem % i === 0 && rem / i >= 2 && rem / i <= 50) {
-            addIfValid(`(${i}*${rem / i})+${c}`);
-            addIfValid(`${c}+(${i}*${rem / i})`);
-            break;
-          }
-        }
-
-        let cSub = this.randInt(2, 50);
-        let total = target + cSub;
-        for (let i = 2; i <= 25; i++) {
-          if (total % i === 0 && total / i >= 2 && total / i <= 50) {
-            addIfValid(`(${i}*${total / i})-${cSub}`);
-            break;
-          }
-        }
-
-        for (let cMul = 2; cMul <= 10; cMul++) {
-          if (target % cMul === 0) {
-            let sum = target / cMul;
-            if (sum >= 3) {
-              let aAdd = this.randInt(1, sum - 1);
-              let bAdd = sum - aAdd;
-              addIfValid(`(${aAdd}+${bAdd})*${cMul}`);
-              addIfValid(`${cMul}*(${aAdd}+${bAdd})`);
-            }
-          }
-        }
-
-        if (difficulty === 'zor') {
-          let cDiv = this.randInt(2, 6);
-          let diffVal = target * cDiv;
-          let bVal = this.randInt(10, 100);
-          let aVal = diffVal + bVal;
-          addIfValid(`(${aVal}-${bVal})/${cDiv}`);
-
-          let cM = this.randInt(1, 20);
-          let bM = this.randInt(2, 5);
-          let aM = (target + cM) * bM;
-          addIfValid(`(${aM}/${bM})-${cM}`);
-
-          let part1 = this.randInt(Math.floor(target * 0.2), Math.floor(target * 0.8));
-          let part2 = target - part1;
-          let p1_f = [];
-          for (let k = 2; k <= 15; k++) if (part1 % k === 0) p1_f.push([k, part1 / k]);
-          let p2_f = [];
-          for (let k = 2; k <= 15; k++) if (part2 % k === 0) p2_f.push([k, part2 / k]);
-          if (p1_f.length > 0 && p2_f.length > 0) {
-            let f1 = this.randChoice(p1_f);
-            let f2 = this.randChoice(p2_f);
-            addIfValid(`(${f1[0]}*${f1[1]})+(${f2[0]}*${f2[1]})`);
-          }
-        }
-      }
-    }
-
-    return results.slice(0, count);
-  }
-
-  static generateDistractors(target, difficulty, count = 7, correctSet = new Set()) {
-    const expressions = new Set(correctSet);
-    const results = [];
-
-    const addDistractor = (rawExpr) => {
-      const evalRes = this.evaluate(rawExpr);
-      if (evalRes.isValid && evalRes.isInteger && evalRes.value !== target && evalRes.value > 0) {
-        const display = this.formatDisplay(rawExpr);
-        if (!expressions.has(display)) {
-          expressions.add(display);
-          results.push({
-            expression: display,
-            raw: rawExpr,
-            value: evalRes.value,
-            isCorrect: false
-          });
-          return true;
-        }
-      }
-      return false;
-    };
-
-    let attempts = 0;
-    while (results.length < count && attempts < 450) {
-      attempts++;
-
-      let offset = this.randChoice([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 10, -10]);
-      let fakeTarget = target + offset;
-      if (fakeTarget > 2) {
-        let a = this.randInt(1, fakeTarget - 1);
-        let b = fakeTarget - a;
-        addDistractor(`${a}+${b}`);
-      }
-
-      {
-        let b = this.randInt(1, 50);
-        let fakeDiff = target + this.randChoice([-3, -2, -1, 1, 2, 3, 5, -5]);
-        let a = fakeDiff + b;
-        if (a > b && fakeDiff > 0) {
-          addDistractor(`${a}-${b}`);
-        }
-      }
-
-      {
-        let a = this.randInt(2, Math.min(20, Math.max(5, Math.floor(Math.sqrt(target) + 3))));
-        let b = this.randInt(2, 20);
-        if (a * b !== target && a * b > 0) {
-          addDistractor(`${a}*${b}`);
-        }
-      }
-
-      {
-        let b = this.randInt(2, 6);
-        let wrongAns = target + this.randChoice([-4, -2, -1, 1, 2, 4, 10]);
-        if (wrongAns > 0) {
-          let a = wrongAns * b;
-          addDistractor(`${a}/${b}`);
-        }
-      }
-
-      if (difficulty === 'orta' || difficulty === 'zor') {
-        let a = this.randInt(2, 12);
-        let b = this.randInt(2, 12);
-        let c = this.randInt(1, 25);
-        
-        if ((a * b) - c > 0) {
-          addDistractor(`(${a}*${b})-${c}`);
-        }
-        addDistractor(`(${a}*${b})+${c}`);
-        addDistractor(`(${a}+${b})*${c}`);
-
-        if (difficulty === 'zor') {
-          let d = this.randInt(2, 6);
-          if ((a * b) > c) {
-            let num = (a * b) + c;
-            let divExact = num * d;
-            addDistractor(`(${divExact}/${d})-${c}`);
-          }
-        }
-      }
-    }
-
-    return results.slice(0, count);
-  }
-
-  static generateRound(difficulty = 'kolay', totalCards = 12) {
-    const target = this.pickTarget(difficulty);
-    const correctCount = this.randChoice([4, 5, 5, 6]);
-    const distractorCount = totalCards - correctCount;
-
-    const correctCards = this.generateCorrectExpressions(target, difficulty, correctCount);
-    const actualCorrectCount = correctCards.length;
-    const actualDistractorCount = totalCards - actualCorrectCount;
-
-    const correctSet = new Set(correctCards.map(c => c.expression));
-    const distractorCards = this.generateDistractors(target, difficulty, actualDistractorCount, correctSet);
-
-    const allCards = [...correctCards, ...distractorCards];
-
-    for (let card of allCards) {
-      const evalRes = this.evaluate(card.raw);
-      if (!evalRes.isValid || !evalRes.isInteger) {
-        throw new Error(`Invalid math card generated: ${card.expression} (${card.raw})`);
-      }
-      if (card.isCorrect && evalRes.value !== target) {
-        throw new Error(`Correct card did not match target: ${card.expression} = ${evalRes.value} != ${target}`);
-      }
-      if (!card.isCorrect && evalRes.value === target) {
-        throw new Error(`Distractor card accidentally matched target: ${card.expression} = ${evalRes.value} == ${target}`);
-      }
-      card.actualValue = evalRes.value;
-    }
-
-    for (let i = allCards.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [allCards[i], allCards[j]] = [allCards[j], allCards[i]];
-    }
-
-    return {
-      target,
-      difficulty,
-      totalCards: allCards.length,
-      correctCount: correctCards.length,
-      cards: allCards
-    };
-  }
-}
-
-// Sound Controller
-class SoundController {
-  constructor() {
-    this.enabled = true;
-    this.ctx = null;
-  }
-
-  init() {
-    if (!this.ctx) {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      if (AudioContext) {
-        this.ctx = new AudioContext();
-      }
-    }
-    if (this.ctx && this.ctx.state === 'suspended') {
-      this.ctx.resume();
-    }
-  }
-
-  toggle() {
-    this.enabled = !this.enabled;
-    return this.enabled;
-  }
-
-  playTone(freq, type = 'sine', duration = 0.15, gainVal = 0.25, startDelay = 0) {
-    if (!this.enabled) return;
-    this.init();
-    if (!this.ctx) return;
-
-    try {
-      const now = this.ctx.currentTime + startDelay;
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-
-      osc.type = type;
-      osc.frequency.setValueAtTime(freq, now);
-
-      gain.gain.setValueAtTime(gainVal, now);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-
-      osc.start(now);
-      osc.stop(now + duration + 0.05);
-    } catch (e) {}
-  }
-
-  playCorrect() {
-    if (!this.enabled) return;
-    this.playTone(523.25, 'triangle', 0.12, 0.2, 0.00);
-    this.playTone(659.25, 'triangle', 0.14, 0.22, 0.06);
-    this.playTone(783.99, 'triangle', 0.18, 0.25, 0.12);
-    this.playTone(1046.50, 'sine', 0.25, 0.28, 0.18);
-  }
-
-  playWrong() {
-    if (!this.enabled) return;
-    this.playTone(220.00, 'sawtooth', 0.20, 0.18, 0.00);
-    this.playTone(207.65, 'sawtooth', 0.25, 0.18, 0.06);
-  }
-
-  playBonus() {
-    if (!this.enabled) return;
-    const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98];
-    notes.forEach((freq, idx) => {
-      this.playTone(freq, 'triangle', 0.22, 0.2, idx * 0.07);
-    });
-  }
-
-  playTick() {
-    if (!this.enabled) return;
-    this.playTone(880, 'sine', 0.04, 0.05);
-  }
-
-  playUrgentTick() {
-    if (!this.enabled) return;
-    this.playTone(1200, 'square', 0.06, 0.12);
-  }
-
-  playTimeUp() {
-    if (!this.enabled) return;
-    this.playTone(330, 'sawtooth', 0.35, 0.25, 0.00);
-    this.playTone(261.63, 'sawtooth', 0.45, 0.25, 0.18);
-    this.playTone(196.00, 'sawtooth', 0.60, 0.30, 0.38);
-  }
-
-  playVictory() {
-    if (!this.enabled) return;
-    const melody = [
-      { f: 523.25, d: 0.15, t: 0.00 },
-      { f: 523.25, d: 0.15, t: 0.15 },
-      { f: 523.25, d: 0.15, t: 0.30 },
-      { f: 659.25, d: 0.35, t: 0.45 },
-      { f: 783.99, d: 0.20, t: 0.80 },
-      { f: 1046.50, d: 0.60, t: 1.00 }
-    ];
-    melody.forEach(n => {
-      this.playTone(n.f, 'triangle', n.d, 0.25, n.t);
-    });
-  }
-}
-
-window.soundCtrl = new SoundController();
-
-// Main Game Controller
 class SayiAviGame {
   constructor() {
     this.config = {
@@ -561,6 +26,7 @@ class SayiAviGame {
         wrongPicks: [0, 0, 0, 0],
         bonuses: [0, 0, 0, 0]
       },
+      usedTargets: new Set(),
       currentRoundData: null,
       foundCorrectCount: 0,
       roundPoints: 0,
@@ -578,6 +44,37 @@ class SayiAviGame {
     this.initDOM();
     this.bindEvents();
     this.initConfetti();
+  }
+
+  getSound() {
+    if (typeof window !== 'undefined' && window.soundCtrl) {
+      return window.soundCtrl;
+    }
+    if (typeof SoundController !== 'undefined') {
+      if (!this._fallbackSound) this._fallbackSound = new SoundController();
+      return this._fallbackSound;
+    }
+    return {
+      init: () => {},
+      toggle: () => true,
+      playCorrect: () => {},
+      playWrong: () => {},
+      playBonus: () => {},
+      playTick: () => {},
+      playUrgentTick: () => {},
+      playTimeUp: () => {},
+      playVictory: () => {}
+    };
+  }
+
+  getMathEngine() {
+    if (typeof MathEngine !== 'undefined') {
+      return MathEngine;
+    }
+    if (typeof window !== 'undefined' && window.MathEngine) {
+      return window.MathEngine;
+    }
+    throw new Error('MathEngine is not available');
   }
 
   initDOM() {
@@ -657,7 +154,7 @@ class SayiAviGame {
     if (this.dom.btnStartGame) {
       this.dom.btnStartGame.addEventListener('click', (e) => {
         if (e) e.preventDefault();
-        window.soundCtrl.init();
+        this.getSound().init();
         this.collectTeamNames();
         this.startGame();
       });
@@ -787,7 +284,7 @@ class SayiAviGame {
   }
 
   toggleSound() {
-    const isEnabled = window.soundCtrl.toggle();
+    const isEnabled = this.getSound().toggle();
     if (this.dom.soundIcon) this.dom.soundIcon.textContent = isEnabled ? '🔊' : '🔇';
     if (this.dom.soundLabel) this.dom.soundLabel.textContent = isEnabled ? 'Ses Açık' : 'Ses Kapalı';
   }
@@ -829,6 +326,7 @@ class SayiAviGame {
       wrongPicks: new Array(this.config.teamCount).fill(0),
       bonuses: new Array(this.config.teamCount).fill(0)
     };
+    this.state.usedTargets = new Set();
 
     if (this.dom.setupScreen) this.dom.setupScreen.classList.remove('active');
     if (this.dom.winnerScreen) this.dom.winnerScreen.classList.remove('active');
@@ -850,7 +348,12 @@ class SayiAviGame {
     this.state.isBonusAchieved = false;
     this.state.isPaused = false;
 
-    this.state.currentRoundData = MathEngine.generateRound(this.config.difficulty, 12);
+    // Generate verified round
+    const engine = this.getMathEngine();
+    this.state.currentRoundData = engine.generateRound(this.config.difficulty, 12, this.state.usedTargets);
+    if (this.state.currentRoundData && this.state.currentRoundData.target) {
+      this.state.usedTargets.add(this.state.currentRoundData.target);
+    }
 
     this.renderHeader();
     this.renderScoreboard();
@@ -950,14 +453,14 @@ class SayiAviGame {
 
       if (this.state.timeLeft <= 10 && this.state.timeLeft > 0) {
         if (this.dom.timerContainer) this.dom.timerContainer.classList.add('urgent-timer', 'urgent');
-        window.soundCtrl.playUrgentTick();
+        this.getSound().playUrgentTick();
       } else if (this.state.timeLeft > 10) {
-        window.soundCtrl.playTick();
+        this.getSound().playTick();
       }
 
       if (this.state.timeLeft <= 0) {
         clearInterval(this.state.timerId);
-        window.soundCtrl.playTimeUp();
+        this.getSound().playTimeUp();
         this.endRound('SÜRE DOLDU! ⏱️');
       }
     }, 1000);
@@ -972,7 +475,7 @@ class SayiAviGame {
 
     if (cardData.isCorrect) {
       cardElement.classList.add('selected-correct');
-      window.soundCtrl.playCorrect();
+      this.getSound().playCorrect();
 
       const earned = 100;
       this.state.roundPoints += earned;
@@ -990,7 +493,7 @@ class SayiAviGame {
         this.state.scores[currentTeam] += bonus;
         this.state.stats.bonuses[currentTeam]++;
 
-        window.soundCtrl.playBonus();
+        this.getSound().playBonus();
         this.triggerConfetti();
         this.showFloatingPoints(window.innerWidth / 2, window.innerHeight / 2 - 50, '+250 BONUS! 🌟', true);
 
@@ -1000,7 +503,7 @@ class SayiAviGame {
       }
     } else {
       cardElement.classList.add('selected-wrong');
-      window.soundCtrl.playWrong();
+      this.getSound().playWrong();
 
       const penalty = 50;
       this.state.roundPoints = Math.max(0, this.state.roundPoints - penalty);
@@ -1018,6 +521,7 @@ class SayiAviGame {
   }
 
   showFloatingPoints(x, y, text, isPositive) {
+    if (typeof document === 'undefined' || !document.body) return;
     const el = document.createElement('div');
     el.className = `floating-point-fx floating-point-text ${isPositive ? 'positive' : 'negative'}`;
     el.textContent = text;
@@ -1040,9 +544,9 @@ class SayiAviGame {
         cardEl.classList.add('locked');
         const data = this.state.currentRoundData.cards[idx];
 
-        if (data.isCorrect && !cardEl.classList.contains('selected-correct')) {
+        if (data && data.isCorrect && !cardEl.classList.contains('selected-correct')) {
           cardEl.classList.add('reveal-missed');
-        } else if (!data.isCorrect && !cardEl.classList.contains('selected-wrong')) {
+        } else if (data && !data.isCorrect && !cardEl.classList.contains('selected-wrong')) {
           cardEl.classList.add('reveal-wrong-unselected');
           const valBadge = document.createElement('span');
           valBadge.className = 'card-val-tag card-actual-val';
@@ -1060,7 +564,7 @@ class SayiAviGame {
   showRoundRevealModal(reasonText) {
     const teamIdx = this.state.currentTeamIdx;
     const teamName = this.config.teamNames[teamIdx] || `Takım ${teamIdx + 1}`;
-    const totalCorrect = this.state.currentRoundData.correctCount;
+    const totalCorrect = this.state.currentRoundData ? this.state.currentRoundData.correctCount : 0;
     const found = this.state.foundCorrectCount;
 
     if (this.dom.revealModalTitle) this.dom.revealModalTitle.textContent = reasonText;
@@ -1118,7 +622,7 @@ class SayiAviGame {
     if (this.dom.roundRevealModal) this.dom.roundRevealModal.classList.add('hidden');
     if (this.dom.winnerScreen) this.dom.winnerScreen.classList.add('active');
 
-    window.soundCtrl.playVictory();
+    this.getSound().playVictory();
     this.triggerConfetti(5000);
 
     const teamRankings = [];
@@ -1231,7 +735,7 @@ class SayiAviGame {
           ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
           ctx.restore();
 
-          if (p.opacity <= 0 || p.y > canvas.height + 50) {
+        if (p.opacity <= 0 || p.y > canvas.height + 50) {
             this.confettiParticles.splice(i, 1);
           }
         }
@@ -1252,7 +756,7 @@ class SayiAviGame {
 
 // Immediate & Robust Initialization
 function initSayiAvi() {
-  if (!window.sayiAvi) {
+  if (typeof window !== 'undefined' && !window.sayiAvi) {
     window.sayiAvi = new SayiAviGame();
   }
 }
@@ -1266,5 +770,5 @@ if (typeof document !== 'undefined') {
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { MathEngine, SoundController, SayiAviGame };
+  module.exports = { SayiAviGame };
 }

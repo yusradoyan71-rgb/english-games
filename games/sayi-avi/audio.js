@@ -10,14 +10,14 @@ class SoundController {
   }
 
   init() {
-    if (!this.ctx) {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      if (AudioContext) {
-        this.ctx = new AudioContext();
+    if (!this.ctx && typeof window !== 'undefined') {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) {
+        this.ctx = new AudioCtx();
       }
     }
     if (this.ctx && this.ctx.state === 'suspended') {
-      this.ctx.resume();
+      this.ctx.resume().catch(() => {});
     }
   }
 
@@ -48,7 +48,7 @@ class SoundController {
       osc.start(now);
       osc.stop(now + duration + 0.05);
     } catch (e) {
-      // AudioContext error handling
+      // AudioContext error suppression
     }
   }
 
@@ -114,4 +114,11 @@ class SoundController {
   }
 }
 
-window.soundCtrl = new SoundController();
+if (typeof window !== 'undefined') {
+  window.SoundController = SoundController;
+  window.soundCtrl = new SoundController();
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = SoundController;
+}
