@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚡ Word Rush — Classroom Speed Word-Hunting Competition</title>
+  <meta name="description" content="A high-energy, competitive classroom word-hunting game for English learners. Select all target category words as fast as possible on the smartboard!">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+
+  <!-- Google Fonts: Fredoka, Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ambient Backdrop -->
+  <div class="ambient-bg" aria-hidden="true">
+    <div class="ambient-blob blob-1"></div>
+    <div class="ambient-blob blob-2"></div>
+    <div class="ambient-blob blob-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-header">
+    <a href="../../index.html" class="btn-back" id="btnBackToGames" aria-label="Back to all English games">
+      <span aria-hidden="true">←</span>
+      <span>Games Hub</span>
+    </a>
+
+    <div class="brand-title">
+      <span aria-hidden="true">⚡</span>
+      <span>WORD RUSH</span>
+    </div>
+
+    <div class="header-controls">
+      <button type="button" class="icon-btn" id="btnSoundToggle" aria-label="Toggle Sound Effects" title="Toggle Sound">
+        🔊
+      </button>
+      <button type="button" class="icon-btn" id="btnFullscreenToggle" aria-label="Toggle Fullscreen" title="Toggle Fullscreen">
+        ⛶
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Game Container -->
+  <main class="app-main">
+
+    <!-- ================================================================= -->
+    <!-- SCREEN 1: TEACHER SETUP SCREEN -->
+    <!-- ================================================================= -->
+    <section class="screen active-screen" id="screenSetup" aria-label="Teacher Setup Screen">
+      <div class="setup-container">
+        
+        <header class="setup-hero">
+          <div class="hero-pill">
+            <span aria-hidden="true">⚡</span>
+            <span>Speed Word-Hunting Competition</span>
+          </div>
+          <h1 class="setup-title">WORD RUSH</h1>
+          <p class="setup-subtitle">Select category and settings. Students race against the clock on the smartboard!</p>
+        </header>
+
+        <div class="setup-card">
+          
+          <!-- Step 1: Grade Selection -->
+          <div class="setup-group">
+            <h2 class="setup-section-title">
+              <span class="step-num">1</span>
+              <span>Select Grade</span>
+            </h2>
+            <div class="btn-grid-options grid-cols-2" id="groupGrade">
+              <button type="button" class="opt-btn active" data-val="grade7">🎓 Grade 7</button>
+              <button type="button" class="opt-btn" data-val="grade8">🎓 Grade 8</button>
+            </div>
+          </div>
+
+          <!-- Step 2: Category Selection (15 Selectable Categories) -->
+          <div class="setup-group">
+            <h2 class="setup-section-title">
+              <span class="step-num">2</span>
+              <span>Target Category</span>
+            </h2>
+            <div class="category-grid" id="groupCategory">
+              <!-- Rendered via JavaScript -->
+            </div>
+          </div>
+
+          <!-- Step 3: Difficulty Selection -->
+          <div class="setup-group">
+            <h2 class="setup-section-title">
+              <span class="step-num">3</span>
+              <span>Difficulty</span>
+            </h2>
+            <div class="btn-grid-options grid-cols-3" id="groupDifficulty">
+              <button type="button" class="opt-btn active" data-val="easy">🟢 Easy</button>
+              <button type="button" class="opt-btn" data-val="medium">🟡 Medium</button>
+              <button type="button" class="opt-btn" data-val="hard">🔴 Hard</button>
+            </div>
+          </div>
+
+          <!-- Step 4: Number of Words on Board -->
+          <div class="setup-group">
+            <h2 class="setup-section-title">
+              <span class="step-num">4</span>
+              <span>Number of Words</span>
+            </h2>
+            <div class="btn-grid-options grid-cols-6" id="groupWordCount">
+              <button type="button" class="opt-btn" data-val="10">10 Words</button>
+              <button type="button" class="opt-btn" data-val="15">15 Words</button>
+              <button type="button" class="opt-btn active" data-val="20">20 Words</button>
+              <button type="button" class="opt-btn" data-val="25">25 Words</button>
+              <button type="button" class="opt-btn" data-val="30">30 Words</button>
+              <button type="button" class="opt-btn" data-val="40">40 Words</button>
+            </div>
+          </div>
+
+          <!-- Step 5: Number of Teams -->
+          <div class="setup-group">
+            <h2 class="setup-section-title">
+              <span class="step-num">5</span>
+              <span>Number of Teams</span>
+            </h2>
+            <div class="btn-grid-options grid-cols-4" id="groupTeams">
+              <button type="button" class="opt-btn" data-val="1">👤 1 Team</button>
+              <button type="button" class="opt-btn active" data-val="2">👥 2 Teams</button>
+              <button type="button" class="opt-btn" data-val="3">👥 3 Teams</button>
+              <button type="button" class="opt-btn" data-val="4">👥 4 Teams</button>
+            </div>
+          </div>
+
+          <!-- Start Match Button -->
+          <button type="button" class="btn-start-match" id="btnStartMatch">
+            <span>START MATCH</span>
+            <span aria-hidden="true">🚀</span>
+          </button>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- SCREEN 2: TEAM READY SCREEN -->
+    <!-- ================================================================= -->
+    <section class="screen" id="screenReady" aria-label="Team Get Ready Screen">
+      <div class="ready-container">
+        
+        <div class="ready-team-badge" id="readyTeamBadge">
+          <span class="team-icon">🏃</span>
+          <span id="readyTeamName">TEAM 1</span>
+        </div>
+
+        <h2 class="ready-heading">GET READY!</h2>
+
+        <div class="ready-target-reminder" id="readyTargetReminder">
+          🎯 Target: FIND ALL THE VERBS
+        </div>
+
+        <p class="ready-instruction">
+          Player, step up to the smartboard! Find and tap all target words as quickly as you can. The timer starts the moment you press <strong>START</strong>!
+        </p>
+
+        <button type="button" class="btn-ready-start" id="btnStartTurn">
+          <span>START</span>
+          <span aria-hidden="true">⏱️</span>
+        </button>
+
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- SCREEN 3: GAMEPLAY WORD BOARD -->
+    <!-- ================================================================= -->
+    <section class="screen" id="screenGameplay" aria-label="Word Rush Board Screen">
+      <div class="gameplay-container">
+        
+        <!-- Game HUD -->
+        <div class="game-hud">
+          <div class="hud-team-tag" id="hudTeamTag">
+            <span>🏃</span>
+            <span id="hudTeamName">TEAM 1</span>
+          </div>
+
+          <div class="hud-banner-prompt" id="hudPrompt">
+            FIND ALL THE VERBS
+          </div>
+
+          <div class="hud-timer-box">
+            <span class="timer-icon" aria-hidden="true">⏱️</span>
+            <span id="hudTimer">00:00.00</span>
+          </div>
+        </div>
+
+        <!-- Word Grid Board -->
+        <div class="word-board board-count-20" id="wordBoard" aria-label="Word Cards Board">
+          <!-- Cards populated dynamically by game.js -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- SCREEN 4: TEAM COMPLETED FREEZE SCREEN -->
+    <!-- ================================================================= -->
+    <section class="screen" id="screenFreeze" aria-label="Team Completed Screen">
+      <div class="freeze-container">
+        <div class="freeze-card">
+          
+          <div class="freeze-badge" id="freezeTeamBadge">
+            <span>🎉</span>
+            <span id="freezeTeamName">TEAM 1</span>
+          </div>
+
+          <h2 class="freeze-title">COMPLETED!</h2>
+
+          <div class="freeze-time-display">
+            <span class="freeze-time-label">Completion Time</span>
+            <span class="freeze-time-val" id="freezeTimeVal">00:18.42</span>
+          </div>
+
+          <p class="freeze-note">
+            All target words successfully identified!
+          </p>
+
+          <button type="button" class="btn-next-team" id="btnNextTeam">
+            <span id="btnNextTeamText">NEXT TEAM</span>
+            <span aria-hidden="true">➜</span>
+          </button>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- SCREEN 5: FINAL RESULTS SCREEN -->
+    <!-- ================================================================= -->
+    <section class="screen" id="screenResults" aria-label="Final Results Screen">
+      <div class="results-container">
+        
+        <header class="results-hero">
+          <h2 class="results-hero-title">FINAL RESULTS</h2>
+          <p class="results-hero-sub">Fastest completion time wins the match!</p>
+        </header>
+
+        <div class="leaderboard-card" id="leaderboardList">
+          <!-- Leaderboard rows generated dynamically -->
+        </div>
+
+        <div class="results-actions">
+          <button type="button" class="btn-action-primary" id="btnPlayAgain">
+            <span aria-hidden="true">🔄</span>
+            <span>PLAY AGAIN</span>
+          </button>
+
+          <button type="button" class="btn-action-secondary" id="btnBackToSetup">
+            <span aria-hidden="true">⚙️</span>
+            <span>BACK TO SETUP</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="audio.js"></script>
+  <script src="word-bank.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
