@@ -141,12 +141,24 @@
               <span class="step-num">6</span>
               <span>Number of Rounds</span>
             </h2>
-            <div class="btn-grid-options grid-cols-5" id="groupRounds">
+            <div class="btn-grid-options grid-cols-6" id="groupRounds">
               <button type="button" class="opt-btn" data-val="3">3 Rounds</button>
               <button type="button" class="opt-btn active" data-val="5">5 Rounds</button>
               <button type="button" class="opt-btn" data-val="6">6 Rounds</button>
               <button type="button" class="opt-btn" data-val="8">8 Rounds</button>
               <button type="button" class="opt-btn" data-val="10">10 Rounds</button>
+              <button type="button" class="opt-btn" data-val="custom" id="btnCustomRounds">Custom...</button>
+            </div>
+
+            <!-- Custom Rounds Stepper Box -->
+            <div class="custom-rounds-box" id="customRoundsBox" style="display: none;">
+              <span class="custom-label">Choose custom rounds (1–20):</span>
+              <div class="stepper-controls">
+                <button type="button" class="stepper-btn" id="btnRoundMinus">−</button>
+                <input type="number" id="inputCustomRounds" min="1" max="20" value="7" class="stepper-input">
+                <button type="button" class="stepper-btn" id="btnRoundPlus">+</button>
+                <span class="stepper-unit">Rounds</span>
+              </div>
             </div>
           </div>
 
@@ -231,7 +243,7 @@
     </section>
 
     <!-- ================================================================= -->
-    <!-- SCREEN 4: TURN COMPLETED FREEZE SCREEN -->
+    <!-- SCREEN 4: TURN COMPLETED FREEZE SCREEN (For non-last team in round) -->
     <!-- ================================================================= -->
     <section class="screen" id="screenFreeze" aria-label="Turn Completed Screen">
       <div class="freeze-container">
@@ -258,8 +270,7 @@
           </p>
 
           <button type="button" class="btn-next-team" id="btnNextTeam">
-            <span id="btnNextTeamText">NEXT TEAM</span>
-            <span aria-hidden="true">➜</span>
+            <span id="btnNextTeamText">NEXT TEAM →</span>
           </button>
 
         </div>
@@ -267,7 +278,7 @@
     </section>
 
     <!-- ================================================================= -->
-    <!-- SCREEN 4B: ROUND COMPLETE SCREEN (Intermediate Multi-Round Recap) -->
+    <!-- SCREEN 4B: ROUND COMPLETE SCREEN (Immediate after last team of round) -->
     <!-- ================================================================= -->
     <section class="screen" id="screenRoundComplete" aria-label="Round Complete Screen">
       <div class="round-complete-container">
@@ -279,7 +290,7 @@
           </div>
 
           <h2 class="rc-title" id="rcTitle">ROUND 1 COMPLETE</h2>
-          <p class="rc-sub">Turn times from this round &amp; current cumulative match standings:</p>
+          <p class="rc-sub">Turn times from this round &amp; current tournament standings:</p>
 
           <div class="rc-split-view">
             <!-- Left: This Round's Times -->
@@ -292,7 +303,7 @@
 
             <!-- Right: Cumulative Totals So Far -->
             <div class="rc-box">
-              <h3 class="rc-box-title">📊 CURRENT TOTALS (CUMULATIVE)</h3>
+              <h3 class="rc-box-title">📊 CURRENT TOURNAMENT TOTALS</h3>
               <div class="rc-list" id="rcCumulativeTotalsList">
                 <!-- Populated dynamically -->
               </div>
@@ -304,8 +315,7 @@
           </p>
 
           <button type="button" class="btn-next-round" id="btnNextRound">
-            <span>NEXT ROUND</span>
-            <span aria-hidden="true">➜</span>
+            <span id="btnNextRoundText">NEXT ROUND →</span>
           </button>
 
         </div>
@@ -313,7 +323,7 @@
     </section>
 
     <!-- ================================================================= -->
-    <!-- SCREEN 5: FINAL RESULTS SCREEN -->
+    <!-- SCREEN 5: FINAL RESULTS SCREEN (Only after final round finishes) -->
     <!-- ================================================================= -->
     <section class="screen" id="screenResults" aria-label="Final Results Screen">
       <div class="results-container">
@@ -321,10 +331,10 @@
         <header class="results-hero">
           <div class="hero-pill">
             <span>🏆</span>
-            <span>MATCH COMPLETE</span>
+            <span>TOURNAMENT COMPLETE</span>
           </div>
           <h2 class="results-hero-title">FINAL RESULTS</h2>
-          <p class="results-hero-sub">Ranked by lowest total cumulative time across all rounds!</p>
+          <p class="results-hero-sub">Winner is the team with the LOWEST total time across all rounds!</p>
         </header>
 
         <!-- Final Ranked Standings -->
@@ -336,7 +346,7 @@
         <div class="breakdown-card">
           <h3 class="breakdown-title">
             <span>📋</span>
-            <span>Round-by-Round Time Breakdown</span>
+            <span>Round-by-Round Time Breakdown Table</span>
           </h3>
           <div class="breakdown-table-wrapper" id="breakdownTableWrapper">
             <!-- Table generated dynamically -->

@@ -105,7 +105,7 @@
     return (ms / 1000).toFixed(2) + 's';
   }
 
-  // --- Main Word Rush Game Controller ---
+  // --- Main Word Rush Tournament Controller ---
   class WordRushGame {
     constructor() {
       // Sound Controller
@@ -119,21 +119,21 @@
         difficulty: 'easy',
         totalWords: 20,
         teamCount: 2,
-        roundCount: 5
+        totalRounds: 5
       };
 
       // Multi-Round Tournament State
       this.match = {
-        currentRound: 1,      // 1 to roundCount
+        currentRound: 1,      // 1 to totalRounds
         currentTeamIndex: 0,  // 0 to teamCount - 1
-        teamScores: {},       // { 1: [16420, 14810, ...], 2: [18310, 15720, ...] }
+        teamTimes: {},        // { 1: [ms1, ms2, ...], 2: [ms1, ms2, ...] }
         usedTargetWords: new Set(),
         currentBoardData: null,
         foundTargetsCount: 0,
         totalTargetsNeeded: 0
       };
 
-      // High-accuracy Timer
+      // High-accuracy Timestamp Timer
       this.timer = {
         startTime: 0,
         elapsedMs: 0,
@@ -166,6 +166,12 @@
       this.groupRounds = document.getElementById('groupRounds');
       this.btnStartMatch = document.getElementById('btnStartMatch');
 
+      // Custom Rounds Stepper Elements
+      this.customRoundsBox = document.getElementById('customRoundsBox');
+      this.inputCustomRounds = document.getElementById('inputCustomRounds');
+      this.btnRoundMinus = document.getElementById('btnRoundMinus');
+      this.btnRoundPlus = document.getElementById('btnRoundPlus');
+
       // Ready Screen Elements
       this.readyRoundBadge = document.getElementById('readyRoundBadge');
       this.readyRoundText = document.getElementById('readyRoundText');
@@ -183,21 +189,21 @@
       this.hudTimer = document.getElementById('hudTimer');
       this.wordBoard = document.getElementById('wordBoard');
 
-      // Freeze Screen Elements
+      // Freeze Screen Elements (Used between teams in the SAME round)
       this.freezeRoundBadge = document.getElementById('freezeRoundBadge');
       this.freezeRoundText = document.getElementById('freezeRoundText');
       this.freezeTeamBadge = document.getElementById('freezeTeamBadge');
       this.freezeTeamName = document.getElementById('freezeTeamName');
       this.freezeTimeVal = document.getElementById('freezeTimeVal');
       this.btnNextTeam = document.getElementById('btnNextTeam');
-      this.btnNextTeamText = document.getElementById('btnNextTeamText');
 
-      // Round Complete Screen Elements (Screen 4B)
+      // Round Complete Screen Elements (Used between ROUNDS)
       this.rcBadgeText = document.getElementById('rcBadgeText');
       this.rcTitle = document.getElementById('rcTitle');
       this.rcRoundTimesList = document.getElementById('rcRoundTimesList');
       this.rcCumulativeTotalsList = document.getElementById('rcCumulativeTotalsList');
       this.btnNextRound = document.getElementById('btnNextRound');
+      this.btnNextRoundText = document.getElementById('btnNextRoundText');
 
       // Results Screen Elements
       this.leaderboardList = document.getElementById('leaderboardList');
@@ -216,7 +222,51 @@
       this.bindOptionGroup(this.groupDifficulty, 'difficulty');
       this.bindOptionGroup(this.groupWordCount, 'totalWords', true);
       this.bindOptionGroup(this.groupTeams, 'teamCount', true);
-      this.bindOptionGroup(this.groupRounds, 'roundCount', true);
+
+      // Rounds Selector delegation
+      if (this.groupRounds) {
+        this.groupRounds.addEventListener('click', (e) => {
+          const btn = e.target.closest('.opt-btn');
+          if (!btn) return;
+          this.sound.playClick();
+          this.groupRounds.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          if (btn.dataset.val === 'custom') {
+            this.customRoundsBox.style.display = 'flex';
+            this.settings.totalRounds = Math.min(20, Math.max(1, Number(this.inputCustomRounds.value) || 5));
+          } else {
+            this.customRoundsBox.style.display = 'none';
+            this.settings.totalRounds = Number(btn.dataset.val);
+          }
+        });
+      }
+
+      // Stepper for Custom Rounds (1–20)
+      if (this.btnRoundMinus && this.btnRoundPlus && this.inputCustomRounds) {
+        this.btnRoundMinus.addEventListener('click', () => {
+          this.sound.playClick();
+          let val = (Number(this.inputCustomRounds.value) || 5) - 1;
+          if (val < 1) val = 1;
+          this.inputCustomRounds.value = val;
+          this.settings.totalRounds = val;
+        });
+
+        this.btnRoundPlus.addEventListener('click', () => {
+          this.sound.playClick();
+          let val = (Number(this.inputCustomRounds.value) || 5) + 1;
+          if (val > 20) val = 20;
+          this.inputCustomRounds.value = val;
+          this.settings.totalRounds = val;
+        });
+
+        this.inputCustomRounds.addEventListener('input', () => {
+          let val = Number(this.inputCustomRounds.value);
+          if (val < 1) val = 1;
+          if (val > 20) val = 20;
+          this.settings.totalRounds = val;
+        });
+      }
 
       // Category Click delegation
       if (this.groupCategory) {
@@ -242,16 +292,16 @@
         this.beginTeamTurn();
       });
 
-      // Next Team from Freeze Screen
+      // Next Team from Freeze Screen (Between teams in SAME round)
       this.btnNextTeam.addEventListener('click', () => {
         this.sound.playClick();
-        this.advanceNextTeam();
+        this.advanceToNextTeamInRound();
       });
 
-      // Next Round from Round Complete Screen
+      // Next Round from Round Complete Screen (Between ROUNDS)
       this.btnNextRound.addEventListener('click', () => {
         this.sound.playClick();
-        this.advanceNextRound();
+        this.advanceToNextRound();
       });
 
       // Play Again (Keeps same tournament settings)
@@ -333,10 +383,10 @@
       this.match.currentTeamIndex = 0;
       this.match.usedTargetWords.clear();
       
-      // Initialize score history for all selected teams
-      this.match.teamScores = {};
+      // Initialize raw time array for all participating teams
+      this.match.teamTimes = {};
       for (let t = 1; t <= this.settings.teamCount; t++) {
-        this.match.teamScores[t] = [];
+        this.match.teamTimes[t] = [];
       }
 
       this.prepareTeamReadyScreen();
@@ -347,7 +397,7 @@
       const teamNum = this.match.currentTeamIndex + 1;
       const teamName = this.getTeamDisplayName(teamNum);
       const teamColor = this.getTeamColor(teamNum);
-      const roundStr = `ROUND ${this.match.currentRound} / ${this.settings.roundCount}`;
+      const roundStr = `ROUND ${this.match.currentRound} / ${this.settings.totalRounds}`;
 
       this.readyRoundText.textContent = roundStr;
       this.readyTeamName.textContent = teamName;
@@ -355,7 +405,7 @@
       this.readyTeamBadge.style.background = teamColor.bg;
       this.readyTeamBadge.style.color = teamColor.text;
 
-      // Find Category Prompt
+      // Category Prompt
       const catMeta = (window.WORD_RUSH_CATEGORIES || []).find(c => c.id === this.settings.categoryId);
       const promptText = catMeta ? catMeta.prompt.replace('{TARGET}', 'WORDS') : 'FIND ALL THE TARGET WORDS';
       this.readyTargetReminder.textContent = `🎯 Task: ${promptText}`;
@@ -368,10 +418,10 @@
       const teamNum = this.match.currentTeamIndex + 1;
       const teamName = this.getTeamDisplayName(teamNum);
       const teamColor = this.getTeamColor(teamNum);
-      const roundStr = `ROUND ${this.match.currentRound} / ${this.settings.roundCount}`;
+      const roundStr = `ROUND ${this.match.currentRound} / ${this.settings.totalRounds}`;
 
-      // Generate Fresh Independent Board for this team
-      // Strict equality: Same Grade, Same Category, Same Difficulty, Same Word Count across all rounds and teams
+      // Generate Fresh Independent Board for this team attempt
+      // Selected difficulty, grade, and category remain identical throughout the entire tournament
       const boardData = window.generateWordRushBoard({
         grade: this.settings.grade,
         categoryId: this.settings.categoryId,
@@ -447,74 +497,60 @@
       }
     }
 
-    // --- Turn Complete (Freeze Screen) ---
+    // --- Turn Complete Logic ---
     handleTurnCompletion() {
-      // STOP TIMER IMMEDIATELY
+      // 1. STOP TIMER IMMEDIATELY
       const finalElapsedMs = this.stopTimer();
       const teamNum = this.match.currentTeamIndex + 1;
       const teamName = this.getTeamDisplayName(teamNum);
       const teamColor = this.getTeamColor(teamNum);
-      const roundStr = `ROUND ${this.match.currentRound} / ${this.settings.roundCount}`;
+      const roundStr = `ROUND ${this.match.currentRound} / ${this.settings.totalRounds}`;
 
-      // Store round time in history (never overwrite!)
-      this.match.teamScores[teamNum].push(finalElapsedMs);
+      // 2. STORE RAW ELAPSED TIME IN TOURNAMENT HISTORY
+      this.match.teamTimes[teamNum].push(finalElapsedMs);
 
       // Fanfare & Confetti
       this.sound.playRoundComplete();
       this.confetti.burst(window.innerWidth / 2, window.innerHeight / 2, 70);
 
-      // Setup Freeze Screen
-      this.freezeRoundText.textContent = roundStr;
-      this.freezeTeamName.textContent = teamName;
-      this.freezeTeamBadge.style.borderColor = teamColor.border;
-      this.freezeTeamBadge.style.background = teamColor.bg;
-      this.freezeTeamBadge.style.color = teamColor.text;
-      this.freezeTimeVal.textContent = formatTime(finalElapsedMs);
+      // 3. EVALUATE TOURNAMENT PROGRESSION
+      const isLastTeamOfRound = (this.match.currentTeamIndex === this.settings.teamCount - 1);
 
-      // Check if more teams remain in this round
-      const isLastTeamOfRound = teamNum >= this.settings.teamCount;
-      const isFinalRound = this.match.currentRound >= this.settings.roundCount;
+      if (!isLastTeamOfRound) {
+        // Case A: More teams remain in the CURRENT round
+        // Show Turn Freeze Screen with [ NEXT TEAM → ]
+        this.freezeRoundText.textContent = roundStr;
+        this.freezeTeamName.textContent = teamName;
+        this.freezeTeamBadge.style.borderColor = teamColor.border;
+        this.freezeTeamBadge.style.background = teamColor.bg;
+        this.freezeTeamBadge.style.color = teamColor.text;
+        this.freezeTimeVal.textContent = formatTime(finalElapsedMs);
 
-      if (isLastTeamOfRound) {
-        if (isFinalRound) {
-          this.btnNextTeamText.textContent = 'VIEW FINAL RESULTS 🏆';
-        } else {
-          this.btnNextTeamText.textContent = 'ROUND SUMMARY 📊';
-        }
+        this.showScreen('freeze');
       } else {
-        this.btnNextTeamText.textContent = 'NEXT TEAM ➜';
+        // Case B: The LAST team of this round has finished!
+        if (this.match.currentRound < this.settings.totalRounds) {
+          // Intermediate Round Ended -> Directly show Round Complete Screen (Screen 4B)
+          this.showRoundCompleteScreen();
+        } else {
+          // Final Round Ended (currentRound === totalRounds) -> Directly show Final Results!
+          this.showFinalResults();
+        }
       }
-
-      // Freeze and show Screen 4 (Wait for teacher!)
-      this.showScreen('freeze');
     }
 
-    // --- Advance from Freeze Screen ---
-    advanceNextTeam() {
+    // --- Advance to Next Team within the Same Round ---
+    advanceToNextTeamInRound() {
       this.match.currentTeamIndex++;
-
-      // Case A: More teams remain in the CURRENT round
       if (this.match.currentTeamIndex < this.settings.teamCount) {
         this.prepareTeamReadyScreen();
-        return;
-      }
-
-      // Case B: Final team of this round has finished
-      const isFinalRound = this.match.currentRound >= this.settings.roundCount;
-
-      if (isFinalRound) {
-        // Match Over -> Show Final Tournament Results Screen
-        this.showFinalResults();
-      } else {
-        // Intermediate Round Over -> Show Round Complete Screen (Screen 4B)
-        this.showRoundCompleteScreen();
       }
     }
 
-    // --- Screen 4B: Intermediate Round Complete Recap ---
+    // --- Screen 4B: Intermediate Round Complete Screen ---
     showRoundCompleteScreen() {
       const r = this.match.currentRound;
-      const totalR = this.settings.roundCount;
+      const totalR = this.settings.totalRounds;
 
       this.rcBadgeText.textContent = `ROUND ${r} OF ${totalR} COMPLETE`;
       this.rcTitle.textContent = `ROUND ${r} COMPLETE`;
@@ -523,7 +559,7 @@
       this.rcRoundTimesList.innerHTML = '';
       for (let t = 1; t <= this.settings.teamCount; t++) {
         const teamName = this.getTeamDisplayName(t);
-        const thisRoundMs = this.match.teamScores[t][r - 1] || 0;
+        const thisRoundMs = this.match.teamTimes[t][r - 1] || 0;
 
         const row = document.createElement('div');
         row.className = 'rc-row';
@@ -534,11 +570,11 @@
         this.rcRoundTimesList.appendChild(row);
       }
 
-      // 2. Render Current Cumulative Totals So Far
+      // 2. Render Current Tournament Totals So Far (Cumulative sum)
       this.rcCumulativeTotalsList.innerHTML = '';
       for (let t = 1; t <= this.settings.teamCount; t++) {
         const teamName = this.getTeamDisplayName(t);
-        const cumulativeMs = this.match.teamScores[t].reduce((sum, val) => sum + val, 0);
+        const cumulativeMs = this.match.teamTimes[t].reduce((sum, val) => sum + val, 0);
 
         const row = document.createElement('div');
         row.className = 'rc-row';
@@ -549,12 +585,18 @@
         this.rcCumulativeTotalsList.appendChild(row);
       }
 
-      this.btnNextRound.querySelector('span').textContent = `START ROUND ${r + 1}`;
+      this.btnNextRoundText.textContent = `START ROUND ${r + 1} →`;
       this.showScreen('roundComplete');
     }
 
-    // --- Advance to Next Round ---
-    advanceNextRound() {
+    // --- Advance to Next Round (Increments round, resets team to Team 1) ---
+    advanceToNextRound() {
+      // Strict safety check: Never increment beyond totalRounds
+      if (this.match.currentRound >= this.settings.totalRounds) {
+        this.showFinalResults();
+        return;
+      }
+
       this.match.currentRound++;
       this.match.currentTeamIndex = 0;
       this.prepareTeamReadyScreen();
@@ -592,6 +634,11 @@
 
     // --- Final Results & Comprehensive Matrix Table ---
     showFinalResults() {
+      // Defensive check: Final results can ONLY occur when tournament has reached totalRounds
+      if (this.match.currentRound < this.settings.totalRounds) {
+        return;
+      }
+
       this.sound.playVictory();
       this.confetti.burst(window.innerWidth / 2, window.innerHeight / 3, 100);
 
@@ -601,7 +648,7 @@
       // Compute total cumulative time for each team
       const teamSummaryList = [];
       for (let t = 1; t <= this.settings.teamCount; t++) {
-        const times = this.match.teamScores[t] || [];
+        const times = this.match.teamTimes[t] || [];
         const totalMs = times.reduce((sum, val) => sum + val, 0);
         teamSummaryList.push({
           teamNum: t,
@@ -613,7 +660,7 @@
         });
       }
 
-      // Sort by fastest total time (Lowest total time wins!)
+      // Sort by fastest total time (Lowest raw cumulative milliseconds wins!)
       teamSummaryList.sort((a, b) => a.totalMs - b.totalMs);
 
       // 1. Render Top Leaderboard Rankings
@@ -645,12 +692,12 @@
               <th>TEAM</th>
       `;
 
-      for (let r = 1; r <= this.settings.roundCount; r++) {
-        tableHtml += `<th>R${r}</th>`;
+      for (let r = 1; r <= this.settings.totalRounds; r++) {
+        tableHtml += `<th>Round ${r}</th>`;
       }
       tableHtml += `<th>TOTAL TIME</th></tr></thead><tbody>`;
 
-      // Sort rows by team number for intuitive reading
+      // Display rows ordered by team number (Team 1, Team 2, ...)
       const displayRows = [...teamSummaryList].sort((a, b) => a.teamNum - b.teamNum);
 
       displayRows.forEach(team => {
@@ -658,7 +705,7 @@
         tableHtml += `<tr class="${isWinner ? 'winner-row' : ''}">`;
         tableHtml += `<td class="team-cell">${team.name} ${isWinner ? '🏆' : ''}</td>`;
 
-        for (let r = 0; r < this.settings.roundCount; r++) {
+        for (let r = 0; r < this.settings.totalRounds; r++) {
           const rTime = team.roundTimes[r] !== undefined ? formatTime(team.roundTimes[r]) : '-';
           tableHtml += `<td>${rTime}</td>`;
         }
