@@ -69,6 +69,30 @@
 
         <div class="setup-card">
           
+          <!-- Mode Selection: Team vs Individual -->
+          <div class="setup-group">
+            <h2 class="setup-section-title">
+              <span class="step-num">★</span>
+              <span>Select Game Mode</span>
+            </h2>
+            <div class="btn-grid-options grid-cols-2" id="groupGameMode">
+              <button type="button" class="opt-btn mode-btn active" data-val="team">
+                <span class="mode-icon">👥</span>
+                <span class="mode-info">
+                  <strong class="mode-name">Team Mode</strong>
+                  <small class="mode-sub">Teams race across multiple rounds</small>
+                </span>
+              </button>
+              <button type="button" class="opt-btn mode-btn" data-val="individual">
+                <span class="mode-icon">👤</span>
+                <span class="mode-info">
+                  <strong class="mode-name">Individual Mode</strong>
+                  <small class="mode-sub">Students race individually (2–40 players)</small>
+                </span>
+              </button>
+            </div>
+          </div>
+
           <!-- Step 1: Grade Selection -->
           <div class="setup-group">
             <h2 class="setup-section-title">
@@ -121,8 +145,8 @@
             </div>
           </div>
 
-          <!-- Step 5: Number of Teams -->
-          <div class="setup-group">
+          <!-- Step 5A: Number of Teams (Team Mode) -->
+          <div class="setup-group" id="sectionTeamSetup">
             <h2 class="setup-section-title">
               <span class="step-num">5</span>
               <span>Number of Teams</span>
@@ -132,6 +156,46 @@
               <button type="button" class="opt-btn active" data-val="2">👥 2 Teams</button>
               <button type="button" class="opt-btn" data-val="3">👥 3 Teams</button>
               <button type="button" class="opt-btn" data-val="4">👥 4 Teams</button>
+            </div>
+          </div>
+
+          <!-- Step 5B: Player Setup (Individual Mode) -->
+          <div class="setup-group" id="sectionIndividualSetup" style="display: none;">
+            <h2 class="setup-section-title">
+              <span class="step-num">5</span>
+              <span>How many players?</span>
+            </h2>
+            
+            <div class="player-count-wrapper">
+              <div class="stepper-controls player-stepper">
+                <button type="button" class="stepper-btn" id="btnPlayerMinus" aria-label="Decrease players">−</button>
+                <input type="number" id="inputPlayerCount" min="2" max="40" value="14" class="stepper-input player-input">
+                <button type="button" class="stepper-btn" id="btnPlayerPlus" aria-label="Increase players">+</button>
+                <span class="stepper-unit">Players</span>
+              </div>
+              <div class="quick-player-chips" id="quickPlayerChips">
+                <button type="button" class="chip-btn" data-count="4">4</button>
+                <button type="button" class="chip-btn" data-count="8">8</button>
+                <button type="button" class="chip-btn" data-count="12">12</button>
+                <button type="button" class="chip-btn active" data-count="14">14</button>
+                <button type="button" class="chip-btn" data-count="18">18</button>
+                <button type="button" class="chip-btn" data-count="24">24</button>
+                <button type="button" class="chip-btn" data-count="30">30</button>
+              </div>
+            </div>
+
+            <!-- Student Names Sub-section -->
+            <div class="player-names-subgroup">
+              <div class="player-names-header">
+                <h3 class="player-names-title">
+                  <span>✏️</span>
+                  <span>Student / Player Names</span>
+                </h3>
+                <span class="player-names-hint">Enter real student names. Empty fields will default to "Player N".</span>
+              </div>
+              <div class="player-names-grid" id="playerNamesGrid">
+                <!-- Dynamically generated name input fields -->
+              </div>
             </div>
           </div>
 

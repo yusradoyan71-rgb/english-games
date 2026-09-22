@@ -114,19 +114,24 @@
 
       // Teacher Settings State
       this.settings = {
+        gameMode: 'team',     // 'team' | 'individual'
         grade: 'grade7',
         categoryId: 'verbs',
         difficulty: 'easy',
         totalWords: 20,
         teamCount: 2,
+        playerCount: 14,
+        playerNames: [],      // Array of custom player names
         totalRounds: 5
       };
 
       // Multi-Round Tournament State
       this.match = {
-        currentRound: 1,      // 1 to totalRounds
-        currentTeamIndex: 0,  // 0 to teamCount - 1
-        teamTimes: {},        // { 1: [ms1, ms2, ...], 2: [ms1, ms2, ...] }
+        currentRound: 1,        // 1 to totalRounds
+        currentTurnIndex: 0,    // 0 to participantCount - 1
+        currentTeamIndex: 0,    // Backward compatibility for team mode
+        participantTimes: {},   // { 0: [ms1, ms2, ...], 1: [ms1, ms2, ...] }
+        teamTimes: {},          // { 1: [ms1, ms2, ...], 2: [ms1, ms2, ...] }
         usedTargetWords: new Set(),
         currentBoardData: null,
         foundTargetsCount: 0,
@@ -144,6 +149,7 @@
       this.cacheDom();
       this.bindEvents();
       this.renderCategoryGrid();
+      this.renderPlayerNamesGrid();
     }
 
     cacheDom() {
@@ -157,7 +163,10 @@
         results: document.getElementById('screenResults')
       };
 
-      // Setup Controls
+      // Mode & Setup Controls
+      this.groupGameMode = document.getElementById('groupGameMode');
+      this.sectionTeamSetup = document.getElementById('sectionTeamSetup');
+      this.sectionIndividualSetup = document.getElementById('sectionIndividualSetup');
       this.groupGrade = document.getElementById('groupGrade');
       this.groupCategory = document.getElementById('groupCategory');
       this.groupDifficulty = document.getElementById('groupDifficulty');
@@ -165,6 +174,13 @@
       this.groupTeams = document.getElementById('groupTeams');
       this.groupRounds = document.getElementById('groupRounds');
       this.btnStartMatch = document.getElementById('btnStartMatch');
+
+      // Individual Mode Controls
+      this.btnPlayerMinus = document.getElementById('btnPlayerMinus');
+      this.inputPlayerCount = document.getElementById('inputPlayerCount');
+      this.btnPlayerPlus = document.getElementById('btnPlayerPlus');
+      this.quickPlayerChips = document.getElementById('quickPlayerChips');
+      this.playerNamesGrid = document.getElementById('playerNamesGrid');
 
       // Custom Rounds Stepper Elements
       this.customRoundsBox = document.getElementById('customRoundsBox');
@@ -189,15 +205,16 @@
       this.hudTimer = document.getElementById('hudTimer');
       this.wordBoard = document.getElementById('wordBoard');
 
-      // Freeze Screen Elements (Used between teams in the SAME round)
+      // Freeze Screen Elements
       this.freezeRoundBadge = document.getElementById('freezeRoundBadge');
       this.freezeRoundText = document.getElementById('freezeRoundText');
       this.freezeTeamBadge = document.getElementById('freezeTeamBadge');
       this.freezeTeamName = document.getElementById('freezeTeamName');
       this.freezeTimeVal = document.getElementById('freezeTimeVal');
       this.btnNextTeam = document.getElementById('btnNextTeam');
+      this.btnNextTeamText = document.getElementById('btnNextTeamText');
 
-      // Round Complete Screen Elements (Used between ROUNDS)
+      // Round Complete Screen Elements
       this.rcBadgeText = document.getElementById('rcBadgeText');
       this.rcTitle = document.getElementById('rcTitle');
       this.rcRoundTimesList = document.getElementById('rcRoundTimesList');
@@ -217,6 +234,75 @@
     }
 
     bindEvents() {
+      // Game Mode Selection delegation
+      if (this.groupGameMode) {
+        this.groupGameMode.addEventListener('click', (e) => {
+          const btn = e.target.closest('.opt-btn');
+          if (!btn) return;
+          this.sound.playClick();
+          this.groupGameMode.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          this.settings.gameMode = btn.dataset.val;
+
+          if (this.settings.gameMode === 'individual') {
+            if (this.sectionTeamSetup) this.sectionTeamSetup.style.display = 'none';
+            if (this.sectionIndividualSetup) this.sectionIndividualSetup.style.display = 'block';
+            this.renderPlayerNamesGrid();
+          } else {
+            if (this.sectionTeamSetup) this.sectionTeamSetup.style.display = 'block';
+            if (this.sectionIndividualSetup) this.sectionIndividualSetup.style.display = 'none';
+          }
+        });
+      }
+
+      // Individual Mode Player Count Controls
+      const setPlayerCount = (val) => {
+        const num = Math.max(2, Math.min(40, Number(val) || 14));
+        this.settings.playerCount = num;
+        if (this.inputPlayerCount) this.inputPlayerCount.value = num;
+        if (this.quickPlayerChips) {
+          this.quickPlayerChips.querySelectorAll('.chip-btn').forEach(chip => {
+            chip.classList.toggle('active', Number(chip.dataset.count) === num);
+          });
+        }
+        this.renderPlayerNamesGrid();
+      };
+
+      if (this.btnPlayerMinus) {
+        this.btnPlayerMinus.addEventListener('click', () => {
+          this.sound.playClick();
+          setPlayerCount(this.settings.playerCount - 1);
+        });
+      }
+
+      if (this.btnPlayerPlus) {
+        this.btnPlayerPlus.addEventListener('click', () => {
+          this.sound.playClick();
+          setPlayerCount(this.settings.playerCount + 1);
+        });
+      }
+
+      if (this.inputPlayerCount) {
+        this.inputPlayerCount.addEventListener('input', () => {
+          const val = Number(this.inputPlayerCount.value);
+          if (val >= 2 && val <= 40) {
+            setPlayerCount(val);
+          }
+        });
+        this.inputPlayerCount.addEventListener('change', () => {
+          setPlayerCount(this.inputPlayerCount.value);
+        });
+      }
+
+      if (this.quickPlayerChips) {
+        this.quickPlayerChips.addEventListener('click', (e) => {
+          const chip = e.target.closest('.chip-btn');
+          if (!chip) return;
+          this.sound.playClick();
+          setPlayerCount(chip.dataset.count);
+        });
+      }
+
       // Option selector button delegation
       this.bindOptionGroup(this.groupGrade, 'grade');
       this.bindOptionGroup(this.groupDifficulty, 'difficulty');
@@ -289,13 +375,13 @@
       // Start Turn from Ready Screen
       this.btnStartTurn.addEventListener('click', () => {
         this.sound.playReadyBeep(true);
-        this.beginTeamTurn();
+        this.beginTurn();
       });
 
-      // Next Team from Freeze Screen (Between teams in SAME round)
+      // Next Participant from Freeze Screen
       this.btnNextTeam.addEventListener('click', () => {
         this.sound.playClick();
-        this.advanceToNextTeamInRound();
+        this.advanceToNextInRound();
       });
 
       // Next Round from Round Complete Screen (Between ROUNDS)
@@ -304,7 +390,7 @@
         this.advanceToNextRound();
       });
 
-      // Play Again (Keeps same tournament settings)
+      // Play Again (Keeps same tournament settings and player names)
       this.btnPlayAgain.addEventListener('click', () => {
         this.sound.playClick();
         this.startNewMatch();
@@ -343,6 +429,16 @@
       });
     }
 
+    escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
     renderCategoryGrid() {
       if (!this.groupCategory) return;
       const categories = window.WORD_RUSH_CATEGORIES || [];
@@ -354,6 +450,41 @@
       `).join('');
     }
 
+    renderPlayerNamesGrid() {
+      if (!this.playerNamesGrid) return;
+      // Capture any current input values before re-rendering
+      const currentInputs = this.playerNamesGrid.querySelectorAll('.player-name-field');
+      currentInputs.forEach(input => {
+        const idx = parseInt(input.dataset.index, 10);
+        if (!isNaN(idx)) {
+          this.settings.playerNames[idx] = input.value;
+        }
+      });
+
+      const count = this.settings.playerCount;
+      let html = '';
+      for (let i = 0; i < count; i++) {
+        const currentVal = (this.settings.playerNames[i] !== undefined) ? this.settings.playerNames[i] : '';
+        html += `
+          <div class="player-input-card">
+            <span class="player-idx-badge">${i + 1}</span>
+            <input type="text" class="player-name-field" data-index="${i}" placeholder="Player ${i + 1}" value="${this.escapeHtml(currentVal)}" maxlength="25">
+          </div>
+        `;
+      }
+      this.playerNamesGrid.innerHTML = html;
+
+      // Add live input listeners
+      this.playerNamesGrid.querySelectorAll('.player-name-field').forEach(input => {
+        input.addEventListener('input', (e) => {
+          const idx = parseInt(e.target.dataset.index, 10);
+          if (!isNaN(idx)) {
+            this.settings.playerNames[idx] = e.target.value;
+          }
+        });
+      });
+    }
+
     showScreen(screenName) {
       Object.values(this.screens).forEach(s => {
         if (s) s.classList.remove('active-screen');
@@ -361,6 +492,12 @@
       if (this.screens[screenName]) {
         this.screens[screenName].classList.add('active-screen');
       }
+    }
+
+    getParticipantCount() {
+      return this.settings.gameMode === 'individual'
+        ? this.settings.playerCount
+        : this.settings.teamCount;
     }
 
     getTeamColor(teamNum) {
@@ -377,33 +514,84 @@
       return this.settings.teamCount === 1 ? 'SOLO PLAYER' : `TEAM ${teamNum}`;
     }
 
+    getParticipantColor(participantIndex) {
+      if (this.settings.gameMode === 'team') {
+        return this.getTeamColor(participantIndex + 1);
+      }
+      const individualPalette = [
+        { border: '#38bdf8', bg: 'rgba(56, 189, 248, 0.15)', text: '#38bdf8' },
+        { border: '#f97316', bg: 'rgba(249, 115, 22, 0.15)', text: '#fb923c' },
+        { border: '#a855f7', bg: 'rgba(168, 85, 247, 0.15)', text: '#c084fc' },
+        { border: '#10b981', bg: 'rgba(16, 185, 129, 0.15)', text: '#34d399' },
+        { border: '#ec4899', bg: 'rgba(236, 72, 153, 0.15)', text: '#f472b6' },
+        { border: '#f59e0b', bg: 'rgba(245, 158, 11, 0.15)', text: '#fbbf24' },
+        { border: '#06b6d4', bg: 'rgba(6, 182, 212, 0.15)', text: '#22d3ee' },
+        { border: '#8b5cf6', bg: 'rgba(139, 92, 246, 0.15)', text: '#a78bfa' }
+      ];
+      return individualPalette[participantIndex % individualPalette.length];
+    }
+
+    getParticipantDisplayName(participantIndex) {
+      if (this.settings.gameMode === 'team') {
+        const teamNum = participantIndex + 1;
+        return this.getTeamDisplayName(teamNum);
+      }
+      const rawName = (this.settings.playerNames[participantIndex] || '').trim();
+      return rawName || `Player ${participantIndex + 1}`;
+    }
+
     // --- Tournament Initialization ---
     startNewMatch() {
+      // If individual mode, ensure latest entered names are stored
+      if (this.settings.gameMode === 'individual' && this.playerNamesGrid) {
+        this.playerNamesGrid.querySelectorAll('.player-name-field').forEach(input => {
+          const idx = parseInt(input.dataset.index, 10);
+          if (!isNaN(idx)) {
+            this.settings.playerNames[idx] = input.value;
+          }
+        });
+      }
+
       this.match.currentRound = 1;
+      this.match.currentTurnIndex = 0;
       this.match.currentTeamIndex = 0;
       this.match.usedTargetWords.clear();
       
-      // Initialize raw time array for all participating teams
-      this.match.teamTimes = {};
-      for (let t = 1; t <= this.settings.teamCount; t++) {
-        this.match.teamTimes[t] = [];
+      const count = this.getParticipantCount();
+      this.match.participantTimes = {};
+      for (let i = 0; i < count; i++) {
+        this.match.participantTimes[i] = [];
       }
 
-      this.prepareTeamReadyScreen();
+      // Initialize teamTimes for backward compatibility in team mode
+      this.match.teamTimes = {};
+      if (this.settings.gameMode === 'team') {
+        for (let t = 1; t <= this.settings.teamCount; t++) {
+          this.match.teamTimes[t] = [];
+        }
+      }
+
+      this.prepareReadyScreen();
     }
 
-    // --- Prepare Team Ready Screen ---
-    prepareTeamReadyScreen() {
-      const teamNum = this.match.currentTeamIndex + 1;
-      const teamName = this.getTeamDisplayName(teamNum);
-      const teamColor = this.getTeamColor(teamNum);
+    // --- Prepare Turn Ready Screen ---
+    prepareReadyScreen() {
+      const idx = this.match.currentTurnIndex;
+      const name = this.getParticipantDisplayName(idx);
+      const color = this.getParticipantColor(idx);
       const roundStr = `ROUND ${this.match.currentRound} / ${this.settings.totalRounds}`;
 
       this.readyRoundText.textContent = roundStr;
-      this.readyTeamName.textContent = teamName;
-      this.readyTeamBadge.style.borderColor = teamColor.border;
-      this.readyTeamBadge.style.background = teamColor.bg;
-      this.readyTeamBadge.style.color = teamColor.text;
+      
+      if (this.settings.gameMode === 'individual') {
+        this.readyTeamName.textContent = `${name.toUpperCase()}'S TURN`;
+      } else {
+        this.readyTeamName.textContent = name;
+      }
+
+      this.readyTeamBadge.style.borderColor = color.border;
+      this.readyTeamBadge.style.background = color.bg;
+      this.readyTeamBadge.style.color = color.text;
 
       // Category Prompt
       const catMeta = (window.WORD_RUSH_CATEGORIES || []).find(c => c.id === this.settings.categoryId);
@@ -413,14 +601,19 @@
       this.showScreen('ready');
     }
 
-    // --- Begin Active Team Turn ---
-    beginTeamTurn() {
-      const teamNum = this.match.currentTeamIndex + 1;
-      const teamName = this.getTeamDisplayName(teamNum);
-      const teamColor = this.getTeamColor(teamNum);
+    // Alias for backward compatibility
+    prepareTeamReadyScreen() {
+      this.prepareReadyScreen();
+    }
+
+    // --- Begin Active Turn ---
+    beginTurn() {
+      const idx = this.match.currentTurnIndex;
+      const name = this.getParticipantDisplayName(idx);
+      const color = this.getParticipantColor(idx);
       const roundStr = `ROUND ${this.match.currentRound} / ${this.settings.totalRounds}`;
 
-      // Generate Fresh Independent Board for this team attempt
+      // Generate Fresh Independent Board for this attempt
       // Selected difficulty, grade, and category remain identical throughout the entire tournament
       const boardData = window.generateWordRushBoard({
         grade: this.settings.grade,
@@ -436,10 +629,10 @@
 
       // Update HUD
       this.hudRoundText.textContent = roundStr;
-      this.hudTeamName.textContent = teamName;
-      this.hudTeamTag.style.borderColor = teamColor.border;
-      this.hudTeamTag.style.background = teamColor.bg;
-      this.hudTeamTag.style.color = teamColor.text;
+      this.hudTeamName.textContent = name.toUpperCase();
+      this.hudTeamTag.style.borderColor = color.border;
+      this.hudTeamTag.style.background = color.bg;
+      this.hudTeamTag.style.color = color.text;
       this.hudPrompt.textContent = boardData.bannerPrompt;
       this.hudTimer.textContent = '00:00.00';
 
@@ -451,6 +644,11 @@
 
       // Start High-accuracy Timestamp Timer
       this.startTimer();
+    }
+
+    // Alias for backward compatibility
+    beginTeamTurn() {
+      this.beginTurn();
     }
 
     renderWordBoard(boardData) {
@@ -504,34 +702,42 @@
     handleTurnCompletion() {
       // 1. STOP TIMER IMMEDIATELY
       const finalElapsedMs = this.stopTimer();
-      const teamNum = this.match.currentTeamIndex + 1;
-      const teamName = this.getTeamDisplayName(teamNum);
-      const teamColor = this.getTeamColor(teamNum);
+      const idx = this.match.currentTurnIndex;
+      const name = this.getParticipantDisplayName(idx);
+      const color = this.getParticipantColor(idx);
       const roundStr = `ROUND ${this.match.currentRound} / ${this.settings.totalRounds}`;
 
-      // 2. STORE RAW ELAPSED TIME IN TOURNAMENT HISTORY
-      this.match.teamTimes[teamNum].push(finalElapsedMs);
+      // 2. STORE RAW ELAPSED TIME IN HISTORY
+      this.match.participantTimes[idx].push(finalElapsedMs);
+      if (this.settings.gameMode === 'team') {
+        const teamNum = idx + 1;
+        this.match.teamTimes[teamNum].push(finalElapsedMs);
+      }
 
       // Fanfare & Confetti
       this.sound.playRoundComplete();
       this.confetti.burst(window.innerWidth / 2, window.innerHeight / 2, 70);
 
       // 3. EVALUATE TOURNAMENT PROGRESSION
-      const isLastTeamOfRound = (this.match.currentTeamIndex === this.settings.teamCount - 1);
+      const totalParticipants = this.getParticipantCount();
+      const isLastParticipantOfRound = (idx === totalParticipants - 1);
 
-      if (!isLastTeamOfRound) {
-        // Case A: More teams remain in the CURRENT round
-        // Show Turn Freeze Screen with [ NEXT TEAM → ]
+      if (!isLastParticipantOfRound) {
+        // Case A: More participants remain in the CURRENT round
+        // Show Turn Freeze Screen
         this.freezeRoundText.textContent = roundStr;
-        this.freezeTeamName.textContent = teamName;
-        this.freezeTeamBadge.style.borderColor = teamColor.border;
-        this.freezeTeamBadge.style.background = teamColor.bg;
-        this.freezeTeamBadge.style.color = teamColor.text;
+        this.freezeTeamName.textContent = name;
+        this.freezeTeamBadge.style.borderColor = color.border;
+        this.freezeTeamBadge.style.background = color.bg;
+        this.freezeTeamBadge.style.color = color.text;
         this.freezeTimeVal.textContent = formatTime(finalElapsedMs);
+        if (this.btnNextTeamText) {
+          this.btnNextTeamText.textContent = this.settings.gameMode === 'individual' ? 'NEXT PLAYER →' : 'NEXT TEAM →';
+        }
 
         this.showScreen('freeze');
       } else {
-        // Case B: The LAST team of this round has finished!
+        // Case B: The LAST participant of this round has finished!
         if (this.match.currentRound < this.settings.totalRounds) {
           // Intermediate Round Ended -> Directly show Round Complete Screen (Screen 4B)
           this.showRoundCompleteScreen();
@@ -542,32 +748,39 @@
       }
     }
 
-    // --- Advance to Next Team within the Same Round ---
-    advanceToNextTeamInRound() {
-      this.match.currentTeamIndex++;
-      if (this.match.currentTeamIndex < this.settings.teamCount) {
-        this.prepareTeamReadyScreen();
+    // --- Advance to Next Participant within the Same Round ---
+    advanceToNextInRound() {
+      this.match.currentTurnIndex++;
+      this.match.currentTeamIndex = this.match.currentTurnIndex;
+      if (this.match.currentTurnIndex < this.getParticipantCount()) {
+        this.prepareReadyScreen();
       }
+    }
+
+    // Alias for backward compatibility
+    advanceToNextTeamInRound() {
+      this.advanceToNextInRound();
     }
 
     // --- Screen 4B: Intermediate Round Complete Screen ---
     showRoundCompleteScreen() {
       const r = this.match.currentRound;
       const totalR = this.settings.totalRounds;
+      const count = this.getParticipantCount();
 
       this.rcBadgeText.textContent = `ROUND ${r} OF ${totalR} COMPLETE`;
       this.rcTitle.textContent = `ROUND ${r} COMPLETE`;
 
       // 1. Render This Round Times
       this.rcRoundTimesList.innerHTML = '';
-      for (let t = 1; t <= this.settings.teamCount; t++) {
-        const teamName = this.getTeamDisplayName(t);
-        const thisRoundMs = this.match.teamTimes[t][r - 1] || 0;
+      for (let i = 0; i < count; i++) {
+        const name = this.getParticipantDisplayName(i);
+        const thisRoundMs = this.match.participantTimes[i][r - 1] || 0;
 
         const row = document.createElement('div');
         row.className = 'rc-row';
         row.innerHTML = `
-          <span class="rc-team-name">${teamName}</span>
+          <span class="rc-team-name">${name}</span>
           <span class="rc-team-time">${formatTime(thisRoundMs)}</span>
         `;
         this.rcRoundTimesList.appendChild(row);
@@ -575,14 +788,14 @@
 
       // 2. Render Current Tournament Totals So Far (Cumulative sum)
       this.rcCumulativeTotalsList.innerHTML = '';
-      for (let t = 1; t <= this.settings.teamCount; t++) {
-        const teamName = this.getTeamDisplayName(t);
-        const cumulativeMs = this.match.teamTimes[t].reduce((sum, val) => sum + val, 0);
+      for (let i = 0; i < count; i++) {
+        const name = this.getParticipantDisplayName(i);
+        const cumulativeMs = this.match.participantTimes[i].reduce((sum, val) => sum + val, 0);
 
         const row = document.createElement('div');
         row.className = 'rc-row';
         row.innerHTML = `
-          <span class="rc-team-name">${teamName}</span>
+          <span class="rc-team-name">${name}</span>
           <span class="rc-team-time" style="color:#fef08a;">${formatTime(cumulativeMs)}</span>
         `;
         this.rcCumulativeTotalsList.appendChild(row);
@@ -592,7 +805,7 @@
       this.showScreen('roundComplete');
     }
 
-    // --- Advance to Next Round (Increments round, resets team to Team 1) ---
+    // --- Advance to Next Round (Increments round, resets participant to 0) ---
     advanceToNextRound() {
       // Strict safety check: Never increment beyond totalRounds
       if (this.match.currentRound >= this.settings.totalRounds) {
@@ -601,8 +814,9 @@
       }
 
       this.match.currentRound++;
+      this.match.currentTurnIndex = 0;
       this.match.currentTeamIndex = 0;
-      this.prepareTeamReadyScreen();
+      this.prepareReadyScreen();
     }
 
     // --- High Accuracy Timestamp Timer ---
@@ -645,17 +859,19 @@
       this.sound.playVictory();
       this.confetti.burst(window.innerWidth / 2, window.innerHeight / 3, 100);
 
-      const isSolo = this.settings.teamCount === 1;
-      const medals = ['🥇', '🥈', '🥉', '4️⃣'];
+      const count = this.getParticipantCount();
+      const isSolo = (this.settings.gameMode === 'team' && this.settings.teamCount === 1);
+      const medals = ['🥇', '🥈', '🥉'];
 
-      // Compute total cumulative time for each team
-      const teamSummaryList = [];
-      for (let t = 1; t <= this.settings.teamCount; t++) {
-        const times = this.match.teamTimes[t] || [];
+      // Compute total cumulative time for each participant
+      const summaryList = [];
+      for (let i = 0; i < count; i++) {
+        const times = this.match.participantTimes[i] || [];
         const totalMs = times.reduce((sum, val) => sum + val, 0);
-        teamSummaryList.push({
-          teamNum: t,
-          name: this.getTeamDisplayName(t),
+        summaryList.push({
+          index: i,
+          num: i + 1,
+          name: this.getParticipantDisplayName(i),
           roundTimes: times,
           totalMs: totalMs,
           formattedTotal: formatTime(totalMs),
@@ -664,12 +880,12 @@
       }
 
       // Sort by fastest total time (Lowest raw cumulative milliseconds wins!)
-      teamSummaryList.sort((a, b) => a.totalMs - b.totalMs);
+      summaryList.sort((a, b) => a.totalMs - b.totalMs);
 
       // 1. Render Top Leaderboard Rankings
-      this.leaderboardList.innerHTML = teamSummaryList.map((team, idx) => {
+      this.leaderboardList.innerHTML = summaryList.map((item, idx) => {
         const isWinner = idx === 0 && !isSolo;
-        const isTie = idx > 0 && Math.abs(team.totalMs - teamSummaryList[0].totalMs) < 10;
+        const isTie = idx > 0 && Math.abs(item.totalMs - summaryList[0].totalMs) < 10;
         const medal = medals[idx] || `${idx + 1}.`;
 
         return `
@@ -677,22 +893,23 @@
             <div class="rank-left">
               <span class="rank-medal">${isSolo ? '⏱️' : medal}</span>
               <div>
-                <span class="rank-team-name">${team.name}</span>
+                <span class="rank-team-name">${item.name}</span>
                 ${isWinner ? '<span class="rank-badge-win">WINNER</span>' : ''}
                 ${isTie ? '<span class="rank-badge-win" style="background:#06b6d4;">TIE</span>' : ''}
               </div>
             </div>
-            <div class="rank-time">${team.formattedTotal}</div>
+            <div class="rank-time">${item.formattedTotal}</div>
           </div>
         `;
       }).join('');
 
       // 2. Render Comprehensive Round-by-Round Breakdown Matrix Table
+      const entityColName = this.settings.gameMode === 'individual' ? 'PLAYER' : 'TEAM';
       let tableHtml = `
         <table class="breakdown-table">
           <thead>
             <tr>
-              <th>TEAM</th>
+              <th>${entityColName}</th>
       `;
 
       for (let r = 1; r <= this.settings.totalRounds; r++) {
@@ -700,20 +917,20 @@
       }
       tableHtml += `<th>TOTAL TIME</th></tr></thead><tbody>`;
 
-      // Display rows ordered by team number (Team 1, Team 2, ...)
-      const displayRows = [...teamSummaryList].sort((a, b) => a.teamNum - b.teamNum);
+      // Display rows ordered by original participant index (Player 1, Player 2... or Team 1, Team 2...)
+      const displayRows = [...summaryList].sort((a, b) => a.index - b.index);
 
-      displayRows.forEach(team => {
-        const isWinner = team.teamNum === teamSummaryList[0].teamNum && !isSolo;
+      displayRows.forEach(item => {
+        const isWinner = item.index === summaryList[0].index && !isSolo;
         tableHtml += `<tr class="${isWinner ? 'winner-row' : ''}">`;
-        tableHtml += `<td class="team-cell">${team.name} ${isWinner ? '🏆' : ''}</td>`;
+        tableHtml += `<td class="team-cell">${item.name} ${isWinner ? '🏆' : ''}</td>`;
 
         for (let r = 0; r < this.settings.totalRounds; r++) {
-          const rTime = team.roundTimes[r] !== undefined ? formatTime(team.roundTimes[r]) : '-';
+          const rTime = item.roundTimes[r] !== undefined ? formatTime(item.roundTimes[r]) : '-';
           tableHtml += `<td>${rTime}</td>`;
         }
 
-        tableHtml += `<td class="total-cell">${team.formattedTotal}</td>`;
+        tableHtml += `<td class="total-cell">${item.formattedTotal}</td>`;
         tableHtml += `</tr>`;
       });
 
