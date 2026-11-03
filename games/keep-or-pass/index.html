@@ -49,19 +49,47 @@
         <div class="setup-group">
           <label class="control-label">🎓 Grade Level</label>
           <div class="option-pills" id="gradeOptions">
-            <button type="button" class="pill-btn active" data-grade="all">All Grades</button>
-            <button type="button" class="pill-btn" data-grade="7">Grade 7</button>
+            <button type="button" class="pill-btn active" data-grade="7">Grade 7</button>
             <button type="button" class="pill-btn" data-grade="8">Grade 8</button>
+            <button type="button" class="pill-btn" data-grade="all">All Grades</button>
+          </div>
+        </div>
+
+        <div class="setup-group" id="unitGroup">
+          <label class="control-label">📖 Unit</label>
+          <div class="option-pills" id="unitOptions">
+            <button type="button" class="pill-btn active" data-unit="life_online">🌐 Unit 1: Life Online</button>
+            <button type="button" class="pill-btn" data-unit="all">All Units</button>
+          </div>
+        </div>
+
+        <div class="setup-group">
+          <label class="control-label">🧩 Topic</label>
+          <div class="option-pills" id="topicOptions">
+            <button type="button" class="pill-btn active" data-topic="all">Mixed Review</button>
+            <button type="button" class="pill-btn" data-topic="vocabulary">Vocabulary</button>
+            <button type="button" class="pill-btn" data-topic="grammar">Grammar</button>
+            <button type="button" class="pill-btn" data-topic="functional_language">Speaking &amp; Skills</button>
+          </div>
+        </div>
+
+        <div class="setup-group">
+          <label class="control-label">⚡ Difficulty</label>
+          <div class="option-pills" id="difficultyOptions">
+            <button type="button" class="pill-btn active" data-difficulty="all">Mixed</button>
+            <button type="button" class="pill-btn" data-difficulty="easy">Easy (A2)</button>
+            <button type="button" class="pill-btn" data-difficulty="medium">Medium (A2+)</button>
+            <button type="button" class="pill-btn" data-difficulty="hard">Hard (B1)</button>
           </div>
         </div>
 
         <div class="setup-group">
           <label class="control-label">🎯 Total Questions</label>
           <div class="option-pills" id="roundOptions">
-            <button type="button" class="pill-btn" data-rounds="8">8 Questions</button>
-            <button type="button" class="pill-btn active" data-rounds="12">12 Questions</button>
-            <button type="button" class="pill-btn" data-rounds="16">16 Questions</button>
+            <button type="button" class="pill-btn active" data-rounds="10">10 Questions</button>
+            <button type="button" class="pill-btn" data-rounds="15">15 Questions</button>
             <button type="button" class="pill-btn" data-rounds="20">20 Questions</button>
+            <button type="button" class="pill-btn" data-rounds="30">30 Questions</button>
           </div>
         </div>
       </div>
@@ -89,6 +117,9 @@
         <h2 class="question-text" id="questionText">Loading grammar question...</h2>
         <div class="options-grid" id="optionsGrid">
           <!-- Dynamic A, B, C, D multiple choice option buttons -->
+        </div>
+        <div class="explanation-box hidden" id="explanationBox" style="margin-top: 1.25rem; padding: 0.9rem 1.2rem; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(52, 211, 153, 0.35); border-left: 4px solid #10b981; border-radius: 10px; font-size: 1rem; line-height: 1.5; color: #d1fae5; text-align: left;">
+          <strong style="color: #6ee7b7;">💡 Explanation:</strong> <span id="explanationText"></span>
         </div>
       </div>
 
@@ -178,6 +209,7 @@
     </section>
   </main>
 
+  <script src="../../data/grade7_unit1_life_online.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

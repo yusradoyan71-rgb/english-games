@@ -4055,5 +4055,167 @@ const ENGLISH_QUESTIONS = [
     "correctIndex": 1,
     "explanation": "'Is there anybody else...?' standard question form with indefinite pronoun.",
     "theme": "island"
+  },
+
+  // --- GRADE 7 UNIT 1: LIFE ONLINE QUESTIONS ---
+  {
+    "id": "life-001",
+    "category": "Life Online",
+    "level": "A2",
+    "question": "Which verb describes moving a finger down the touchscreen to see newer posts?",
+    "options": ["stream", "swipe", "scroll", "download"],
+    "correctIndex": 2,
+    "explanation": "'Scroll' means moving down or up a screen to view content feeds.",
+    "theme": "technology"
+  },
+  {
+    "id": "life-002",
+    "category": "Life Online",
+    "level": "A2",
+    "question": "Sarah wants to send a photo from her smartphone to her class blog. She needs to _______ it.",
+    "options": ["download", "upload", "delete", "format"],
+    "correctIndex": 1,
+    "explanation": "'Upload' means transferring files from a local device to the internet.",
+    "theme": "technology"
+  },
+  {
+    "id": "life-003",
+    "category": "Life Online",
+    "level": "A2",
+    "question": "Which app category do Google Maps and Waze belong to?",
+    "options": ["Navigation", "Productivity", "Mobile banking", "Photography"],
+    "correctIndex": 0,
+    "explanation": "Navigation apps help drivers and pedestrians find routes and directions.",
+    "theme": "technology"
+  },
+  {
+    "id": "life-004",
+    "category": "Life Online",
+    "level": "A2",
+    "question": "Look at Mark! He _______ a live gaming tournament on his computer right now.",
+    "options": ["streams", "streamed", "is streaming", "stream"],
+    "correctIndex": 2,
+    "explanation": "'Right now' specifies an ongoing present activity, requiring the Present Continuous.",
+    "theme": "technology"
+  },
+  {
+    "id": "life-005",
+    "category": "Life Online",
+    "level": "A2+",
+    "question": "David _______ how computer algorithms rank social media posts.",
+    "options": ["is understanding", "understands", "was understanding", "understand"],
+    "correctIndex": 1,
+    "explanation": "'Understand' is a stative verb and cannot be used in continuous tenses.",
+    "theme": "technology"
+  },
+  {
+    "id": "life-006",
+    "category": "Life Online",
+    "level": "A2+",
+    "question": "My sister agreed _______ her smartphone screen time to one hour per day.",
+    "options": ["limiting", "to limit", "limit", "limited"],
+    "correctIndex": 1,
+    "explanation": "The verb 'agree' takes a to-infinitive ('agreed to limit').",
+    "theme": "technology"
+  },
+  {
+    "id": "life-007",
+    "category": "Life Online",
+    "level": "A2+",
+    "question": "What is an online 'echo chamber'?",
+    "options": [
+      "A speaker device with microphone echo",
+      "An environment where a user only encounters opinions they already agree with",
+      "A quiet study room with high-speed internet",
+      "An encrypted security setting for banking apps"
+    ],
+    "correctIndex": 1,
+    "explanation": "An 'echo chamber' is an online bubble where users only see beliefs that confirm their own.",
+    "theme": "technology"
+  },
+  {
+    "id": "life-008",
+    "category": "Life Online",
+    "level": "B1",
+    "question": "Social media platforms connect friends; _______, excessive use can cause sleep disorders.",
+    "options": ["furthermore", "however", "therefore", "in addition"],
+    "correctIndex": 1,
+    "explanation": "'However' signals a contrast between positive connections and negative health effects.",
+    "theme": "technology"
+  },
+  {
+    "id": "life-009",
+    "category": "Life Online",
+    "level": "A2",
+    "question": "What noun is formed from the verb 'decide'?",
+    "options": ["decidation", "decision", "decisive", "decidement"],
+    "correctIndex": 1,
+    "explanation": "The noun form of 'decide' is 'decision'.",
+    "theme": "technology"
+  },
+  {
+    "id": "life-010",
+    "category": "Life Online",
+    "level": "A2+",
+    "question": "The IT teacher warned students against _______ personal passwords in public chat rooms.",
+    "options": ["typing", "to type", "type", "typed"],
+    "correctIndex": 0,
+    "explanation": "Prepositions ('against') are followed by a gerund ('typing').",
+    "theme": "technology"
+  },
+  {
+    "id": "life-011",
+    "category": "Life Online",
+    "level": "A2",
+    "question": "To enter your private school email account, you must _______ with your username and password.",
+    "options": ["log on", "scroll down", "swipe left", "stream"],
+    "correctIndex": 0,
+    "explanation": "'Log on' or 'log in' means authenticating yourself to access an account.",
+    "theme": "technology"
+  },
+  {
+    "id": "life-012",
+    "category": "Life Online",
+    "level": "A2+",
+    "question": "We enjoy _______ new photography techniques with our mobile phone cameras.",
+    "options": ["learning", "to learn", "learn", "learned"],
+    "correctIndex": 0,
+    "explanation": "'Enjoy' is followed by a gerund ('learning').",
+    "theme": "technology"
+  },
+  {
+    "id": "life-013",
+    "category": "Life Online",
+    "level": "B1",
+    "question": "Which sentence is grammatically CORRECT?",
+    "options": [
+      "I am loving this new productivity app.",
+      "I love this new productivity app.",
+      "I am knowing how to use this app.",
+      "I am wanting to download this app."
+    ],
+    "correctIndex": 1,
+    "explanation": "'Love', 'know', and 'want' are stative verbs and use Simple Present.",
+    "theme": "technology"
+  },
+  {
+    "id": "life-014",
+    "category": "Life Online",
+    "level": "B1",
+    "question": "Which linker is best to conclude a short presentation about digital well-being?",
+    "options": ["First of all", "To sum up", "In addition", "For example"],
+    "correctIndex": 1,
+    "explanation": "'To sum up' is a concluding linker used in summaries.",
+    "theme": "technology"
+  },
+  {
+    "id": "life-015",
+    "category": "Life Online",
+    "level": "A2",
+    "question": "What is the noun form of the verb 'organize'?",
+    "options": ["organization", "organizement", "organizingly", "organizity"],
+    "correctIndex": 0,
+    "explanation": "The noun form of 'organize' is 'organization'.",
+    "theme": "technology"
   }
 ];

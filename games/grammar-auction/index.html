@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grammar Auction 🔨 — English Grammar Strategy Game</title>
+  <meta name="description" content="Engaging classroom grammar auction game. Bid on sentences you believe are correct, avoid tricky grammar errors, and build your team fortune!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Confetti Canvas for Grand Finale -->
+  <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+
+  <!-- Header / Navigation Bar -->
+  <header class="game-header">
+    <div class="header-inner">
+      <a href="../../index.html" class="back-link" id="backToHub">
+        <span class="back-arrow" aria-hidden="true">←</span> Back to Games
+      </a>
+      <div class="game-brand">
+        <span class="brand-icon">🔨</span>
+        <span class="brand-title">Grammar Auction</span>
+      </div>
+      <div class="header-actions">
+        <button type="button" class="btn-icon" id="btnSoundToggle" title="Toggle Sound" aria-label="Toggle Sound">🔊</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- SCREEN 1: SETUP -->
+    <section id="setupScreen" class="game-panel active">
+      <div class="panel-header">
+        <span class="badge-pill">GRAMMAR &amp; BIDDING STRATEGY</span>
+        <h1 class="panel-title">Grammar Auction 🔨</h1>
+        <p class="panel-desc">Bid on English sentences you think are 100% grammatically correct. Win bonuses for correct sentences, but beware of buying grammatical mistakes!</p>
+      </div>
+
+      <div class="setup-grid">
+        <div class="setup-group">
+          <label class="control-label">👥 Number of Teams</label>
+          <div class="option-pills" id="teamOptions">
+            <button type="button" class="pill-btn active" data-teams="2">2 Teams</button>
+            <button type="button" class="pill-btn" data-teams="3">3 Teams</button>
+            <button type="button" class="pill-btn" data-teams="4">4 Teams</button>
+          </div>
+        </div>
+
+        <div class="setup-group">
+          <label class="control-label">🎓 Grade &amp; Unit</label>
+          <div class="option-pills" id="unitOptions">
+            <button type="button" class="pill-btn active" data-unit="g7_u1_life_online">🌐 Grade 7 — Unit 1: Life Online</button>
+          </div>
+        </div>
+
+        <div class="setup-group">
+          <label class="control-label">💰 Starting Budget Per Team</label>
+          <div class="option-pills" id="budgetOptions">
+            <button type="button" class="pill-btn" data-budget="500">$500</button>
+            <button type="button" class="pill-btn active" data-budget="1000">$1,000</button>
+            <button type="button" class="pill-btn" data-budget="1500">$1,500</button>
+          </div>
+        </div>
+
+        <div class="setup-group">
+          <label class="control-label">🎯 Total Auction Lots</label>
+          <div class="option-pills" id="lotOptions">
+            <button type="button" class="pill-btn active" data-lots="10">10 Sentences</button>
+            <button type="button" class="pill-btn" data-lots="15">15 Sentences</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="start-action-row">
+        <button type="button" class="btn-primary-action" id="btnStartAuction">
+          OPEN THE AUCTION ▶
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: ACTIVE BIDDING PHASE -->
+    <section id="auctionScreen" class="game-panel hidden">
+      <!-- Live Bank Accounts Bar -->
+      <div class="bank-bar" id="bankBar"></div>
+
+      <div class="auction-status-bar">
+        <span class="lot-badge" id="lotBadge">LOT 1 / 10</span>
+        <span class="topic-indicator" id="lotTopic">Topic: Life Online</span>
+      </div>
+
+      <!-- Lot Presentation Card -->
+      <div class="lot-card">
+        <div class="lot-category" id="lotCategory">Present Simple Routine</div>
+        <div class="sentence-display-box">
+          <span class="quote-mark">“</span>
+          <h2 class="sentence-text" id="sentenceText">Sarah usually checks her notifications before she goes to sleep.</h2>
+          <span class="quote-mark">”</span>
+        </div>
+        <div class="current-bid-box">
+          <div class="bid-label">CURRENT HIGHEST BID</div>
+          <div class="bid-amount" id="currentBidAmount">$0</div>
+          <div class="bid-leader" id="currentBidLeader">No bids yet — Bidding is open!</div>
+        </div>
+      </div>
+
+      <!-- Bidding Interface -->
+      <div class="bidding-dashboard">
+        <div class="team-bid-selector">
+          <span class="control-label">Select Bidding Team:</span>
+          <div class="team-bid-pills" id="biddingTeamPills"></div>
+        </div>
+
+        <div class="bid-actions-row">
+          <button type="button" class="btn-bid" data-inc="50">+$50</button>
+          <button type="button" class="btn-bid" data-inc="100">+$100</button>
+          <button type="button" class="btn-bid" data-inc="200">+$200</button>
+          <button type="button" class="btn-bid btn-all-in" id="btnAllIn">ALL IN! 🔥</button>
+          <button type="button" class="btn-bid btn-reset-bid" id="btnResetLotBid">Reset Bid ↩</button>
+        </div>
+
+        <div class="gavel-action-row">
+          <button type="button" class="btn-hammer" id="btnHammerSold">
+            <span class="gavel-icon">🔨</span>
+            <span>SOLD! Strike Gavel</span>
+          </button>
+          <button type="button" class="btn-pass-lot" id="btnPassLot">
+            <span>⏩ No Buyers (Pass Lot)</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: VERDICT REVEAL -->
+    <section id="revealScreen" class="game-panel hidden">
+      <div class="panel-header">
+        <span class="badge-pill" id="verdictSubtitle">AUCTION LOT VERDICT</span>
+        <h2 class="panel-title" id="verdictTitle">The Hammer Has Fallen!</h2>
+      </div>
+
+      <div class="verdict-card" id="verdictCard">
+        <div class="stamp-badge" id="stampBadge">CORRECT! ✅</div>
+        <div class="verdict-sentence-box">
+          <div class="orig-label">Auctioned Sentence:</div>
+          <p class="verdict-sentence" id="verdictOrigSentence">...</p>
+        </div>
+        
+        <div class="correction-box hidden" id="correctionBox">
+          <div class="correct-label">Corrected Sentence:</div>
+          <p class="corrected-sentence" id="verdictCorrectedSentence">...</p>
+        </div>
+
+        <div class="explanation-box" id="verdictExplanationBox">
+          <div class="expl-label">💡 Teacher &amp; Student Explanation:</div>
+          <p class="explanation-text" id="verdictExplanationText">...</p>
+        </div>
+
+        <div class="payout-summary" id="payoutSummary">
+          <span class="payout-icon" id="payoutIcon">💰</span>
+          <span class="payout-text" id="payoutText">Team 1 wins the lot and earns +$200 bonus!</span>
+        </div>
+      </div>
+
+      <div class="start-action-row">
+        <button type="button" class="btn-primary-action" id="btnNextLot">
+          NEXT AUCTION LOT ➔
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 4: PODIUM / CHAMPION CEREMONY -->
+    <section id="podiumScreen" class="game-panel hidden">
+      <div class="panel-header">
+        <span class="badge-pill">AUCTION COMPLETED</span>
+        <h1 class="panel-title">🏆 Grammar Millionaires Podium</h1>
+        <p class="panel-desc">Congratulations to our grammar investors! Here are the final balances:</p>
+      </div>
+
+      <div class="results-podium" id="finalPodium"></div>
+
+      <div class="start-action-row">
+        <button type="button" class="btn-primary-action" id="btnPlayAgain">
+          Play Again 🔄
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script src="../../data/grade7_unit1_life_online.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -9,6 +9,76 @@ window.GAME_QUESTIONS = {
   "grade7": {
     "easy": [
       {
+        "type": "tense-choice",
+        "category": "life_online",
+        "question": "Sarah usually ______ funny photos to her profile every weekend.",
+        "options": [
+          "uploads",
+          "is uploading",
+          "upload",
+          "uploaded"
+        ],
+        "correct": 0,
+        "hint": "Habitual action with usually",
+        "explanation": "We use Simple Present ('uploads') for regular habits with 'usually'."
+      },
+      {
+        "type": "verb-choice",
+        "category": "life_online",
+        "question": "To save a song on your phone so you can listen offline, you must ______ it.",
+        "options": [
+          "download",
+          "scroll",
+          "log on",
+          "swipe"
+        ],
+        "correct": 0,
+        "hint": "Saving files to local device",
+        "explanation": "'Download' means copying files from the internet to your local device."
+      },
+      {
+        "type": "tense-choice",
+        "category": "life_online",
+        "question": "Look! David ______ his favorite singer's concert live on his tablet.",
+        "options": [
+          "is streaming",
+          "streams",
+          "stream",
+          "streamed"
+        ],
+        "correct": 0,
+        "hint": "Action happening right now",
+        "explanation": "'Look!' indicates an action occurring right now, requiring Present Continuous ('is streaming')."
+      },
+      {
+        "type": "word-order",
+        "category": "life_online",
+        "question": "Which sentence shows the CORRECT word order for an online habit?",
+        "options": [
+          "I always check my notifications before breakfast.",
+          "I check always my notifications before breakfast.",
+          "Always I check my notifications before breakfast.",
+          "I check my notifications always before breakfast."
+        ],
+        "correct": 0,
+        "hint": "Adverb of frequency position",
+        "explanation": "Adverbs of frequency like 'always' come before the main verb ('check')."
+      },
+      {
+        "type": "modal-choice",
+        "category": "life_online",
+        "question": "You ______ share your private account password with strangers on the internet.",
+        "options": [
+          "mustn't",
+          "can",
+          "should",
+          "don't have to"
+        ],
+        "correct": 0,
+        "hint": "Strict internet safety prohibition",
+        "explanation": "'Mustn't' indicates a strict prohibition for cybersecurity safety."
+      },
+      {
         "type": "modal-choice",
         "category": "modals",
         "question": "You ______ wear a helmet when riding a bicycle for safety.",
@@ -1523,6 +1593,76 @@ window.GAME_QUESTIONS = {
     ],
     "medium": [
       {
+        "type": "tense-choice",
+        "category": "life_online",
+        "question": "Right now, Alex ______ how computer algorithms recommend content on his feed.",
+        "options": [
+          "understands",
+          "is understanding",
+          "understand",
+          "was understanding"
+        ],
+        "correct": 0,
+        "hint": "Stative verb (mental state)",
+        "explanation": "'Understand' is a stative verb expressing a cognitive state, so it does not take the continuous form."
+      },
+      {
+        "type": "verb-choice",
+        "category": "life_online",
+        "question": "Emma decided ______ her daily screen time after reading about eye fatigue.",
+        "options": [
+          "to reduce",
+          "reducing",
+          "reduce",
+          "reduced"
+        ],
+        "correct": 0,
+        "hint": "Verb followed by infinitive",
+        "explanation": "'Decide' is followed by a to-infinitive ('decided to reduce')."
+      },
+      {
+        "type": "verb-choice",
+        "category": "life_online",
+        "question": "Liam really enjoys ______ creative digital artwork on his new graphics tablet.",
+        "options": [
+          "making",
+          "to make",
+          "make",
+          "made"
+        ],
+        "correct": 0,
+        "hint": "Verb followed by gerund",
+        "explanation": "'Enjoy' is always followed by a gerund ('making')."
+      },
+      {
+        "type": "find-mistake",
+        "category": "life_online",
+        "question": "Spot the error: 'I am knowing the password to log on to the school website.'",
+        "options": [
+          "'am knowing' should be 'know'",
+          "'log on' should be 'logging on'",
+          "'the' should be omitted",
+          "'website' should be 'web page'"
+        ],
+        "correct": 0,
+        "hint": "Stative verb error",
+        "explanation": "'Know' is a stative verb and cannot be used in the present continuous form."
+      },
+      {
+        "type": "word-order",
+        "category": "life_online",
+        "question": "Which connector shows CONTRAST between two aspects of social media?",
+        "options": [
+          "However",
+          "Furthermore",
+          "In addition",
+          "Therefore"
+        ],
+        "correct": 0,
+        "hint": "Discourse linker of contrast",
+        "explanation": "'However' is used to introduce a contrasting idea."
+      },
+      {
         "type": "context-dialogue",
         "category": "modals",
         "question": "Doctor: 'Your ankle is badly sprained.' -> Patient ______ play football this weekend.",
@@ -2574,6 +2714,76 @@ window.GAME_QUESTIONS = {
       }
     ],
     "hard": [
+      {
+        "type": "tense-choice",
+        "category": "life_online",
+        "question": "Although social networks help friends connect, algorithms ______ echo chambers when users ______ only similar opinions.",
+        "options": [
+          "create / encounter",
+          "are creating / are encountering",
+          "created / encountered",
+          "creates / encounters"
+        ],
+        "correct": 0,
+        "hint": "General truth / fact",
+        "explanation": "General facts and technological mechanisms are expressed using the Present Simple ('create / encounter')."
+      },
+      {
+        "type": "verb-choice",
+        "category": "life_online",
+        "question": "The IT teacher warned students against ______ suspicious links from unknown senders.",
+        "options": [
+          "clicking",
+          "to click",
+          "click",
+          "clicked"
+        ],
+        "correct": 0,
+        "hint": "Preposition + Gerund",
+        "explanation": "Prepositions ('against') are followed by a gerund ('clicking')."
+      },
+      {
+        "type": "complete-sentence",
+        "category": "life_online",
+        "question": "Complete the linker: 'Digital tools increase productivity; ______, excessive screen time can impair sleep quality.'",
+        "options": [
+          "on the other hand",
+          "in addition",
+          "first of all",
+          "to sum up"
+        ],
+        "correct": 0,
+        "hint": "Contrasting viewpoint",
+        "explanation": "'On the other hand' introduces a contrasting perspective."
+      },
+      {
+        "type": "choose-sentence",
+        "category": "life_online",
+        "question": "Which sentence correctly demonstrates the suffix noun formation from the verb 'encourage'?",
+        "options": [
+          "Her parents gave her plenty of encouragement when she launched her website.",
+          "Her parents gave her plenty of encouragingness when she launched her website.",
+          "Her parents gave her plenty of encouragementation when she launched her website.",
+          "Her parents gave her plenty of encouragery when she launched her website."
+        ],
+        "correct": 0,
+        "hint": "Noun suffix -ment",
+        "explanation": "The noun form of 'encourage' is 'encouragement'."
+      },
+      {
+        "type": "context-dialogue",
+        "category": "life_online",
+        "question": "Maya: 'I think spending five hours a day on social media is totally fine.' -> Chloe: '______! It can cause headaches and lack of sleep.'",
+        "options": [
+          "I totally disagree",
+          "I couldn't agree more",
+          "You are definitely right",
+          "That sounds like a great idea"
+        ],
+        "correct": 0,
+        "hint": "Polite strong disagreement",
+        "explanation": "Chloe gives negative consequences, so she strongly disagrees ('I totally disagree')."
+      },
       {
         "type": "tense-choice",
         "category": "tenses",

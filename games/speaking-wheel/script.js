@@ -191,6 +191,24 @@ const QUESTION_BANK = [
     target: "Speak for 1–2 sentences.",
     usefulLanguage: ["On Sunday evenings, I prepare my...", "I like relaxing by...", "I usually go to bed at..."]
   },
+  {
+    id: "g7_r1_life_online_01",
+    grade: 7,
+    round: 1,
+    topic: "Online Habits",
+    question: "How many hours a day do you spend on your phone or computer, and which app do you use most?",
+    target: "Speak for 1–2 sentences.",
+    usefulLanguage: ["I usually spend around... hours a day.", "My favorite application is...", "I mostly use it to chat with..."]
+  },
+  {
+    id: "g7_r1_life_online_02",
+    grade: 7,
+    round: 1,
+    topic: "Social Media Verbs",
+    question: "Do you prefer uploading photos or watching videos online? Explain why.",
+    target: "Speak for 1–2 sentences.",
+    usefulLanguage: ["I prefer uploading/watching because...", "It is more entertaining to...", "I enjoy sharing... with my friends."]
+  },
 
   // ----------------------------------------------------
   // GRADE 7 — ROUND 2 (MEDIUM: ~3-4 Sentences)
@@ -375,6 +393,24 @@ const QUESTION_BANK = [
     target: "Speak for 3–4 sentences.",
     usefulLanguage: ["For school, I use my computer to research...", "I also watch educational videos on...", "For entertainment, I play games or chat with...", "I try not to spend too many hours on screens."]
   },
+  {
+    id: "g7_r2_life_online_01",
+    grade: 7,
+    round: 2,
+    topic: "Digital Privacy",
+    question: "Why is privacy important on social networks, and what rules do you follow to protect your personal identity online?",
+    target: "Speak for 3–4 sentences.",
+    usefulLanguage: ["Protecting privacy is essential because...", "First, I never share my passwords with...", "Secondly, I keep my account private...", "Finally, I avoid clicking on suspicious links."]
+  },
+  {
+    id: "g7_r2_life_online_02",
+    grade: 7,
+    round: 2,
+    topic: "Apps & Productivity",
+    question: "Which type of mobile app do you find most helpful: navigation, fitness, productivity, or music? Give reasons.",
+    target: "Speak for 3–4 sentences.",
+    usefulLanguage: ["In my opinion, ... apps are the most useful.", "They help me organize my day and...", "For instance, when I use...", "Without this app, it would be much harder to..."]
+  },
 
   // ----------------------------------------------------
   // GRADE 7 — ROUND 3 (CHALLENGE: ~5-7 Sentences)
@@ -558,6 +594,38 @@ const QUESTION_BANK = [
     question: "Who is a person in real life (a family member, teacher, or public figure) that you look up to? What qualities make them inspiring to you?",
     target: "Speak for 5–7 sentences.",
     usefulLanguage: ["The person I admire most in my life is my older brother / mother.", "They have always shown great determination, patience, and kindness in everything they do.", "Whenever they face a difficult challenge, they never give up or complain.", "They also take time to help others and offer wise guidance whenever I need it.", "Their positive attitude inspires me to work harder and treat people with respect.", "I hope to grow up and become as dependable and caring as they are."]
+  },
+  {
+    id: "g7_r3_life_online_01",
+    grade: 7,
+    round: 3,
+    topic: "Pros & Cons of Social Media",
+    question: "Discuss the advantages and disadvantages of social media for teenagers today. How can students avoid echo chambers and excessive screen time?",
+    target: "Speak for 5–7 sentences.",
+    usefulLanguage: [
+      "On the one hand, social media lets us stream music, upload creative photos, and keep in touch with classmates.",
+      "However, on the other hand, algorithms often show us only opinions we already agree with, creating echo chambers.",
+      "Furthermore, spending too many hours scrolling through short videos leads to fatigue and poor concentration.",
+      "To solve this, health experts encourage setting a daily screen time limit.",
+      "We should also remember to disconnect regularly and spend time outdoors with real friends.",
+      "In conclusion, finding a balanced digital lifestyle is the secret to healthy online living."
+    ]
+  },
+  {
+    id: "g7_r3_life_online_02",
+    grade: 7,
+    round: 3,
+    topic: "A Digital Detox Experiment",
+    question: "Imagine your school organizes a 'Digital Detox Day' where nobody uses internet or smartphones for 24 hours. Describe how you would spend that day and whether you think it would be beneficial.",
+    target: "Speak for 5–7 sentences.",
+    usefulLanguage: [
+      "If our school held a 24-hour digital detox day, I think it would be an eye-opening experiment for all of us.",
+      "First of all, without notifications constantly buzzing, I would enjoy a peaceful morning walk in the park.",
+      "In the afternoon, my friends and I could play board games, ride bicycles, and cook lunch together.",
+      "Instead of scrolling on social media, I would have time to read a great novel or sketch in my notebook.",
+      "Although some students might feel nervous without their phones at first, we would soon realize how much we miss real conversations.",
+      "In the end, disconnecting occasionally helps us appreciate the real world around us."
+    ]
   },
 
   // ----------------------------------------------------

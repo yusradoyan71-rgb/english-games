@@ -34,6 +34,88 @@
  */
 
 const grade7Expressions = [
+  // --- GRADE 7 UNIT 1: LIFE ONLINE ---
+  {
+    phrase: "SCROLL DOWN THE FEED",
+    category: "LIFE ONLINE",
+    meaning: "To move your finger down the screen to browse through social media updates.",
+    exampleSentence: "Habit — Maya likes to scroll down the feed to see the latest photography tips.",
+    difficulty: 1,
+    baseWeight: 1.2
+  },
+  {
+    phrase: "STREAM YOUR FAVORITE MUSIC",
+    category: "LIFE ONLINE",
+    meaning: "To listen to audio files directly over the internet without downloading them.",
+    exampleSentence: "Daily Routine — Liam uses his headphones to stream your favorite music while studying.",
+    difficulty: 1,
+    baseWeight: 1.2
+  },
+  {
+    phrase: "PROTECT YOUR DIGITAL PRIVACY",
+    category: "LIFE ONLINE",
+    meaning: "To keep passwords secure and avoid sharing sensitive personal information online.",
+    exampleSentence: "Advice — Our IT teacher reminds us to protect your digital privacy at all times.",
+    difficulty: 2,
+    baseWeight: 1.2
+  },
+  {
+    phrase: "UPLOAD A NEW PHOTO",
+    category: "LIFE ONLINE",
+    meaning: "To transfer a picture from your camera or phone onto an online website.",
+    exampleSentence: "Social Media — Elena decided to upload a new photo from our school sports day.",
+    difficulty: 1,
+    baseWeight: 1.2
+  },
+  {
+    phrase: "CHECK YOUR DAILY SCREEN TIME",
+    category: "LIFE ONLINE",
+    meaning: "To monitor how many hours you spend looking at digital displays each day.",
+    exampleSentence: "Health Tip — Health experts encourage students to check your daily screen time.",
+    difficulty: 2,
+    baseWeight: 1.2
+  },
+  {
+    phrase: "AVOID ONLINE ECHO CHAMBERS",
+    category: "LIFE ONLINE",
+    meaning: "To follow diverse creators so you do not only hear opinions you already agree with.",
+    exampleSentence: "Critical Thinking — To be a wise digital citizen, avoid online echo chambers.",
+    difficulty: 2,
+    baseWeight: 1.2
+  },
+  {
+    phrase: "LOG ON WITH YOUR PASSWORD",
+    category: "LIFE ONLINE",
+    meaning: "To enter your username and security code to open your account.",
+    exampleSentence: "Classroom — Please log on with your password before beginning the quiz.",
+    difficulty: 1,
+    baseWeight: 1.2
+  },
+  {
+    phrase: "IN MY OPINION",
+    category: "LIFE ONLINE",
+    meaning: "A natural phrase used to share your personal perspective or judgment.",
+    exampleSentence: "Discussion — In my opinion, disconnecting for a weekend is very refreshing.",
+    difficulty: 1,
+    baseWeight: 1.2
+  },
+  {
+    phrase: "ON THE OTHER HAND",
+    category: "LIFE ONLINE",
+    meaning: "A linker used to introduce a contrasting point of view or argument.",
+    exampleSentence: "Contrast — Social apps connect friends; on the other hand, they can distract us.",
+    difficulty: 2,
+    baseWeight: 1.2
+  },
+  {
+    phrase: "HEALTH AND FITNESS APP",
+    category: "LIFE ONLINE",
+    meaning: "An application designed to track steps, workouts, water intake, and healthy habits.",
+    exampleSentence: "Technology — Omar uses a health and fitness app to track his daily jogging distance.",
+    difficulty: 2,
+    baseWeight: 1.2
+  },
+
   // --- GREETINGS & INTRODUCTIONS ---
   {
     phrase: "HOW HAVE YOU BEEN",

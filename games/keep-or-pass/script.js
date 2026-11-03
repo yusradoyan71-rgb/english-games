@@ -1681,11 +1681,64 @@ class QuestionDeck {
 // Global persistent deck instance
 const globalDeck = new QuestionDeck(KEEP_OR_PASS_QUESTIONS);
 let currentGrade = "all";
+let currentUnit = "life_online";
+let currentTopic = "all";
+let currentDifficulty = "all";
 
-function getQuestionsForGrade(grade) {
-  if (grade === "7") return GRADE_7_QUESTIONS;
-  if (grade === "8") return GRADE_8_QUESTIONS;
-  return KEEP_OR_PASS_QUESTIONS;
+function getQuestionsForGrade(grade, unit = "life_online", topic = "all", difficulty = "all") {
+  let pool = [];
+
+  // If Grade 7 with Unit 1 Life Online selected (or Life Online unit specifically requested)
+  if ((grade === "7" || grade === "all") && unit === "life_online" && typeof window !== "undefined" && window.Grade7Unit1LifeOnline) {
+    const rawFiltered = window.Grade7Unit1LifeOnline.filterQuestions({
+      topic: topic,
+      difficulty: difficulty,
+      randomize: true
+    });
+    pool = rawFiltered.map(q => ({
+      question: q.question,
+      options: [...q.options],
+      answer: q.answer,
+      category: `Grade 7 • ${q.subtopic ? q.subtopic.replace('_', ' ').toUpperCase() : 'LIFE ONLINE'}`,
+      grade: 7,
+      explanation: q.explanation
+    }));
+  } else if (grade === "7") {
+    pool = [...GRADE_7_QUESTIONS];
+    if (typeof window !== "undefined" && window.Grade7Unit1LifeOnline) {
+      const g7Extra = window.Grade7Unit1LifeOnline.questions.map(q => ({
+        question: q.question,
+        options: [...q.options],
+        answer: q.answer,
+        category: `Grade 7 • ${q.subtopic ? q.subtopic.replace('_', ' ').toUpperCase() : 'LIFE ONLINE'}`,
+        grade: 7,
+        explanation: q.explanation
+      }));
+      pool = pool.concat(g7Extra);
+    }
+  } else if (grade === "8") {
+    pool = [...GRADE_8_QUESTIONS];
+  } else {
+    pool = [...KEEP_OR_PASS_QUESTIONS];
+    if (typeof window !== "undefined" && window.Grade7Unit1LifeOnline) {
+      const g7Extra = window.Grade7Unit1LifeOnline.questions.map(q => ({
+        question: q.question,
+        options: [...q.options],
+        answer: q.answer,
+        category: `Grade 7 • ${q.subtopic ? q.subtopic.replace('_', ' ').toUpperCase() : 'LIFE ONLINE'}`,
+        grade: 7,
+        explanation: q.explanation
+      }));
+      pool = pool.concat(g7Extra);
+    }
+  }
+
+  // Fallback safety if filter is overly strict
+  if (pool.length === 0) {
+    pool = [...GRADE_7_QUESTIONS];
+  }
+
+  return pool;
 }
 
 // ==========================================
@@ -1758,7 +1811,7 @@ const sfx = new SoundFX();
 // ==========================================
 let gameState = {
   numTeams: 2,
-  totalRounds: 12,
+  totalRounds: 10,
   currentQuestionIdx: 0,
   activeTeamIdx: 0,
   teams: [],
@@ -1769,7 +1822,7 @@ let gameState = {
 
 // DOM Elements (Initialized in browser)
 let setupScreen, questionScreen, decisionScreen, revealScreen, podiumScreen;
-let scoreboardBar, decisionScoreboard, activeTeamTurnEl, questionProgressEl, questionCategoryEl, questionTextEl, optionsGridEl;
+let scoreboardBar, decisionScoreboard, activeTeamTurnEl, questionProgressEl, questionCategoryEl, questionTextEl, optionsGridEl, explanationBoxEl, explanationTextEl;
 let decisionTeamTitle, choiceButtonsGroup, passTargetSelection, passTeamsGrid;
 let revealCard, revealBadge, revealActionTag, revealTargetTeam, revealIcon, revealPointsText, revealDescText;
 
@@ -1789,6 +1842,8 @@ function initDomElements() {
   questionCategoryEl = document.getElementById("questionCategory");
   questionTextEl = document.getElementById("questionText");
   optionsGridEl = document.getElementById("optionsGrid");
+  explanationBoxEl = document.getElementById("explanationBox");
+  explanationTextEl = document.getElementById("explanationText");
 
   decisionTeamTitle = document.getElementById("decisionTeamTitle");
   choiceButtonsGroup = document.getElementById("choiceButtonsGroup");
@@ -1848,20 +1903,28 @@ function initEvents() {
 
 function startMatch() {
   sfx.init();
-  const teamCount = parseInt(document.querySelector("#teamOptions .pill-btn.active").dataset.teams, 10);
-  const roundCount = parseInt(document.querySelector("#roundOptions .pill-btn.active").dataset.rounds, 10);
-  const gradeBtn = document.querySelector("#gradeOptions .pill-btn.active");
-  const selectedGrade = gradeBtn ? gradeBtn.dataset.grade : "all";
+  const teamBtn = document.querySelector("#teamOptions .pill-btn.active");
+  const teamCount = teamBtn ? parseInt(teamBtn.dataset.teams, 10) : 2;
 
-  // If grade pool changed, update the global persistent deck
-  const activePool = getQuestionsForGrade(selectedGrade);
-  if (currentGrade !== selectedGrade || globalDeck.masterPool.length !== activePool.length) {
-    currentGrade = selectedGrade;
-    globalDeck.setPool(activePool);
-  } else {
-    // Reset session tracking when starting a new match
-    globalDeck.resetSession();
-  }
+  const roundBtn = document.querySelector("#roundOptions .pill-btn.active");
+  const roundCount = roundBtn ? parseInt(roundBtn.dataset.rounds, 10) : 10;
+
+  const gradeBtn = document.querySelector("#gradeOptions .pill-btn.active");
+  const selectedGrade = gradeBtn ? gradeBtn.dataset.grade : "7";
+
+  const unitBtn = document.querySelector("#unitOptions .pill-btn.active");
+  const selectedUnit = unitBtn ? unitBtn.dataset.unit : "life_online";
+
+  const topicBtn = document.querySelector("#topicOptions .pill-btn.active");
+  const selectedTopic = topicBtn ? topicBtn.dataset.topic : "all";
+
+  const diffBtn = document.querySelector("#difficultyOptions .pill-btn.active");
+  const selectedDifficulty = diffBtn ? diffBtn.dataset.difficulty : "all";
+
+  // Re-fetch pool based on teacher selections
+  const activePool = getQuestionsForGrade(selectedGrade, selectedUnit, selectedTopic, selectedDifficulty);
+  globalDeck.setPool(activePool);
+  globalDeck.resetSession();
 
   gameState.numTeams = teamCount;
   gameState.totalRounds = roundCount;
@@ -1907,6 +1970,12 @@ function showQuestionScreen() {
   questionCategoryEl.textContent = curQ.category || "English Grammar";
   questionTextEl.textContent = curQ.question;
 
+  // Hide explanation box initially
+  if (explanationBoxEl) {
+    explanationBoxEl.classList.add("hidden");
+    if (explanationTextEl) explanationTextEl.textContent = "";
+  }
+
   // Render multiple-choice options with randomized ordering
   if (optionsGridEl) {
     optionsGridEl.innerHTML = "";
@@ -1943,18 +2012,24 @@ function handleOptionSelected(selectedIndex, clickedBtn, questionObj) {
     }
   });
 
+  // Reveal teacher-friendly explanation immediately
+  if (explanationBoxEl && questionObj.explanation) {
+    explanationBoxEl.classList.remove("hidden");
+    if (explanationTextEl) explanationTextEl.textContent = questionObj.explanation;
+  }
+
   if (isCorrect) {
     clickedBtn.classList.add("is-correct");
     sfx.playChime();
     setTimeout(() => {
       onAnswerCorrect();
-    }, 900);
+    }, 1400);
   } else {
     clickedBtn.classList.add("is-wrong");
     sfx.playBoom();
     setTimeout(() => {
       onAnswerWrong();
-    }, 1200);
+    }, 1600);
   }
 }
 
@@ -1962,12 +2037,22 @@ function onAnswerJudge(isCorrect) {
   if (gameState.answered) return;
   gameState.answered = true;
 
+  const curQ = gameState.questions[gameState.currentQuestionIdx];
+  if (explanationBoxEl && curQ && curQ.explanation) {
+    explanationBoxEl.classList.remove("hidden");
+    if (explanationTextEl) explanationTextEl.textContent = curQ.explanation;
+  }
+
   if (isCorrect) {
     sfx.playChime();
-    onAnswerCorrect();
+    setTimeout(() => {
+      onAnswerCorrect();
+    }, 1400);
   } else {
     sfx.playBoom();
-    onAnswerWrong();
+    setTimeout(() => {
+      onAnswerWrong();
+    }, 1600);
   }
 }
 

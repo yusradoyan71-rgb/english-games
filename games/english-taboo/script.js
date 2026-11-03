@@ -93,7 +93,34 @@ const TABOO_DECK = [
   { word: "WALLET", taboo: ["money", "pocket", "cards", "carry"] },
   { word: "BACKPACK", taboo: ["bag", "school", "books", "carry"] },
   { word: "MAP", taboo: ["country", "place", "directions", "find"] },
-  { word: "TICKET", taboo: ["bus", "cinema", "price", "travel"] }
+  { word: "TICKET", taboo: ["bus", "cinema", "price", "travel"] },
+
+  // --- GRADE 7 UNIT 1: LIFE ONLINE CARDS ---
+  { word: "ALGORITHM", taboo: ["computer", "code", "feed", "recommend"], unit: "g7_life_online" },
+  { word: "PRIVACY", taboo: ["secret", "password", "personal", "safe"], unit: "g7_life_online" },
+  { word: "SCREEN TIME", taboo: ["phone", "hours", "limit", "day"], unit: "g7_life_online" },
+  { word: "FOLLOW", taboo: ["account", "friend", "social", "subscribe"], unit: "g7_life_online" },
+  { word: "STREAM", taboo: ["live", "watch", "video", "internet"], unit: "g7_life_online" },
+  { word: "UPLOAD", taboo: ["photo", "send", "internet", "cloud"], unit: "g7_life_online" },
+  { word: "DOWNLOAD", taboo: ["save", "file", "computer", "get"], unit: "g7_life_online" },
+  { word: "SCROLL", taboo: ["down", "screen", "finger", "feed"], unit: "g7_life_online" },
+  { word: "SWIPE", taboo: ["touch", "screen", "left", "right"], unit: "g7_life_online" },
+  { word: "NAVIGATION", taboo: ["map", "GPS", "direction", "route"], unit: "g7_life_online" },
+  { word: "PRODUCTIVITY", taboo: ["work", "calendar", "task", "organize"], unit: "g7_life_online" },
+  { word: "ECHO CHAMBER", taboo: ["same", "opinion", "agree", "bubble"], unit: "g7_life_online" },
+  { word: "DIGITAL IDENTITY", taboo: ["profile", "online", "person", "real"], unit: "g7_life_online" },
+  { word: "NOTIFICATION", taboo: ["sound", "message", "alert", "phone"], unit: "g7_life_online" },
+  { word: "HASHTAG", taboo: ["symbol", "trend", "search", "post"], unit: "g7_life_online" },
+  { word: "STATIVE VERB", taboo: ["action", "ing", "like", "know"], unit: "g7_life_online" },
+  { word: "GERUND", taboo: ["verb", "ing", "noun", "enjoy"], unit: "g7_life_online" },
+  { word: "INFINITIVE", taboo: ["to", "verb", "base", "decide"], unit: "g7_life_online" },
+  { word: "FITNESS APP", taboo: ["health", "steps", "exercise", "walk"], unit: "g7_life_online" },
+  { word: "MOBILE BANKING", taboo: ["money", "account", "pay", "card"], unit: "g7_life_online" },
+  { word: "PHOTOGRAPHY", taboo: ["picture", "camera", "filter", "photo"], unit: "g7_life_online" },
+  { word: "BROWSE", taboo: ["web", "look", "search", "page"], unit: "g7_life_online" },
+  { word: "LOG ON", taboo: ["enter", "password", "username", "account"], unit: "g7_life_online" },
+  { word: "TREND", taboo: ["popular", "viral", "now", "everyone"], unit: "g7_life_online" },
+  { word: "DIGITAL DETOX", taboo: ["break", "no phone", "off", "healthy"], unit: "g7_life_online" }
 ];
 
 // Sound System (Web Audio API)
@@ -261,7 +288,13 @@ function startGame() {
     gameState.teams = [{ name: "Player Score", score: 0 }];
   }
 
-  gameState.deck = shuffleArray(TABOO_DECK);
+  const selectedDeckBtn = document.querySelector("#deckOptions .pill-btn.active");
+  const selectedDeck = selectedDeckBtn ? selectedDeckBtn.dataset.deck : "g7_life_online";
+  let pool = selectedDeck === "g7_life_online"
+    ? TABOO_DECK.filter(card => card.unit === "g7_life_online")
+    : [...TABOO_DECK];
+
+  gameState.deck = shuffleArray(pool);
   gameState.currentCardIndex = 0;
 
   startRound();

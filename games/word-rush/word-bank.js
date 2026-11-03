@@ -19,7 +19,8 @@ const CATEGORIES_METADATA = [
   { id: 'travel', name: 'Travel', icon: '✈️', prompt: 'FIND ALL THE TRAVEL WORDS', desc: 'Journeys, transport, and tourism' },
   { id: 'hobbies', name: 'Hobbies', icon: '⚽', prompt: 'FIND ALL THE HOBBIES & SPORTS', desc: 'Activities, sports, and entertainment' },
   { id: 'feelings', name: 'Feelings', icon: '😊', prompt: 'FIND ALL THE FEELINGS & EMOTIONS', desc: 'Emotions and personality states' },
-  { id: 'daily_life', name: 'Daily Life', icon: '🏠', prompt: 'FIND ALL THE DAILY LIFE WORDS', desc: 'Routines, chores, food, and home' }
+  { id: 'daily_life', name: 'Daily Life', icon: '🏠', prompt: 'FIND ALL THE DAILY LIFE WORDS', desc: 'Routines, chores, food, and home' },
+  { id: 'life_online', name: 'Life Online', icon: '🌐', prompt: 'FIND ALL THE LIFE ONLINE WORDS', desc: 'Social media, apps, and digital communication' }
 ];
 
 /**
@@ -32,6 +33,7 @@ function normalizeCategory(cat) {
   if (s === 'determiners' || s === 'article') return 'articles';
   if (s === 'feeling' || s === 'emotions') return 'feelings';
   if (s === 'hobby' || s === 'sports') return 'hobbies';
+  if (s === 'life_online' || s === 'online' || s === 'digital') return 'life_online';
   return s;
 }
 
@@ -613,7 +615,41 @@ const CANONICAL_WORDS = [
   { word: 'water the plants', categories: ['daily_life', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
   { word: 'organize the wardrobe', categories: ['daily_life', 'verbs'], grades: ['grade8'], difficulty: 'hard' },
   { word: 'defrost the fridge', categories: ['daily_life', 'verbs'], grades: ['grade8'], difficulty: 'hard' },
-  { word: 'manage weekly budget', categories: ['daily_life', 'verbs'], grades: ['grade8'], difficulty: 'hard' }
+  { word: 'manage weekly budget', categories: ['daily_life', 'verbs'], grades: ['grade8'], difficulty: 'hard' },
+
+  // ==========================================
+  // LIFE ONLINE (Grade 7 Unit 1: Social Media, Apps & Digital Communication)
+  // ==========================================
+  { word: 'upload', categories: ['life_online', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'download', categories: ['life_online', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'scroll', categories: ['life_online', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'swipe', categories: ['life_online', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'follow', categories: ['life_online', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'stream', categories: ['life_online', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'browse', categories: ['life_online', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'search', categories: ['life_online', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'access', categories: ['life_online', 'verbs', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'log on', categories: ['life_online', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'click', categories: ['life_online', 'verbs', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'tap', categories: ['life_online', 'verbs', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'trend', categories: ['life_online', 'nouns', 'verbs'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'post', categories: ['life_online', 'verbs', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'share', categories: ['life_online', 'verbs', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'algorithm', categories: ['life_online', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'privacy', categories: ['life_online', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'screen time', categories: ['life_online', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'echo chamber', categories: ['life_online', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'hard' },
+  { word: 'digital identity', categories: ['life_online', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'navigation', categories: ['life_online', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'productivity', categories: ['life_online', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'photography', categories: ['life_online', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'reference', categories: ['life_online', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'fitness', categories: ['life_online', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'mobile banking', categories: ['life_online', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'decision', categories: ['life_online', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'organization', categories: ['life_online', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'easy' },
+  { word: 'encouragement', categories: ['life_online', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' },
+  { word: 'understanding', categories: ['life_online', 'nouns'], grades: ['grade7', 'grade8'], difficulty: 'medium' }
 ];
 
 // Build Canonical Index: Map of lowercase word -> { word, categories: Set, grades: Set, difficulty }
