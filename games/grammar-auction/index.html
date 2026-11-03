@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grammar Auction 🔨 — English Grammar Strategy Game</title>
-  <meta name="description" content="Engaging classroom grammar auction game. Bid on sentences you believe are correct, avoid tricky grammar errors, and build your team fortune!">
+  <meta name="description" content="Engaging classroom grammar auction game with real bidding mechanics, multiple teams, Grade 7 and Grade 8 question banks, and smartboard controls.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
@@ -25,51 +25,104 @@
         <span class="brand-title">Grammar Auction</span>
       </div>
       <div class="header-actions">
-        <button type="button" class="btn-icon" id="btnSoundToggle" title="Toggle Sound" aria-label="Toggle Sound">🔊</button>
+        <button type="button" class="btn-header-action" id="btnNewGameConfirm" title="Start New Game">
+          <span>🔄</span> New Game
+        </button>
+        <button type="button" class="btn-icon" id="btnFullscreenToggle" title="Toggle Fullscreen" aria-label="Toggle Fullscreen">
+          ⛶
+        </button>
+        <button type="button" class="btn-icon" id="btnSoundToggle" title="Toggle Sound (Muted by default)" aria-label="Toggle Sound">
+          🔇
+        </button>
       </div>
     </div>
   </header>
 
   <main class="main-wrapper">
-    <!-- SCREEN 1: SETUP -->
+    <!-- SCREEN 1: GAME SETUP -->
     <section id="setupScreen" class="game-panel active">
       <div class="panel-header">
-        <span class="badge-pill">GRAMMAR &amp; BIDDING STRATEGY</span>
+        <span class="badge-pill">SMARTBOARD CLASSROOM EDITION</span>
         <h1 class="panel-title">Grammar Auction 🔨</h1>
-        <p class="panel-desc">Bid on English sentences you think are 100% grammatically correct. Win bonuses for correct sentences, but beware of buying grammatical mistakes!</p>
+        <p class="panel-desc">Bid on English sentences with real auction mechanics. Evaluate grammar accuracy, correct errors verbally, and build your team fortune!</p>
       </div>
 
       <div class="setup-grid">
+        <!-- Grade Selection -->
+        <div class="setup-group">
+          <label class="control-label">🎓 Grade Level</label>
+          <div class="option-pills" id="gradeOptions">
+            <button type="button" class="pill-btn active" data-grade="7">Grade 7 (150 Questions)</button>
+            <button type="button" class="pill-btn" data-grade="8">Grade 8 (150 Questions)</button>
+            <button type="button" class="pill-btn" data-grade="mixed">Mixed Grade 7 &amp; 8 (300 Questions)</button>
+          </div>
+        </div>
+
+        <!-- Number of Teams -->
         <div class="setup-group">
           <label class="control-label">👥 Number of Teams</label>
-          <div class="option-pills" id="teamOptions">
+          <div class="option-pills" id="teamCountOptions">
             <button type="button" class="pill-btn active" data-teams="2">2 Teams</button>
             <button type="button" class="pill-btn" data-teams="3">3 Teams</button>
             <button type="button" class="pill-btn" data-teams="4">4 Teams</button>
+            <button type="button" class="pill-btn" data-teams="5">5 Teams</button>
+            <button type="button" class="pill-btn" data-teams="6">6 Teams</button>
+            <button type="button" class="pill-btn" data-teams="7">7 Teams</button>
+            <button type="button" class="pill-btn" data-teams="8">8 Teams</button>
           </div>
         </div>
 
-        <div class="setup-group">
-          <label class="control-label">🎓 Grade &amp; Unit</label>
-          <div class="option-pills" id="unitOptions">
-            <button type="button" class="pill-btn active" data-unit="g7_u1_life_online">🌐 Grade 7 — Unit 1: Life Online</button>
+        <!-- Team Names Customization Editor -->
+        <div class="setup-group full-width-group">
+          <label class="control-label">🏷️ Team Names (Editable for Classroom)</label>
+          <div class="team-names-grid" id="teamNamesEditor">
+            <!-- Dynamically generated inputs for 2-8 teams -->
           </div>
         </div>
 
+        <!-- Starting Budget -->
         <div class="setup-group">
           <label class="control-label">💰 Starting Budget Per Team</label>
           <div class="option-pills" id="budgetOptions">
             <button type="button" class="pill-btn" data-budget="500">$500</button>
             <button type="button" class="pill-btn active" data-budget="1000">$1,000</button>
-            <button type="button" class="pill-btn" data-budget="1500">$1,500</button>
+            <button type="button" class="pill-btn" data-budget="2000">$2,000</button>
+            <button type="button" class="pill-btn" data-budget="custom">Custom Amount</button>
+          </div>
+          <div class="custom-input-wrap hidden" id="customBudgetWrap">
+            <span class="currency-symbol">$</span>
+            <input type="number" id="customBudgetInput" min="100" max="10000" step="50" placeholder="Enter starting budget (e.g. 1500)">
           </div>
         </div>
 
+        <!-- Total Auction Rounds -->
         <div class="setup-group">
-          <label class="control-label">🎯 Total Auction Lots</label>
-          <div class="option-pills" id="lotOptions">
-            <button type="button" class="pill-btn active" data-lots="10">10 Sentences</button>
-            <button type="button" class="pill-btn" data-lots="15">15 Sentences</button>
+          <label class="control-label">🎯 Total Auction Rounds</label>
+          <div class="option-pills" id="roundOptions">
+            <button type="button" class="pill-btn active" data-rounds="10">10 Rounds</button>
+            <button type="button" class="pill-btn" data-rounds="15">15 Rounds</button>
+            <button type="button" class="pill-btn" data-rounds="20">20 Rounds</button>
+            <button type="button" class="pill-btn" data-rounds="25">25 Rounds</button>
+            <button type="button" class="pill-btn" data-rounds="30">30 Rounds</button>
+          </div>
+        </div>
+
+        <!-- Difficulty Settings -->
+        <div class="setup-group">
+          <label class="control-label">⚡ Difficulty Level</label>
+          <div class="option-pills" id="difficultyOptions">
+            <button type="button" class="pill-btn active" data-difficulty="mixed">Mixed Difficulty</button>
+            <button type="button" class="pill-btn" data-difficulty="easy">Easy (A2 Foundations)</button>
+            <button type="button" class="pill-btn" data-difficulty="medium">Medium (Contextual)</button>
+            <button type="button" class="pill-btn" data-difficulty="hard">Hard (Complex/B1)</button>
+          </div>
+        </div>
+
+        <!-- Optional Grammar Topic Filter -->
+        <div class="setup-group full-width-group">
+          <label class="control-label">📚 Grammar Topic Filter</label>
+          <div class="topic-filter-pills" id="topicFilterPills">
+            <!-- Dynamically populated based on chosen Grade -->
           </div>
         </div>
       </div>
@@ -78,62 +131,167 @@
         <button type="button" class="btn-primary-action" id="btnStartAuction">
           OPEN THE AUCTION ▶
         </button>
+        <button type="button" class="btn-secondary-action hidden" id="btnResumeGame">
+          RESUME ACTIVE GAME ↻
+        </button>
       </div>
     </section>
 
-    <!-- SCREEN 2: ACTIVE BIDDING PHASE -->
+    <!-- SCREEN 2: ACTIVE AUCTION BIDDING PHASE -->
     <section id="auctionScreen" class="game-panel hidden">
-      <!-- Live Bank Accounts Bar -->
-      <div class="bank-bar" id="bankBar"></div>
+      <!-- Live Team Bank & Scoreboard Bar -->
+      <div class="bank-bar" id="bankBar">
+        <!-- Rendered dynamically for 2 to 8 teams -->
+      </div>
 
+      <!-- Lot Status Bar -->
       <div class="auction-status-bar">
-        <span class="lot-badge" id="lotBadge">LOT 1 / 10</span>
-        <span class="topic-indicator" id="lotTopic">Topic: Life Online</span>
+        <div class="status-left">
+          <span class="lot-badge" id="lotBadge">ROUND 1 / 15</span>
+          <span class="topic-indicator" id="lotTopic">Grade 7 • Present Simple</span>
+          <span class="difficulty-indicator" id="lotDifficultyBadge">Medium</span>
+        </div>
+        <div class="status-right">
+          <div class="call-stage-pill stage-open" id="callStageBadge">
+            🟢 BIDDING OPEN
+          </div>
+        </div>
       </div>
 
       <!-- Lot Presentation Card -->
       <div class="lot-card">
-        <div class="lot-category" id="lotCategory">Present Simple Routine</div>
         <div class="sentence-display-box">
           <span class="quote-mark">“</span>
-          <h2 class="sentence-text" id="sentenceText">Sarah usually checks her notifications before she goes to sleep.</h2>
+          <h2 class="sentence-text" id="sentenceText">She doesn't likes watching documentaries on television.</h2>
           <span class="quote-mark">”</span>
         </div>
-        <div class="current-bid-box">
-          <div class="bid-label">CURRENT HIGHEST BID</div>
-          <div class="bid-amount" id="currentBidAmount">$0</div>
-          <div class="bid-leader" id="currentBidLeader">No bids yet — Bidding is open!</div>
+
+        <div class="auction-meta-strip">
+          <div class="current-bid-box">
+            <div class="bid-label">CURRENT HIGHEST BID</div>
+            <div class="bid-amount" id="currentBidAmount">$0</div>
+            <div class="bid-leader" id="currentBidLeader">No bids placed yet — Bidding is open!</div>
+          </div>
+          <div class="min-bid-chip" id="minBidChip">
+            Minimum Next Bid: <strong>$10</strong>
+          </div>
         </div>
       </div>
 
-      <!-- Bidding Interface -->
+      <!-- Bidding Dashboard -->
       <div class="bidding-dashboard">
+        <!-- Team Bidder Selection -->
         <div class="team-bid-selector">
           <span class="control-label">Select Bidding Team:</span>
-          <div class="team-bid-pills" id="biddingTeamPills"></div>
+          <div class="team-bid-pills" id="biddingTeamPills">
+            <!-- Team selector pills with live balances -->
+          </div>
         </div>
 
+        <!-- Increments & Custom Bid Controls -->
         <div class="bid-actions-row">
-          <button type="button" class="btn-bid" data-inc="50">+$50</button>
-          <button type="button" class="btn-bid" data-inc="100">+$100</button>
-          <button type="button" class="btn-bid" data-inc="200">+$200</button>
-          <button type="button" class="btn-bid btn-all-in" id="btnAllIn">ALL IN! 🔥</button>
-          <button type="button" class="btn-bid btn-reset-bid" id="btnResetLotBid">Reset Bid ↩</button>
+          <div class="quick-inc-group">
+            <button type="button" class="btn-bid" data-inc="10">+$10</button>
+            <button type="button" class="btn-bid" data-inc="25">+$25</button>
+            <button type="button" class="btn-bid" data-inc="50">+$50</button>
+            <button type="button" class="btn-bid" data-inc="100">+$100</button>
+            <button type="button" class="btn-bid btn-all-in" id="btnAllIn">ALL IN! 🔥</button>
+          </div>
+
+          <div class="custom-bid-form">
+            <span class="currency-symbol">$</span>
+            <input type="number" id="customBidInput" placeholder="Custom Bid" min="10" step="10">
+            <button type="button" class="btn-place-custom" id="btnPlaceCustomBid">Place Bid</button>
+            <button type="button" class="btn-reset-bid" id="btnResetLotBid" title="Reset Current Round Bid">Reset ↩</button>
+          </div>
         </div>
 
-        <div class="gavel-action-row">
-          <button type="button" class="btn-hammer" id="btnHammerSold">
-            <span class="gavel-icon">🔨</span>
-            <span>SOLD! Strike Gavel</span>
-          </button>
-          <button type="button" class="btn-pass-lot" id="btnPassLot">
-            <span>⏩ No Buyers (Pass Lot)</span>
-          </button>
+        <!-- Live Bidding History Log -->
+        <div class="bidding-history-wrap">
+          <span class="history-label">Round Bidding Log:</span>
+          <div class="bidding-history-list" id="biddingHistoryList">
+            <span class="empty-history">Auction open. Awaiting opening bid...</span>
+          </div>
+        </div>
+
+        <!-- Auctioneer Call & Gavel Action Controls -->
+        <div class="auctioneer-controls-card">
+          <div class="auctioneer-controls-title">AUCTIONEER GAVEL CONTROLS</div>
+          <div class="auctioneer-buttons-row">
+            <button type="button" class="btn-call-stage btn-going-once" id="btnGoingOnce">
+              📢 GOING ONCE!
+            </button>
+            <button type="button" class="btn-call-stage btn-going-twice" id="btnGoingTwice">
+              📢 GOING TWICE!
+            </button>
+            <button type="button" class="btn-hammer" id="btnHammerSold">
+              <span class="gavel-icon">🔨</span>
+              <span class="gavel-text">SOLD! Strike Gavel</span>
+            </button>
+            <button type="button" class="btn-pass-lot" id="btnPassLot">
+              ⏩ No Buyers (Pass Lot)
+            </button>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- SCREEN 3: VERDICT REVEAL -->
+    <!-- SCREEN 3: VERBAL EVALUATION & CORRECTION PHASE -->
+    <section id="evaluationScreen" class="game-panel hidden">
+      <div class="panel-header">
+        <span class="badge-pill">STEP 6: TEAM EVALUATION</span>
+        <h2 class="panel-title" id="evalTitle">Sentence Sold to Team!</h2>
+        <p class="panel-desc" id="evalSubtitle">Winning team must decide whether the sentence is grammatically correct or incorrect.</p>
+      </div>
+
+      <div class="evaluation-card">
+        <div class="eval-winning-banner" id="evalWinningBanner">
+          🏆 Highest Bidder: <strong id="evalWinnerName">Team 1</strong> with <strong id="evalWinnerBid">$200</strong>
+        </div>
+
+        <div class="eval-sentence-box">
+          <div class="eval-label">Purchased Sentence:</div>
+          <p class="eval-sentence-text" id="evalSentenceText">...</p>
+        </div>
+
+        <!-- Step 6A: Correct vs Incorrect Choice -->
+        <div class="eval-decision-block" id="evalDecisionBlock">
+          <h3 class="eval-prompt">Is this sentence grammatically CORRECT or INCORRECT?</h3>
+          <div class="eval-choice-buttons">
+            <button type="button" class="btn-eval btn-eval-correct" id="btnEvalCorrect">
+              <span class="eval-emoji">✅</span>
+              <span class="eval-text">CORRECT</span>
+            </button>
+            <button type="button" class="btn-eval btn-eval-incorrect" id="btnEvalIncorrect">
+              <span class="eval-emoji">❌</span>
+              <span class="eval-text">INCORRECT</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 6B: Verbal Correction Verification (appears if INCORRECT is chosen) -->
+        <div class="verbal-correction-subpanel hidden" id="verbalCorrectionSubpanel">
+          <div class="correction-prompt-alert">
+            <span class="alert-icon">🗣️</span>
+            <div>
+              <strong>Classroom Verbal Challenge:</strong>
+              <p>The winning team claims this sentence is INCORRECT. They must now verbally identify and correct the error in front of the class.</p>
+            </div>
+          </div>
+
+          <div class="teacher-correction-actions">
+            <button type="button" class="btn-teacher-mark btn-correction-success" id="btnCorrectionSuccess">
+              ✅ Correction Accepted (+Points)
+            </button>
+            <button type="button" class="btn-teacher-mark btn-correction-fail" id="btnCorrectionFail">
+              ❌ Correction Failed / Inaccurate (0 Pts)
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 4: VERDICT REVEAL & SCORING SUMMARY -->
     <section id="revealScreen" class="game-panel hidden">
       <div class="panel-header">
         <span class="badge-pill" id="verdictSubtitle">AUCTION LOT VERDICT</span>
@@ -141,7 +299,8 @@
       </div>
 
       <div class="verdict-card" id="verdictCard">
-        <div class="stamp-badge" id="stampBadge">CORRECT! ✅</div>
+        <div class="stamp-badge stamp-correct" id="stampBadge">CORRECT SENTENCE! ✅</div>
+
         <div class="verdict-sentence-box">
           <div class="orig-label">Auctioned Sentence:</div>
           <p class="verdict-sentence" id="verdictOrigSentence">...</p>
@@ -153,13 +312,19 @@
         </div>
 
         <div class="explanation-box" id="verdictExplanationBox">
-          <div class="expl-label">💡 Teacher &amp; Student Explanation:</div>
+          <div class="expl-label">💡 Teacher &amp; Student Grammar Explanation:</div>
           <p class="explanation-text" id="verdictExplanationText">...</p>
         </div>
 
         <div class="payout-summary" id="payoutSummary">
-          <span class="payout-icon" id="payoutIcon">💰</span>
-          <span class="payout-text" id="payoutText">Team 1 wins the lot and earns +$200 bonus!</span>
+          <div class="payout-left">
+            <span class="payout-icon" id="payoutIcon">💰</span>
+          </div>
+          <div class="payout-details">
+            <h4 class="payout-headline" id="payoutHeadline">Successful Purchase!</h4>
+            <p class="payout-text" id="payoutText">Team 1 correctly evaluated the sentence and earned +200 points!</p>
+            <div class="payout-balance-chip" id="payoutBalanceChip">Remaining Budget: $800 | Score: 200 pts</div>
+          </div>
         </div>
       </div>
 
@@ -170,25 +335,70 @@
       </div>
     </section>
 
-    <!-- SCREEN 4: PODIUM / CHAMPION CEREMONY -->
+    <!-- SCREEN 5: FINAL PODIUM & COMPREHENSIVE SCOREBOARD -->
     <section id="podiumScreen" class="game-panel hidden">
       <div class="panel-header">
         <span class="badge-pill">AUCTION COMPLETED</span>
         <h1 class="panel-title">🏆 Grammar Millionaires Podium</h1>
-        <p class="panel-desc">Congratulations to our grammar investors! Here are the final balances:</p>
+        <p class="panel-desc">Congratulations to our grammar investors! Here are the official standings:</p>
       </div>
 
+      <!-- Top Podium Champions (1st, 2nd, 3rd) -->
       <div class="results-podium" id="finalPodium"></div>
+
+      <!-- Complete Comprehensive Classroom Scoreboard -->
+      <div class="full-scoreboard-wrap">
+        <h3 class="scoreboard-title">📊 Complete Final Results &amp; Statistics</h3>
+        <div class="table-responsive">
+          <table class="scoreboard-table" id="scoreboardTable">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Team</th>
+                <th>Final Score</th>
+                <th>Remaining Budget</th>
+                <th>Correct Purchases</th>
+                <th>Failed Purchases</th>
+                <th>Total Lots Won</th>
+              </tr>
+            </thead>
+            <tbody id="scoreboardTableBody">
+              <!-- Dynamically populated rows -->
+            </tbody>
+          </table>
+        </div>
+      </div>
 
       <div class="start-action-row">
         <button type="button" class="btn-primary-action" id="btnPlayAgain">
-          Play Again 🔄
+          Play Again (Same Settings) 🔄
+        </button>
+        <button type="button" class="btn-secondary-action" id="btnReconfigure">
+          ⚙️ Change Game Setup
         </button>
       </div>
     </section>
   </main>
 
+  <!-- Modal: Confirmation for New Game -->
+  <div class="modal-backdrop hidden" id="confirmModal">
+    <div class="modal-card">
+      <div class="modal-icon">⚠️</div>
+      <h3 class="modal-title">Start a New Game?</h3>
+      <p class="modal-desc">Are you sure you want to start a new auction? Current game progress, bids, and scores will be reset.</p>
+      <div class="modal-actions">
+        <button type="button" class="btn-modal-cancel" id="btnCancelModal">Keep Playing</button>
+        <button type="button" class="btn-modal-confirm" id="btnConfirmNewGame">Yes, Start New Game</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
   <script src="../../data/grade7_unit1_life_online.js"></script>
+  <script src="questions.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
